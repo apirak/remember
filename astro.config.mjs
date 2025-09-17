@@ -5,5 +5,24 @@ import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [react()]
+  integrations: [
+    react({
+      // Enable experimental React children parsing for better component compatibility
+      experimentalReactChildren: true,
+    })
+  ],
+  // Enable client-side routing for SPA behavior
+  output: 'static',
+  // Configure for better development experience
+  vite: {
+    // Optimize for React development
+    optimizeDeps: {
+      include: ['react', 'react-dom', 'firebase/app', 'firebase/auth', 'firebase/firestore']
+    },
+    // Configure for better error handling in development
+    define: {
+      // Ensure proper environment variables are available
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+    }
+  }
 });
