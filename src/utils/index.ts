@@ -17,6 +17,10 @@ export { default as firestore } from './firestore';
 export * from './errorHandling';
 export { default as errorHandling } from './errorHandling';
 
+// Re-export SM-2 algorithm utilities
+export * from './sm2';
+export { default as sm2 } from './sm2';
+
 // Convenience exports for commonly used functions
 export {
   // Firebase core
@@ -61,3 +65,14 @@ export {
   logError,
   checkNetworkConnectivity
 } from './errorHandling';
+
+export {
+  // SM-2 Algorithm
+  calculateSM2,
+  isCardDue,
+  getDueCards,
+  sortCardsByPriority,
+  initializeSM2Params,
+  calculateReviewStats,
+  QUALITY_RATINGS
+} from './sm2';
