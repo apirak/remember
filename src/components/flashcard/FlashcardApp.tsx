@@ -17,16 +17,25 @@ const FlashcardAppContent: React.FC = () => {
 
   // Auto-navigate based on session state
   React.useEffect(() => {
+    console.log('FlashcardApp navigation check:', {
+      hasSession: !!state.currentSession,
+      isComplete: state.currentSession?.isComplete,
+      currentRoute
+    });
+    
     if (state.currentSession) {
       if (state.currentSession.isComplete) {
+        console.log('Session complete, navigating to complete screen');
         setCurrentRoute('complete');
       } else {
+        console.log('Session active, navigating to review screen');
         setCurrentRoute('review');
       }
     } else {
+      console.log('No session, navigating to dashboard');
       setCurrentRoute('dashboard');
     }
-  }, [state.currentSession]);
+  }, [state.currentSession?.isComplete, state.currentSession]);
 
   // Render current screen
   const renderCurrentScreen = () => {

@@ -1,7 +1,7 @@
 // Review component - main flashcard review interface
 // Handles showing cards, flipping to back, and rating responses
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFlashcard } from '../../contexts/FlashcardContext';
 import { QUALITY_RATINGS } from '../../utils/sm2';
 
@@ -13,24 +13,35 @@ interface ReviewProps {
 
 const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
   const { state, showCardBack, rateCard, knowCard } = useFlashcard();
+  const [isFlipping, setIsFlipping] = useState(false);
 
-  // Redirect if no active session
+  // All hooks must be called before any conditional returns
+  // Reset flip animation when card changes
   useEffect(() => {
-    if (!state.currentSession || state.currentSession.isComplete) {
-      onNavigate('complete');
+    if (state.currentCard?.id) {
+      setIsFlipping(false);
     }
-  }, [state.currentSession, onNavigate]);
+  }, [state.currentCard?.id]);
+
+  // Handle "I Know" button
+  const handleKnowCard = () => {
+    knowCard();
+    setIsFlipping(false); // Reset flip state for next card
+  };
+
+  // Handle card flip animation
+  const handleShowCard = () => {
+    setIsFlipping(true);
+    // Add a slight delay before showing the back to make the flip visible
+    setTimeout(() => {
+      showCardBack();
+    }, 300); // Half of the animation duration
+  };
 
   // Handle rating selection
   const handleRating = (quality: number) => {
     rateCard(quality);
-    
-    // Check if session is complete after rating
-    setTimeout(() => {
-      if (state.currentSession?.isComplete) {
-        onNavigate('complete');
-      }
-    }, 100);
+    setIsFlipping(false); // Reset flip state for next card
   };
 
   // Show loading or redirect if no session
@@ -79,11 +90,10 @@ const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
       <div className="flex-1 flex items-center justify-center p-4">
         <div className="max-w-md w-full">
           {/* Flashcard */}
-          <div className="bg-white rounded-3xl shadow-2xl border-4 border-white overflow-hidden mb-8 min-h-[300px] flex flex-col">
-            {/* Card content */}
-            <div className="flex-1 p-8 flex flex-col justify-center items-center text-center">
-              {!isShowingBack ? (
-                // Front of card
+          <div className={`flashcard-flip ${isShowingBack || isFlipping ? 'flipped' : ''} mb-8 min-h-[300px]`}>
+            <div className="flashcard-inner">
+              {/* Front of card */}
+              <div className="flashcard-front bg-white rounded-3xl shadow-2xl border-4 border-white overflow-hidden flex flex-col justify-center items-center text-center p-8">
                 <div className="space-y-4">
                   <div className="text-6xl font-bold text-gray-800 mb-2">
                     {currentCard.front.title}
@@ -97,8 +107,10 @@ const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
                     </div>
                   )}
                 </div>
-              ) : (
-                // Back of card
+              </div>
+              
+              {/* Back of card */}
+              <div className="flashcard-back bg-white rounded-3xl shadow-2xl border-4 border-white overflow-hidden flex flex-col justify-center items-center text-center p-8">
                 <div className="space-y-4">
                   <div className="text-4xl mb-2">
                     {currentCard.back.icon}
@@ -118,7 +130,7 @@ const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
                     </div>
                   </div>
                 </div>
-              )}
+              </div>
             </div>
           </div>
 
@@ -128,7 +140,7 @@ const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
               // Front side buttons
               <div className="grid grid-cols-2 gap-4">
                 <button
-                  onClick={showCardBack}
+                  onClick={handleShowCard}
                   className="
                     py-4 px-6 bg-gradient-to-r from-blue-500 to-blue-600 text-white 
                     rounded-2xl font-bold font-child text-lg shadow-lg
@@ -140,7 +152,7 @@ const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
                 </button>
                 
                 <button
-                  onClick={knowCard}
+                  onClick={handleKnowCard}
                   className="
                     py-4 px-6 bg-gradient-to-r from-green-500 to-green-600 text-white 
                     rounded-2xl font-bold font-child text-lg shadow-lg
@@ -171,7 +183,7 @@ const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
                     "
                   >
                     <span>🔄</span>
-                    <span>Again</span>
+                    <span>Skip</span>
                   </button>
 
                   {/* Hard - Orange */}
@@ -185,7 +197,7 @@ const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
                       flex items-center justify-center space-x-2
                     "
                   >
-                    <span>🤔</span>
+                    <span>🔥</span>
                     <span>Hard</span>
                   </button>
 
@@ -200,8 +212,8 @@ const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
                       flex items-center justify-center space-x-2
                     "
                   >
-                    <span>😊</span>
-                    <span>Got It</span>
+                    <span>🍰</span>
+                    <span>Easy</span>
                   </button>
                 </div>
               </div>
