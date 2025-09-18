@@ -83,6 +83,7 @@ export type FlashcardAction =
   | { type: 'NEXT_CARD' }
   | { type: 'COMPLETE_SESSION' }
   | { type: 'RESET_SESSION' }
+  | { type: 'RESET_TODAY_PROGRESS' }
   | { type: 'SET_LOADING'; payload: boolean }
   | { type: 'UPDATE_STATS' };
 

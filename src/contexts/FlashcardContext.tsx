@@ -309,6 +309,39 @@ const flashcardReducer = (state: FlashcardContextState, action: FlashcardAction)
       };
     }
 
+    case 'RESET_TODAY_PROGRESS': {
+      // Reset all cards to be due today and reset reviewsToday counter
+      const resetCards = state.allCards.map(card => ({
+        ...card,
+        nextReviewDate: new Date(),
+        interval: 1,
+        repetitions: 0,
+        totalReviews: 0,
+        easinessFactor: 2.5, // Reset to default SM2 value
+        isNew: true,
+        lastReviewDate: new Date(0), // Reset to epoch
+      }));
+      
+      const stats = calculateFlashcardStats(resetCards);
+      const dueCards = getDueFlashcards(resetCards);
+      
+      return {
+        ...state,
+        allCards: resetCards,
+        dueCards,
+        stats: {
+          totalCards: stats.totalCards,
+          dueCards: stats.dueCards,
+          masteredCards: stats.masteredCards,
+          difficultCards: stats.difficultCards,
+          reviewsToday: 0, // Reset reviews today counter
+        },
+        currentSession: null,
+        currentCard: null,
+        isShowingBack: false,
+      };
+    }
+
     default:
       return state;
   }
@@ -385,15 +418,8 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({ children 
   };
 
   const resetTodayProgress = () => {
-    // Reset all cards to be due today (for testing purposes)
-    const resetCards = state.allCards.map(card => ({
-      ...card,
-      nextReviewDate: new Date(),
-      interval: 1,
-      repetitions: 0,
-    }));
-    
-    dispatch({ type: 'LOAD_CARDS', payload: resetCards });
+    // Reset all cards and progress counters
+    dispatch({ type: 'RESET_TODAY_PROGRESS' });
   };
 
   const contextValue = {
