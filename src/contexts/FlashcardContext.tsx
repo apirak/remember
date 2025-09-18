@@ -209,14 +209,22 @@ const flashcardReducer = (state: FlashcardContextState, action: FlashcardAction)
         nextCard = updatedSession.cards[nextIndex];
       }
 
+      // Recalculate due cards and stats after each rating
+      const updatedDueCards = getDueFlashcards(updatedAllCards);
+      const updatedStats = calculateFlashcardStats(updatedAllCards);
+
       return {
         ...state,
         allCards: updatedAllCards,
+        dueCards: updatedDueCards,
         currentSession: isComplete ? { ...updatedSession, isComplete: true } : { ...updatedSession, currentIndex: nextIndex },
         currentCard: nextCard,
         isShowingBack: false,
         stats: {
-          ...state.stats,
+          totalCards: updatedStats.totalCards,
+          dueCards: updatedStats.dueCards,
+          masteredCards: updatedStats.masteredCards,
+          difficultCards: updatedStats.difficultCards,
           reviewsToday: state.stats.reviewsToday + 1,
         }
       };
@@ -342,7 +350,9 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({ children 
 
   const startReviewSession = () => {
     if (state.dueCards.length > 0) {
-      dispatch({ type: 'START_REVIEW_SESSION', payload: state.dueCards });
+      // Limit review session to maximum 20 cards
+      const reviewCards = state.dueCards.slice(0, 20);
+      dispatch({ type: 'START_REVIEW_SESSION', payload: reviewCards });
     }
   };
 

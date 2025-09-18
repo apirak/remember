@@ -258,5 +258,265 @@
       "title": "To walk / To go",
       "description": "Action of moving with your feet"
     }
+  },
+  {
+    "id": "da",
+    "front": {
+      "icon": "",
+      "title": "大",
+      "description": "dà"
+    },
+    "back": {
+      "icon": "📏",
+      "title": "Big / Large",
+      "description": "Something of great size"
+    }
+  },
+  {
+    "id": "xiao",
+    "front": {
+      "icon": "",
+      "title": "小",
+      "description": "xiǎo"
+    },
+    "back": {
+      "icon": "🤏",
+      "title": "Small / Little",
+      "description": "Something of little size"
+    }
+  },
+  {
+    "id": "hao",
+    "front": {
+      "icon": "",
+      "title": "好",
+      "description": "hǎo"
+    },
+    "back": {
+      "icon": "👍",
+      "title": "Good / Well",
+      "description": "Something positive or of good quality"
+    }
+  },
+  {
+    "id": "huai",
+    "front": {
+      "icon": "",
+      "title": "坏",
+      "description": "huài"
+    },
+    "back": {
+      "icon": "👎",
+      "title": "Bad",
+      "description": "Something negative or of poor quality"
+    }
+  },
+  {
+    "id": "re",
+    "front": {
+      "icon": "",
+      "title": "热",
+      "description": "rè"
+    },
+    "back": {
+      "icon": "🔥",
+      "title": "Hot",
+      "description": "High temperature"
+    }
+  },
+  {
+    "id": "leng",
+    "front": {
+      "icon": "",
+      "title": "冷",
+      "description": "lěng"
+    },
+    "back": {
+      "icon": "❄️",
+      "title": "Cold",
+      "description": "Low temperature"
+    }
+  },
+  {
+    "id": "kuai",
+    "front": {
+      "icon": "",
+      "title": "快",
+      "description": "kuài"
+    },
+    "back": {
+      "icon": "🏃",
+      "title": "Fast / Quick",
+      "description": "Moving at high speed"
+    }
+  },
+  {
+    "id": "man",
+    "front": {
+      "icon": "",
+      "title": "慢",
+      "description": "màn"
+    },
+    "back": {
+      "icon": "🐌",
+      "title": "Slow",
+      "description": "Moving at low speed"
+    }
+  },
+  {
+    "id": "gou",
+    "front": {
+      "icon": "",
+      "title": "狗",
+      "description": "gǒu"
+    },
+    "back": {
+      "icon": "🐕",
+      "title": "Dog",
+      "description": "A common pet animal"
+    }
+  },
+  {
+    "id": "mao",
+    "front": {
+      "icon": "",
+      "title": "猫",
+      "description": "māo"
+    },
+    "back": {
+      "icon": "🐱",
+      "title": "Cat",
+      "description": "A small domestic animal"
+    }
+  },
+  {
+    "id": "shu",
+    "front": {
+      "icon": "",
+      "title": "书",
+      "description": "shū"
+    },
+    "back": {
+      "icon": "📚",
+      "title": "Book",
+      "description": "Collection of pages with writing"
+    }
+  },
+  {
+    "id": "bi",
+    "front": {
+      "icon": "",
+      "title": "笔",
+      "description": "bǐ"
+    },
+    "back": {
+      "icon": "✏️",
+      "title": "Pen / Pencil",
+      "description": "Tool for writing"
+    }
+  },
+  {
+    "id": "che",
+    "front": {
+      "icon": "",
+      "title": "车",
+      "description": "chē"
+    },
+    "back": {
+      "icon": "🚗",
+      "title": "Car / Vehicle",
+      "description": "Transportation with wheels"
+    }
+  },
+  {
+    "id": "dianhua",
+    "front": {
+      "icon": "",
+      "title": "电话",
+      "description": "diàn huà"
+    },
+    "back": {
+      "icon": "📞",
+      "title": "Phone / Telephone",
+      "description": "Device for talking to people far away"
+    }
+  },
+  {
+    "id": "diannao",
+    "front": {
+      "icon": "",
+      "title": "电脑",
+      "description": "diàn nǎo"
+    },
+    "back": {
+      "icon": "💻",
+      "title": "Computer",
+      "description": "Electronic device for processing data"
+    }
+  },
+  {
+    "id": "yifu",
+    "front": {
+      "icon": "",
+      "title": "衣服",
+      "description": "yī fu"
+    },
+    "back": {
+      "icon": "👕",
+      "title": "Clothes",
+      "description": "What you wear on your body"
+    }
+  },
+  {
+    "id": "xie",
+    "front": {
+      "icon": "",
+      "title": "鞋",
+      "description": "xié"
+    },
+    "back": {
+      "icon": "👟",
+      "title": "Shoes",
+      "description": "What you wear on your feet"
+    }
+  },
+  {
+    "id": "qian",
+    "front": {
+      "icon": "",
+      "title": "钱",
+      "description": "qián"
+    },
+    "back": {
+      "icon": "💰",
+      "title": "Money",
+      "description": "Currency used for buying things"
+    }
+  },
+  {
+    "id": "shijian",
+    "front": {
+      "icon": "",
+      "title": "时间",
+      "description": "shí jiān"
+    },
+    "back": {
+      "icon": "⏰",
+      "title": "Time",
+      "description": "Duration or moment when something happens"
+    }
+  },
+  {
+    "id": "tianqi",
+    "front": {
+      "icon": "",
+      "title": "天气",
+      "description": "tiān qì"
+    },
+    "back": {
+      "icon": "🌤️",
+      "title": "Weather",
+      "description": "Conditions outside like sunny or rainy"
+    }
   }
 ]

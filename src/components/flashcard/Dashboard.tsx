@@ -112,7 +112,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
           >
             {state.stats.dueCards > 0 ? (
               <>
-                🚀 Start Review ({state.stats.dueCards} cards)
+                🚀 Start Review ({Math.min(state.stats.dueCards, 20)}{state.stats.dueCards > 20 ? ` of ${state.stats.dueCards}` : ''} cards)
               </>
             ) : (
               <>

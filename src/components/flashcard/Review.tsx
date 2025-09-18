@@ -46,7 +46,7 @@ const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
   }
 
   const { currentSession, currentCard, isShowingBack } = state;
-  const progress = ((currentSession.currentIndex + 1) / currentSession.totalCards) * 100;
+  const progress = ((currentSession.reviewedCards) / currentSession.totalCards) * 100;
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-50 via-yellow-50 to-green-50">
@@ -57,7 +57,7 @@ const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
           <div className="mb-3">
             <div className="flex justify-between text-sm font-rounded text-gray-600 mb-1">
               <span>Progress</span>
-              <span>{currentSession.currentIndex + 1} / {currentSession.totalCards}</span>
+              <span>{currentSession.reviewedCards} / {currentSession.totalCards} completed</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-3">
               <div 
