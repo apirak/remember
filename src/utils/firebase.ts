@@ -4,7 +4,7 @@
 import { initializeApp, type FirebaseApp } from 'firebase/app';
 import { getAuth, type Auth } from 'firebase/auth';
 import { getFirestore, type Firestore } from 'firebase/firestore';
-import { getAnalytics, type Analytics } from 'firebase/analytics';
+// Note: Analytics import removed to avoid content blocker issues
 
 // Firebase configuration object - hardcoded as per requirements
 const firebaseConfig = {
@@ -14,14 +14,16 @@ const firebaseConfig = {
   storageBucket: "remember-me-c8da6.firebasestorage.app",
   messagingSenderId: "818564421697",
   appId: "1:818564421697:web:f2abcf83ca42a9c3978ec0",
-  measurementId: "G-ZK2QES54E1"
+  measurementId: "G-ZK2QES54E1",
+  webClientId:
+    "818564421697-g4orolgg2o002splkbtvog6og7ivjg7q.apps.googleusercontent.com",
+  webClientSecret: "remember-me-secret"
 };
 
 // Initialize Firebase app
 let app: FirebaseApp;
 let auth: Auth;
 let firestore: Firestore;
-let analytics: Analytics | null = null;
 
 try {
   // Initialize Firebase
@@ -31,15 +33,8 @@ try {
   auth = getAuth(app);
   firestore = getFirestore(app);
   
-  // Initialize Analytics only in browser environment
-  if (typeof window !== 'undefined') {
-    try {
-      analytics = getAnalytics(app);
-    } catch (error) {
-      console.warn('Analytics initialization failed:', error);
-      // Analytics is optional, continue without it
-    }
-  }
+  // Note: Analytics removed to avoid content blocker issues
+  console.log('Firebase initialized successfully');
   
   // Expose Firebase app to window for debugging in development
   if (typeof window !== 'undefined' && import.meta.env.DEV) {
@@ -53,7 +48,7 @@ try {
 }
 
 // Export Firebase services
-export { app, auth, firestore, analytics };
+export { app, auth, firestore };
 
 // Export Firebase configuration for reference
 export { firebaseConfig };
@@ -134,7 +129,6 @@ export default {
   app,
   auth,
   firestore,
-  analytics,
   checkConnection: checkFirebaseConnection,
   getErrorMessage: getFirebaseErrorMessage,
   isFirebaseError

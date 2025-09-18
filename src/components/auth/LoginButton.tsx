@@ -1,0 +1,149 @@
+// Login Button component for Google authentication
+// Simple button component that handles Google Sign-In with Firebase
+
+import React, { useState } from 'react';
+import { signInWithGoogle, signOutUser, getAuthState } from '../../utils/auth';
+
+interface LoginButtonProps {
+  onAuthStateChange?: () => void;
+}
+
+const LoginButton: React.FC<LoginButtonProps> = ({ onAuthStateChange }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  
+  // Get current auth state
+  const authState = getAuthState();
+  const { user, isAuthenticated } = authState;
+
+  const handleSignIn = async () => {
+    setIsLoading(true);
+    setError(null);
+    
+    try {
+      const result = await signInWithGoogle();
+      
+      if (result.success) {
+        console.log('Successfully signed in:', result.user);
+        onAuthStateChange?.();
+      } else {
+        setError(result.error || 'เกิดข้อผิดพลาดในการเข้าสู่ระบบ');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      setError('เกิดข้อผิดพลาดในการเข้าสู่ระบบ');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSignOut = async () => {
+    setIsLoading(true);
+    setError(null);
+    
+    try {
+      const result = await signOutUser();
+      
+      if (result.success) {
+        console.log('Successfully signed out');
+        onAuthStateChange?.();
+      } else {
+        setError(result.error || 'เกิดข้อผิดพลาดในการออกจากระบบ');
+      }
+    } catch (error) {
+      console.error('Logout error:', error);
+      setError('เกิดข้อผิดพลาดในการออกจากระบบ');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // If user is authenticated, show profile and logout
+  if (isAuthenticated && user) {
+    return (
+      <div className="space-y-3">
+        {/* User Profile */}
+        <div className="p-4 bg-green-50 rounded-xl border border-green-200">
+          <div className="flex items-center space-x-3">
+            {user.photoURL && (
+              <img 
+                src={user.photoURL} 
+                alt="Profile" 
+                className="w-10 h-10 rounded-full border-2 border-green-300"
+              />
+            )}
+            <div className="flex-1">
+              <div className="text-sm font-rounded font-semibold text-green-800">
+                {user.displayName || user.email || 'ผู้ใช้'}
+              </div>
+              <div className="text-xs font-rounded text-green-600">
+                ✅ เข้าสู่ระบบแล้ว
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Logout Button */}
+        <button
+          onClick={handleSignOut}
+          disabled={isLoading}
+          className="
+            w-full py-2 px-4 rounded-xl font-rounded text-sm
+            bg-red-100 text-red-700 border border-red-300
+            hover:bg-red-200 hover:border-red-400 
+            disabled:opacity-50 disabled:cursor-not-allowed
+            transition-colors duration-200
+          "
+        >
+          {isLoading ? '⌛ กำลังออกจากระบบ...' : '🚪 ออกจากระบบ'}
+        </button>
+
+        {error && (
+          <div className="text-xs text-red-600 text-center font-rounded">
+            {error}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // If user is not authenticated, show login button
+  return (
+    <div className="space-y-3">
+      {/* Login Button */}
+      <button
+        onClick={handleSignIn}
+        disabled={isLoading}
+        className="
+          w-full py-3 px-4 rounded-xl font-rounded text-sm font-medium
+          bg-blue-600 text-white border border-blue-600
+          hover:bg-blue-700 hover:border-blue-700
+          disabled:opacity-50 disabled:cursor-not-allowed
+          transition-colors duration-200
+          shadow-md hover:shadow-lg
+        "
+      >
+        {isLoading ? (
+          '⌛ กำลังเข้าสู่ระบบ...'
+        ) : (
+          '🔑 เข้าสู่ระบบด้วย Google'
+        )}
+      </button>
+
+      {/* Benefits of signing in */}
+      <div className="text-xs font-rounded text-gray-600 text-center space-y-1">
+        <div>💾 บันทึกความคืบหน้าการเรียนรู้</div>
+        <div>📊 ติดตามสถิติการทบทวน</div>
+        <div>☁️ ซิงค์ข้อมูลข้ามอุปกรณ์</div>
+      </div>
+
+      {error && (
+        <div className="text-xs text-red-600 text-center font-rounded">
+          {error}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default LoginButton;

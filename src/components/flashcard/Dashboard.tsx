@@ -3,6 +3,7 @@
 
 import React from 'react';
 import { useFlashcard } from '../../contexts/FlashcardContext';
+import LoginButton from '../auth/LoginButton';
 
 type AppRoute = 'dashboard' | 'review' | 'complete';
 
@@ -132,17 +133,10 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
           >
             🔄 Reset Today's Progress
           </button>
-        </div>
 
-        {/* Guest Mode Notice */}
-        <div className="mt-6 p-3 bg-blue-50 rounded-xl border border-blue-200">
-          <div className="text-center">
-            <div className="text-sm font-rounded text-blue-600">
-              👤 Guest Mode: Your progress won't be saved
-            </div>
-            <div className="text-xs font-rounded text-blue-500 mt-1">
-              Sign up to save your learning progress!
-            </div>
+          {/* Login Section */}
+          <div className="mt-4">
+            <LoginButton />
           </div>
         </div>
       </div>
