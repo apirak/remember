@@ -69,8 +69,9 @@ module.exports = {
         }
       },
       fontFamily: {
-        'child': ['Comic Sans MS', 'cursive', 'sans-serif'],
-        'rounded': ['ui-rounded', 'Hiragino Maru Gothic ProN', 'Quicksand', 'Comfortaa', 'Manjari', 'Arial Rounded MT Bold', 'Calibri', 'source-sans-pro', 'sans-serif'],
+        'sans': ['IBM Plex Sans', 'Itim', 'ui-rounded', 'Hiragino Maru Gothic ProN', 'Manjari', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        'child': ['Itim', 'Comic Sans MS', 'cursive', 'sans-serif'],
+        'rounded': ['IBM Plex Sans', 'Itim', 'ui-rounded', 'Hiragino Maru Gothic ProN', 'Manjari', 'Arial Rounded MT Bold', 'Calibri', 'source-sans-pro', 'sans-serif'],
       },
       animation: {
         'bounce-slow': 'bounce 1s infinite',

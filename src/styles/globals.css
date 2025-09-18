@@ -6,7 +6,7 @@
 /* Custom base styles for child-friendly design */
 @layer base {
   html {
-    font-family: ui-rounded, "Hiragino Maru Gothic ProN", Quicksand, Comfortaa, Manjari, "Arial Rounded MT Bold", Calibri, source-sans-pro, sans-serif;
+    font-family: 'Itim', 'IBM Plex Sans', ui-rounded, "Hiragino Maru Gothic ProN", Manjari, -apple-system, BlinkMacSystemFont, sans-serif;
   }
   
   body {
