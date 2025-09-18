@@ -40,13 +40,14 @@ const calculateFlashcardStats = (cards: Flashcard[]) => {
   let totalReviews = 0;
   
   cards.forEach(card => {
-    // Mastered: repetitions >= 3 and easiness factor >= 2.0
-    if (card.repetitions >= 3 && card.easinessFactor >= 2.0) {
+    // Mastered: has been reviewed at least once with correct answer (repetitions >= 1) 
+    // and has good easiness factor (>= 2.0) indicating successful learning
+    if (card.repetitions >= 1 && card.easinessFactor >= 2.0 && !card.isNew) {
       masteredCards++;
     }
     
-    // Difficult: easiness factor < 1.8
-    if (card.easinessFactor < 1.8) {
+    // Difficult: easiness factor < 2.2 indicating cards that were rated as Hard
+    if (card.easinessFactor < 2.2 && card.totalReviews > 0) {
       difficultCards++;
     }
     
