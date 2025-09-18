@@ -1,0 +1,142 @@
+/* Tailwind CSS base styles for the flashcard application */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom base styles for child-friendly design */
+@layer base {
+  html {
+    font-family: ui-rounded, "Hiragino Maru Gothic ProN", Quicksand, Comfortaa, Manjari, "Arial Rounded MT Bold", Calibri, source-sans-pro, sans-serif;
+  }
+  
+  body {
+    @apply bg-gray-50;
+  }
+}
+
+/* Custom component styles */
+@layer components {
+  /* Flashcard flip animation */
+  .flashcard-flip {
+    perspective: 1000px;
+  }
+  
+  .flashcard-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+  }
+  
+  .flashcard-flip.flipped .flashcard-inner {
+    transform: rotateY(180deg);
+  }
+  
+  .flashcard-front,
+  .flashcard-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+  
+  .flashcard-back {
+    transform: rotateY(180deg);
+  }
+  
+  /* Button animations */
+  .btn-bounce {
+    @apply transform transition-all duration-200 hover:scale-105 active:scale-95;
+  }
+  
+  /* Sparkle animation for positive feedback */
+  .sparkle {
+    @apply animate-sparkle;
+  }
+}
+
+/* Custom utility classes */
+@layer utilities {
+  /* Child-friendly shadows */
+  .shadow-child {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  }
+  
+  .shadow-child-lg {
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Gradient backgrounds for game-like feel */
+  .bg-game-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+  
+  .bg-game-success {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+  }
+  
+  .bg-game-warning {
+    background: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%);
+  }
+  
+  .bg-game-danger {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+  }
+  
+  /* Text with game-like glow */
+  .text-glow {
+    text-shadow: 0 0 20px currentColor;
+  }
+  
+  /* Rounded corners for child-friendly design */
+  .rounded-child {
+    border-radius: 1.5rem;
+  }
+  
+  .rounded-child-lg {
+    border-radius: 2rem;
+  }
+}
+
+/* Custom animations */
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+@keyframes sparkle {
+  0% { transform: scale(0) rotate(0deg); opacity: 0; }
+  50% { transform: scale(1) rotate(180deg); opacity: 1; }
+  100% { transform: scale(0) rotate(360deg); opacity: 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-wiggle {
+  animation: wiggle 1s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Focus styles for accessibility */
+@layer base {
+  button:focus-visible,
+  [role="button"]:focus-visible {
+    @apply outline-none ring-4 ring-primary-300 ring-opacity-50;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+}

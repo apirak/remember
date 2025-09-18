@@ -1,11 +1,27 @@
+---
+export interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
 <!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<title>{title}</title>
+		
+		<!-- Import our global CSS with Tailwind -->
+		<link rel="stylesheet" href="/src/styles/globals.css" />
+		
+		<!-- Preload Chinese fonts for better performance -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 	</head>
 	<body>
 		<slot />
@@ -18,5 +34,12 @@
 		margin: 0;
 		width: 100%;
 		height: 100%;
+		font-family: 'Quicksand', ui-rounded, "Hiragino Maru Gothic ProN", Comfortaa, Manjari, "Arial Rounded MT Bold", Calibri, source-sans-pro, sans-serif;
+	}
+	
+	/* Ensure proper overflow handling for mobile */
+	body {
+		overflow-x: hidden;
+		-webkit-overflow-scrolling: touch;
 	}
 </style>

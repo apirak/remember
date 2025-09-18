@@ -1,0 +1,262 @@
+[
+  {
+    "id": "nihao",
+    "front": {
+      "icon": "",
+      "title": "你好",
+      "description": "nǐ hǎo"
+    },
+    "back": {
+      "icon": "👋",
+      "title": "Hello",
+      "description": "A greeting used when meeting someone"
+    }
+  },
+  {
+    "id": "zaijian",
+    "front": {
+      "icon": "",
+      "title": "再见",
+      "description": "zài jiàn"
+    },
+    "back": {
+      "icon": "👋",
+      "title": "Goodbye",
+      "description": "A farewell greeting"
+    }
+  },
+  {
+    "id": "xiexie",
+    "front": {
+      "icon": "",
+      "title": "谢谢",
+      "description": "xiè xiè"
+    },
+    "back": {
+      "icon": "🙏",
+      "title": "Thank you",
+      "description": "Expression of gratitude"
+    }
+  },
+  {
+    "id": "duibuqi",
+    "front": {
+      "icon": "",
+      "title": "对不起",
+      "description": "duì bù qǐ"
+    },
+    "back": {
+      "icon": "😔",
+      "title": "Sorry",
+      "description": "Apology for making a mistake"
+    }
+  },
+  {
+    "id": "wo",
+    "front": {
+      "icon": "",
+      "title": "我",
+      "description": "wǒ"
+    },
+    "back": {
+      "icon": "👤",
+      "title": "I / Me",
+      "description": "First person pronoun"
+    }
+  },
+  {
+    "id": "ni",
+    "front": {
+      "icon": "",
+      "title": "你",
+      "description": "nǐ"
+    },
+    "back": {
+      "icon": "👉",
+      "title": "You",
+      "description": "Second person pronoun"
+    }
+  },
+  {
+    "id": "ta",
+    "front": {
+      "icon": "",
+      "title": "他",
+      "description": "tā"
+    },
+    "back": {
+      "icon": "👤",
+      "title": "He / Him",
+      "description": "Third person pronoun (male)"
+    }
+  },
+  {
+    "id": "mama",
+    "front": {
+      "icon": "",
+      "title": "妈妈",
+      "description": "mā ma"
+    },
+    "back": {
+      "icon": "👩",
+      "title": "Mom / Mother",
+      "description": "Female parent"
+    }
+  },
+  {
+    "id": "baba",
+    "front": {
+      "icon": "",
+      "title": "爸爸",
+      "description": "bà ba"
+    },
+    "back": {
+      "icon": "👨",
+      "title": "Dad / Father",
+      "description": "Male parent"
+    }
+  },
+  {
+    "id": "pengyou",
+    "front": {
+      "icon": "",
+      "title": "朋友",
+      "description": "péng yǒu"
+    },
+    "back": {
+      "icon": "👫",
+      "title": "Friend",
+      "description": "A person you like and know well"
+    }
+  },
+  {
+    "id": "xuexiao",
+    "front": {
+      "icon": "",
+      "title": "学校",
+      "description": "xué xiào"
+    },
+    "back": {
+      "icon": "🏫",
+      "title": "School",
+      "description": "Place where children learn"
+    }
+  },
+  {
+    "id": "jia",
+    "front": {
+      "icon": "",
+      "title": "家",
+      "description": "jiā"
+    },
+    "back": {
+      "icon": "🏠",
+      "title": "Home / Family",
+      "description": "Where you live with your family"
+    }
+  },
+  {
+    "id": "shuiguo",
+    "front": {
+      "icon": "",
+      "title": "水果",
+      "description": "shuǐ guǒ"
+    },
+    "back": {
+      "icon": "🍎",
+      "title": "Fruit",
+      "description": "Sweet food that grows on trees"
+    }
+  },
+  {
+    "id": "shui",
+    "front": {
+      "icon": "",
+      "title": "水",
+      "description": "shuǐ"
+    },
+    "back": {
+      "icon": "💧",
+      "title": "Water",
+      "description": "Clear liquid that we drink"
+    }
+  },
+  {
+    "id": "chi",
+    "front": {
+      "icon": "",
+      "title": "吃",
+      "description": "chī"
+    },
+    "back": {
+      "icon": "🍽️",
+      "title": "To eat",
+      "description": "Action of consuming food"
+    }
+  },
+  {
+    "id": "he",
+    "front": {
+      "icon": "",
+      "title": "喝",
+      "description": "hē"
+    },
+    "back": {
+      "icon": "🥤",
+      "title": "To drink",
+      "description": "Action of consuming liquids"
+    }
+  },
+  {
+    "id": "kan",
+    "front": {
+      "icon": "",
+      "title": "看",
+      "description": "kàn"
+    },
+    "back": {
+      "icon": "👀",
+      "title": "To look / To see",
+      "description": "Action of using your eyes"
+    }
+  },
+  {
+    "id": "ting",
+    "front": {
+      "icon": "",
+      "title": "听",
+      "description": "tīng"
+    },
+    "back": {
+      "icon": "👂",
+      "title": "To listen",
+      "description": "Action of using your ears"
+    }
+  },
+  {
+    "id": "shuo",
+    "front": {
+      "icon": "",
+      "title": "说",
+      "description": "shuō"
+    },
+    "back": {
+      "icon": "💬",
+      "title": "To speak / To say",
+      "description": "Action of using your voice to talk"
+    }
+  },
+  {
+    "id": "zou",
+    "front": {
+      "icon": "",
+      "title": "走",
+      "description": "zǒu"
+    },
+    "back": {
+      "icon": "🚶",
+      "title": "To walk / To go",
+      "description": "Action of moving with your feet"
+    }
+  }
+]
