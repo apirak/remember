@@ -1,19 +1,33 @@
 // Login Button component for Google authentication
 // Simple button component that handles Google Sign-In with Firebase
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { signInWithGoogle, signOutUser, getAuthState } from '../../utils/auth';
+import { onAuthStateChanged, type User } from 'firebase/auth';
+import { auth } from '../../utils/firebase';
 
 interface LoginButtonProps {
-  onAuthStateChange?: () => void;
+  // Component no longer needs external auth state change callback
+  // as it uses Firebase onAuthStateChanged internally
 }
 
-const LoginButton: React.FC<LoginButtonProps> = ({ onAuthStateChange }) => {
+const LoginButton: React.FC<LoginButtonProps> = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [authState, setAuthState] = useState(getAuthState());
   
-  // Get current auth state
-  const authState = getAuthState();
+  // Listen to authentication state changes
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user: User | null) => {
+      // Update auth state when Firebase auth state changes
+      setAuthState(getAuthState());
+      console.log('Auth state changed:', user ? 'User logged in' : 'User logged out');
+    });
+
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, []);
+
   const { user, isAuthenticated } = authState;
 
   const handleSignIn = async () => {
@@ -25,7 +39,7 @@ const LoginButton: React.FC<LoginButtonProps> = ({ onAuthStateChange }) => {
       
       if (result.success) {
         console.log('Successfully signed in:', result.user);
-        onAuthStateChange?.();
+        // Auth state will be updated automatically via onAuthStateChanged
       } else {
         setError(result.error || 'เกิดข้อผิดพลาดในการเข้าสู่ระบบ');
       }
@@ -46,7 +60,7 @@ const LoginButton: React.FC<LoginButtonProps> = ({ onAuthStateChange }) => {
       
       if (result.success) {
         console.log('Successfully signed out');
-        onAuthStateChange?.();
+        // Auth state will be updated automatically via onAuthStateChanged
       } else {
         setError(result.error || 'เกิดข้อผิดพลาดในการออกจากระบบ');
       }

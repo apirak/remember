@@ -120,7 +120,7 @@ export const getCurrentUserProfile = (): UserProfile | null => {
 };
 
 // Auth state change listener
-export const onAuthStateChange = (callback: (user: User | null) => void) => {
+export const onAuthStateChange = (callback: (user: User | null) => void): (() => void) => {
   return onAuthStateChanged(auth, callback);
 };
 
