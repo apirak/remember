@@ -155,10 +155,10 @@ const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
               // Back side rating buttons
               <div className="space-y-3">
                 <div className="text-center mb-4">
-                  <p className="text-lg font-rounded text-gray-600">How did you do?</p>
+                  {/* <p className="text-lg font-rounded text-gray-600">How did you do?</p> */}
                 </div>
                 
-                <div className="space-y-3">
+                <div className="flex gap-4">
                   {/* Ask Me Again - Red */}
                   <button
                     onClick={() => handleRating(QUALITY_RATINGS.AGAIN)}
@@ -170,8 +170,8 @@ const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
                       flex items-center justify-center space-x-2
                     "
                   >
-                    <span>😔</span>
-                    <span>Ask Me Again</span>
+                    <span>🔄</span>
+                    <span>Again</span>
                   </button>
 
                   {/* Hard - Orange */}

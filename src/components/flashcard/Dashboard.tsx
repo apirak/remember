@@ -87,9 +87,9 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
           {/* Review Today */}
           <div className="bg-white rounded-2xl p-4 shadow-lg border-2 border-secondary-100">
             <div className="text-center">
-              <div className="text-2xl mb-1">⏰</div>
+              <div className="text-2xl mb-1">💪</div>
               <div className="text-2xl font-bold font-child text-secondary-600">
-                {state.stats.dueCards}
+                {state.stats.reviewsToday}
               </div>
               <div className="text-sm font-rounded text-gray-500">Review Today</div>
             </div>
@@ -133,20 +133,6 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             🔄 Reset Today's Progress
           </button>
         </div>
-
-        {/* Progress Summary */}
-        {state.stats.reviewsToday > 0 && (
-          <div className="mt-6 p-4 bg-white rounded-2xl shadow-sm border border-gray-200">
-            <div className="text-center">
-              <div className="text-sm font-rounded text-gray-500 mb-1">
-                Reviews Today
-              </div>
-              <div className="text-xl font-bold font-child text-primary-600">
-                {state.stats.reviewsToday}
-              </div>
-            </div>
-          </div>
-        )}
 
         {/* Guest Mode Notice */}
         <div className="mt-6 p-3 bg-blue-50 rounded-xl border border-blue-200">
