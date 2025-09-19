@@ -21,16 +21,13 @@ import {
 } from "../utils/sm2";
 import flashcardsData from "../data/flashcards.json";
 import { transformFlashcardData } from "../utils/seedData";
-// Flashcard utility functions
-import {
-  getDueFlashcards,
-  calculateFlashcardStats,
-} from "../utils/flashcardHelpers";
 // Flashcard service for Firestore operations
 import { FlashcardService } from "../services/flashcardService";
 import { getCurrentUser, onAuthStateChange } from "../utils/auth";
 // Session reducer for session management
 import { sessionReducer, type SessionAction } from "../reducers/sessionReducer";
+// Card reducer for card management
+import { cardReducer, type CardAction } from "../reducers/cardReducer";
 
 // Initial state
 const initialState: FlashcardContextState = {
@@ -91,84 +88,18 @@ const flashcardReducer = (
     return { ...state, ...sessionUpdates };
   }
 
+  // Check if this is a card action and delegate to card reducer
+  if (
+    action.type === "LOAD_CARDS" ||
+    action.type === "UPDATE_STATS" ||
+    action.type === "RESET_TODAY_PROGRESS" ||
+    action.type === "SET_LOADING"
+  ) {
+    const cardUpdates = cardReducer(state, action as CardAction);
+    return { ...state, ...cardUpdates };
+  }
+
   switch (action.type) {
-    case "LOAD_CARDS": {
-      const allCards = action.payload;
-      const dueCards = getDueFlashcards(allCards);
-      const stats = calculateFlashcardStats(allCards);
-
-      return {
-        ...state,
-        allCards,
-        dueCards,
-        stats: {
-          totalCards: stats.totalCards,
-          dueCards: stats.dueCards,
-          masteredCards: stats.masteredCards,
-          difficultCards: stats.difficultCards,
-          reviewsToday: 0, // Will be calculated from session data
-        },
-        isLoading: false,
-      };
-    }
-
-    case "SET_LOADING": {
-      return {
-        ...state,
-        isLoading: action.payload,
-      };
-    }
-
-    case "UPDATE_STATS": {
-      const stats = calculateFlashcardStats(state.allCards);
-      const dueCards = getDueFlashcards(state.allCards);
-
-      return {
-        ...state,
-        dueCards,
-        stats: {
-          totalCards: stats.totalCards,
-          dueCards: stats.dueCards,
-          masteredCards: stats.masteredCards,
-          difficultCards: stats.difficultCards,
-          reviewsToday: state.stats.reviewsToday,
-        },
-      };
-    }
-
-    case "RESET_TODAY_PROGRESS": {
-      // Reset all cards to be due today and reset reviewsToday counter
-      const resetCards = state.allCards.map((card) => ({
-        ...card,
-        nextReviewDate: new Date(),
-        interval: 1,
-        repetitions: 0,
-        totalReviews: 0,
-        easinessFactor: 2.5, // Reset to default SM2 value
-        isNew: true,
-        lastReviewDate: new Date(0), // Reset to epoch
-      }));
-
-      const stats = calculateFlashcardStats(resetCards);
-      const dueCards = getDueFlashcards(resetCards);
-
-      return {
-        ...state,
-        allCards: resetCards,
-        dueCards,
-        stats: {
-          totalCards: stats.totalCards,
-          dueCards: stats.dueCards,
-          masteredCards: stats.masteredCards,
-          difficultCards: stats.difficultCards,
-          reviewsToday: 0, // Reset reviews today counter
-        },
-        currentSession: null,
-        currentCard: null,
-        isShowingBack: false,
-      };
-    }
-
     // Enhanced loading states
     case "SET_LOADING_STATE": {
       const { key, value } = action.payload;
