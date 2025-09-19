@@ -1,6 +1,6 @@
 [
   {
-    "id": "nihao",
+    "id": "basic-ch-nihao",
     "front": {
       "icon": "",
       "title": "你好",
@@ -13,7 +13,7 @@
     }
   },
   {
-    "id": "zaijian",
+    "id": "basic-ch-zaijian",
     "front": {
       "icon": "",
       "title": "再见",
@@ -26,7 +26,7 @@
     }
   },
   {
-    "id": "xiexie",
+    "id": "basic-ch-xiexie",
     "front": {
       "icon": "",
       "title": "谢谢",
@@ -39,7 +39,7 @@
     }
   },
   {
-    "id": "bukeqi",
+    "id": "basic-ch-bukeqi",
     "front": {
       "icon": "",
       "title": "不客气",
@@ -52,7 +52,7 @@
     }
   },
   {
-    "id": "duibuqi",
+    "id": "basic-ch-duibuqi",
     "front": {
       "icon": "",
       "title": "对不起",
@@ -65,7 +65,7 @@
     }
   },
   {
-    "id": "meiguanxi",
+    "id": "basic-ch-meiguanxi",
     "front": {
       "icon": "",
       "title": "没关系",
@@ -78,7 +78,7 @@
     }
   },
   {
-    "id": "shi",
+    "id": "basic-ch-shi",
     "front": {
       "icon": "",
       "title": "是",
@@ -91,7 +91,7 @@
     }
   },
   {
-    "id": "bushi",
+    "id": "basic-ch-bushi",
     "front": {
       "icon": "",
       "title": "不是",
@@ -2194,6 +2194,526 @@
       "icon": "💯",
       "title": "มาก",
       "description": "คำวิเศษณ์แสดงระดับ"
+    }
+  },
+  {
+    "id": "basic-ch-le",
+    "front": {
+      "icon": "",
+      "title": "了",
+      "description": "le"
+    },
+    "back": {
+      "icon": "✅",
+      "title": "แล้ว",
+      "description": "คำเสริมแสดงการกระทำที่เสร็จสิ้นหรือการเปลี่ยนแปลง"
+    }
+  },
+  {
+    "id": "basic-ch-de",
+    "front": {
+      "icon": "",
+      "title": "的",
+      "description": "de"
+    },
+    "back": {
+      "icon": "🔗",
+      "title": "ของ",
+      "description": "คำช่วยแสดงความเป็นเจ้าของ"
+    }
+  },
+  {
+    "id": "basic-ch-ma",
+    "front": {
+      "icon": "",
+      "title": "吗",
+      "description": "ma"
+    },
+    "back": {
+      "icon": "❓",
+      "title": "ไหม",
+      "description": "คำช่วยท้ายประโยคคำถาม"
+    }
+  },
+  {
+    "id": "basic-ch-ne",
+    "front": {
+      "icon": "",
+      "title": "呢",
+      "description": "ne"
+    },
+    "back": {
+      "icon": "❓",
+      "title": "ล่ะ",
+      "description": "คำช่วยท้ายประโยคคำถามกลับ"
+    }
+  },
+  {
+    "id": "basic-ch-ba",
+    "front": {
+      "icon": "",
+      "title": "吧",
+      "description": "ba"
+    },
+    "back": {
+      "icon": "🗣️",
+      "title": "เถอะ",
+      "description": "คำช่วยท้ายประโยคแสดงการชักชวน"
+    }
+  },
+  {
+    "id": "basic-ch-hen",
+    "front": {
+      "icon": "",
+      "title": "很",
+      "description": "hěn"
+    },
+    "back": {
+      "icon": "📈",
+      "title": "มาก",
+      "description": "คำวิเศษณ์แสดงระดับ"
+    }
+  },
+  {
+    "id": "basic-ch-bu",
+    "front": {
+      "icon": "",
+      "title": "不",
+      "description": "bù"
+    },
+    "back": {
+      "icon": "❌",
+      "title": "ไม่",
+      "description": "คำวิเศษณ์แสดงการปฏิเสธ"
+    }
+  },
+  {
+    "id": "basic-ch-ye",
+    "front": {
+      "icon": "",
+      "title": "也",
+      "description": "yě"
+    },
+    "back": {
+      "icon": "➕",
+      "title": "ก็...เหมือนกัน",
+      "description": "คำวิเศษณ์แสดงการเพิ่มเติม"
+    }
+  },
+  {
+    "id": "basic-ch-dou",
+    "front": {
+      "icon": "",
+      "title": "都",
+      "description": "dōu"
+    },
+    "back": {
+      "icon": "💯",
+      "title": "ทั้งหมด",
+      "description": "คำวิเศษณ์แสดงความครอบคลุม"
+    }
+  },
+  {
+    "id": "basic-ch-zuo",
+    "front": {
+      "icon": "",
+      "title": "做",
+      "description": "zuò"
+    },
+    "back": {
+      "icon": "🔧",
+      "title": "ทำ",
+      "description": "กริยาของการสร้างหรือกระทำ"
+    }
+  },
+  {
+    "id": "basic-ch-mai",
+    "front": {
+      "icon": "",
+      "title": "买",
+      "description": "mǎi"
+    },
+    "back": {
+      "icon": "🛒",
+      "title": "ซื้อ",
+      "description": "กริยาของการแลกเงินกับสิ่งของ"
+    }
+  },
+  {
+    "id": "basic-ch-mai2",
+    "front": {
+      "icon": "",
+      "title": "卖",
+      "description": "mài"
+    },
+    "back": {
+      "icon": "🛍️",
+      "title": "ขาย",
+      "description": "กริยาของการแลกสิ่งของกับเงิน"
+    }
+  },
+  {
+    "id": "basic-ch-xuexi",
+    "front": {
+      "icon": "",
+      "title": "学习",
+      "description": "xuéxí"
+    },
+    "back": {
+      "icon": "📚",
+      "title": "เรียน",
+      "description": "กริยาของการศึกษา"
+    }
+  },
+  {
+    "id": "basic-ch-gongzuo",
+    "front": {
+      "icon": "",
+      "title": "工作",
+      "description": "gōngzuò"
+    },
+    "back": {
+      "icon": "💼",
+      "title": "ทำงาน",
+      "description": "กริยาของการประกอบอาชีพ"
+    }
+  },
+  {
+    "id": "basic-ch-xihuan",
+    "front": {
+      "icon": "",
+      "title": "喜欢",
+      "description": "xǐhuān"
+    },
+    "back": {
+      "icon": "❤️",
+      "title": "ชอบ",
+      "description": "กริยาแสดงความรู้สึกดี"
+    }
+  },
+  {
+    "id": "basic-ch-ai",
+    "front": {
+      "icon": "",
+      "title": "爱",
+      "description": "ài"
+    },
+    "back": {
+      "icon": "💖",
+      "title": "รัก",
+      "description": "ความรู้สึกรักใคร่"
+    }
+  },
+  {
+    "id": "basic-ch-you",
+    "front": {
+      "icon": "",
+      "title": "有",
+      "description": "yǒu"
+    },
+    "back": {
+      "icon": "✔️",
+      "title": "มี",
+      "description": "กริยาแสดงการเป็นเจ้าของ"
+    }
+  },
+  {
+    "id": "basic-ch-meiyou",
+    "front": {
+      "icon": "",
+      "title": "没有",
+      "description": "méiyǒu"
+    },
+    "back": {
+      "icon": "✖️",
+      "title": "ไม่มี",
+      "description": "กริยาแสดงการไม่มี"
+    }
+  },
+  {
+    "id": "basic-ch-jia",
+    "front": {
+      "icon": "",
+      "title": "家",
+      "description": "jiā"
+    },
+    "back": {
+      "icon": "🏠",
+      "title": "บ้าน",
+      "description": "สถานที่อยู่อาศัย"
+    }
+  },
+  {
+    "id": "basic-ch-xuexiao",
+    "front": {
+      "icon": "",
+      "title": "学校",
+      "description": "xuéxiào"
+    },
+    "back": {
+      "icon": "🏫",
+      "title": "โรงเรียน",
+      "description": "สถานที่เรียน"
+    }
+  },
+  {
+    "id": "basic-ch-yisheng",
+    "front": {
+      "icon": "",
+      "title": "医生",
+      "description": "yīshēng"
+    },
+    "back": {
+      "icon": "👩‍⚕️",
+      "title": "หมอ",
+      "description": "ผู้รักษาโรค"
+    }
+  },
+  {
+    "id": "basic-ch-pengyou",
+    "front": {
+      "icon": "",
+      "title": "朋友",
+      "description": "péngyǒu"
+    },
+    "back": {
+      "icon": "👫",
+      "title": "เพื่อน",
+      "description": "บุคคลที่เราสนิทด้วย"
+    }
+  },
+  {
+    "id": "basic-ch-baba",
+    "front": {
+      "icon": "",
+      "title": "爸爸",
+      "description": "bàba"
+    },
+    "back": {
+      "icon": "👨",
+      "title": "พ่อ",
+      "description": "ผู้ให้กำเนิด (ชาย)"
+    }
+  },
+  {
+    "id": "basic-ch-mama",
+    "front": {
+      "icon": "",
+      "title": "妈妈",
+      "description": "māma"
+    },
+    "back": {
+      "icon": "👩",
+      "title": "แม่",
+      "description": "ผู้ให้กำเนิด (หญิง)"
+    }
+  },
+  {
+    "id": "basic-ch-he",
+    "front": {
+      "icon": "",
+      "title": "喝",
+      "description": "hē"
+    },
+    "back": {
+      "icon": "🥤",
+      "title": "ดื่ม",
+      "description": "กริยาของการบริโภคเครื่องดื่ม"
+    }
+  },
+  {
+    "id": "basic-ch-fan",
+    "front": {
+      "icon": "",
+      "title": "饭",
+      "description": "fàn"
+    },
+    "back": {
+      "icon": "🍚",
+      "title": "ข้าว",
+      "description": "อาหารหลัก"
+    }
+  },
+  {
+    "id": "basic-ch-shuiguo",
+    "front": {
+      "icon": "",
+      "title": "水果",
+      "description": "shuǐguǒ"
+    },
+    "back": {
+      "icon": "🍎",
+      "title": "ผลไม้",
+      "description": "อาหารจากพืช"
+    }
+  },
+  {
+    "id": "basic-ch-shijian",
+    "front": {
+      "icon": "",
+      "title": "时间",
+      "description": "shíjiān"
+    },
+    "back": {
+      "icon": "⏰",
+      "title": "เวลา",
+      "description": "หน่วยนับช่วงเวลา"
+    }
+  },
+  {
+    "id": "basic-ch-qian",
+    "front": {
+      "icon": "",
+      "title": "钱",
+      "description": "qián"
+    },
+    "back": {
+      "icon": "💰",
+      "title": "เงิน",
+      "description": "สิ่งที่ใช้ในการแลกเปลี่ยน"
+    }
+  },
+  {
+    "id": "basic-ch-duoshaoqian",
+    "front": {
+      "icon": "",
+      "title": "多少钱",
+      "description": "duōshao qián"
+    },
+    "back": {
+      "icon": "💰",
+      "title": "ราคาเท่าไหร่",
+      "description": "ประโยคคำถามถามราคา"
+    }
+  },
+  {
+    "id": "basic-ch-zailaiyici",
+    "front": {
+      "icon": "",
+      "title": "再来一次",
+      "description": "zài lái yícì"
+    },
+    "back": {
+      "icon": "🔁",
+      "title": "มาอีกครั้ง",
+      "description": "ขอให้ทำซ้ำ"
+    }
+  },
+  {
+    "id": "basic-ch-zhende",
+    "front": {
+      "icon": "",
+      "title": "真的吗",
+      "description": "zhēn de ma"
+    },
+    "back": {
+      "icon": "🤯",
+      "title": "จริงเหรอ",
+      "description": "คำถามแสดงความไม่เชื่อ"
+    }
+  },
+  {
+    "id": "basic-ch-woaini",
+    "front": {
+      "icon": "",
+      "title": "我爱你",
+      "description": "wǒ ài nǐ"
+    },
+    "back": {
+      "icon": "💖",
+      "title": "ฉันรักคุณ",
+      "description": "ประโยคบอกรัก"
+    }
+  },
+  {
+    "id": "basic-ch-wanan",
+    "front": {
+      "icon": "",
+      "title": "晚安",
+      "description": "wǎn'ān"
+    },
+    "back": {
+      "icon": "🌙",
+      "title": "ราตรีสวัสดิ์",
+      "description": "คำทักทายก่อนนอน"
+    }
+  },
+  {
+    "id": "basic-ch-zaoshanghao",
+    "front": {
+      "icon": "",
+      "title": "早上好",
+      "description": "zǎoshang hǎo"
+    },
+    "back": {
+      "icon": "☀️",
+      "title": "อรุณสวัสดิ์",
+      "description": "คำทักทายตอนเช้า"
+    }
+  },
+  {
+    "id": "basic-ch-tianqi",
+    "front": {
+      "icon": "",
+      "title": "天气",
+      "description": "tiān qì"
+    },
+    "back": {
+      "icon": "🌤️",
+      "title": "สภาพอากาศ",
+      "description": "สภาพลมฟ้าอากาศ"
+    }
+  },
+  {
+    "id": "basic-ch-che",
+    "front": {
+      "icon": "",
+      "title": "车",
+      "description": "chē"
+    },
+    "back": {
+      "icon": "🚗",
+      "title": "รถ",
+      "description": "ยานพาหนะ"
+    }
+  },
+  {
+    "id": "basic-ch-dianhua",
+    "front": {
+      "icon": "",
+      "title": "电话",
+      "description": "diàn huà"
+    },
+    "back": {
+      "icon": "📞",
+      "title": "โทรศัพท์",
+      "description": "อุปกรณ์สื่อสาร"
+    }
+  },
+  {
+    "id": "basic-ch-diannao",
+    "front": {
+      "icon": "",
+      "title": "电脑",
+      "description": "diàn nǎo"
+    },
+    "back": {
+      "icon": "💻",
+      "title": "คอมพิวเตอร์",
+      "description": "อุปกรณ์อิเล็กทรอนิกส์"
+    }
+  },
+  {
+    "id": "basic-ch-yifu",
+    "front": {
+      "icon": "",
+      "title": "衣服",
+      "description": "yī fu"
+    },
+    "back": {
+      "icon": "👕",
+      "title": "เสื้อผ้า",
+      "description": "เครื่องแต่งกาย"
     }
   }
 ]
