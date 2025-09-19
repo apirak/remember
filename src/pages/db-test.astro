@@ -90,6 +90,7 @@
         <h2>📡 Database Connection</h2>
         <div id="db-status" class="status info">Checking database connection...</div>
         <button id="test-connection-btn">Test Connection</button>
+        <button id="test-all-btn" class="success" style="background: #6f42c1;">🧪 Test All Functions</button>
       </div>
 
       <!-- CRUD Operations Section -->
@@ -525,10 +526,85 @@
         }
       }
 
+      // Test all functions in sequence
+      async function testAllFunctions() {
+        try {
+          if (!currentUser) throw new Error('User must be authenticated');
+
+          log('🧪 Starting comprehensive test suite...', 'info');
+          setStatus('db-status', '🧪 Running comprehensive test suite...', 'info');
+          setStatus('crud-status', '🧪 Testing all functions...', 'info');
+
+          // Clear previous test data first
+          log('🧹 Cleaning up previous test data...');
+          await deleteAllTestCards();
+          await new Promise(resolve => setTimeout(resolve, 1000)); // Wait 1 second
+
+          // Step 1: Test connection
+          log('📡 Step 1/8: Testing database connection...');
+          await testConnection();
+          await new Promise(resolve => setTimeout(resolve, 500));
+
+          // Step 2: Create single test card
+          log('➕ Step 2/8: Creating single test card...');
+          document.getElementById('card-id').value = 'auto-test-single';
+          document.getElementById('card-front-title').value = 'Auto Test';
+          document.getElementById('card-front-desc').value = 'Single card test';
+          document.getElementById('card-back-title').value = 'ทดสอบอัตโนมัติ';
+          document.getElementById('card-back-desc').value = 'การทดสอบการ์ดเดี่ยว';
+          await createTestCard();
+          await new Promise(resolve => setTimeout(resolve, 500));
+
+          // Step 3: Create batch cards
+          log('📦 Step 3/8: Creating batch test cards...');
+          await createBatchCards();
+          await new Promise(resolve => setTimeout(resolve, 500));
+
+          // Step 4: Read all cards
+          log('📖 Step 4/8: Reading all cards...');
+          await readAllCards();
+          await new Promise(resolve => setTimeout(resolve, 500));
+
+          // Step 5: Read single card
+          log('🔍 Step 5/8: Reading single card...');
+          document.getElementById('card-id').value = 'auto-test-single';
+          await readSingleCard();
+          await new Promise(resolve => setTimeout(resolve, 500));
+
+          // Step 6: Update card
+          log('✏️ Step 6/8: Updating card progress...');
+          document.getElementById('update-card-id').value = 'auto-test-single';
+          await updateCard();
+          await new Promise(resolve => setTimeout(resolve, 500));
+
+          // Step 7: Delete single card
+          log('🗑️ Step 7/8: Deleting single card...');
+          document.getElementById('delete-card-id').value = 'auto-test-single';
+          await deleteCard();
+          await new Promise(resolve => setTimeout(resolve, 500));
+
+          // Step 8: Final cleanup
+          log('🧹 Step 8/8: Final cleanup...');
+          await deleteAllTestCards();
+          await new Promise(resolve => setTimeout(resolve, 500));
+
+          // Test completed
+          setStatus('db-status', '✅ All tests completed successfully!', 'success');
+          setStatus('crud-status', '🎉 Comprehensive test suite passed!', 'success');
+          log('🎉 All tests completed successfully! Database is fully functional.', 'success');
+
+        } catch (error) {
+          setStatus('db-status', `❌ Test suite failed: ${error.message}`, 'error');
+          setStatus('crud-status', `❌ Test suite failed: ${error.message}`, 'error');
+          log(`❌ Test suite failed: ${error.message}`, 'error');
+        }
+      }
+
       // Event listeners
       document.getElementById('login-btn').addEventListener('click', signInWithGoogle);
       document.getElementById('logout-btn').addEventListener('click', signOutUser);
       document.getElementById('test-connection-btn').addEventListener('click', testConnection);
+      document.getElementById('test-all-btn').addEventListener('click', testAllFunctions);
       document.getElementById('create-card-btn').addEventListener('click', createTestCard);
       document.getElementById('read-all-cards-btn').addEventListener('click', readAllCards);
       document.getElementById('read-single-card-btn').addEventListener('click', readSingleCard);
