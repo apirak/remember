@@ -1,0 +1,594 @@
+---
+// Database Test Page
+// This page allows testing Firebase authentication and Firestore CRUD operations
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Database Test - Remember Me</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #f5f5f5;
+      }
+      .container {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+      .section {
+        margin: 20px 0;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+      .status {
+        padding: 10px;
+        border-radius: 5px;
+        margin: 10px 0;
+      }
+      .status.success { background: #d4edda; color: #155724; }
+      .status.error { background: #f8d7da; color: #721c24; }
+      .status.info { background: #d1ecf1; color: #0c5460; }
+      .status.warning { background: #fff3cd; color: #856404; }
+      button {
+        background: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 5px;
+      }
+      button:hover { background: #0056b3; }
+      button:disabled { background: #6c757d; cursor: not-allowed; }
+      .danger { background: #dc3545; }
+      .danger:hover { background: #c82333; }
+      .success { background: #28a745; }
+      .success:hover { background: #218838; }
+      input, textarea {
+        width: 100%;
+        padding: 8px;
+        margin: 5px 0;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      .card-data {
+        background: #f8f9fa;
+        padding: 10px;
+        border-radius: 4px;
+        margin: 10px 0;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🔥 Firebase Database Test Page</h1>
+      <p>Test Firebase Authentication and Firestore CRUD operations</p>
+      
+      <!-- Authentication Section -->
+      <div class="section">
+        <h2>🔐 Authentication Status</h2>
+        <div id="auth-status" class="status info">Checking authentication...</div>
+        <div id="user-info"></div>
+        <button id="login-btn">Sign In with Google</button>
+        <button id="logout-btn" style="display:none;" class="danger">Sign Out</button>
+      </div>
+
+      <!-- Database Connection Section -->
+      <div class="section">
+        <h2>📡 Database Connection</h2>
+        <div id="db-status" class="status info">Checking database connection...</div>
+        <button id="test-connection-btn">Test Connection</button>
+      </div>
+
+      <!-- CRUD Operations Section -->
+      <div class="section">
+        <h2>💾 CRUD Operations Test</h2>
+        <div id="crud-status" class="status info">Ready to test CRUD operations</div>
+        
+        <h3>Create Test Card</h3>
+        <input type="text" id="card-id" placeholder="Card ID (e.g., test-card-1)" />
+        <input type="text" id="card-front-title" placeholder="Front Title (e.g., Hello)" />
+        <input type="text" id="card-front-desc" placeholder="Front Description (e.g., greeting)" />
+        <input type="text" id="card-back-title" placeholder="Back Title (e.g., 你好)" />
+        <input type="text" id="card-back-desc" placeholder="Back Description (e.g., nǐ hǎo)" />
+        <button id="create-card-btn" class="success">Create Test Card</button>
+
+        <h3>Read Operations</h3>
+        <button id="read-all-cards-btn">Read All Cards</button>
+        <button id="read-single-card-btn">Read Single Card</button>
+        <div id="cards-display" class="card-data"></div>
+
+        <h3>Update Operations</h3>
+        <input type="text" id="update-card-id" placeholder="Card ID to update" />
+        <button id="update-card-btn" class="success">Update Card Progress</button>
+
+        <h3>Delete Operations</h3>
+        <input type="text" id="delete-card-id" placeholder="Card ID to delete" />
+        <button id="delete-card-btn" class="danger">Delete Card</button>
+
+        <h3>Batch Operations</h3>
+        <button id="create-batch-btn" class="success">Create 3 Test Cards (Batch)</button>
+        <button id="delete-all-btn" class="danger">Delete All Test Cards</button>
+      </div>
+
+      <!-- Operation Log -->
+      <div class="section">
+        <h2>📝 Operation Log</h2>
+        <div id="operation-log" style="height: 200px; overflow-y: scroll; background: #f8f9fa; padding: 10px; border: 1px solid #ddd;"></div>
+        <button id="clear-log-btn">Clear Log</button>
+      </div>
+    </div>
+
+    <script type="module">
+      import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js';
+      import { 
+        getAuth, 
+        signInWithPopup, 
+        GoogleAuthProvider, 
+        signOut, 
+        onAuthStateChanged 
+      } from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js';
+      import { 
+        getFirestore, 
+        doc, 
+        setDoc, 
+        getDoc, 
+        getDocs, 
+        updateDoc, 
+        deleteDoc, 
+        collection, 
+        writeBatch,
+        serverTimestamp,
+        query,
+        orderBy
+      } from 'https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js';
+
+      // Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyDPQE3fesCq9nN84-zVBYHJRyMUR-pWgLk",
+        authDomain: "remember-me-c8da6.firebaseapp.com",
+        projectId: "remember-me-c8da6",
+        storageBucket: "remember-me-c8da6.firebasestorage.app",
+        messagingSenderId: "818564421697",
+        appId: "1:818564421697:web:f2abcf83ca42a9c3978ec0",
+        measurementId: "G-ZK2QES54E1"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const db = getFirestore(app);
+      const provider = new GoogleAuthProvider();
+
+      let currentUser = null;
+
+      // Utility functions
+      function log(message, type = 'info') {
+        const logDiv = document.getElementById('operation-log');
+        const timestamp = new Date().toLocaleTimeString();
+        const logEntry = document.createElement('div');
+        logEntry.style.color = type === 'error' ? '#dc3545' : type === 'success' ? '#28a745' : '#495057';
+        logEntry.textContent = `[${timestamp}] ${message}`;
+        logDiv.appendChild(logEntry);
+        logDiv.scrollTop = logDiv.scrollHeight;
+        console.log(`[DB-Test] ${message}`);
+      }
+
+      function setStatus(elementId, message, type = 'info') {
+        const element = document.getElementById(elementId);
+        element.className = `status ${type}`;
+        element.textContent = message;
+      }
+
+      function getUserCardsCollection() {
+        if (!currentUser) throw new Error('User not authenticated');
+        return collection(db, 'users', currentUser.uid, 'cards');
+      }
+
+      function getUserDocRef() {
+        if (!currentUser) throw new Error('User not authenticated');
+        return doc(db, 'users', currentUser.uid);
+      }
+
+      // Authentication functions
+      async function signInWithGoogle() {
+        try {
+          log('Attempting Google sign-in...');
+          const result = await signInWithPopup(auth, provider);
+          log(`Successfully signed in: ${result.user.email}`, 'success');
+        } catch (error) {
+          log(`Sign-in error: ${error.message}`, 'error');
+          setStatus('auth-status', `Sign-in failed: ${error.message}`, 'error');
+        }
+      }
+
+      async function signOutUser() {
+        try {
+          await signOut(auth);
+          log('Successfully signed out', 'success');
+        } catch (error) {
+          log(`Sign-out error: ${error.message}`, 'error');
+        }
+      }
+
+      // Database test functions
+      async function testConnection() {
+        try {
+          log('Testing database connection...');
+          setStatus('db-status', 'Testing connection...', 'info');
+          
+          if (!currentUser) {
+            throw new Error('User must be authenticated to test database');
+          }
+
+          // Try to read user document (will create if doesn't exist)
+          const userDocRef = getUserDocRef();
+          const userDoc = await getDoc(userDocRef);
+          
+          if (!userDoc.exists()) {
+            // Create user profile if it doesn't exist
+            await setDoc(userDocRef, {
+              email: currentUser.email,
+              displayName: currentUser.displayName,
+              createdAt: serverTimestamp(),
+              testConnection: true
+            });
+            log('Created user profile document', 'success');
+          }
+
+          setStatus('db-status', '✅ Database connection successful!', 'success');
+          log('Database connection test passed', 'success');
+        } catch (error) {
+          setStatus('db-status', `❌ Connection failed: ${error.message}`, 'error');
+          log(`Database connection error: ${error.message}`, 'error');
+        }
+      }
+
+      // CRUD functions
+      async function createTestCard() {
+        try {
+          if (!currentUser) throw new Error('User must be authenticated');
+
+          const cardId = document.getElementById('card-id').value || `test-card-${Date.now()}`;
+          const frontTitle = document.getElementById('card-front-title').value || 'Test Front';
+          const frontDesc = document.getElementById('card-front-desc').value || 'Test Description';
+          const backTitle = document.getElementById('card-back-title').value || 'Test Back';
+          const backDesc = document.getElementById('card-back-desc').value || 'Test Back Description';
+
+          const cardData = {
+            id: cardId,
+            front: {
+              icon: "🧪",
+              title: frontTitle,
+              description: frontDesc
+            },
+            back: {
+              icon: "✅",
+              title: backTitle,
+              description: backDesc
+            },
+            // SM-2 parameters
+            easinessFactor: 2.5,
+            interval: 1,
+            repetitions: 0,
+            nextReviewDate: new Date(),
+            lastReviewDate: new Date(),
+            totalReviews: 0,
+            averageQuality: 0,
+            isNew: true,
+            createdAt: serverTimestamp(),
+            updatedAt: serverTimestamp()
+          };
+
+          const cardsCollection = getUserCardsCollection();
+          const cardDocRef = doc(cardsCollection, cardId);
+          
+          log(`Creating card: ${cardId}`);
+          await setDoc(cardDocRef, cardData);
+          
+          setStatus('crud-status', `✅ Created card: ${cardId}`, 'success');
+          log(`Successfully created card: ${cardId}`, 'success');
+          
+          // Clear form
+          document.getElementById('card-id').value = '';
+          document.getElementById('card-front-title').value = '';
+          document.getElementById('card-front-desc').value = '';
+          document.getElementById('card-back-title').value = '';
+          document.getElementById('card-back-desc').value = '';
+          
+        } catch (error) {
+          setStatus('crud-status', `❌ Create failed: ${error.message}`, 'error');
+          log(`Create card error: ${error.message}`, 'error');
+        }
+      }
+
+      async function readAllCards() {
+        try {
+          if (!currentUser) throw new Error('User must be authenticated');
+
+          log('Reading all cards...');
+          const cardsCollection = getUserCardsCollection();
+          const q = query(cardsCollection, orderBy('createdAt', 'desc'));
+          const querySnapshot = await getDocs(q);
+          
+          const cards = [];
+          querySnapshot.forEach((doc) => {
+            cards.push({ id: doc.id, ...doc.data() });
+          });
+
+          const cardsDisplay = document.getElementById('cards-display');
+          cardsDisplay.textContent = JSON.stringify(cards, null, 2);
+          
+          setStatus('crud-status', `✅ Read ${cards.length} cards`, 'success');
+          log(`Successfully read ${cards.length} cards`, 'success');
+          
+        } catch (error) {
+          setStatus('crud-status', `❌ Read failed: ${error.message}`, 'error');
+          log(`Read cards error: ${error.message}`, 'error');
+        }
+      }
+
+      async function readSingleCard() {
+        try {
+          if (!currentUser) throw new Error('User must be authenticated');
+
+          const cardId = document.getElementById('card-id').value || 'test-card-1';
+          
+          log(`Reading card: ${cardId}`);
+          const cardsCollection = getUserCardsCollection();
+          const cardDocRef = doc(cardsCollection, cardId);
+          const cardDoc = await getDoc(cardDocRef);
+          
+          if (cardDoc.exists()) {
+            const cardData = { id: cardDoc.id, ...cardDoc.data() };
+            const cardsDisplay = document.getElementById('cards-display');
+            cardsDisplay.textContent = JSON.stringify(cardData, null, 2);
+            
+            setStatus('crud-status', `✅ Read card: ${cardId}`, 'success');
+            log(`Successfully read card: ${cardId}`, 'success');
+          } else {
+            setStatus('crud-status', `⚠️ Card not found: ${cardId}`, 'warning');
+            log(`Card not found: ${cardId}`, 'error');
+          }
+          
+        } catch (error) {
+          setStatus('crud-status', `❌ Read failed: ${error.message}`, 'error');
+          log(`Read card error: ${error.message}`, 'error');
+        }
+      }
+
+      async function updateCard() {
+        try {
+          if (!currentUser) throw new Error('User must be authenticated');
+
+          const cardId = document.getElementById('update-card-id').value || 'test-card-1';
+          
+          const updateData = {
+            easinessFactor: 2.8,
+            interval: 3,
+            repetitions: 1,
+            nextReviewDate: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), // 3 days from now
+            lastReviewDate: new Date(),
+            totalReviews: 1,
+            averageQuality: 4,
+            isNew: false,
+            updatedAt: serverTimestamp()
+          };
+
+          log(`Updating card: ${cardId}`);
+          const cardsCollection = getUserCardsCollection();
+          const cardDocRef = doc(cardsCollection, cardId);
+          
+          await updateDoc(cardDocRef, updateData);
+          
+          setStatus('crud-status', `✅ Updated card: ${cardId}`, 'success');
+          log(`Successfully updated card: ${cardId}`, 'success');
+          
+        } catch (error) {
+          setStatus('crud-status', `❌ Update failed: ${error.message}`, 'error');
+          log(`Update card error: ${error.message}`, 'error');
+        }
+      }
+
+      async function deleteCard() {
+        try {
+          if (!currentUser) throw new Error('User must be authenticated');
+
+          const cardId = document.getElementById('delete-card-id').value;
+          if (!cardId) {
+            throw new Error('Please enter a card ID to delete');
+          }
+
+          log(`Deleting card: ${cardId}`);
+          const cardsCollection = getUserCardsCollection();
+          const cardDocRef = doc(cardsCollection, cardId);
+          
+          await deleteDoc(cardDocRef);
+          
+          setStatus('crud-status', `✅ Deleted card: ${cardId}`, 'success');
+          log(`Successfully deleted card: ${cardId}`, 'success');
+          
+          document.getElementById('delete-card-id').value = '';
+          
+        } catch (error) {
+          setStatus('crud-status', `❌ Delete failed: ${error.message}`, 'error');
+          log(`Delete card error: ${error.message}`, 'error');
+        }
+      }
+
+      async function createBatchCards() {
+        try {
+          if (!currentUser) throw new Error('User must be authenticated');
+
+          log('Creating batch of test cards...');
+          const batch = writeBatch(db);
+          const cardsCollection = getUserCardsCollection();
+          
+          const testCards = [
+            {
+              id: `batch-test-1-${Date.now()}`,
+              front: { icon: "🍎", title: "Apple", description: "A red fruit" },
+              back: { icon: "🔴", title: "Red Fruit", description: "Sweet and healthy" }
+            },
+            {
+              id: `batch-test-2-${Date.now()}`,
+              front: { icon: "🌊", title: "Water", description: "Clear liquid" },
+              back: { icon: "💧", title: "H2O", description: "Essential for life" }
+            },
+            {
+              id: `batch-test-3-${Date.now()}`,
+              front: { icon: "🌞", title: "Sun", description: "Bright star" },
+              back: { icon: "⭐", title: "Star", description: "Source of light and heat" }
+            }
+          ];
+
+          testCards.forEach(cardData => {
+            const cardDocRef = doc(cardsCollection, cardData.id);
+            batch.set(cardDocRef, {
+              ...cardData,
+              easinessFactor: 2.5,
+              interval: 1,
+              repetitions: 0,
+              nextReviewDate: new Date(),
+              lastReviewDate: new Date(),
+              totalReviews: 0,
+              averageQuality: 0,
+              isNew: true,
+              createdAt: serverTimestamp(),
+              updatedAt: serverTimestamp()
+            });
+          });
+
+          await batch.commit();
+          
+          setStatus('crud-status', `✅ Created ${testCards.length} cards in batch`, 'success');
+          log(`Successfully created ${testCards.length} cards in batch`, 'success');
+          
+        } catch (error) {
+          setStatus('crud-status', `❌ Batch create failed: ${error.message}`, 'error');
+          log(`Batch create error: ${error.message}`, 'error');
+        }
+      }
+
+      async function deleteAllTestCards() {
+        try {
+          if (!currentUser) throw new Error('User must be authenticated');
+
+          if (!confirm('Are you sure you want to delete ALL test cards? This action cannot be undone.')) {
+            return;
+          }
+
+          log('Deleting all test cards...');
+          const cardsCollection = getUserCardsCollection();
+          const querySnapshot = await getDocs(cardsCollection);
+          
+          const batch = writeBatch(db);
+          let deleteCount = 0;
+          
+          querySnapshot.forEach((doc) => {
+            const cardData = doc.data();
+            // Only delete cards that look like test cards
+            if (cardData.id && (
+              cardData.id.includes('test-') || 
+              cardData.id.includes('batch-') ||
+              cardData.front?.icon === '🧪'
+            )) {
+              batch.delete(doc.ref);
+              deleteCount++;
+            }
+          });
+
+          if (deleteCount > 0) {
+            await batch.commit();
+            setStatus('crud-status', `✅ Deleted ${deleteCount} test cards`, 'success');
+            log(`Successfully deleted ${deleteCount} test cards`, 'success');
+          } else {
+            setStatus('crud-status', `ℹ️ No test cards found to delete`, 'info');
+            log('No test cards found to delete', 'info');
+          }
+          
+        } catch (error) {
+          setStatus('crud-status', `❌ Batch delete failed: ${error.message}`, 'error');
+          log(`Batch delete error: ${error.message}`, 'error');
+        }
+      }
+
+      // Event listeners
+      document.getElementById('login-btn').addEventListener('click', signInWithGoogle);
+      document.getElementById('logout-btn').addEventListener('click', signOutUser);
+      document.getElementById('test-connection-btn').addEventListener('click', testConnection);
+      document.getElementById('create-card-btn').addEventListener('click', createTestCard);
+      document.getElementById('read-all-cards-btn').addEventListener('click', readAllCards);
+      document.getElementById('read-single-card-btn').addEventListener('click', readSingleCard);
+      document.getElementById('update-card-btn').addEventListener('click', updateCard);
+      document.getElementById('delete-card-btn').addEventListener('click', deleteCard);
+      document.getElementById('create-batch-btn').addEventListener('click', createBatchCards);
+      document.getElementById('delete-all-btn').addEventListener('click', deleteAllTestCards);
+      document.getElementById('clear-log-btn').addEventListener('click', () => {
+        document.getElementById('operation-log').innerHTML = '';
+      });
+
+      // Auth state listener
+      onAuthStateChanged(auth, (user) => {
+        currentUser = user;
+        
+        if (user) {
+          setStatus('auth-status', `✅ Signed in as: ${user.email}`, 'success');
+          document.getElementById('user-info').innerHTML = `
+            <p><strong>User ID:</strong> ${user.uid}</p>
+            <p><strong>Email:</strong> ${user.email}</p>
+            <p><strong>Display Name:</strong> ${user.displayName || 'Not set'}</p>
+          `;
+          document.getElementById('login-btn').style.display = 'none';
+          document.getElementById('logout-btn').style.display = 'inline-block';
+          
+          // Enable CRUD buttons
+          document.querySelectorAll('button').forEach(btn => {
+            if (!btn.id.includes('login') && !btn.id.includes('logout') && !btn.id.includes('clear-log')) {
+              btn.disabled = false;
+            }
+          });
+          
+          log(`User authenticated: ${user.email}`, 'success');
+        } else {
+          setStatus('auth-status', '❌ Not signed in', 'error');
+          document.getElementById('user-info').innerHTML = '';
+          document.getElementById('login-btn').style.display = 'inline-block';
+          document.getElementById('logout-btn').style.display = 'none';
+          
+          // Disable CRUD buttons
+          document.querySelectorAll('button').forEach(btn => {
+            if (!btn.id.includes('login') && !btn.id.includes('logout') && !btn.id.includes('clear-log')) {
+              btn.disabled = true;
+            }
+          });
+          
+          setStatus('db-status', '⚠️ Sign in required for database operations', 'warning');
+          log('User signed out', 'info');
+        }
+      });
+
+      // Initialize page
+      log('Database test page initialized', 'success');
+      
+      // Initially disable CRUD buttons until user signs in
+      document.querySelectorAll('button').forEach(btn => {
+        if (!btn.id.includes('login') && !btn.id.includes('logout') && !btn.id.includes('clear-log')) {
+          btn.disabled = true;
+        }
+      });
+    </script>
+  </body>
+</html>
