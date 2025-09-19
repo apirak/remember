@@ -32,8 +32,12 @@ import { createFirestoreOperations } from "../hooks/useFirestoreOperations";
 // Complex action hooks
 import { createFlashcardActions } from "../hooks/useFlashcardActions";
 
-// Initial state
+/**
+ * Initial state for the FlashcardContext
+ * Sets up default values for all state properties
+ */
 const initialState: FlashcardContextState = {
+  // Core flashcard data
   allCards: [],
   dueCards: [],
   currentSession: null,
@@ -41,7 +45,7 @@ const initialState: FlashcardContextState = {
   isLoading: false,
   isShowingBack: false,
 
-  // Enhanced loading states
+  // Enhanced loading states for different operations
   loadingStates: {
     fetchingCards: false,
     savingProgress: false,
@@ -50,18 +54,19 @@ const initialState: FlashcardContextState = {
     migrating: false,
   },
 
-  // Data source and sync status
+  // Data source and synchronization tracking
   dataSource: "session",
   syncStatus: "idle",
   lastSyncTime: null,
 
-  // Error handling
+  // Error handling and retry mechanism
   error: null,
   pendingOperations: [],
 
-  // Migration status
+  // Migration status for guest-to-user data transfer
   migrationStatus: "none",
 
+  // Statistics for dashboard display
   stats: {
     totalCards: 0,
     dueCards: 0,
@@ -69,11 +74,19 @@ const initialState: FlashcardContextState = {
     difficultCards: 0,
     reviewsToday: 0,
   },
+
+  // User authentication state
   isGuest: true,
   user: null,
 };
 
-// Reducer function to manage state updates
+/**
+ * Main reducer function that delegates actions to specialized reducers
+ * Uses a pattern where each domain (session, cards, app state) has its own reducer
+ * @param state Current flashcard context state
+ * @param action Action to process
+ * @returns Updated state
+ */
 const flashcardReducer = (
   state: FlashcardContextState,
   action: FlashcardAction
@@ -125,11 +138,15 @@ const flashcardReducer = (
   return state;
 };
 
-// Create context
+/**
+ * React Context for flashcard application state management
+ * Provides all necessary methods and state for flashcard operations
+ */
 const FlashcardContext = createContext<{
   state: FlashcardContextState;
   dispatch: React.Dispatch<FlashcardAction>;
-  // Action helpers
+
+  // Core action helpers for flashcard operations
   loadCards: (cards: Flashcard[]) => void;
   startReviewSession: () => void;
   showCardBack: () => void;
@@ -139,6 +156,7 @@ const FlashcardContext = createContext<{
   completeSession: () => void;
   resetSession: () => void;
   resetTodayProgress: () => Promise<void>;
+
   // Enhanced helpers for loading states and error handling
   setLoadingState: (
     key: keyof FlashcardContextState["loadingStates"],
@@ -150,6 +168,7 @@ const FlashcardContext = createContext<{
   clearError: () => void;
   retryPendingOperations: () => void;
   setUser: (user: any, isGuest: boolean) => void;
+
   // Firestore integration methods
   loadCardsFromFirestore: () => Promise<void>;
   saveCardToFirestore: (card: Flashcard) => Promise<void>;
@@ -157,13 +176,19 @@ const FlashcardContext = createContext<{
   migrateGuestDataToFirestore: (guestData: any) => Promise<void>;
 } | null>(null);
 
-// Context provider component
+/**
+ * FlashcardProvider component that wraps the application with flashcard context
+ * Manages initialization, authentication monitoring, and provides all flashcard functionality
+ */
 export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [state, dispatch] = useReducer(flashcardReducer, initialState);
 
-  // Load initial flashcard data on mount
+  /**
+   * Load initial flashcard data on component mount
+   * Transforms raw JSON data to include SM-2 algorithm parameters
+   */
   useEffect(() => {
     dispatch({ type: "SET_LOADING", payload: true });
 
@@ -175,7 +200,10 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
     dispatch({ type: "LOAD_CARDS", payload: transformedCards });
   }, []);
 
-  // Monitor authentication state changes and load Firestore data for authenticated users
+  /**
+   * Monitor authentication state changes and load appropriate data
+   * Handles sign-in/sign-out flow and data source switching
+   */
   useEffect(() => {
     const unsubscribe = onAuthStateChange((firebaseUser) => {
       if (firebaseUser) {
@@ -215,7 +243,9 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
     return () => unsubscribe();
   }, []); // Empty dependency array since we want this to run once on mount
 
-  // Action helper functions
+  /**
+   * Basic action helper functions for core flashcard operations
+   */
   const loadCards = (cards: Flashcard[]) => {
     dispatch({ type: "LOAD_CARDS", payload: cards });
   };
@@ -244,7 +274,9 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
     dispatch({ type: "RESET_SESSION" });
   };
 
-  // Enhanced helper functions for loading states and error handling
+  /**
+   * Enhanced helper functions for loading states and error handling
+   */
   const setLoadingState = (
     key: keyof FlashcardContextState["loadingStates"],
     value: boolean
@@ -282,6 +314,11 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
     dispatch({ type: "SET_USER", payload: { user, isGuest } });
   };
 
+  /**
+   * Factory function implementations for complex operations
+   * Uses dependency injection pattern to provide necessary context methods
+   */
+
   // Create Firestore operations using the factory function
   const firestoreOperations = createFirestoreOperations({
     dispatch,
@@ -314,9 +351,13 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
   // Extract individual methods for backward compatibility
   const { rateCard, knowCard, resetTodayProgress } = flashcardActions;
 
+  /**
+   * Context value object that provides all state and methods to consumers
+   */
   const contextValue = {
     state,
     dispatch,
+    // Core flashcard operations
     loadCards,
     startReviewSession,
     showCardBack,
@@ -326,7 +367,7 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
     completeSession,
     resetSession,
     resetTodayProgress,
-    // Enhanced helpers
+    // State management helpers
     setLoadingState,
     setDataSource,
     setSyncStatus,
@@ -348,7 +389,11 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
   );
 };
 
-// Custom hook to use the flashcard context
+/**
+ * Custom hook to access the flashcard context
+ * Ensures the hook is used within a FlashcardProvider
+ * @returns Flashcard context value with all state and methods
+ */
 export const useFlashcard = () => {
   const context = useContext(FlashcardContext);
   if (!context) {
