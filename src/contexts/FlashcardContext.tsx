@@ -490,7 +490,7 @@ const FlashcardContext = createContext<{
   nextCard: () => void;
   completeSession: () => void;
   resetSession: () => void;
-  resetTodayProgress: () => void;
+  resetTodayProgress: () => Promise<void>;
   // Enhanced helpers for loading states and error handling
   setLoadingState: (
     key: keyof FlashcardContextState["loadingStates"],
@@ -649,9 +649,68 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
     dispatch({ type: "RESET_SESSION" });
   };
 
-  const resetTodayProgress = () => {
-    // Reset all cards and progress counters
+  const resetTodayProgress = async () => {
+    // Reset all cards and progress counters locally first
     dispatch({ type: "RESET_TODAY_PROGRESS" });
+
+    // If user is authenticated and data source is Firestore, reset cards in Firestore too
+    if (!state.isGuest && state.dataSource === "firestore") {
+      try {
+        setLoadingState("savingProgress", true);
+        setSyncStatus("syncing");
+        clearError();
+
+        const currentUser = getCurrentUser();
+        if (!currentUser) {
+          setError(
+            "User must be authenticated to reset progress in Firestore."
+          );
+          return;
+        }
+
+        // Get the current cards after reset (they should be reset with default SM-2 values)
+        const resetCards = state.allCards.map((card) => ({
+          ...card,
+          nextReviewDate: new Date(),
+          interval: 1,
+          repetitions: 0,
+          totalReviews: 0,
+          easinessFactor: 2.5, // Reset to default SM2 value
+          isNew: true,
+          lastReviewDate: new Date(0), // Reset to epoch
+          correctStreak: 0,
+          averageQuality: 0,
+          updatedAt: new Date(),
+        }));
+
+        // Save all reset cards to Firestore using batch operation
+        const { saveFlashcardsBatch } = await import("../utils/firestore");
+        const result = await saveFlashcardsBatch(resetCards);
+
+        if (result.success) {
+          setSyncStatus("idle");
+          dispatch({ type: "SET_LAST_SYNC_TIME", payload: new Date() });
+          console.log("Successfully reset all cards progress in Firestore");
+        } else {
+          throw new Error(
+            result.error || "Failed to reset progress in Firestore"
+          );
+        }
+      } catch (error) {
+        console.error("Error resetting progress in Firestore:", error);
+        setError(
+          error instanceof Error
+            ? error.message
+            : "Failed to reset progress in Firestore"
+        );
+        setSyncStatus("error");
+
+        // Note: Local reset already happened, so user can still use the app
+        // but their Firestore data won't be reset until next sync
+      } finally {
+        setLoadingState("savingProgress", false);
+      }
+    }
   };
 
   // Enhanced helper functions for loading states and error handling
@@ -708,27 +767,65 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
       const result = await getUserFlashcards();
 
       if (result.success && result.data) {
-        // Convert Firestore data to our Flashcard format
-        const cards: Flashcard[] = result.data.map((cardData: any) => ({
-          ...cardData,
-          // Ensure proper date conversion
-          nextReviewDate:
-            cardData.nextReviewDate instanceof Date
-              ? cardData.nextReviewDate
-              : new Date(cardData.nextReviewDate),
-          lastReviewDate:
-            cardData.lastReviewDate instanceof Date
-              ? cardData.lastReviewDate
-              : new Date(cardData.lastReviewDate),
-          createdAt:
-            cardData.createdAt instanceof Date
-              ? cardData.createdAt
-              : new Date(cardData.createdAt),
-          updatedAt:
-            cardData.updatedAt instanceof Date
-              ? cardData.updatedAt
-              : new Date(cardData.updatedAt),
-        }));
+        let cards: Flashcard[];
+
+        // If user has no cards in Firestore yet, use default cards and save them
+        if (result.data.length === 0) {
+          console.log(
+            "No cards found in Firestore for new user, using default cards"
+          );
+
+          // Transform default cards to include SM-2 parameters
+          const defaultCards = (flashcardsData as FlashcardData[]).map(
+            transformFlashcardData
+          );
+
+          // Save default cards to Firestore for the new user
+          try {
+            const { saveFlashcardsBatch } = await import("../utils/firestore");
+            const saveResult = await saveFlashcardsBatch(defaultCards);
+
+            if (saveResult.success) {
+              console.log(
+                "Successfully saved default cards to Firestore for new user"
+              );
+            } else {
+              console.warn(
+                "Failed to save default cards to Firestore:",
+                saveResult.error
+              );
+            }
+          } catch (batchError) {
+            console.warn(
+              "Error saving default cards to Firestore:",
+              batchError
+            );
+          }
+
+          cards = defaultCards;
+        } else {
+          // Convert existing Firestore data to our Flashcard format
+          cards = result.data.map((cardData: any) => ({
+            ...cardData,
+            // Ensure proper date conversion
+            nextReviewDate:
+              cardData.nextReviewDate instanceof Date
+                ? cardData.nextReviewDate
+                : new Date(cardData.nextReviewDate),
+            lastReviewDate:
+              cardData.lastReviewDate instanceof Date
+                ? cardData.lastReviewDate
+                : new Date(cardData.lastReviewDate),
+            createdAt:
+              cardData.createdAt instanceof Date
+                ? cardData.createdAt
+                : new Date(cardData.createdAt),
+            updatedAt:
+              cardData.updatedAt instanceof Date
+                ? cardData.updatedAt
+                : new Date(cardData.updatedAt),
+          }));
+        }
 
         dispatch({ type: "LOAD_CARDS", payload: cards });
         setDataSource("firestore");
@@ -748,7 +845,12 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
       );
       setSyncStatus("error");
 
-      // Fallback to session storage if available
+      // Fallback to default cards if Firestore fails
+      console.log("Falling back to default cards due to Firestore error");
+      const defaultCards = (flashcardsData as FlashcardData[]).map(
+        transformFlashcardData
+      );
+      dispatch({ type: "LOAD_CARDS", payload: defaultCards });
       setDataSource("fallback");
     } finally {
       setLoadingState("fetchingCards", false);
