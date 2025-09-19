@@ -27,13 +27,8 @@ import {
   getDueFlashcards,
   calculateFlashcardStats,
 } from "../utils/flashcardHelpers";
-// Firestore integration imports
-import {
-  getUserFlashcards,
-  updateFlashcardProgress,
-  saveFlashcard,
-  migrateGuestDataToUser,
-} from "../utils/firestore";
+// Flashcard service for Firestore operations
+import { FlashcardService } from "../services/flashcardService";
 import { getCurrentUser, onAuthStateChange } from "../utils/auth";
 
 // Initial state
@@ -630,8 +625,7 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
         }));
 
         // Save all reset cards to Firestore using batch operation
-        const { saveFlashcardsBatch } = await import("../utils/firestore");
-        const result = await saveFlashcardsBatch(resetCards);
+        const result = await FlashcardService.saveCardsBatch(resetCards);
 
         if (result.success) {
           setSyncStatus("idle");
@@ -704,81 +698,15 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
       setSyncStatus("syncing");
       clearError();
 
-      const currentUser = getCurrentUser();
-      if (!currentUser) {
-        setError("User must be authenticated to load cards from Firestore.");
-        return;
-      }
-
-      const result = await getUserFlashcards();
+      const result = await FlashcardService.loadUserFlashcards();
 
       if (result.success && result.data) {
-        let cards: Flashcard[];
-
-        // If user has no cards in Firestore yet, use default cards and save them
-        if (result.data.length === 0) {
-          console.log(
-            "No cards found in Firestore for new user, using default cards"
-          );
-
-          // Transform default cards to include SM-2 parameters
-          const defaultCards = (flashcardsData as FlashcardData[]).map(
-            transformFlashcardData
-          );
-
-          // Save default cards to Firestore for the new user
-          try {
-            const { saveFlashcardsBatch } = await import("../utils/firestore");
-            const saveResult = await saveFlashcardsBatch(defaultCards);
-
-            if (saveResult.success) {
-              console.log(
-                "Successfully saved default cards to Firestore for new user"
-              );
-            } else {
-              console.warn(
-                "Failed to save default cards to Firestore:",
-                saveResult.error
-              );
-            }
-          } catch (batchError) {
-            console.warn(
-              "Error saving default cards to Firestore:",
-              batchError
-            );
-          }
-
-          cards = defaultCards;
-        } else {
-          // Convert existing Firestore data to our Flashcard format
-          cards = result.data.map((cardData: any) => ({
-            ...cardData,
-            // Ensure proper date conversion
-            nextReviewDate:
-              cardData.nextReviewDate instanceof Date
-                ? cardData.nextReviewDate
-                : new Date(cardData.nextReviewDate),
-            lastReviewDate:
-              cardData.lastReviewDate instanceof Date
-                ? cardData.lastReviewDate
-                : new Date(cardData.lastReviewDate),
-            createdAt:
-              cardData.createdAt instanceof Date
-                ? cardData.createdAt
-                : new Date(cardData.createdAt),
-            updatedAt:
-              cardData.updatedAt instanceof Date
-                ? cardData.updatedAt
-                : new Date(cardData.updatedAt),
-          }));
-        }
-
-        dispatch({ type: "LOAD_CARDS", payload: cards });
+        dispatch({ type: "LOAD_CARDS", payload: result.data });
         setDataSource("firestore");
         setSyncStatus("idle");
         dispatch({ type: "SET_LAST_SYNC_TIME", payload: new Date() });
 
-        console.log(`Loaded ${cards.length} cards from Firestore`);
+        console.log(`Loaded ${result.data.length} cards from Firestore`);
       } else {
         throw new Error(result.error || "Failed to load cards from Firestore");
       }
@@ -793,9 +721,7 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
 
       // Fallback to default cards if Firestore fails
       console.log("Falling back to default cards due to Firestore error");
-      const defaultCards = (flashcardsData as FlashcardData[]).map(
-        transformFlashcardData
-      );
+      const defaultCards = FlashcardService.getDefaultFlashcards();
       dispatch({ type: "LOAD_CARDS", payload: defaultCards });
       setDataSource("fallback");
     } finally {
@@ -809,13 +735,7 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
       setSyncStatus("syncing");
       clearError();
 
-      const currentUser = getCurrentUser();
-      if (!currentUser) {
-        setError("User must be authenticated to save cards to Firestore.");
-        return;
-      }
-
-      const result = await saveFlashcard(card);
+      const result = await FlashcardService.saveCard(card);
 
       if (result.success) {
         setSyncStatus("idle");
@@ -834,14 +754,10 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
       setSyncStatus("error");
 
       // Add to pending operations for retry
-      const pendingOp = {
-        id: `save_card_${card.id}_${Date.now()}`,
-        type: "add_card" as const,
-        data: card,
-        timestamp: new Date(),
-        retryCount: 0,
-        maxRetries: 3,
-      };
+      const pendingOp = FlashcardService.createPendingOperation(
+        "add_card",
+        card
+      );
       dispatch({ type: "ADD_PENDING_OPERATION", payload: pendingOp });
     } finally {
       setLoadingState("savingProgress", false);
@@ -857,13 +773,7 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
       setSyncStatus("syncing");
       clearError();
 
-      const currentUser = getCurrentUser();
-      if (!currentUser) {
-        setError("User must be authenticated to save progress to Firestore.");
-        return;
-      }
-
-      const result = await updateFlashcardProgress(cardId, progressData);
+      const result = await FlashcardService.saveProgress(cardId, progressData);
 
       if (result.success) {
         setSyncStatus("idle");
@@ -882,14 +792,10 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
       setSyncStatus("error");
 
       // Add to pending operations for retry
-      const pendingOp = {
-        id: `rate_card_${cardId}_${Date.now()}`,
-        type: "rate_card" as const,
-        data: { cardId, progressData },
-        timestamp: new Date(),
-        retryCount: 0,
-        maxRetries: 3,
-      };
+      const pendingOp = FlashcardService.createPendingOperation("rate_card", {
+        cardId,
+        progressData,
+      });
       dispatch({ type: "ADD_PENDING_OPERATION", payload: pendingOp });
     } finally {
       setLoadingState("savingProgress", false);
@@ -903,13 +809,7 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
       setSyncStatus("syncing");
       clearError();
 
-      const currentUser = getCurrentUser();
-      if (!currentUser) {
-        setError("User must be authenticated to migrate data to Firestore.");
-        return;
-      }
-
-      const result = await migrateGuestDataToUser(guestData);
+      const result = await FlashcardService.migrateGuestData(guestData);
 
       if (result.success) {
         // After successful migration, load the migrated cards
