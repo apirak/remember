@@ -28,6 +28,11 @@ import { getCurrentUser, onAuthStateChange } from "../utils/auth";
 import { sessionReducer, type SessionAction } from "../reducers/sessionReducer";
 // Card reducer for card management
 import { cardReducer, type CardAction } from "../reducers/cardReducer";
+// App state reducer for loading, sync, error management
+import {
+  appStateReducer,
+  type AppStateAction,
+} from "../reducers/appStateReducer";
 
 // Initial state
 const initialState: FlashcardContextState = {
@@ -99,104 +104,27 @@ const flashcardReducer = (
     return { ...state, ...cardUpdates };
   }
 
-  switch (action.type) {
-    // Enhanced loading states
-    case "SET_LOADING_STATE": {
-      const { key, value } = action.payload;
-      return {
-        ...state,
-        loadingStates: {
-          ...state.loadingStates,
-          [key]: value,
-        },
-      };
-    }
-
-    // Data source and sync management
-    case "SET_DATA_SOURCE": {
-      return {
-        ...state,
-        dataSource: action.payload,
-      };
-    }
-
-    case "SET_SYNC_STATUS": {
-      return {
-        ...state,
-        syncStatus: action.payload,
-      };
-    }
-
-    case "SET_LAST_SYNC_TIME": {
-      return {
-        ...state,
-        lastSyncTime: action.payload,
-      };
-    }
-
-    // Error handling
-    case "SET_ERROR": {
-      return {
-        ...state,
-        error: action.payload,
-      };
-    }
-
-    case "CLEAR_ERROR": {
-      return {
-        ...state,
-        error: null,
-      };
-    }
-
-    case "ADD_PENDING_OPERATION": {
-      return {
-        ...state,
-        pendingOperations: [...state.pendingOperations, action.payload],
-      };
-    }
-
-    case "REMOVE_PENDING_OPERATION": {
-      return {
-        ...state,
-        pendingOperations: state.pendingOperations.filter(
-          (op) => op.id !== action.payload
-        ),
-      };
-    }
-
-    case "RETRY_PENDING_OPERATIONS": {
-      // Reset retry count for all pending operations
-      return {
-        ...state,
-        pendingOperations: state.pendingOperations.map((op) => ({
-          ...op,
-          retryCount: 0,
-        })),
-      };
-    }
-
-    // Migration
-    case "SET_MIGRATION_STATUS": {
-      return {
-        ...state,
-        migrationStatus: action.payload,
-      };
-    }
-
-    // User authentication
-    case "SET_USER": {
-      const { user, isGuest } = action.payload;
-      return {
-        ...state,
-        user,
-        isGuest,
-      };
-    }
-
-    default:
-      return state;
+  // Check if this is an app state action and delegate to app state reducer
+  if (
+    action.type === "SET_LOADING_STATE" ||
+    action.type === "SET_DATA_SOURCE" ||
+    action.type === "SET_SYNC_STATUS" ||
+    action.type === "SET_LAST_SYNC_TIME" ||
+    action.type === "SET_ERROR" ||
+    action.type === "CLEAR_ERROR" ||
+    action.type === "ADD_PENDING_OPERATION" ||
+    action.type === "REMOVE_PENDING_OPERATION" ||
+    action.type === "RETRY_PENDING_OPERATIONS" ||
+    action.type === "SET_MIGRATION_STATUS" ||
+    action.type === "SET_USER"
+  ) {
+    const appStateUpdates = appStateReducer(state, action as AppStateAction);
+    return { ...state, ...appStateUpdates };
   }
+
+  // If we reach here, it's an unknown action type
+  console.warn(`Unknown action type: ${(action as any).type}`);
+  return state;
 };
 
 // Create context
