@@ -33,6 +33,8 @@ import {
   appStateReducer,
   type AppStateAction,
 } from "../reducers/appStateReducer";
+// Firestore operations
+import { createFirestoreOperations } from "../hooks/useFirestoreOperations";
 
 // Initial state
 const initialState: FlashcardContextState = {
@@ -400,151 +402,23 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
     dispatch({ type: "SET_USER", payload: { user, isGuest } });
   };
 
-  // Firestore integration methods
-  const loadCardsFromFirestore = async (): Promise<void> => {
-    try {
-      setLoadingState("fetchingCards", true);
-      setSyncStatus("syncing");
-      clearError();
+  // Create Firestore operations using the factory function
+  const firestoreOperations = createFirestoreOperations({
+    dispatch,
+    setLoadingState,
+    setSyncStatus,
+    setDataSource,
+    setError,
+    clearError,
+  });
 
-      const result = await FlashcardService.loadUserFlashcards();
-
-      if (result.success && result.data) {
-        dispatch({ type: "LOAD_CARDS", payload: result.data });
-        setDataSource("firestore");
-        setSyncStatus("idle");
-        dispatch({ type: "SET_LAST_SYNC_TIME", payload: new Date() });
-
-        console.log(`Loaded ${result.data.length} cards from Firestore`);
-      } else {
-        throw new Error(result.error || "Failed to load cards from Firestore");
-      }
-    } catch (error) {
-      console.error("Error loading cards from Firestore:", error);
-      setError(
-        error instanceof Error
-          ? error.message
-          : "Failed to load cards from Firestore"
-      );
-      setSyncStatus("error");
-
-      // Fallback to default cards if Firestore fails
-      console.log("Falling back to default cards due to Firestore error");
-      const defaultCards = FlashcardService.getDefaultFlashcards();
-      dispatch({ type: "LOAD_CARDS", payload: defaultCards });
-      setDataSource("fallback");
-    } finally {
-      setLoadingState("fetchingCards", false);
-    }
-  };
-
-  const saveCardToFirestore = async (card: Flashcard): Promise<void> => {
-    try {
-      setLoadingState("savingProgress", true);
-      setSyncStatus("syncing");
-      clearError();
-
-      const result = await FlashcardService.saveCard(card);
-
-      if (result.success) {
-        setSyncStatus("idle");
-        dispatch({ type: "SET_LAST_SYNC_TIME", payload: new Date() });
-        console.log(`Saved card ${card.id} to Firestore`);
-      } else {
-        throw new Error(result.error || "Failed to save card to Firestore");
-      }
-    } catch (error) {
-      console.error("Error saving card to Firestore:", error);
-      setError(
-        error instanceof Error
-          ? error.message
-          : "Failed to save card to Firestore"
-      );
-      setSyncStatus("error");
-
-      // Add to pending operations for retry
-      const pendingOp = FlashcardService.createPendingOperation(
-        "add_card",
-        card
-      );
-      dispatch({ type: "ADD_PENDING_OPERATION", payload: pendingOp });
-    } finally {
-      setLoadingState("savingProgress", false);
-    }
-  };
-
-  const saveProgressToFirestore = async (
-    cardId: string,
-    progressData: any
-  ): Promise<void> => {
-    try {
-      setLoadingState("savingProgress", true);
-      setSyncStatus("syncing");
-      clearError();
-
-      const result = await FlashcardService.saveProgress(cardId, progressData);
-
-      if (result.success) {
-        setSyncStatus("idle");
-        dispatch({ type: "SET_LAST_SYNC_TIME", payload: new Date() });
-        console.log(`Updated progress for card ${cardId} in Firestore`);
-      } else {
-        throw new Error(result.error || "Failed to save progress to Firestore");
-      }
-    } catch (error) {
-      console.error("Error saving progress to Firestore:", error);
-      setError(
-        error instanceof Error
-          ? error.message
-          : "Failed to save progress to Firestore"
-      );
-      setSyncStatus("error");
-
-      // Add to pending operations for retry
-      const pendingOp = FlashcardService.createPendingOperation("rate_card", {
-        cardId,
-        progressData,
-      });
-      dispatch({ type: "ADD_PENDING_OPERATION", payload: pendingOp });
-    } finally {
-      setLoadingState("savingProgress", false);
-    }
-  };
-
-  const migrateGuestDataToFirestore = async (guestData: any): Promise<void> => {
-    try {
-      setLoadingState("migrating", true);
-      dispatch({ type: "SET_MIGRATION_STATUS", payload: "in-progress" });
-      setSyncStatus("syncing");
-      clearError();
-
-      const result = await FlashcardService.migrateGuestData(guestData);
-
-      if (result.success) {
-        // After successful migration, load the migrated cards
-        await loadCardsFromFirestore();
-
-        dispatch({ type: "SET_MIGRATION_STATUS", payload: "completed" });
-        setSyncStatus("idle");
-        setDataSource("firestore");
-
-        console.log("Successfully migrated guest data to Firestore");
-      } else {
-        throw new Error(result.error || "Failed to migrate data to Firestore");
-      }
-    } catch (error) {
-      console.error("Error migrating data to Firestore:", error);
-      setError(
-        error instanceof Error
-          ? error.message
-          : "Failed to migrate data to Firestore"
-      );
-      dispatch({ type: "SET_MIGRATION_STATUS", payload: "failed" });
-      setSyncStatus("error");
-    } finally {
-      setLoadingState("migrating", false);
-    }
-  };
+  // Extract individual methods for backward compatibility
+  const {
+    loadCardsFromFirestore,
+    saveCardToFirestore,
+    saveProgressToFirestore,
+    migrateGuestDataToFirestore,
+  } = firestoreOperations;
 
   const contextValue = {
     state,
