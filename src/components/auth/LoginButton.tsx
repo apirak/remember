@@ -98,17 +98,17 @@ const LoginButton: React.FC<LoginButtonProps> = () => {
           <button
             onClick={handleSignOut}
             disabled={isLoading}
-            className="m-1 py-1 px-2 rounded-md text-sm text-gray-800 
-            hover:bg-red-200 hover:border-red-400 hover:text-red-800
-            disabled:opacity-50 disabled:cursor-not-allowed
-            transition-colors duration-200
-          "
+            className="
+              m-1 py-1 px-2 rounded-md font-rounded text-sm
+              text-gray-800 
+              hover:bg-red-200 hover:border-red-400 
+              disabled:opacity-50 disabled:cursor-not-allowed
+              transition-colors duration-200
+            "
           >
             {isLoading ? "⌛ logging out..." : "Log out"}
           </button>
         </div>
-
-        {/* Logout Button */}
 
         {error && (
           <div className="text-xs text-red-600 text-center font-rounded">
@@ -135,7 +135,7 @@ const LoginButton: React.FC<LoginButtonProps> = () => {
           shadow-md hover:shadow-lg
         "
       >
-        {isLoading ? "⌛ กำลังเข้าสู่ระบบ..." : "🔑 เข้าสู่ระบบด้วย Google"}
+        {isLoading ? "⌛ logging in..." : "🔑 Sign in with Google"}
       </button>
 
       {/* Benefits of signing in */}
