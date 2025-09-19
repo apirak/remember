@@ -54,11 +54,15 @@ export const calculateFlashcardStats = (cards: Flashcard[]) => {
     totalReviews += card.totalReviews;
   });
 
+  // Calculate reviews completed today
+  const reviewsToday = calculateReviewsToday(cards);
+
   return {
     totalCards,
     dueCards,
     masteredCards,
     difficultCards,
+    reviewsToday,
     totalReviews,
     averageEasinessFactor:
       cards.length > 0
@@ -107,6 +111,38 @@ export const isCardMastered = (card: Flashcard): boolean => {
  */
 export const isCardDifficult = (card: Flashcard): boolean => {
   return card.easinessFactor < 2.2 && card.totalReviews > 0;
+};
+
+/**
+ * Check if a card was reviewed today based on lastReviewDate
+ * @param card - The flashcard to check
+ * @param currentDate - The current date (defaults to now)
+ * @returns true if the card was reviewed today
+ */
+export const isCardReviewedToday = (
+  card: Flashcard,
+  currentDate: Date = new Date()
+): boolean => {
+  // Handle edge case: if lastReviewDate is invalid or undefined, treat as not reviewed today
+  if (!card.lastReviewDate || !(card.lastReviewDate instanceof Date)) {
+    return false;
+  }
+
+  // Simple date comparison using toDateString (ignores time, uses local time)
+  return card.lastReviewDate.toDateString() === currentDate.toDateString();
+};
+
+/**
+ * Calculate the number of cards reviewed today
+ * @param cards - Array of flashcards to analyze
+ * @param currentDate - The current date (defaults to now)
+ * @returns Number of cards reviewed today
+ */
+export const calculateReviewsToday = (
+  cards: Flashcard[],
+  currentDate: Date = new Date()
+): number => {
+  return cards.filter((card) => isCardReviewedToday(card, currentDate)).length;
 };
 
 /**

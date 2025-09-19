@@ -40,7 +40,7 @@ export const cardReducer = (
           dueCards: stats.dueCards,
           masteredCards: stats.masteredCards,
           difficultCards: stats.difficultCards,
-          reviewsToday: 0, // Will be calculated from session data
+          reviewsToday: stats.reviewsToday, // Now calculated from actual card data
         },
         isLoading: false,
       };
@@ -63,7 +63,7 @@ export const cardReducer = (
           dueCards: stats.dueCards,
           masteredCards: stats.masteredCards,
           difficultCards: stats.difficultCards,
-          reviewsToday: state.stats.reviewsToday,
+          reviewsToday: stats.reviewsToday, // Now calculated from actual card data
         },
       };
     }
@@ -92,7 +92,7 @@ export const cardReducer = (
           dueCards: stats.dueCards,
           masteredCards: stats.masteredCards,
           difficultCards: stats.difficultCards,
-          reviewsToday: 0, // Reset reviews today counter
+          reviewsToday: stats.reviewsToday, // Will be 0 since all lastReviewDate reset to epoch
         },
         currentSession: null,
         currentCard: null,
