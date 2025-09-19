@@ -22,6 +22,11 @@ import {
 } from "../utils/sm2";
 import flashcardsData from "../data/flashcards.json";
 import { transformFlashcardData } from "../utils/seedData";
+// Flashcard utility functions
+import {
+  getDueFlashcards,
+  calculateFlashcardStats,
+} from "../utils/flashcardHelpers";
 // Firestore integration imports
 import {
   getUserFlashcards,
@@ -30,65 +35,6 @@ import {
   migrateGuestDataToUser,
 } from "../utils/firestore";
 import { getCurrentUser, onAuthStateChange } from "../utils/auth";
-
-// Helper functions for working with our Flashcard format
-
-// Check if a card is due for review
-const isFlashcardDue = (
-  card: Flashcard,
-  currentDate: Date = new Date()
-): boolean => {
-  return card.nextReviewDate <= currentDate;
-};
-
-// Get cards that are due for review
-const getDueFlashcards = (cards: Flashcard[]): Flashcard[] => {
-  const currentDate = new Date();
-  return cards.filter((card) => isFlashcardDue(card, currentDate));
-};
-
-// Calculate review statistics for our flashcard format
-const calculateFlashcardStats = (cards: Flashcard[]) => {
-  const totalCards = cards.length;
-  const dueCards = getDueFlashcards(cards).length;
-
-  let masteredCards = 0;
-  let difficultCards = 0;
-  let totalReviews = 0;
-
-  cards.forEach((card) => {
-    // Mastered: has been reviewed at least once with correct answer (repetitions >= 1)
-    // and has good easiness factor (>= 2.0) indicating successful learning
-    if (card.repetitions >= 1 && card.easinessFactor >= 2.0 && !card.isNew) {
-      masteredCards++;
-    }
-
-    // Difficult: easiness factor < 2.2 indicating cards that were rated as Hard
-    if (card.easinessFactor < 2.2 && card.totalReviews > 0) {
-      difficultCards++;
-    }
-
-    totalReviews += card.totalReviews;
-  });
-
-  return {
-    totalCards,
-    dueCards,
-    masteredCards,
-    difficultCards,
-    totalReviews,
-    averageEasinessFactor:
-      cards.length > 0
-        ? cards.reduce((sum, card) => sum + card.easinessFactor, 0) /
-          cards.length
-        : 0,
-    averageQuality:
-      cards.length > 0
-        ? cards.reduce((sum, card) => sum + card.averageQuality, 0) /
-          cards.length
-        : 0,
-  };
-};
 
 // Initial state
 const initialState: FlashcardContextState = {
