@@ -16,13 +16,20 @@ import type {
   ReviewSession,
 } from "../types/flashcard";
 import {
-  initializeSM2Params,
   calculateSM2,
   QUALITY_RATINGS,
   type QualityRating,
 } from "../utils/sm2";
 import flashcardsData from "../data/flashcards.json";
 import { transformFlashcardData } from "../utils/seedData";
+// Firestore integration imports
+import {
+  getUserFlashcards,
+  updateFlashcardProgress,
+  saveFlashcard,
+  migrateGuestDataToUser,
+} from "../utils/firestore";
+import { getCurrentUser, onAuthStateChange } from "../utils/auth";
 
 // Helper functions for working with our Flashcard format
 
@@ -478,8 +485,8 @@ const FlashcardContext = createContext<{
   loadCards: (cards: Flashcard[]) => void;
   startReviewSession: () => void;
   showCardBack: () => void;
-  rateCard: (quality: number) => void;
-  knowCard: () => void;
+  rateCard: (quality: number) => Promise<void>;
+  knowCard: () => Promise<void>;
   nextCard: () => void;
   completeSession: () => void;
   resetSession: () => void;
@@ -495,6 +502,11 @@ const FlashcardContext = createContext<{
   clearError: () => void;
   retryPendingOperations: () => void;
   setUser: (user: any, isGuest: boolean) => void;
+  // Firestore integration methods
+  loadCardsFromFirestore: () => Promise<void>;
+  saveCardToFirestore: (card: Flashcard) => Promise<void>;
+  saveProgressToFirestore: (cardId: string, progressData: any) => Promise<void>;
+  migrateGuestDataToFirestore: (guestData: any) => Promise<void>;
 } | null>(null);
 
 // Context provider component
@@ -515,6 +527,46 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
     dispatch({ type: "LOAD_CARDS", payload: transformedCards });
   }, []);
 
+  // Monitor authentication state changes and load Firestore data for authenticated users
+  useEffect(() => {
+    const unsubscribe = onAuthStateChange((firebaseUser) => {
+      if (firebaseUser) {
+        // User signed in - convert to UserProfile and set user state
+        const userProfile = {
+          uid: firebaseUser.uid,
+          email: firebaseUser.email,
+          displayName: firebaseUser.displayName,
+          photoURL: firebaseUser.photoURL,
+          isGuest: false,
+        };
+
+        setUser(userProfile, false);
+
+        // Load user's cards from Firestore
+        loadCardsFromFirestore().catch((error) => {
+          console.error(
+            "Failed to load cards from Firestore after sign-in:",
+            error
+          );
+          // If Firestore loading fails, keep using default cards as fallback
+        });
+      } else {
+        // User signed out or is guest - use session storage and default cards
+        setUser(null, true);
+        setDataSource("session");
+
+        // Load default cards
+        const transformedCards = (flashcardsData as FlashcardData[]).map(
+          transformFlashcardData
+        );
+        dispatch({ type: "LOAD_CARDS", payload: transformedCards });
+      }
+    });
+
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
+  }, []); // Empty dependency array since we want this to run once on mount
+
   // Action helper functions
   const loadCards = (cards: Flashcard[]) => {
     dispatch({ type: "LOAD_CARDS", payload: cards });
@@ -532,18 +584,57 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
     dispatch({ type: "SHOW_CARD_BACK" });
   };
 
-  const rateCard = (quality: number) => {
+  const rateCard = async (quality: number) => {
     if (state.currentCard) {
+      const currentCard = state.currentCard;
+
+      // First, update the local state immediately (optimistic update)
       dispatch({
         type: "RATE_CARD",
-        payload: { cardId: state.currentCard.id, quality },
+        payload: { cardId: currentCard.id, quality },
       });
+
+      // If user is authenticated and data source is Firestore, save to Firestore
+      if (!state.isGuest && state.dataSource === "firestore") {
+        try {
+          // Calculate the updated progress data using SM-2 algorithm
+          const updatedProgress = calculateSM2(
+            currentCard,
+            quality as QualityRating
+          );
+
+          // Save progress to Firestore in background
+          await saveProgressToFirestore(currentCard.id, {
+            easinessFactor: updatedProgress.easinessFactor,
+            repetitions: updatedProgress.repetitions,
+            interval: updatedProgress.interval,
+            nextReviewDate: updatedProgress.nextReviewDate,
+            lastReviewDate: new Date(),
+            totalReviews: currentCard.totalReviews + 1,
+            correctStreak:
+              quality >= QUALITY_RATINGS.HARD
+                ? currentCard.correctStreak + 1
+                : 0,
+            averageQuality:
+              (currentCard.averageQuality * currentCard.totalReviews +
+                quality) /
+              (currentCard.totalReviews + 1),
+            isNew: false,
+          });
+        } catch (error) {
+          console.warn(
+            "Failed to save card rating to Firestore, will retry later:",
+            error
+          );
+          // Note: saveProgressToFirestore already handles adding to pending operations
+        }
+      }
     }
   };
 
-  const knowCard = () => {
+  const knowCard = async () => {
     // "I Know" button is equivalent to "Easy" rating
-    rateCard(QUALITY_RATINGS.EASY);
+    await rateCard(QUALITY_RATINGS.EASY);
   };
 
   const nextCard = () => {
@@ -601,6 +692,203 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
     dispatch({ type: "SET_USER", payload: { user, isGuest } });
   };
 
+  // Firestore integration methods
+  const loadCardsFromFirestore = async (): Promise<void> => {
+    try {
+      setLoadingState("fetchingCards", true);
+      setSyncStatus("syncing");
+      clearError();
+
+      const currentUser = getCurrentUser();
+      if (!currentUser) {
+        setError("User must be authenticated to load cards from Firestore.");
+        return;
+      }
+
+      const result = await getUserFlashcards();
+
+      if (result.success && result.data) {
+        // Convert Firestore data to our Flashcard format
+        const cards: Flashcard[] = result.data.map((cardData: any) => ({
+          ...cardData,
+          // Ensure proper date conversion
+          nextReviewDate:
+            cardData.nextReviewDate instanceof Date
+              ? cardData.nextReviewDate
+              : new Date(cardData.nextReviewDate),
+          lastReviewDate:
+            cardData.lastReviewDate instanceof Date
+              ? cardData.lastReviewDate
+              : new Date(cardData.lastReviewDate),
+          createdAt:
+            cardData.createdAt instanceof Date
+              ? cardData.createdAt
+              : new Date(cardData.createdAt),
+          updatedAt:
+            cardData.updatedAt instanceof Date
+              ? cardData.updatedAt
+              : new Date(cardData.updatedAt),
+        }));
+
+        dispatch({ type: "LOAD_CARDS", payload: cards });
+        setDataSource("firestore");
+        setSyncStatus("idle");
+        dispatch({ type: "SET_LAST_SYNC_TIME", payload: new Date() });
+
+        console.log(`Loaded ${cards.length} cards from Firestore`);
+      } else {
+        throw new Error(result.error || "Failed to load cards from Firestore");
+      }
+    } catch (error) {
+      console.error("Error loading cards from Firestore:", error);
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Failed to load cards from Firestore"
+      );
+      setSyncStatus("error");
+
+      // Fallback to session storage if available
+      setDataSource("fallback");
+    } finally {
+      setLoadingState("fetchingCards", false);
+    }
+  };
+
+  const saveCardToFirestore = async (card: Flashcard): Promise<void> => {
+    try {
+      setLoadingState("savingProgress", true);
+      setSyncStatus("syncing");
+      clearError();
+
+      const currentUser = getCurrentUser();
+      if (!currentUser) {
+        setError("User must be authenticated to save cards to Firestore.");
+        return;
+      }
+
+      const result = await saveFlashcard(card);
+
+      if (result.success) {
+        setSyncStatus("idle");
+        dispatch({ type: "SET_LAST_SYNC_TIME", payload: new Date() });
+        console.log(`Saved card ${card.id} to Firestore`);
+      } else {
+        throw new Error(result.error || "Failed to save card to Firestore");
+      }
+    } catch (error) {
+      console.error("Error saving card to Firestore:", error);
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Failed to save card to Firestore"
+      );
+      setSyncStatus("error");
+
+      // Add to pending operations for retry
+      const pendingOp = {
+        id: `save_card_${card.id}_${Date.now()}`,
+        type: "add_card" as const,
+        data: card,
+        timestamp: new Date(),
+        retryCount: 0,
+        maxRetries: 3,
+      };
+      dispatch({ type: "ADD_PENDING_OPERATION", payload: pendingOp });
+    } finally {
+      setLoadingState("savingProgress", false);
+    }
+  };
+
+  const saveProgressToFirestore = async (
+    cardId: string,
+    progressData: any
+  ): Promise<void> => {
+    try {
+      setLoadingState("savingProgress", true);
+      setSyncStatus("syncing");
+      clearError();
+
+      const currentUser = getCurrentUser();
+      if (!currentUser) {
+        setError("User must be authenticated to save progress to Firestore.");
+        return;
+      }
+
+      const result = await updateFlashcardProgress(cardId, progressData);
+
+      if (result.success) {
+        setSyncStatus("idle");
+        dispatch({ type: "SET_LAST_SYNC_TIME", payload: new Date() });
+        console.log(`Updated progress for card ${cardId} in Firestore`);
+      } else {
+        throw new Error(result.error || "Failed to save progress to Firestore");
+      }
+    } catch (error) {
+      console.error("Error saving progress to Firestore:", error);
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Failed to save progress to Firestore"
+      );
+      setSyncStatus("error");
+
+      // Add to pending operations for retry
+      const pendingOp = {
+        id: `rate_card_${cardId}_${Date.now()}`,
+        type: "rate_card" as const,
+        data: { cardId, progressData },
+        timestamp: new Date(),
+        retryCount: 0,
+        maxRetries: 3,
+      };
+      dispatch({ type: "ADD_PENDING_OPERATION", payload: pendingOp });
+    } finally {
+      setLoadingState("savingProgress", false);
+    }
+  };
+
+  const migrateGuestDataToFirestore = async (guestData: any): Promise<void> => {
+    try {
+      setLoadingState("migrating", true);
+      dispatch({ type: "SET_MIGRATION_STATUS", payload: "in-progress" });
+      setSyncStatus("syncing");
+      clearError();
+
+      const currentUser = getCurrentUser();
+      if (!currentUser) {
+        setError("User must be authenticated to migrate data to Firestore.");
+        return;
+      }
+
+      const result = await migrateGuestDataToUser(guestData);
+
+      if (result.success) {
+        // After successful migration, load the migrated cards
+        await loadCardsFromFirestore();
+
+        dispatch({ type: "SET_MIGRATION_STATUS", payload: "completed" });
+        setSyncStatus("idle");
+        setDataSource("firestore");
+
+        console.log("Successfully migrated guest data to Firestore");
+      } else {
+        throw new Error(result.error || "Failed to migrate data to Firestore");
+      }
+    } catch (error) {
+      console.error("Error migrating data to Firestore:", error);
+      setError(
+        error instanceof Error
+          ? error.message
+          : "Failed to migrate data to Firestore"
+      );
+      dispatch({ type: "SET_MIGRATION_STATUS", payload: "failed" });
+      setSyncStatus("error");
+    } finally {
+      setLoadingState("migrating", false);
+    }
+  };
+
   const contextValue = {
     state,
     dispatch,
@@ -621,6 +909,11 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
     clearError,
     retryPendingOperations,
     setUser,
+    // Firestore integration methods
+    loadCardsFromFirestore,
+    saveCardToFirestore,
+    saveProgressToFirestore,
+    migrateGuestDataToFirestore,
   };
 
   return (
