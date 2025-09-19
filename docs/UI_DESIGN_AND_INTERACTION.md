@@ -9,6 +9,7 @@ Create a joyful, game-like learning interface for children studying Chinese voca
 ## Core Design Principles
 
 ### Child-Friendly Experience
+
 - **Visual Appeal**: Bright, cheerful colors with gentle gradients
 - **Typography**: Round, friendly fonts that feel approachable
 - **Interactions**: Large touch targets, satisfying animations, immediate feedback
@@ -17,15 +18,21 @@ Create a joyful, game-like learning interface for children studying Chinese voca
 ### Key Data Structures
 
 **Flashcard Example**:
+
 ```json
 {
   "id": "nihao",
   "front": { "icon": "🗣️", "title": "你好", "description": "nǐ hǎo" },
-  "back": { "icon": "👋", "title": "Hello", "description": "A greeting used when meeting someone" }
+  "back": {
+    "icon": "👋",
+    "title": "Hello",
+    "description": "A greeting used when meeting someone"
+  }
 }
 ```
 
 **User Progress Tracking**:
+
 ```json
 {
   "easinessFactor": 2.5,

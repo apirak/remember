@@ -22,10 +22,10 @@ Create an adaptive learning system that intelligently schedules flashcard review
 
 ```json
 {
-  "Ask Me Again": 0,  // Complete failure - show again immediately
-  "Hard": 2,          // Difficult recall - shorter next interval  
-  "Got It": 4,        // Correct with effort - normal interval
-  "I Know": 5         // Easy recall - longer next interval
+  "Ask Me Again": 0, // Complete failure - show again immediately
+  "Hard": 2, // Difficult recall - shorter next interval
+  "Got It": 4, // Correct with effort - normal interval
+  "I Know": 5 // Easy recall - longer next interval
 }
 ```
 
@@ -43,10 +43,14 @@ Create an adaptive learning system that intelligently schedules flashcard review
 ```json
 {
   "learningData": {
-    "difficulty": 2.5,           // How hard this card is (1.3-2.5)
-    "consecutiveCorrect": 3,     // Streak of correct answers
-    "daysTillNextReview": 15,    // When to show this card again
-    "totalAttempts": 8,          // How many times reviewed
+    "difficulty": 2.5, // How hard this card is (1.3-2.5)
+    "consecutiveCorrect": 3, // Streak of correct answers
+    "daysTillNextReview": 15, // When to show this card again
+    "totalAttempts": 8 // How many times reviewed
+  }
+}
+```
+
 ## Algorithm Implementation Guidelines
 
 ### Core Algorithm Concepts
@@ -54,7 +58,7 @@ Create an adaptive learning system that intelligently schedules flashcard review
 **Interval Scheduling**: Determine when to show each card next
 
 - **New cards**: Show today, then tomorrow if correct
-- **Learning cards**: Use short intervals (1-6 days) 
+- **Learning cards**: Use short intervals (1-6 days)
 - **Mature cards**: Use exponentially increasing intervals
 - **Failed cards**: Reset to short intervals and show again soon
 
@@ -67,7 +71,7 @@ Create an adaptive learning system that intelligently schedules flashcard review
 **Performance Outcomes**: What the algorithm should achieve
 
 - Users spend more time on difficult content
-- Well-known content appears less frequently  
+- Well-known content appears less frequently
 - Overall study time is optimized for retention
 - Learning progress is measurable and visible
 
@@ -147,4 +151,4 @@ Create an adaptive learning system that intelligently schedules flashcard review
 - **FSRS Algorithm**: Modern free spaced repetition scheduler
 - **Custom Algorithm**: Tailored to specific learning needs
 - **Hybrid Approach**: Combine multiple algorithms
-Use this prompt to guide AI in creating intelligent learning systems that adapt to user performance and optimize long-term knowledge retention through scientifically-backed spaced repetition principles.
+  Use this prompt to guide AI in creating intelligent learning systems that adapt to user performance and optimize long-term knowledge retention through scientifically-backed spaced repetition principles.

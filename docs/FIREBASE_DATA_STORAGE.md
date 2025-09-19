@@ -73,7 +73,11 @@ Design a cloud database structure that ensures user data isolation, enables effi
   "cardId": "nihao001",
   "content": {
     "front": { "icon": "🗣️", "title": "你好", "description": "nǐ hǎo" },
-    "back": { "icon": "👋", "title": "Hello", "description": "A friendly greeting" }
+    "back": {
+      "icon": "👋",
+      "title": "Hello",
+      "description": "A friendly greeting"
+    }
   },
   "learning": {
     "easinessFactor": 2.5,
@@ -104,6 +108,7 @@ Design a cloud database structure that ensures user data isolation, enables effi
   }
 }
 ```
+
 ## Cloud Database Implementation Guidelines
 
 ### Core Query Patterns
@@ -190,11 +195,11 @@ Design a cloud database structure that ensures user data isolation, enables effi
 
 Use this prompt to guide AI in creating scalable, secure cloud storage solutions that can adapt to different database technologies while maintaining user data isolation and optimal performance.
 const getUserCards = async (userId: string): Promise<Flashcard[]> => {
-  const cardsRef = collection(firestore, 'users', userId, 'cards');
-  const snapshot = await getDocs(cardsRef);
-  
-  return snapshot.docs.map(doc => ({
-    id: doc.id,
-    ...doc.data(),
-    // Convert Timestamps to Dates
+const cardsRef = collection(firestore, 'users', userId, 'cards');
+const snapshot = await getDocs(cardsRef);
+
+return snapshot.docs.map(doc => ({
+id: doc.id,
+...doc.data(),
+// Convert Timestamps to Dates
 Use this prompt to guide AI in creating scalable, secure cloud storage solutions that can adapt to different database technologies while maintaining user data isolation and optimal performance.
