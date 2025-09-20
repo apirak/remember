@@ -9,6 +9,7 @@ import {
 import Dashboard from "./Dashboard.tsx";
 import Review from "./Review.tsx";
 import Completion from "./Completion.tsx";
+import CardSetSelection from "./CardSetSelection.tsx";
 
 // Navigation types
 type AppRoute = "dashboard" | "review" | "complete" | "card-sets";
@@ -49,24 +50,7 @@ const FlashcardAppContent: React.FC = () => {
         return <Completion onNavigate={setCurrentRoute} />;
       case "card-sets":
         console.log("Navigating to card sets selection screen");
-        // TODO: Replace with actual CardSetSelection component in Step 2
-        return (
-          <div className="min-h-screen flex items-center justify-center p-4">
-            <div className="max-w-md w-full bg-white/80 backdrop-blur-md p-6 rounded-3xl shadow-lg text-center">
-              <h1 className="text-2xl font-bold mb-4">Card Sets</h1>
-              <p className="text-gray-600 mb-4">Coming soon...</p>
-              <button
-                onClick={() => {
-                  console.log("Navigating back to dashboard from card sets");
-                  setCurrentRoute("dashboard");
-                }}
-                className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-              >
-                Back to Dashboard
-              </button>
-            </div>
-          </div>
-        );
+        return <CardSetSelection onNavigate={setCurrentRoute} />;
       case "dashboard":
       default:
         return <Dashboard onNavigate={setCurrentRoute} />;
