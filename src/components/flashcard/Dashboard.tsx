@@ -70,10 +70,16 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold font-child text-primary-600 mb-2">
-            🎓 Learn Chinese!
+            🎓 Remember Me!
           </h1>
           <p className="text-lg font-rounded text-gray-600">
-            Practice vocabulary with fun flashcards
+            Remember Everything with{" "}
+            <a
+              className="text-blue-600 hover:text-blue-800 no-underline"
+              href="http://bit.ly/3KctaMk"
+            >
+              Smart Flashcards
+            </a>
           </p>
         </div>
 
@@ -87,7 +93,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                 {state.stats.totalCards}
               </div>
               <div className="text-lg font-rounded text-primary-700">
-                Total Cards
+                Basic Chinese Cards
               </div>
             </div>
           </div>
