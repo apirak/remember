@@ -141,9 +141,7 @@ const LoginButton: React.FC<LoginButtonProps> = () => {
 
       {/* Benefits of signing in */}
       <div className="text-xs font-rounded text-gray-600 text-center space-y-1">
-        <div>💾 Save learning progress</div>
-        <div>📊 Track review statistics</div>
-        <div>☁️ Sync data across devices</div>
+        <div>Save learning progress</div>
       </div>
 
       {error && (
