@@ -1,0 +1,1133 @@
+[
+  {
+    "id": "inter-ch-yinwei",
+    "front": {
+      "icon": "",
+      "title": "因为",
+      "description": "yīnwèi"
+    },
+    "back": {
+      "icon": "🔍",
+      "title": "because",
+      "description": "Conjunction used to express cause or reason."
+    }
+  },
+  {
+    "id": "inter-ch-suoyi",
+    "front": {
+      "icon": "",
+      "title": "所以",
+      "description": "suǒyǐ"
+    },
+    "back": {
+      "icon": "➡️",
+      "title": "therefore, so",
+      "description": "Conjunction indicating result or conclusion."
+    }
+  },
+  {
+    "id": "inter-ch-ruguo",
+    "front": {
+      "icon": "",
+      "title": "如果",
+      "description": "rúguǒ"
+    },
+    "back": {
+      "icon": "❓",
+      "title": "if",
+      "description": "Conditional conjunction for hypothetical situations."
+    }
+  },
+  {
+    "id": "inter-ch-suiran",
+    "front": {
+      "icon": "",
+      "title": "虽然",
+      "description": "suīrán"
+    },
+    "back": {
+      "icon": "⚖️",
+      "title": "although",
+      "description": "Conjunction expressing contrast or concession."
+    }
+  },
+  {
+    "id": "inter-ch-danshi",
+    "front": {
+      "icon": "",
+      "title": "但是",
+      "description": "dànshì"
+    },
+    "back": {
+      "icon": "🔄",
+      "title": "but, however",
+      "description": "Adversative conjunction showing contrast."
+    }
+  },
+  {
+    "id": "inter-ch-haishi",
+    "front": {
+      "icon": "",
+      "title": "还是",
+      "description": "háishi"
+    },
+    "back": {
+      "icon": "🤔",
+      "title": "or, still",
+      "description": "Used in questions offering alternatives or expressing preference."
+    }
+  },
+  {
+    "id": "inter-ch-genjv",
+    "front": {
+      "icon": "",
+      "title": "根据",
+      "description": "gēnjù"
+    },
+    "back": {
+      "icon": "📊",
+      "title": "according to",
+      "description": "Preposition indicating basis or foundation."
+    }
+  },
+  {
+    "id": "inter-ch-duiyu",
+    "front": {
+      "icon": "",
+      "title": "对于",
+      "description": "duìyú"
+    },
+    "back": {
+      "icon": "🎯",
+      "title": "regarding, as for",
+      "description": "Preposition introducing a topic or subject."
+    }
+  },
+  {
+    "id": "inter-ch-guanyu",
+    "front": {
+      "icon": "",
+      "title": "关于",
+      "description": "guānyú"
+    },
+    "back": {
+      "icon": "📝",
+      "title": "about, concerning",
+      "description": "Preposition introducing a topic or subject matter."
+    }
+  },
+  {
+    "id": "inter-ch-weiliao",
+    "front": {
+      "icon": "",
+      "title": "为了",
+      "description": "wèile"
+    },
+    "back": {
+      "icon": "🎯",
+      "title": "in order to, for",
+      "description": "Preposition expressing purpose or goal."
+    }
+  },
+  {
+    "id": "inter-ch-chule",
+    "front": {
+      "icon": "",
+      "title": "除了",
+      "description": "chúle"
+    },
+    "back": {
+      "icon": "➖",
+      "title": "except, besides",
+      "description": "Preposition indicating exclusion or addition."
+    }
+  },
+  {
+    "id": "inter-ch-biran",
+    "front": {
+      "icon": "",
+      "title": "比如",
+      "description": "bǐrú"
+    },
+    "back": {
+      "icon": "📋",
+      "title": "for example",
+      "description": "Phrase used to introduce examples."
+    }
+  },
+  {
+    "id": "inter-ch-tebie",
+    "front": {
+      "icon": "",
+      "title": "特别",
+      "description": "tèbié"
+    },
+    "back": {
+      "icon": "⭐",
+      "title": "especially, special",
+      "description": "Adverb/adjective indicating emphasis or uniqueness."
+    }
+  },
+  {
+    "id": "inter-ch-yiban",
+    "front": {
+      "icon": "",
+      "title": "一般",
+      "description": "yībān"
+    },
+    "back": {
+      "icon": "⚖️",
+      "title": "generally, ordinary",
+      "description": "Adverb/adjective indicating typical or average."
+    }
+  },
+  {
+    "id": "inter-ch-tongyuan",
+    "front": {
+      "icon": "",
+      "title": "通常",
+      "description": "tōngcháng"
+    },
+    "back": {
+      "icon": "🔄",
+      "title": "usually, normally",
+      "description": "Adverb indicating habitual or typical behavior."
+    }
+  },
+  {
+    "id": "inter-ch-jingchang",
+    "front": {
+      "icon": "",
+      "title": "经常",
+      "description": "jīngcháng"
+    },
+    "back": {
+      "icon": "🔁",
+      "title": "often, frequently",
+      "description": "Adverb indicating high frequency."
+    }
+  },
+  {
+    "id": "inter-ch-ouer",
+    "front": {
+      "icon": "",
+      "title": "偶尔",
+      "description": "ǒu'ěr"
+    },
+    "back": {
+      "icon": "🎲",
+      "title": "occasionally",
+      "description": "Adverb indicating infrequent occurrence."
+    }
+  },
+  {
+    "id": "inter-ch-congming",
+    "front": {
+      "icon": "",
+      "title": "聪明",
+      "description": "cōngmíng"
+    },
+    "back": {
+      "icon": "🧠",
+      "title": "intelligent, smart",
+      "description": "Adjective describing mental ability."
+    }
+  },
+  {
+    "id": "inter-ch-nuli",
+    "front": {
+      "icon": "",
+      "title": "努力",
+      "description": "nǔlì"
+    },
+    "back": {
+      "icon": "💪",
+      "title": "hardworking, effort",
+      "description": "Adjective/noun describing diligence or trying hard."
+    }
+  },
+  {
+    "id": "inter-ch-shenxin",
+    "front": {
+      "icon": "",
+      "title": "身心",
+      "description": "shēnxīn"
+    },
+    "back": {
+      "icon": "🧘",
+      "title": "body and mind",
+      "description": "Noun referring to physical and mental well-being."
+    }
+  },
+  {
+    "id": "inter-ch-jiankang",
+    "front": {
+      "icon": "",
+      "title": "健康",
+      "description": "jiànkāng"
+    },
+    "back": {
+      "icon": "💚",
+      "title": "healthy, health",
+      "description": "Adjective/noun relating to physical wellness."
+    }
+  },
+  {
+    "id": "inter-ch-anquan",
+    "front": {
+      "icon": "",
+      "title": "安全",
+      "description": "ānquán"
+    },
+    "back": {
+      "icon": "🛡️",
+      "title": "safe, safety",
+      "description": "Adjective/noun relating to security and protection."
+    }
+  },
+  {
+    "id": "inter-ch-weixian",
+    "front": {
+      "icon": "",
+      "title": "危险",
+      "description": "wēixiǎn"
+    },
+    "back": {
+      "icon": "⚠️",
+      "title": "dangerous, danger",
+      "description": "Adjective/noun indicating risk or hazard."
+    }
+  },
+  {
+    "id": "inter-ch-fangbian",
+    "front": {
+      "icon": "",
+      "title": "方便",
+      "description": "fāngbiàn"
+    },
+    "back": {
+      "icon": "✨",
+      "title": "convenient",
+      "description": "Adjective describing ease of use or accessibility."
+    }
+  },
+  {
+    "id": "inter-ch-kunnan",
+    "front": {
+      "icon": "",
+      "title": "困难",
+      "description": "kùnnán"
+    },
+    "back": {
+      "icon": "⛰️",
+      "title": "difficult, difficulty",
+      "description": "Adjective/noun indicating challenge or hardship."
+    }
+  },
+  {
+    "id": "inter-ch-rongyi",
+    "front": {
+      "icon": "",
+      "title": "容易",
+      "description": "róngyì"
+    },
+    "back": {
+      "icon": "☁️",
+      "title": "easy",
+      "description": "Adjective indicating simplicity or lack of difficulty."
+    }
+  },
+  {
+    "id": "inter-ch-fuza",
+    "front": {
+      "icon": "",
+      "title": "复杂",
+      "description": "fùzá"
+    },
+    "back": {
+      "icon": "🌪️",
+      "title": "complicated, complex",
+      "description": "Adjective describing intricacy or complexity."
+    }
+  },
+  {
+    "id": "inter-ch-jiandan",
+    "front": {
+      "icon": "",
+      "title": "简单",
+      "description": "jiǎndān"
+    },
+    "back": {
+      "icon": "🎯",
+      "title": "simple",
+      "description": "Adjective indicating straightforwardness or ease."
+    }
+  },
+  {
+    "id": "inter-ch-zhongyao",
+    "front": {
+      "icon": "",
+      "title": "重要",
+      "description": "zhòngyào"
+    },
+    "back": {
+      "icon": "⭐",
+      "title": "important",
+      "description": "Adjective indicating significance or priority."
+    }
+  },
+  {
+    "id": "inter-ch-yisi",
+    "front": {
+      "icon": "",
+      "title": "有趣",
+      "description": "yǒuqù"
+    },
+    "back": {
+      "icon": "😊",
+      "title": "interesting, fun",
+      "description": "Adjective describing something engaging or entertaining."
+    }
+  },
+  {
+    "id": "inter-ch-wuliao",
+    "front": {
+      "icon": "",
+      "title": "无聊",
+      "description": "wúliáo"
+    },
+    "back": {
+      "icon": "😴",
+      "title": "boring",
+      "description": "Adjective describing lack of interest or excitement."
+    }
+  },
+  {
+    "id": "inter-ch-xiwang",
+    "front": {
+      "icon": "",
+      "title": "希望",
+      "description": "xīwàng"
+    },
+    "back": {
+      "icon": "🌟",
+      "title": "hope, wish",
+      "description": "Verb/noun expressing desire or expectation."
+    }
+  },
+  {
+    "id": "inter-ch-danyuan",
+    "front": {
+      "icon": "",
+      "title": "担心",
+      "description": "dānxīn"
+    },
+    "back": {
+      "icon": "😰",
+      "title": "worry, concerned",
+      "description": "Verb/adjective expressing anxiety or concern."
+    }
+  },
+  {
+    "id": "inter-ch-gaoxing",
+    "front": {
+      "icon": "",
+      "title": "高兴",
+      "description": "gāoxìng"
+    },
+    "back": {
+      "icon": "😄",
+      "title": "happy, glad",
+      "description": "Adjective expressing joy or pleasure."
+    }
+  },
+  {
+    "id": "inter-ch-nanguo",
+    "front": {
+      "icon": "",
+      "title": "难过",
+      "description": "nánguò"
+    },
+    "back": {
+      "icon": "😢",
+      "title": "sad, upset",
+      "description": "Adjective expressing sorrow or distress."
+    }
+  },
+  {
+    "id": "inter-ch-shengqi",
+    "front": {
+      "icon": "",
+      "title": "生气",
+      "description": "shēngqì"
+    },
+    "back": {
+      "icon": "😠",
+      "title": "angry",
+      "description": "Adjective expressing anger or irritation."
+    }
+  },
+  {
+    "id": "inter-ch-jingya",
+    "front": {
+      "icon": "",
+      "title": "惊讶",
+      "description": "jīngyà"
+    },
+    "back": {
+      "icon": "😲",
+      "title": "surprised",
+      "description": "Adjective expressing astonishment or shock."
+    }
+  },
+  {
+    "id": "inter-ch-manyi",
+    "front": {
+      "icon": "",
+      "title": "满意",
+      "description": "mǎnyì"
+    },
+    "back": {
+      "icon": "😌",
+      "title": "satisfied",
+      "description": "Adjective expressing contentment or approval."
+    }
+  },
+  {
+    "id": "inter-ch-shiwang",
+    "front": {
+      "icon": "",
+      "title": "失望",
+      "description": "shīwàng"
+    },
+    "back": {
+      "icon": "😞",
+      "title": "disappointed",
+      "description": "Adjective expressing letdown or dissatisfaction."
+    }
+  },
+  {
+    "id": "inter-ch-jiuye",
+    "front": {
+      "icon": "",
+      "title": "就业",
+      "description": "jiùyè"
+    },
+    "back": {
+      "icon": "💼",
+      "title": "employment",
+      "description": "Noun relating to having a job or career."
+    }
+  },
+  {
+    "id": "inter-ch-shiye",
+    "front": {
+      "icon": "",
+      "title": "失业",
+      "description": "shīyè"
+    },
+    "back": {
+      "icon": "📉",
+      "title": "unemployment",
+      "description": "Noun/adjective relating to being without work."
+    }
+  },
+  {
+    "id": "inter-ch-zhiye",
+    "front": {
+      "icon": "",
+      "title": "职业",
+      "description": "zhíyè"
+    },
+    "back": {
+      "icon": "🏢",
+      "title": "profession, career",
+      "description": "Noun referring to one's occupation or job."
+    }
+  },
+  {
+    "id": "inter-ch-jingli",
+    "front": {
+      "icon": "",
+      "title": "经理",
+      "description": "jīnglǐ"
+    },
+    "back": {
+      "icon": "👔",
+      "title": "manager",
+      "description": "Noun referring to a person in charge of operations."
+    }
+  },
+  {
+    "id": "inter-ch-yuangong",
+    "front": {
+      "icon": "",
+      "title": "员工",
+      "description": "yuángōng"
+    },
+    "back": {
+      "icon": "👨‍💼",
+      "title": "employee, staff",
+      "description": "Noun referring to a worker in an organization."
+    }
+  },
+  {
+    "id": "inter-ch-gongsi",
+    "front": {
+      "icon": "",
+      "title": "公司",
+      "description": "gōngsī"
+    },
+    "back": {
+      "icon": "🏢",
+      "title": "company",
+      "description": "Noun referring to a business organization."
+    }
+  },
+  {
+    "id": "inter-ch-bangongshi",
+    "front": {
+      "icon": "",
+      "title": "办公室",
+      "description": "bàngōngshì"
+    },
+    "back": {
+      "icon": "🏢",
+      "title": "office",
+      "description": "Noun referring to a workplace or room for business."
+    }
+  },
+  {
+    "id": "inter-ch-huiyi",
+    "front": {
+      "icon": "",
+      "title": "会议",
+      "description": "huìyì"
+    },
+    "back": {
+      "icon": "📋",
+      "title": "meeting, conference",
+      "description": "Noun referring to a formal gathering for discussion."
+    }
+  },
+  {
+    "id": "inter-ch-xiangmu",
+    "front": {
+      "icon": "",
+      "title": "项目",
+      "description": "xiàngmù"
+    },
+    "back": {
+      "icon": "📊",
+      "title": "project",
+      "description": "Noun referring to a planned undertaking or task."
+    }
+  },
+  {
+    "id": "inter-ch-jihua",
+    "front": {
+      "icon": "",
+      "title": "计划",
+      "description": "jìhuà"
+    },
+    "back": {
+      "icon": "📅",
+      "title": "plan, planning",
+      "description": "Noun/verb relating to organizing future actions."
+    }
+  },
+  {
+    "id": "inter-ch-mubiao",
+    "front": {
+      "icon": "",
+      "title": "目标",
+      "description": "mùbiāo"
+    },
+    "back": {
+      "icon": "🎯",
+      "title": "goal, target",
+      "description": "Noun referring to an objective or aim."
+    }
+  },
+  {
+    "id": "inter-ch-jieguo",
+    "front": {
+      "icon": "",
+      "title": "结果",
+      "description": "jiéguǒ"
+    },
+    "back": {
+      "icon": "📈",
+      "title": "result, outcome",
+      "description": "Noun referring to the consequence or conclusion."
+    }
+  },
+  {
+    "id": "inter-ch-chenggong",
+    "front": {
+      "icon": "",
+      "title": "成功",
+      "description": "chéngōng"
+    },
+    "back": {
+      "icon": "🏆",
+      "title": "success, successful",
+      "description": "Noun/adjective relating to achievement or accomplishment."
+    }
+  },
+  {
+    "id": "inter-ch-shibai",
+    "front": {
+      "icon": "",
+      "title": "失败",
+      "description": "shībài"
+    },
+    "back": {
+      "icon": "❌",
+      "title": "failure, fail",
+      "description": "Noun/verb relating to lack of success."
+    }
+  },
+  {
+    "id": "inter-ch-wenti",
+    "front": {
+      "icon": "",
+      "title": "问题",
+      "description": "wèntí"
+    },
+    "back": {
+      "icon": "❓",
+      "title": "problem, question",
+      "description": "Noun referring to an issue or inquiry."
+    }
+  },
+  {
+    "id": "inter-ch-jiejue",
+    "front": {
+      "icon": "",
+      "title": "解决",
+      "description": "jiějué"
+    },
+    "back": {
+      "icon": "🔧",
+      "title": "solve, resolve",
+      "description": "Verb meaning to find a solution to a problem."
+    }
+  },
+  {
+    "id": "inter-ch-tigao",
+    "front": {
+      "icon": "",
+      "title": "提高",
+      "description": "tígāo"
+    },
+    "back": {
+      "icon": "📈",
+      "title": "improve, increase",
+      "description": "Verb meaning to enhance or raise the level of something."
+    }
+  },
+  {
+    "id": "inter-ch-fazhan",
+    "front": {
+      "icon": "",
+      "title": "发展",
+      "description": "fāzhǎn"
+    },
+    "back": {
+      "icon": "🌱",
+      "title": "develop, development",
+      "description": "Verb/noun relating to growth or progress."
+    }
+  },
+  {
+    "id": "inter-ch-bianhua",
+    "front": {
+      "icon": "",
+      "title": "变化",
+      "description": "biànhuà"
+    },
+    "back": {
+      "icon": "🔄",
+      "title": "change, transformation",
+      "description": "Noun/verb relating to alteration or modification."
+    }
+  },
+  {
+    "id": "inter-ch-jinbu",
+    "front": {
+      "icon": "",
+      "title": "进步",
+      "description": "jìnbù"
+    },
+    "back": {
+      "icon": "📈",
+      "title": "progress, improve",
+      "description": "Noun/verb relating to advancement or betterment."
+    }
+  },
+  {
+    "id": "inter-ch-tuibu",
+    "front": {
+      "icon": "",
+      "title": "退步",
+      "description": "tuìbù"
+    },
+    "back": {
+      "icon": "📉",
+      "title": "regress, deteriorate",
+      "description": "Verb/noun indicating decline or moving backward."
+    }
+  },
+  {
+    "id": "inter-ch-xiaolv",
+    "front": {
+      "icon": "",
+      "title": "效率",
+      "description": "xiàolǜ"
+    },
+    "back": {
+      "icon": "⚡",
+      "title": "efficiency",
+      "description": "Noun referring to productivity or effectiveness."
+    }
+  },
+  {
+    "id": "inter-ch-zhiliang",
+    "front": {
+      "icon": "",
+      "title": "质量",
+      "description": "zhìliàng"
+    },
+    "back": {
+      "icon": "⭐",
+      "title": "quality",
+      "description": "Noun referring to the standard or grade of something."
+    }
+  },
+  {
+    "id": "inter-ch-shuliang",
+    "front": {
+      "icon": "",
+      "title": "数量",
+      "description": "shùliàng"
+    },
+    "back": {
+      "icon": "🔢",
+      "title": "quantity, amount",
+      "description": "Noun referring to the number or volume of something."
+    }
+  },
+  {
+    "id": "inter-ch-jiage",
+    "front": {
+      "icon": "",
+      "title": "价格",
+      "description": "jiàgé"
+    },
+    "back": {
+      "icon": "💰",
+      "title": "price",
+      "description": "Noun referring to the cost or value of something."
+    }
+  },
+  {
+    "id": "inter-ch-jiazhi",
+    "front": {
+      "icon": "",
+      "title": "价值",
+      "description": "jiàzhí"
+    },
+    "back": {
+      "icon": "💎",
+      "title": "value, worth",
+      "description": "Noun referring to importance, usefulness, or monetary worth."
+    }
+  },
+  {
+    "id": "inter-ch-liyong",
+    "front": {
+      "icon": "",
+      "title": "利用",
+      "description": "lìyòng"
+    },
+    "back": {
+      "icon": "🔧",
+      "title": "use, utilize",
+      "description": "Verb meaning to make use of or take advantage of."
+    }
+  },
+  {
+    "id": "inter-ch-langfei",
+    "front": {
+      "icon": "",
+      "title": "浪费",
+      "description": "làngfèi"
+    },
+    "back": {
+      "icon": "🗑️",
+      "title": "waste, squander",
+      "description": "Verb/noun relating to using something carelessly or excessively."
+    }
+  },
+  {
+    "id": "inter-ch-jiejue",
+    "front": {
+      "icon": "",
+      "title": "节约",
+      "description": "jiéyuē"
+    },
+    "back": {
+      "icon": "💰",
+      "title": "save, economize",
+      "description": "Verb meaning to use less or conserve resources."
+    }
+  },
+  {
+    "id": "inter-ch-fuwu",
+    "front": {
+      "icon": "",
+      "title": "服务",
+      "description": "fúwù"
+    },
+    "back": {
+      "icon": "🤝",
+      "title": "service, serve",
+      "description": "Noun/verb relating to helping or providing assistance."
+    }
+  },
+  {
+    "id": "inter-ch-chanpin",
+    "front": {
+      "icon": "",
+      "title": "产品",
+      "description": "chǎnpǐn"
+    },
+    "back": {
+      "icon": "📦",
+      "title": "product",
+      "description": "Noun referring to something produced or manufactured."
+    }
+  },
+  {
+    "id": "inter-ch-shichang",
+    "front": {
+      "icon": "",
+      "title": "市场",
+      "description": "shìchǎng"
+    },
+    "back": {
+      "icon": "🏪",
+      "title": "market",
+      "description": "Noun referring to a place or system for buying and selling."
+    }
+  },
+  {
+    "id": "inter-ch-kehue",
+    "front": {
+      "icon": "",
+      "title": "客户",
+      "description": "kèhù"
+    },
+    "back": {
+      "icon": "👥",
+      "title": "client, customer",
+      "description": "Noun referring to someone who uses services or buys products."
+    }
+  },
+  {
+    "id": "inter-ch-xiaoshou",
+    "front": {
+      "icon": "",
+      "title": "销售",
+      "description": "xiāoshòu"
+    },
+    "back": {
+      "icon": "💼",
+      "title": "sales, sell",
+      "description": "Noun/verb relating to the act of selling products or services."
+    }
+  },
+  {
+    "id": "inter-ch-goumai",
+    "front": {
+      "icon": "",
+      "title": "购买",
+      "description": "gòumǎi"
+    },
+    "back": {
+      "icon": "🛒",
+      "title": "purchase, buy",
+      "description": "Verb meaning to acquire something by paying for it."
+    }
+  },
+  {
+    "id": "inter-ch-jingzheng",
+    "front": {
+      "icon": "",
+      "title": "竞争",
+      "description": "jìngzhēng"
+    },
+    "back": {
+      "icon": "🏃‍♂️",
+      "title": "competition, compete",
+      "description": "Noun/verb relating to rivalry or striving for advantage."
+    }
+  },
+  {
+    "id": "inter-ch-hezuo",
+    "front": {
+      "icon": "",
+      "title": "合作",
+      "description": "hézuò"
+    },
+    "back": {
+      "icon": "🤝",
+      "title": "cooperation, collaborate",
+      "description": "Noun/verb relating to working together toward a common goal."
+    }
+  },
+  {
+    "id": "inter-ch-chengjiu",
+    "front": {
+      "icon": "",
+      "title": "成就",
+      "description": "chéngjiù"
+    },
+    "back": {
+      "icon": "🏆",
+      "title": "achievement, accomplishment",
+      "description": "Noun referring to something successfully completed or attained."
+    }
+  },
+  {
+    "id": "inter-ch-jingyan",
+    "front": {
+      "icon": "",
+      "title": "经验",
+      "description": "jīngyàn"
+    },
+    "back": {
+      "icon": "🎓",
+      "title": "experience",
+      "description": "Noun referring to knowledge gained through practice or exposure."
+    }
+  },
+  {
+    "id": "inter-ch-nengli",
+    "front": {
+      "icon": "",
+      "title": "能力",
+      "description": "nénglì"
+    },
+    "back": {
+      "icon": "💪",
+      "title": "ability, capability",
+      "description": "Noun referring to the power or skill to do something."
+    }
+  },
+  {
+    "id": "inter-ch-jineng",
+    "front": {
+      "icon": "",
+      "title": "技能",
+      "description": "jìnéng"
+    },
+    "back": {
+      "icon": "🛠️",
+      "title": "skill",
+      "description": "Noun referring to expertise or proficiency in a particular area."
+    }
+  },
+  {
+    "id": "inter-ch-zhishi",
+    "front": {
+      "icon": "",
+      "title": "知识",
+      "description": "zhīshi"
+    },
+    "back": {
+      "icon": "📚",
+      "title": "knowledge",
+      "description": "Noun referring to information, understanding, or awareness."
+    }
+  },
+  {
+    "id": "inter-ch-xuexi",
+    "front": {
+      "icon": "",
+      "title": "学习",
+      "description": "xuéxí"
+    },
+    "back": {
+      "icon": "📖",
+      "title": "study, learn",
+      "description": "Verb meaning to acquire knowledge or skills through instruction or practice."
+    }
+  },
+  {
+    "id": "inter-ch-jiaoxue",
+    "front": {
+      "icon": "",
+      "title": "教学",
+      "description": "jiāoxué"
+    },
+    "back": {
+      "icon": "👨‍🏫",
+      "title": "teaching, instruction",
+      "description": "Noun/verb relating to the process of imparting knowledge."
+    }
+  },
+  {
+    "id": "inter-ch-peixuan",
+    "front": {
+      "icon": "",
+      "title": "培训",
+      "description": "péixùn"
+    },
+    "back": {
+      "icon": "📋",
+      "title": "training",
+      "description": "Noun/verb relating to developing skills through practice and instruction."
+    }
+  },
+  {
+    "id": "inter-ch-yanjiu",
+    "front": {
+      "icon": "",
+      "title": "研究",
+      "description": "yánjiū"
+    },
+    "back": {
+      "icon": "🔬",
+      "title": "research, study",
+      "description": "Noun/verb relating to systematic investigation or examination."
+    }
+  },
+  {
+    "id": "inter-ch-faxian",
+    "front": {
+      "icon": "",
+      "title": "发现",
+      "description": "fāxiàn"
+    },
+    "back": {
+      "icon": "🔍",
+      "title": "discover, find",
+      "description": "Verb meaning to become aware of or locate something previously unknown."
+    }
+  },
+  {
+    "id": "inter-ch-chuangxin",
+    "front": {
+      "icon": "",
+      "title": "创新",
+      "description": "chuàngxīn"
+    },
+    "back": {
+      "icon": "💡",
+      "title": "innovation, innovate",
+      "description": "Noun/verb relating to introducing new ideas or methods."
+    }
+  }
+]

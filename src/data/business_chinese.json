@@ -1,0 +1,2030 @@
+[
+  {
+    "id": "biz-ch-gongsi",
+    "front": {
+      "icon": "",
+      "title": "公司",
+      "description": "gōngsī"
+    },
+    "back": {
+      "icon": "🏢",
+      "title": "company, corporation",
+      "description": "A business organization or commercial enterprise."
+    }
+  },
+  {
+    "id": "biz-ch-qiye",
+    "front": {
+      "icon": "",
+      "title": "企业",
+      "description": "qǐyè"
+    },
+    "back": {
+      "icon": "🏭",
+      "title": "enterprise, business",
+      "description": "A company or organization engaged in commercial activity."
+    }
+  },
+  {
+    "id": "biz-ch-shangye",
+    "front": {
+      "icon": "",
+      "title": "商业",
+      "description": "shāngyè"
+    },
+    "back": {
+      "icon": "💼",
+      "title": "business, commerce",
+      "description": "Commercial activities or trade in general."
+    }
+  },
+  {
+    "id": "biz-ch-maoyi",
+    "front": {
+      "icon": "",
+      "title": "贸易",
+      "description": "màoyì"
+    },
+    "back": {
+      "icon": "🚢",
+      "title": "trade",
+      "description": "The activity of buying and selling goods and services."
+    }
+  },
+  {
+    "id": "biz-ch-shichang",
+    "front": {
+      "icon": "",
+      "title": "市场",
+      "description": "shìchǎng"
+    },
+    "back": {
+      "icon": "🏪",
+      "title": "market",
+      "description": "A place or system where goods and services are exchanged."
+    }
+  },
+  {
+    "id": "biz-ch-jingji",
+    "front": {
+      "icon": "",
+      "title": "经济",
+      "description": "jīngjì"
+    },
+    "back": {
+      "icon": "📈",
+      "title": "economy, economic",
+      "description": "The system of production, distribution, and consumption of goods."
+    }
+  },
+  {
+    "id": "biz-ch-caizheng",
+    "front": {
+      "icon": "",
+      "title": "财政",
+      "description": "cáizhèng"
+    },
+    "back": {
+      "icon": "💰",
+      "title": "finance, fiscal",
+      "description": "Management of money and financial resources."
+    }
+  },
+  {
+    "id": "biz-ch-yinbang",
+    "front": {
+      "icon": "",
+      "title": "银行",
+      "description": "yínháng"
+    },
+    "back": {
+      "icon": "🏦",
+      "title": "bank",
+      "description": "A financial institution that handles money transactions."
+    }
+  },
+  {
+    "id": "biz-ch-touzi",
+    "front": {
+      "icon": "",
+      "title": "投资",
+      "description": "tóuzī"
+    },
+    "back": {
+      "icon": "💹",
+      "title": "investment, invest",
+      "description": "The allocation of money expecting future returns."
+    }
+  },
+  {
+    "id": "biz-ch-lirun",
+    "front": {
+      "icon": "",
+      "title": "利润",
+      "description": "lìrùn"
+    },
+    "back": {
+      "icon": "💰",
+      "title": "profit",
+      "description": "Financial gain from business activities."
+    }
+  },
+  {
+    "id": "biz-ch-kuisun",
+    "front": {
+      "icon": "",
+      "title": "亏损",
+      "description": "kuīsǔn"
+    },
+    "back": {
+      "icon": "📉",
+      "title": "loss, deficit",
+      "description": "Financial loss or negative earnings."
+    }
+  },
+  {
+    "id": "biz-ch-shouru",
+    "front": {
+      "icon": "",
+      "title": "收入",
+      "description": "shōurù"
+    },
+    "back": {
+      "icon": "💵",
+      "title": "income, revenue",
+      "description": "Money received from business or employment."
+    }
+  },
+  {
+    "id": "biz-ch-zhichu",
+    "front": {
+      "icon": "",
+      "title": "支出",
+      "description": "zhīchū"
+    },
+    "back": {
+      "icon": "💸",
+      "title": "expenditure, expenses",
+      "description": "Money spent on business operations."
+    }
+  },
+  {
+    "id": "biz-ch-chengben",
+    "front": {
+      "icon": "",
+      "title": "成本",
+      "description": "chéngběn"
+    },
+    "back": {
+      "icon": "💱",
+      "title": "cost, expense",
+      "description": "The amount spent to produce goods or services."
+    }
+  },
+  {
+    "id": "biz-ch-jiage",
+    "front": {
+      "icon": "",
+      "title": "价格",
+      "description": "jiàgé"
+    },
+    "back": {
+      "icon": "🏷️",
+      "title": "price",
+      "description": "The amount charged for goods or services."
+    }
+  },
+  {
+    "id": "biz-ch-baojia",
+    "front": {
+      "icon": "",
+      "title": "报价",
+      "description": "bàojià"
+    },
+    "back": {
+      "icon": "📋",
+      "title": "quotation, quote",
+      "description": "A statement of the price for goods or services."
+    }
+  },
+  {
+    "id": "biz-ch-tanpan",
+    "front": {
+      "icon": "",
+      "title": "谈判",
+      "description": "tánpàn"
+    },
+    "back": {
+      "icon": "🤝",
+      "title": "negotiation, negotiate",
+      "description": "Discussion to reach an agreement on business terms."
+    }
+  },
+  {
+    "id": "biz-ch-hetong",
+    "front": {
+      "icon": "",
+      "title": "合同",
+      "description": "hétóng"
+    },
+    "back": {
+      "icon": "📄",
+      "title": "contract, agreement",
+      "description": "A legally binding business agreement."
+    }
+  },
+  {
+    "id": "biz-ch-qianding",
+    "front": {
+      "icon": "",
+      "title": "签订",
+      "description": "qiāndìng"
+    },
+    "back": {
+      "icon": "✍️",
+      "title": "sign, conclude",
+      "description": "To formally sign a contract or agreement."
+    }
+  },
+  {
+    "id": "biz-ch-jiaoyi",
+    "front": {
+      "icon": "",
+      "title": "交易",
+      "description": "jiāoyì"
+    },
+    "back": {
+      "icon": "🔄",
+      "title": "transaction, deal",
+      "description": "A business exchange or commercial deal."
+    }
+  },
+  {
+    "id": "biz-ch-xiaoshou",
+    "front": {
+      "icon": "",
+      "title": "销售",
+      "description": "xiāoshòu"
+    },
+    "back": {
+      "icon": "🛒",
+      "title": "sales, selling",
+      "description": "The process of selling products or services."
+    }
+  },
+  {
+    "id": "biz-ch-caigou",
+    "front": {
+      "icon": "",
+      "title": "采购",
+      "description": "cǎigòu"
+    },
+    "back": {
+      "icon": "🛍️",
+      "title": "procurement, purchasing",
+      "description": "The process of acquiring goods or services for business."
+    }
+  },
+  {
+    "id": "biz-ch-gongying",
+    "front": {
+      "icon": "",
+      "title": "供应",
+      "description": "gōngyìng"
+    },
+    "back": {
+      "icon": "📦",
+      "title": "supply, provide",
+      "description": "To provide goods or services to customers."
+    }
+  },
+  {
+    "id": "biz-ch-xuqiu",
+    "front": {
+      "icon": "",
+      "title": "需求",
+      "description": "xūqiú"
+    },
+    "back": {
+      "icon": "📊",
+      "title": "demand, requirement",
+      "description": "Customer need or desire for products/services."
+    }
+  },
+  {
+    "id": "biz-ch-kehue",
+    "front": {
+      "icon": "",
+      "title": "客户",
+      "description": "kèhù"
+    },
+    "back": {
+      "icon": "👥",
+      "title": "client, customer",
+      "description": "A person or company that purchases goods or services."
+    }
+  },
+  {
+    "id": "biz-ch-gongying",
+    "front": {
+      "icon": "",
+      "title": "供应商",
+      "description": "gōngyìngshāng"
+    },
+    "back": {
+      "icon": "🏭",
+      "title": "supplier, vendor",
+      "description": "A company that provides goods or services to other businesses."
+    }
+  },
+  {
+    "id": "biz-ch-hezuohuoban",
+    "front": {
+      "icon": "",
+      "title": "合作伙伴",
+      "description": "hézuòhuǒbàn"
+    },
+    "back": {
+      "icon": "🤝",
+      "title": "business partner",
+      "description": "A company or individual collaborating in business ventures."
+    }
+  },
+  {
+    "id": "biz-ch-jingzhengdui",
+    "front": {
+      "icon": "",
+      "title": "竞争对手",
+      "description": "jìngzhēngduìshǒu"
+    },
+    "back": {
+      "icon": "⚔️",
+      "title": "competitor, rival",
+      "description": "A business competing for the same market or customers."
+    }
+  },
+  {
+    "id": "biz-ch-chanpin",
+    "front": {
+      "icon": "",
+      "title": "产品",
+      "description": "chǎnpǐn"
+    },
+    "back": {
+      "icon": "📦",
+      "title": "product",
+      "description": "Goods or items produced for sale."
+    }
+  },
+  {
+    "id": "biz-ch-fuwu",
+    "front": {
+      "icon": "",
+      "title": "服务",
+      "description": "fúwù"
+    },
+    "back": {
+      "icon": "🛎️",
+      "title": "service",
+      "description": "Work performed for customers or clients."
+    }
+  },
+  {
+    "id": "biz-ch-zhiliang",
+    "front": {
+      "icon": "",
+      "title": "质量",
+      "description": "zhìliàng"
+    },
+    "back": {
+      "icon": "⭐",
+      "title": "quality",
+      "description": "The standard or grade of products or services."
+    }
+  },
+  {
+    "id": "biz-ch-pinpai",
+    "front": {
+      "icon": "",
+      "title": "品牌",
+      "description": "pǐnpái"
+    },
+    "back": {
+      "icon": "🏷️",
+      "title": "brand",
+      "description": "A trademark or commercial identity of products."
+    }
+  },
+  {
+    "id": "biz-ch-guanggao",
+    "front": {
+      "icon": "",
+      "title": "广告",
+      "description": "guǎnggào"
+    },
+    "back": {
+      "icon": "📺",
+      "title": "advertisement, advertising",
+      "description": "Promotional messages to attract customers."
+    }
+  },
+  {
+    "id": "biz-ch-yingxiao",
+    "front": {
+      "icon": "",
+      "title": "营销",
+      "description": "yíngxiāo"
+    },
+    "back": {
+      "icon": "📈",
+      "title": "marketing",
+      "description": "Activities to promote and sell products or services."
+    }
+  },
+  {
+    "id": "biz-ch-tuiguang",
+    "front": {
+      "icon": "",
+      "title": "推广",
+      "description": "tuīguǎng"
+    },
+    "back": {
+      "icon": "📢",
+      "title": "promotion, promote",
+      "description": "Activities to increase awareness and sales."
+    }
+  },
+  {
+    "id": "biz-ch-shengchan",
+    "front": {
+      "icon": "",
+      "title": "生产",
+      "description": "shēngchǎn"
+    },
+    "back": {
+      "icon": "🏭",
+      "title": "production, manufacture",
+      "description": "The process of making goods or products."
+    }
+  },
+  {
+    "id": "biz-ch-jiagong",
+    "front": {
+      "icon": "",
+      "title": "加工",
+      "description": "jiāgōng"
+    },
+    "back": {
+      "icon": "⚙️",
+      "title": "processing, manufacture",
+      "description": "The transformation of raw materials into finished products."
+    }
+  },
+  {
+    "id": "biz-ch-zhizao",
+    "front": {
+      "icon": "",
+      "title": "制造",
+      "description": "zhìzào"
+    },
+    "back": {
+      "icon": "🔧",
+      "title": "manufacture, make",
+      "description": "To produce goods in factories or workshops."
+    }
+  },
+  {
+    "id": "biz-ch-kucun",
+    "front": {
+      "icon": "",
+      "title": "库存",
+      "description": "kùcún"
+    },
+    "back": {
+      "icon": "📦",
+      "title": "inventory, stock",
+      "description": "Goods held in storage for sale or distribution."
+    }
+  },
+  {
+    "id": "biz-ch-yunshung",
+    "front": {
+      "icon": "",
+      "title": "运输",
+      "description": "yùnshū"
+    },
+    "back": {
+      "icon": "🚛",
+      "title": "transportation, shipping",
+      "description": "The movement of goods from one place to another."
+    }
+  },
+  {
+    "id": "biz-ch-wuliu",
+    "front": {
+      "icon": "",
+      "title": "物流",
+      "description": "wùliú"
+    },
+    "back": {
+      "icon": "📦",
+      "title": "logistics",
+      "description": "The planning and execution of goods movement and storage."
+    }
+  },
+  {
+    "id": "biz-ch-jiaofu",
+    "front": {
+      "icon": "",
+      "title": "交付",
+      "description": "jiāofù"
+    },
+    "back": {
+      "icon": "📮",
+      "title": "delivery, deliver",
+      "description": "The act of providing goods or services to customers."
+    }
+  },
+  {
+    "id": "biz-ch-shouhuo",
+    "front": {
+      "icon": "",
+      "title": "收货",
+      "description": "shōuhuò"
+    },
+    "back": {
+      "icon": "📥",
+      "title": "receive goods",
+      "description": "The act of accepting delivered goods or products."
+    }
+  },
+  {
+    "id": "biz-ch-jianyan",
+    "front": {
+      "icon": "",
+      "title": "检验",
+      "description": "jiǎnyàn"
+    },
+    "back": {
+      "icon": "🔍",
+      "title": "inspection, examine",
+      "description": "The process of checking quality and compliance."
+    }
+  },
+  {
+    "id": "biz-ch-zhengming",
+    "front": {
+      "icon": "",
+      "title": "证明",
+      "description": "zhèngmíng"
+    },
+    "back": {
+      "icon": "📜",
+      "title": "certificate, proof",
+      "description": "Official documentation verifying compliance or quality."
+    }
+  },
+  {
+    "id": "biz-ch-xukezheng",
+    "front": {
+      "icon": "",
+      "title": "许可证",
+      "description": "xǔkězhèng"
+    },
+    "back": {
+      "icon": "📋",
+      "title": "license, permit",
+      "description": "Official authorization to conduct business activities."
+    }
+  },
+  {
+    "id": "biz-ch-zhengce",
+    "front": {
+      "icon": "",
+      "title": "政策",
+      "description": "zhèngcè"
+    },
+    "back": {
+      "icon": "📊",
+      "title": "policy",
+      "description": "Official rules or guidelines governing business operations."
+    }
+  },
+  {
+    "id": "biz-ch-fagui",
+    "front": {
+      "icon": "",
+      "title": "法规",
+      "description": "fǎguī"
+    },
+    "back": {
+      "icon": "⚖️",
+      "title": "regulations, rules",
+      "description": "Legal requirements and standards for business conduct."
+    }
+  },
+  {
+    "id": "biz-ch-baoxian",
+    "front": {
+      "icon": "",
+      "title": "保险",
+      "description": "bǎoxiǎn"
+    },
+    "back": {
+      "icon": "🛡️",
+      "title": "insurance",
+      "description": "Financial protection against business risks and losses."
+    }
+  },
+  {
+    "id": "biz-ch-fengxian",
+    "front": {
+      "icon": "",
+      "title": "风险",
+      "description": "fēngxiǎn"
+    },
+    "back": {
+      "icon": "⚠️",
+      "title": "risk",
+      "description": "Potential for financial loss or business failure."
+    }
+  },
+  {
+    "id": "biz-ch-guanli",
+    "front": {
+      "icon": "",
+      "title": "管理",
+      "description": "guǎnlǐ"
+    },
+    "back": {
+      "icon": "👔",
+      "title": "management, manage",
+      "description": "The process of controlling and organizing business operations."
+    }
+  },
+  {
+    "id": "biz-ch-jingli",
+    "front": {
+      "icon": "",
+      "title": "经理",
+      "description": "jīnglǐ"
+    },
+    "back": {
+      "icon": "👨‍💼",
+      "title": "manager",
+      "description": "A person responsible for managing business operations."
+    }
+  },
+  {
+    "id": "biz-ch-zhongshi",
+    "front": {
+      "icon": "",
+      "title": "总裁",
+      "description": "zǒngcái"
+    },
+    "back": {
+      "icon": "👑",
+      "title": "president, CEO",
+      "description": "The highest-ranking executive in a company."
+    }
+  },
+  {
+    "id": "biz-ch-dongshi",
+    "front": {
+      "icon": "",
+      "title": "董事",
+      "description": "dǒngshì"
+    },
+    "back": {
+      "icon": "👨‍⚖️",
+      "title": "director",
+      "description": "A member of the board governing a company."
+    }
+  },
+  {
+    "id": "biz-ch-gaoguanding",
+    "front": {
+      "icon": "",
+      "title": "高管",
+      "description": "gāoguǎn"
+    },
+    "back": {
+      "icon": "🎩",
+      "title": "executive, senior management",
+      "description": "High-level managers responsible for strategic decisions."
+    }
+  },
+  {
+    "id": "biz-ch-yuangong",
+    "front": {
+      "icon": "",
+      "title": "员工",
+      "description": "yuángōng"
+    },
+    "back": {
+      "icon": "👥",
+      "title": "employee, staff",
+      "description": "People working for a company or organization."
+    }
+  },
+  {
+    "id": "biz-ch-tongshi",
+    "front": {
+      "icon": "",
+      "title": "同事",
+      "description": "tóngshì"
+    },
+    "back": {
+      "icon": "👫",
+      "title": "colleague, coworker",
+      "description": "People working together in the same organization."
+    }
+  },
+  {
+    "id": "biz-ch-tuandui",
+    "front": {
+      "icon": "",
+      "title": "团队",
+      "description": "tuánduì"
+    },
+    "back": {
+      "icon": "👥",
+      "title": "team",
+      "description": "A group of people working together toward common goals."
+    }
+  },
+  {
+    "id": "biz-ch-bumen",
+    "front": {
+      "icon": "",
+      "title": "部门",
+      "description": "bùmén"
+    },
+    "back": {
+      "icon": "🏢",
+      "title": "department, division",
+      "description": "A distinct section or unit within an organization."
+    }
+  },
+  {
+    "id": "biz-ch-zhiwei",
+    "front": {
+      "icon": "",
+      "title": "职位",
+      "description": "zhíwèi"
+    },
+    "back": {
+      "icon": "🎯",
+      "title": "position, job title",
+      "description": "A specific role or rank within an organization."
+    }
+  },
+  {
+    "id": "biz-ch-zhize",
+    "front": {
+      "icon": "",
+      "title": "职责",
+      "description": "zhízé"
+    },
+    "back": {
+      "icon": "📋",
+      "title": "responsibility, duty",
+      "description": "Tasks and obligations assigned to a job position."
+    }
+  },
+  {
+    "id": "biz-ch-xinzi",
+    "front": {
+      "icon": "",
+      "title": "薪资",
+      "description": "xīnzī"
+    },
+    "back": {
+      "icon": "💰",
+      "title": "salary, wages",
+      "description": "Compensation paid to employees for their work."
+    }
+  },
+  {
+    "id": "biz-ch-jiaxin",
+    "front": {
+      "icon": "",
+      "title": "加薪",
+      "description": "jiāxīn"
+    },
+    "back": {
+      "icon": "📈",
+      "title": "salary increase, raise",
+      "description": "An increase in employee compensation."
+    }
+  },
+  {
+    "id": "biz-ch-jiangjin",
+    "front": {
+      "icon": "",
+      "title": "奖金",
+      "description": "jiǎngjīn"
+    },
+    "back": {
+      "icon": "🎁",
+      "title": "bonus",
+      "description": "Additional compensation based on performance or achievements."
+    }
+  },
+  {
+    "id": "biz-ch-fuli",
+    "front": {
+      "icon": "",
+      "title": "福利",
+      "description": "fúlì"
+    },
+    "back": {
+      "icon": "🎁",
+      "title": "benefits, welfare",
+      "description": "Additional compensation and services provided to employees."
+    }
+  },
+  {
+    "id": "biz-ch-baoxiao",
+    "front": {
+      "icon": "",
+      "title": "报销",
+      "description": "bàoxiāo"
+    },
+    "back": {
+      "icon": "🧾",
+      "title": "reimbursement, expense claim",
+      "description": "Compensation for business expenses incurred by employees."
+    }
+  },
+  {
+    "id": "biz-ch-chuchai",
+    "front": {
+      "icon": "",
+      "title": "出差",
+      "description": "chūchāi"
+    },
+    "back": {
+      "icon": "✈️",
+      "title": "business trip",
+      "description": "Travel for work-related purposes."
+    }
+  },
+  {
+    "id": "biz-ch-huiyi",
+    "front": {
+      "icon": "",
+      "title": "会议",
+      "description": "huìyì"
+    },
+    "back": {
+      "icon": "🏛️",
+      "title": "meeting, conference",
+      "description": "A gathering of people for business discussions."
+    }
+  },
+  {
+    "id": "biz-ch-baogao",
+    "front": {
+      "icon": "",
+      "title": "报告",
+      "description": "bàogào"
+    },
+    "back": {
+      "icon": "📊",
+      "title": "report",
+      "description": "A formal document presenting business information or analysis."
+    }
+  },
+  {
+    "id": "biz-ch-jihua",
+    "front": {
+      "icon": "",
+      "title": "计划",
+      "description": "jìhuà"
+    },
+    "back": {
+      "icon": "📅",
+      "title": "plan, planning",
+      "description": "A detailed proposal for achieving business objectives."
+    }
+  },
+  {
+    "id": "biz-ch-mubiao",
+    "front": {
+      "icon": "",
+      "title": "目标",
+      "description": "mùbiāo"
+    },
+    "back": {
+      "icon": "🎯",
+      "title": "goal, target, objective",
+      "description": "A specific aim or result that a business wants to achieve."
+    }
+  },
+  {
+    "id": "biz-ch-yusuan",
+    "front": {
+      "icon": "",
+      "title": "预算",
+      "description": "yùsuàn"
+    },
+    "back": {
+      "icon": "💰",
+      "title": "budget",
+      "description": "A plan for allocating financial resources."
+    }
+  },
+  {
+    "id": "biz-ch-yuece",
+    "front": {
+      "icon": "",
+      "title": "预测",
+      "description": "yùcè"
+    },
+    "back": {
+      "icon": "🔮",
+      "title": "forecast, prediction",
+      "description": "An estimate of future business conditions or performance."
+    }
+  },
+  {
+    "id": "biz-ch-fenxi",
+    "front": {
+      "icon": "",
+      "title": "分析",
+      "description": "fēnxī"
+    },
+    "back": {
+      "icon": "📊",
+      "title": "analysis, analyze",
+      "description": "The detailed examination of business data or situations."
+    }
+  },
+  {
+    "id": "biz-ch-shuju",
+    "front": {
+      "icon": "",
+      "title": "数据",
+      "description": "shùjù"
+    },
+    "back": {
+      "icon": "📈",
+      "title": "data",
+      "description": "Information used for business analysis and decision-making."
+    }
+  },
+  {
+    "id": "biz-ch-tongji",
+    "front": {
+      "icon": "",
+      "title": "统计",
+      "description": "tǒngjì"
+    },
+    "back": {
+      "icon": "📊",
+      "title": "statistics",
+      "description": "Numerical data and analysis for business insights."
+    }
+  },
+  {
+    "id": "biz-ch-jilu",
+    "front": {
+      "icon": "",
+      "title": "记录",
+      "description": "jìlù"
+    },
+    "back": {
+      "icon": "📝",
+      "title": "record, documentation",
+      "description": "Written accounts of business transactions or activities."
+    }
+  },
+  {
+    "id": "biz-ch-wendang",
+    "front": {
+      "icon": "",
+      "title": "文档",
+      "description": "wéndàng"
+    },
+    "back": {
+      "icon": "📄",
+      "title": "document",
+      "description": "Official papers or electronic files containing business information."
+    }
+  },
+  {
+    "id": "biz-ch-xiangmu",
+    "front": {
+      "icon": "",
+      "title": "项目",
+      "description": "xiàngmù"
+    },
+    "back": {
+      "icon": "📊",
+      "title": "project",
+      "description": "A temporary undertaking to create a unique product or service."
+    }
+  },
+  {
+    "id": "biz-ch-renwu",
+    "front": {
+      "icon": "",
+      "title": "任务",
+      "description": "rènwù"
+    },
+    "back": {
+      "icon": "✅",
+      "title": "task, assignment",
+      "description": "A specific piece of work to be completed."
+    }
+  },
+  {
+    "id": "biz-ch-jingcheng",
+    "front": {
+      "icon": "",
+      "title": "进程",
+      "description": "jìnchéng"
+    },
+    "back": {
+      "icon": "⏳",
+      "title": "progress, process",
+      "description": "The advancement or development of work or projects."
+    }
+  },
+  {
+    "id": "biz-ch-jiejue",
+    "front": {
+      "icon": "",
+      "title": "解决",
+      "description": "jiějué"
+    },
+    "back": {
+      "icon": "🔧",
+      "title": "solve, resolve",
+      "description": "To find solutions to business problems or challenges."
+    }
+  },
+  {
+    "id": "biz-ch-wenti",
+    "front": {
+      "icon": "",
+      "title": "问题",
+      "description": "wèntí"
+    },
+    "back": {
+      "icon": "❓",
+      "title": "problem, issue, question",
+      "description": "Challenges or difficulties in business operations."
+    }
+  },
+  {
+    "id": "biz-ch-tiaozhan",
+    "front": {
+      "icon": "",
+      "title": "挑战",
+      "description": "tiǎozhàn"
+    },
+    "back": {
+      "icon": "⛰️",
+      "title": "challenge",
+      "description": "Difficult tasks or situations requiring effort to overcome."
+    }
+  },
+  {
+    "id": "biz-ch-jihui",
+    "front": {
+      "icon": "",
+      "title": "机会",
+      "description": "jīhuì"
+    },
+    "back": {
+      "icon": "🚪",
+      "title": "opportunity, chance",
+      "description": "Favorable circumstances for business growth or success."
+    }
+  },
+  {
+    "id": "biz-ch-chenggong",
+    "front": {
+      "icon": "",
+      "title": "成功",
+      "description": "chéngōng"
+    },
+    "back": {
+      "icon": "🏆",
+      "title": "success, successful",
+      "description": "The achievement of business goals or objectives."
+    }
+  },
+  {
+    "id": "biz-ch-shibai",
+    "front": {
+      "icon": "",
+      "title": "失败",
+      "description": "shībài"
+    },
+    "back": {
+      "icon": "❌",
+      "title": "failure, fail",
+      "description": "The lack of success in achieving business objectives."
+    }
+  },
+  {
+    "id": "biz-ch-gaijin",
+    "front": {
+      "icon": "",
+      "title": "改进",
+      "description": "gǎijìn"
+    },
+    "back": {
+      "icon": "🔄",
+      "title": "improve, enhancement",
+      "description": "To make changes that result in better business performance."
+    }
+  },
+  {
+    "id": "biz-ch-chuangxin",
+    "front": {
+      "icon": "",
+      "title": "创新",
+      "description": "chuàngxīn"
+    },
+    "back": {
+      "icon": "💡",
+      "title": "innovation, innovate",
+      "description": "The introduction of new ideas, methods, or products in business."
+    }
+  },
+  {
+    "id": "biz-ch-fazhan",
+    "front": {
+      "icon": "",
+      "title": "发展",
+      "description": "fāzhǎn"
+    },
+    "back": {
+      "icon": "🌱",
+      "title": "development, growth",
+      "description": "The process of expanding or improving business operations."
+    }
+  },
+  {
+    "id": "biz-ch-kuozhan",
+    "front": {
+      "icon": "",
+      "title": "扩展",
+      "description": "kuòzhǎn"
+    },
+    "back": {
+      "icon": "📈",
+      "title": "expansion, expand",
+      "description": "The process of increasing business size, scope, or reach."
+    }
+  },
+  {
+    "id": "biz-ch-zengzhang",
+    "front": {
+      "icon": "",
+      "title": "增长",
+      "description": "zēngzhǎng"
+    },
+    "back": {
+      "icon": "📈",
+      "title": "growth, increase",
+      "description": "An increase in business size, revenue, or market share."
+    }
+  },
+  {
+    "id": "biz-ch-jianshao",
+    "front": {
+      "icon": "",
+      "title": "减少",
+      "description": "jiǎnshǎo"
+    },
+    "back": {
+      "icon": "📉",
+      "title": "decrease, reduce",
+      "description": "To make or become smaller in amount, size, or degree."
+    }
+  },
+  {
+    "id": "biz-ch-wending",
+    "front": {
+      "icon": "",
+      "title": "稳定",
+      "description": "wěndìng"
+    },
+    "back": {
+      "icon": "⚖️",
+      "title": "stable, stability",
+      "description": "Consistent and predictable business conditions."
+    }
+  },
+  {
+    "id": "biz-ch-bianhua",
+    "front": {
+      "icon": "",
+      "title": "变化",
+      "description": "biànhuà"
+    },
+    "back": {
+      "icon": "🔄",
+      "title": "change, transformation",
+      "description": "Alterations in business conditions, strategies, or operations."
+    }
+  },
+  {
+    "id": "biz-ch-qushi",
+    "front": {
+      "icon": "",
+      "title": "趋势",
+      "description": "qūshì"
+    },
+    "back": {
+      "icon": "📈",
+      "title": "trend, tendency",
+      "description": "General direction of market or business developments."
+    }
+  },
+  {
+    "id": "biz-ch-weilai",
+    "front": {
+      "icon": "",
+      "title": "未来",
+      "description": "wèilái"
+    },
+    "back": {
+      "icon": "🔮",
+      "title": "future",
+      "description": "Time period ahead and business prospects for that time."
+    }
+  },
+  {
+    "id": "biz-ch-zhanlue",
+    "front": {
+      "icon": "",
+      "title": "战略",
+      "description": "zhànlüè"
+    },
+    "back": {
+      "icon": "🎯",
+      "title": "strategy, strategic",
+      "description": "Long-term plans and approaches for achieving business goals."
+    }
+  },
+  {
+    "id": "biz-ch-celue",
+    "front": {
+      "icon": "",
+      "title": "策略",
+      "description": "cèlüè"
+    },
+    "back": {
+      "icon": "🧩",
+      "title": "tactics, strategy",
+      "description": "Specific methods or approaches used to achieve objectives."
+    }
+  },
+  {
+    "id": "biz-ch-jingying",
+    "front": {
+      "icon": "",
+      "title": "经营",
+      "description": "jīngyíng"
+    },
+    "back": {
+      "icon": "🏢",
+      "title": "operate, management",
+      "description": "The running and management of business operations."
+    }
+  },
+  {
+    "id": "biz-ch-yunying",
+    "front": {
+      "icon": "",
+      "title": "运营",
+      "description": "yùnyíng"
+    },
+    "back": {
+      "icon": "⚙️",
+      "title": "operations, operate",
+      "description": "The day-to-day functioning of business activities."
+    }
+  },
+  {
+    "id": "biz-ch-xiaolv",
+    "front": {
+      "icon": "",
+      "title": "效率",
+      "description": "xiàolǜ"
+    },
+    "back": {
+      "icon": "⚡",
+      "title": "efficiency",
+      "description": "The ability to accomplish tasks with minimal waste of resources."
+    }
+  },
+  {
+    "id": "biz-ch-xiaoguo",
+    "front": {
+      "icon": "",
+      "title": "效果",
+      "description": "xiàoguǒ"
+    },
+    "back": {
+      "icon": "🎯",
+      "title": "effect, result",
+      "description": "The outcome or impact of business actions or strategies."
+    }
+  },
+  {
+    "id": "biz-ch-yingxiang",
+    "front": {
+      "icon": "",
+      "title": "影响",
+      "description": "yǐngxiǎng"
+    },
+    "back": {
+      "icon": "🌊",
+      "title": "influence, impact",
+      "description": "The effect that actions or decisions have on business outcomes."
+    }
+  },
+  {
+    "id": "biz-ch-zuoyong",
+    "front": {
+      "icon": "",
+      "title": "作用",
+      "description": "zuòyòng"
+    },
+    "back": {
+      "icon": "⚙️",
+      "title": "function, role",
+      "description": "The purpose or effect of something in business operations."
+    }
+  },
+  {
+    "id": "biz-ch-jiazhi",
+    "front": {
+      "icon": "",
+      "title": "价值",
+      "description": "jiàzhí"
+    },
+    "back": {
+      "icon": "💎",
+      "title": "value, worth",
+      "description": "The importance, usefulness, or monetary worth of something."
+    }
+  },
+  {
+    "id": "biz-ch-lianxi",
+    "front": {
+      "icon": "",
+      "title": "联系",
+      "description": "liánxì"
+    },
+    "back": {
+      "icon": "📞",
+      "title": "contact, connection",
+      "description": "Communication or relationship between business parties."
+    }
+  },
+  {
+    "id": "biz-ch-guanxi",
+    "front": {
+      "icon": "",
+      "title": "关系",
+      "description": "guānxì"
+    },
+    "back": {
+      "icon": "🤝",
+      "title": "relationship, connection",
+      "description": "The way in which business entities are connected or related."
+    }
+  },
+  {
+    "id": "biz-ch-hezuo",
+    "front": {
+      "icon": "",
+      "title": "合作",
+      "description": "hézuò"
+    },
+    "back": {
+      "icon": "🤝",
+      "title": "cooperation, collaborate",
+      "description": "Working together with others to achieve common business goals."
+    }
+  },
+  {
+    "id": "biz-ch-jingzheng",
+    "front": {
+      "icon": "",
+      "title": "竞争",
+      "description": "jìngzhēng"
+    },
+    "back": {
+      "icon": "🏃‍♂️",
+      "title": "competition, compete",
+      "description": "Rivalry between businesses for customers, market share, or resources."
+    }
+  },
+  {
+    "id": "biz-ch-youshi",
+    "front": {
+      "icon": "",
+      "title": "优势",
+      "description": "yōushì"
+    },
+    "back": {
+      "icon": "💪",
+      "title": "advantage, strength",
+      "description": "Beneficial factors that give a business competitive edge."
+    }
+  },
+  {
+    "id": "biz-ch-lieshi",
+    "front": {
+      "icon": "",
+      "title": "劣势",
+      "description": "lièshì"
+    },
+    "back": {
+      "icon": "⚠️",
+      "title": "disadvantage, weakness",
+      "description": "Factors that put a business at a competitive disadvantage."
+    }
+  },
+  {
+    "id": "biz-ch-yaoqiu",
+    "front": {
+      "icon": "",
+      "title": "要求",
+      "description": "yāoqiú"
+    },
+    "back": {
+      "icon": "📋",
+      "title": "requirement, demand",
+      "description": "Conditions or standards that must be met in business."
+    }
+  },
+  {
+    "id": "biz-ch-tiaojian",
+    "front": {
+      "icon": "",
+      "title": "条件",
+      "description": "tiáojiàn"
+    },
+    "back": {
+      "icon": "📜",
+      "title": "condition, terms",
+      "description": "Circumstances or requirements for business agreements."
+    }
+  },
+  {
+    "id": "biz-ch-biaozhun",
+    "front": {
+      "icon": "",
+      "title": "标准",
+      "description": "biāozhǔn"
+    },
+    "back": {
+      "icon": "📏",
+      "title": "standard, criterion",
+      "description": "Established levels of quality or achievement in business."
+    }
+  },
+  {
+    "id": "biz-ch-guifan",
+    "front": {
+      "icon": "",
+      "title": "规范",
+      "description": "guīfàn"
+    },
+    "back": {
+      "icon": "📋",
+      "title": "standard, norm",
+      "description": "Established rules or guidelines for business conduct."
+    }
+  },
+  {
+    "id": "biz-ch-zhengshi",
+    "front": {
+      "icon": "",
+      "title": "正式",
+      "description": "zhèngshì"
+    },
+    "back": {
+      "icon": "🎩",
+      "title": "formal, official",
+      "description": "Following established business protocols and procedures."
+    }
+  },
+  {
+    "id": "biz-ch-feizhenshi",
+    "front": {
+      "icon": "",
+      "title": "非正式",
+      "description": "fēizhèngshì"
+    },
+    "back": {
+      "icon": "👕",
+      "title": "informal, unofficial",
+      "description": "Casual or non-official business communications or meetings."
+    }
+  },
+  {
+    "id": "biz-ch-zhuanye",
+    "front": {
+      "icon": "",
+      "title": "专业",
+      "description": "zhuānyè"
+    },
+    "back": {
+      "icon": "🎓",
+      "title": "professional, specialized",
+      "description": "Relating to expert knowledge or skilled business practice."
+    }
+  },
+  {
+    "id": "biz-ch-jingli",
+    "front": {
+      "icon": "",
+      "title": "经历",
+      "description": "jīnglì"
+    },
+    "back": {
+      "icon": "📚",
+      "title": "experience, background",
+      "description": "Past events or activities that provide business knowledge."
+    }
+  },
+  {
+    "id": "biz-ch-beijing",
+    "front": {
+      "icon": "",
+      "title": "背景",
+      "description": "bèijǐng"
+    },
+    "back": {
+      "icon": "🎭",
+      "title": "background, context",
+      "description": "The circumstances or history relevant to business situations."
+    }
+  },
+  {
+    "id": "biz-ch-qingkuang",
+    "front": {
+      "icon": "",
+      "title": "情况",
+      "description": "qíngkuàng"
+    },
+    "back": {
+      "icon": "📊",
+      "title": "situation, circumstances",
+      "description": "The current state or condition of business affairs."
+    }
+  },
+  {
+    "id": "biz-ch-zhuangtai",
+    "front": {
+      "icon": "",
+      "title": "状态",
+      "description": "zhuàngtài"
+    },
+    "back": {
+      "icon": "📈",
+      "title": "state, status",
+      "description": "The current condition or position of business operations."
+    }
+  },
+  {
+    "id": "biz-ch-shuiping",
+    "front": {
+      "icon": "",
+      "title": "水平",
+      "description": "shuǐpíng"
+    },
+    "back": {
+      "icon": "📊",
+      "title": "level, standard",
+      "description": "The degree or quality of business performance or capability."
+    }
+  },
+  {
+    "id": "biz-ch-chendu",
+    "front": {
+      "icon": "",
+      "title": "程度",
+      "description": "chéngdù"
+    },
+    "back": {
+      "icon": "📏",
+      "title": "degree, extent",
+      "description": "The amount or level to which business conditions apply."
+    }
+  },
+  {
+    "id": "biz-ch-fanwei",
+    "front": {
+      "icon": "",
+      "title": "范围",
+      "description": "fànwéi"
+    },
+    "back": {
+      "icon": "🔲",
+      "title": "scope, range",
+      "description": "The extent or boundaries of business activities or responsibilities."
+    }
+  },
+  {
+    "id": "biz-ch-guimo",
+    "front": {
+      "icon": "",
+      "title": "规模",
+      "description": "guīmó"
+    },
+    "back": {
+      "icon": "📏",
+      "title": "scale, size",
+      "description": "The extent or magnitude of business operations."
+    }
+  },
+  {
+    "id": "biz-ch-xiaoxi",
+    "front": {
+      "icon": "",
+      "title": "消息",
+      "description": "xiāoxī"
+    },
+    "back": {
+      "icon": "📨",
+      "title": "message, news",
+      "description": "Information or communication shared in business."
+    }
+  },
+  {
+    "id": "biz-ch-tongzhi",
+    "front": {
+      "icon": "",
+      "title": "通知",
+      "description": "tōngzhī"
+    },
+    "back": {
+      "icon": "📢",
+      "title": "notice, notification",
+      "description": "Official announcement or communication to employees or stakeholders."
+    }
+  },
+  {
+    "id": "biz-ch-gonggao",
+    "front": {
+      "icon": "",
+      "title": "公告",
+      "description": "gōnggào"
+    },
+    "back": {
+      "icon": "📋",
+      "title": "announcement, bulletin",
+      "description": "Public statement about company matters or changes."
+    }
+  },
+  {
+    "id": "biz-ch-shenpi",
+    "front": {
+      "icon": "",
+      "title": "审批",
+      "description": "shěnpī"
+    },
+    "back": {
+      "icon": "✅",
+      "title": "approval, authorize",
+      "description": "The process of reviewing and approving business decisions."
+    }
+  },
+  {
+    "id": "biz-ch-pizhun",
+    "front": {
+      "icon": "",
+      "title": "批准",
+      "description": "pīzhǔn"
+    },
+    "back": {
+      "icon": "👍",
+      "title": "approve, ratify",
+      "description": "To formally agree to or accept a business proposal."
+    }
+  },
+  {
+    "id": "biz-ch-jujue",
+    "front": {
+      "icon": "",
+      "title": "拒绝",
+      "description": "jùjué"
+    },
+    "back": {
+      "icon": "❌",
+      "title": "reject, refuse",
+      "description": "To decline or deny a business request or proposal."
+    }
+  },
+  {
+    "id": "biz-ch-quxiao",
+    "front": {
+      "icon": "",
+      "title": "取消",
+      "description": "qǔxiāo"
+    },
+    "back": {
+      "icon": "🚫",
+      "title": "cancel, revoke",
+      "description": "To call off or nullify a business arrangement."
+    }
+  },
+  {
+    "id": "biz-ch-xiuzheng",
+    "front": {
+      "icon": "",
+      "title": "修正",
+      "description": "xiūzhèng"
+    },
+    "back": {
+      "icon": "✏️",
+      "title": "correct, revise",
+      "description": "To make changes to improve or fix business documents."
+    }
+  },
+  {
+    "id": "biz-ch-xiugai",
+    "front": {
+      "icon": "",
+      "title": "修改",
+      "description": "xiūgǎi"
+    },
+    "back": {
+      "icon": "📝",
+      "title": "modify, amend",
+      "description": "To make alterations to business plans or agreements."
+    }
+  },
+  {
+    "id": "biz-ch-gengxin",
+    "front": {
+      "icon": "",
+      "title": "更新",
+      "description": "gēngxīn"
+    },
+    "back": {
+      "icon": "🔄",
+      "title": "update, refresh",
+      "description": "To bring business information or systems up to date."
+    }
+  },
+  {
+    "id": "biz-ch-shengji",
+    "front": {
+      "icon": "",
+      "title": "升级",
+      "description": "shēngjí"
+    },
+    "back": {
+      "icon": "⬆️",
+      "title": "upgrade, promote",
+      "description": "To improve systems, products, or employee positions."
+    }
+  },
+  {
+    "id": "biz-ch-jiangji",
+    "front": {
+      "icon": "",
+      "title": "降级",
+      "description": "jiàngjí"
+    },
+    "back": {
+      "icon": "⬇️",
+      "title": "downgrade, demote",
+      "description": "To reduce the level or status of business elements."
+    }
+  },
+  {
+    "id": "biz-ch-zhuanye",
+    "front": {
+      "icon": "",
+      "title": "转移",
+      "description": "zhuǎnyí"
+    },
+    "back": {
+      "icon": "↗️",
+      "title": "transfer, shift",
+      "description": "To move resources, responsibilities, or operations."
+    }
+  },
+  {
+    "id": "biz-ch-fenpei",
+    "front": {
+      "icon": "",
+      "title": "分配",
+      "description": "fēnpèi"
+    },
+    "back": {
+      "icon": "📊",
+      "title": "allocate, distribute",
+      "description": "To assign resources or tasks among different areas."
+    }
+  },
+  {
+    "id": "biz-ch-anpai",
+    "front": {
+      "icon": "",
+      "title": "安排",
+      "description": "ānpái"
+    },
+    "back": {
+      "icon": "📅",
+      "title": "arrange, schedule",
+      "description": "To organize and plan business activities or meetings."
+    }
+  },
+  {
+    "id": "biz-ch-zuzhi",
+    "front": {
+      "icon": "",
+      "title": "组织",
+      "description": "zǔzhī"
+    },
+    "back": {
+      "icon": "🏗️",
+      "title": "organize, organization",
+      "description": "To structure and coordinate business activities or entities."
+    }
+  },
+  {
+    "id": "biz-ch-jihua",
+    "front": {
+      "icon": "",
+      "title": "机构",
+      "description": "jīgòu"
+    },
+    "back": {
+      "icon": "🏢",
+      "title": "institution, organization",
+      "description": "A formal business or administrative organization."
+    }
+  },
+  {
+    "id": "biz-ch-jiguan",
+    "front": {
+      "icon": "",
+      "title": "机关",
+      "description": "jīguān"
+    },
+    "back": {
+      "icon": "🏛️",
+      "title": "office, agency",
+      "description": "A government or administrative office."
+    }
+  },
+  {
+    "id": "biz-ch-danwei",
+    "front": {
+      "icon": "",
+      "title": "单位",
+      "description": "dānwèi"
+    },
+    "back": {
+      "icon": "🏢",
+      "title": "unit, organization",
+      "description": "A work unit or organizational entity."
+    }
+  },
+  {
+    "id": "biz-ch-zhengfu",
+    "front": {
+      "icon": "",
+      "title": "政府",
+      "description": "zhèngfǔ"
+    },
+    "back": {
+      "icon": "🏛️",
+      "title": "government",
+      "description": "The governing body that regulates business activities."
+    }
+  },
+  {
+    "id": "biz-ch-guojia",
+    "front": {
+      "icon": "",
+      "title": "国家",
+      "description": "guójiā"
+    },
+    "back": {
+      "icon": "🌍",
+      "title": "country, nation",
+      "description": "A sovereign state with its own business regulations."
+    }
+  },
+  {
+    "id": "biz-ch-guoji",
+    "front": {
+      "icon": "",
+      "title": "国际",
+      "description": "guójì"
+    },
+    "back": {
+      "icon": "🌐",
+      "title": "international",
+      "description": "Relating to business activities between countries."
+    }
+  },
+  {
+    "id": "biz-ch-quanqiu",
+    "front": {
+      "icon": "",
+      "title": "全球",
+      "description": "quánqiú"
+    },
+    "back": {
+      "icon": "🌎",
+      "title": "global, worldwide",
+      "description": "Relating to business activities across the entire world."
+    }
+  },
+  {
+    "id": "biz-ch-bentu",
+    "front": {
+      "icon": "",
+      "title": "本土",
+      "description": "běntǔ"
+    },
+    "back": {
+      "icon": "🏠",
+      "title": "local, domestic",
+      "description": "Relating to business activities within one's own country."
+    }
+  },
+  {
+    "id": "biz-ch-haiwai",
+    "front": {
+      "icon": "",
+      "title": "海外",
+      "description": "hǎiwài"
+    },
+    "back": {
+      "icon": "🌊",
+      "title": "overseas, abroad",
+      "description": "Relating to business activities in foreign countries."
+    }
+  },
+  {
+    "id": "biz-ch-jinkou",
+    "front": {
+      "icon": "",
+      "title": "进口",
+      "description": "jìnkǒu"
+    },
+    "back": {
+      "icon": "📥",
+      "title": "import",
+      "description": "To bring goods or services from foreign countries."
+    }
+  },
+  {
+    "id": "biz-ch-chukou",
+    "front": {
+      "icon": "",
+      "title": "出口",
+      "description": "chūkǒu"
+    },
+    "back": {
+      "icon": "📤",
+      "title": "export",
+      "description": "To send goods or services to foreign countries."
+    }
+  },
+  {
+    "id": "biz-ch-haiguan",
+    "front": {
+      "icon": "",
+      "title": "海关",
+      "description": "hǎiguān"
+    },
+    "back": {
+      "icon": "🛃",
+      "title": "customs",
+      "description": "Government agency controlling import and export of goods."
+    }
+  },
+  {
+    "id": "biz-ch-guanshui",
+    "front": {
+      "icon": "",
+      "title": "关税",
+      "description": "guānshuì"
+    },
+    "back": {
+      "icon": "💰",
+      "title": "tariff, duty",
+      "description": "Tax imposed on imported or exported goods."
+    }
+  }
+]
