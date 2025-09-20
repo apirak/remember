@@ -2,9 +2,13 @@
 // Shows progress stats and provides navigation to begin reviewing flashcards
 
 import React from "react";
-import { useFlashcard } from "../../contexts/FlashcardContext";
+import {
+  MAX_REVIEW_CARDS,
+  useFlashcard,
+} from "../../contexts/FlashcardContext";
 import LoginButton from "../auth/LoginButton";
 import { DebugPanel } from "../ui/DebugPanel";
+import EmojiText from "../EmojiSVG";
 
 type AppRoute = "dashboard" | "review" | "complete";
 
@@ -47,8 +51,8 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="max-w-md w-full">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4">
+      <div className="max-w-md w-full bg-white/80 backdrop-blur-md p-6 rounded-3xl shadow-lg">
         {/* Error Display */}
         {state.error && (
           <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-2xl">
@@ -69,11 +73,12 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
 
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold font-child text-primary-600 mb-2">
-            🎓 Remember Me!
+          <EmojiText size={128}>🎓</EmojiText>
+          <h1 className="mt-2 text-4xl font-child text-gray-600 mb-2">
+            103 Everyday Chinese!
           </h1>
-          <p className="text-lg font-rounded text-gray-600">
-            Remember Everything with{" "}
+          <p className="text-md font-rounded text-gray-600">
+            Remember Everything with <br />
             <a
               className="text-blue-600 hover:text-blue-800 no-underline"
               href="http://bit.ly/3KctaMk"
@@ -85,55 +90,42 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
 
         {/* Stats Cards */}
         <div className="mb-8">
-          {/* Total Cards - Main Focus */}
-          <div className="bg-gradient-to-br from-primary-50 to-primary-100 rounded-2xl p-6 mb-3 border border-primary-200">
-            <div className="text-center">
-              <div className="text-4xl mb-2">📚</div>
-              <div className="text-4xl font-bold font-child text-primary-600">
-                {state.stats.totalCards}
-              </div>
-              <div className="text-lg font-rounded text-primary-700">
-                Basic Chinese Cards
-              </div>
-            </div>
-          </div>
-
           {/* Supporting Stats */}
-          <div className="grid grid-cols-3 gap-3">
+          <div className="grid grid-cols-3 gap-3 bg-white border border-gray-100 rounded-xl p-3">
             {/* Mastered Cards */}
-            <div className="bg-gray-50 rounded-xl p-3 border border-gray-200">
-              <div className="text-center">
-                <div className="text-lg mb-1">🏆</div>
-                <div className="text-lg font-bold font-child text-success-600">
-                  {state.stats.masteredCards}
-                </div>
-                <div className="text-xs font-rounded text-gray-600">
-                  Mastered
-                </div>
+            <div className="text-center">
+              <div className="text-lg mb-1">
+                <EmojiText size={32}>🏆</EmojiText>
               </div>
+              <div className="text-2xl font-bold font-child text-success-600">
+                {state.stats.masteredCards}
+              </div>
+              <div className="text-xs font-rounded text-gray-600">Mastered</div>
             </div>
 
             {/* Need Practice Cards */}
-            <div className="bg-gray-50 rounded-xl p-3 border border-gray-200">
-              <div className="text-center">
-                <div className="text-lg mb-1">🤔</div>
-                <div className="text-lg font-bold font-child text-warning-600">
-                  {state.stats.difficultCards}
-                </div>
-                <div className="text-xs font-rounded text-gray-600">
-                  Need Practice
-                </div>
+            <div className="text-center">
+              <div className="text-lg mb-1">
+                <EmojiText size={32}>⏲️</EmojiText>
+              </div>
+              <div className="text-2xl font-bold font-child text-warning-600">
+                {state.stats.difficultCards}
+              </div>
+              <div className="text-xs font-rounded text-gray-600">
+                Need Practice
               </div>
             </div>
 
             {/* Review Today */}
-            <div className="bg-gray-50 rounded-xl p-3 border border-gray-200">
-              <div className="text-center">
-                <div className="text-lg mb-1">💪</div>
-                <div className="text-lg font-bold font-child text-secondary-600">
-                  {state.stats.reviewsToday}
-                </div>
-                <div className="text-xs font-rounded text-gray-600">Today</div>
+            <div className="text-center">
+              <div className="text-lg mb-1">
+                <EmojiText size={32}>️✅</EmojiText>
+              </div>
+              <div className="text-2xl font-bold font-child text-secondary-600">
+                {state.stats.reviewsToday}
+              </div>
+              <div className="text-xs font-rounded text-gray-600">
+                Reviewed Today
               </div>
             </div>
           </div>
@@ -146,7 +138,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             onClick={handleStartReview}
             disabled={state.stats.dueCards === 0}
             className={`
-                w-full py-4 px-8 rounded-2xl font-bold font-child text-3xl 
+                w-full py-3 px-8 rounded-2xl font-bold font-child text-3xl 
                 transform transition-all duration-200
                 ${
                   state.stats.dueCards > 0
@@ -157,7 +149,6 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
           >
             {state.stats.dueCards > 0 ? (
               <div className="flex items-center justify-center">
-                <span className="text-2xl mr-3">🚀</span>
                 <span>Start Review</span>
               </div>
             ) : (
@@ -171,7 +162,8 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
           <div className="flex flex-col">
             {state.stats.dueCards > 0 ? (
               <div className="w-full text-center text-md text-primary-900">
-                {Math.min(state.stats.dueCards, 20)} cards ready for today.
+                {Math.min(state.stats.dueCards, MAX_REVIEW_CARDS)} cards ready
+                for today. 🚀
               </div>
             ) : null}
 
@@ -199,12 +191,12 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
               )}
             </button>
           </div>
-
-          {/* Login Section */}
-          <div className="mt-2">
-            <LoginButton />
-          </div>
         </div>
+      </div>
+
+      {/* Login Section */}
+      <div className="mt-4">
+        <LoginButton />
       </div>
 
       {/* Debug Panel - only shows in development */}

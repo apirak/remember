@@ -32,6 +32,8 @@ import { createFirestoreOperations } from "../hooks/useFirestoreOperations";
 // Complex action hooks
 import { createFlashcardActions } from "../hooks/useFlashcardActions";
 
+export const MAX_REVIEW_CARDS = 10;
+
 /**
  * Initial state for the FlashcardContext
  * Sets up default values for all state properties
@@ -253,7 +255,7 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
   const startReviewSession = () => {
     if (state.dueCards.length > 0) {
       // Limit review session to maximum 20 cards
-      const reviewCards = state.dueCards.slice(0, 20);
+      const reviewCards = state.dueCards.slice(0, MAX_REVIEW_CARDS);
       dispatch({ type: "START_REVIEW_SESSION", payload: reviewCards });
     }
   };

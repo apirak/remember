@@ -80,7 +80,7 @@ const LoginButton: React.FC<LoginButtonProps> = () => {
     return (
       <div className="space-y-3">
         {/* User Profile */}
-        <div className="flex bg-white/50 rounded-xl border border-green-200">
+        <div className="flex gap-5">
           <div className="flex-1 flex items-center space-x-3">
             {user.photoURL && (
               <img
@@ -102,6 +102,7 @@ const LoginButton: React.FC<LoginButtonProps> = () => {
               m-1 py-1 px-2 rounded-md font-rounded text-sm
               text-gray-800 
               hover:bg-red-200 hover:border-red-400 
+              hover:text-red-700
               disabled:opacity-50 disabled:cursor-not-allowed
               transition-colors duration-200
             "
@@ -127,15 +128,15 @@ const LoginButton: React.FC<LoginButtonProps> = () => {
         onClick={handleSignIn}
         disabled={isLoading}
         className="
-          w-full py-3 px-4 rounded-xl font-rounded text-sm font-medium
-          bg-blue-600 text-white border border-blue-600
+          w-full py-3 px-8 rounded-xl font-rounded text-sm font-medium
+          bg-blue-600 text-white 
           hover:bg-blue-700 hover:border-blue-700
           disabled:opacity-50 disabled:cursor-not-allowed
           transition-colors duration-200
           shadow-md hover:shadow-lg
         "
       >
-        {isLoading ? "⌛ logging in..." : "🔑 Sign in with Google"}
+        {isLoading ? "⌛ logging in..." : "Sign in with Google"}
       </button>
 
       {/* Benefits of signing in */}
