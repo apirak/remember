@@ -10,7 +10,7 @@ import LoginButton from "../auth/LoginButton";
 import { DebugPanel } from "../ui/DebugPanel";
 import EmojiText from "../EmojiSVG";
 
-type AppRoute = "dashboard" | "review" | "complete";
+type AppRoute = "dashboard" | "review" | "complete" | "card-sets";
 
 interface DashboardProps {
   onNavigate: (route: AppRoute) => void;
@@ -21,6 +21,9 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
     useFlashcard();
 
   const handleStartReview = () => {
+    console.log("Dashboard: Start Review button clicked", {
+      dueCards: state.stats.dueCards,
+    });
     if (state.stats.dueCards > 0) {
       startReviewSession();
       onNavigate("review");
@@ -28,8 +31,10 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
   };
 
   const handleResetProgress = async () => {
+    console.log("Dashboard: Reset Progress button clicked");
     try {
       await resetTodayProgress();
+      console.log("Dashboard: Reset Progress completed successfully");
     } catch (error) {
       console.error("Failed to reset progress:", error);
       // You could add user-facing error handling here if needed
@@ -70,6 +75,20 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             )}
           </div>
         )}
+
+        {/* All Sets Navigation Button - Top Left */}
+        <div className="mb-4">
+          <button
+            onClick={() => {
+              console.log("Dashboard: All Sets button clicked");
+              onNavigate("card-sets");
+            }}
+            className="flex items-center px-3 py-2 text-sm font-rounded text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-colors duration-200"
+          >
+            <span className="mr-2">📚</span>
+            <span>All Sets</span>
+          </button>
+        </div>
 
         {/* Header */}
         <div className="text-center mb-8">
