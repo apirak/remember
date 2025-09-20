@@ -78,53 +78,56 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-2 gap-4 mb-8">
-          {/* Total Cards */}
-          <div className="bg-white rounded-2xl p-4 shadow-lg border-2 border-primary-100">
+        <div className="mb-8">
+          {/* Total Cards - Main Focus */}
+          <div className="bg-gradient-to-br from-primary-50 to-primary-100 rounded-2xl p-6 mb-6 border border-primary-200">
             <div className="text-center">
-              <div className="text-2xl mb-1">📚</div>
-              <div className="text-2xl font-bold font-child text-primary-600">
+              <div className="text-4xl mb-2">📚</div>
+              <div className="text-4xl font-bold font-child text-primary-600">
                 {state.stats.totalCards}
               </div>
-              <div className="text-sm font-rounded text-gray-500">
+              <div className="text-lg font-rounded text-primary-700">
                 Total Cards
               </div>
             </div>
           </div>
 
-          {/* Mastered Cards */}
-          <div className="bg-white rounded-2xl p-4 shadow-lg border-2 border-success-100">
-            <div className="text-center">
-              <div className="text-2xl mb-1">🏆</div>
-              <div className="text-2xl font-bold font-child text-success-600">
-                {state.stats.masteredCards}
-              </div>
-              <div className="text-sm font-rounded text-gray-500">Mastered</div>
-            </div>
-          </div>
-
-          {/* Need Practice Cards */}
-          <div className="bg-white rounded-2xl p-4 shadow-lg border-2 border-warning-100">
-            <div className="text-center">
-              <div className="text-2xl mb-1">🤔</div>
-              <div className="text-2xl font-bold font-child text-warning-600">
-                {state.stats.difficultCards}
-              </div>
-              <div className="text-sm font-rounded text-gray-500">
-                Need Practice
+          {/* Supporting Stats */}
+          <div className="grid grid-cols-3 gap-3">
+            {/* Mastered Cards */}
+            <div className="bg-gray-50 rounded-xl p-3 border border-gray-200">
+              <div className="text-center">
+                <div className="text-lg mb-1">🏆</div>
+                <div className="text-lg font-bold font-child text-success-600">
+                  {state.stats.masteredCards}
+                </div>
+                <div className="text-xs font-rounded text-gray-600">
+                  Mastered
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Review Today */}
-          <div className="bg-white rounded-2xl p-4 shadow-lg border-2 border-secondary-100">
-            <div className="text-center">
-              <div className="text-2xl mb-1">💪</div>
-              <div className="text-2xl font-bold font-child text-secondary-600">
-                {state.stats.reviewsToday}
+            {/* Need Practice Cards */}
+            <div className="bg-gray-50 rounded-xl p-3 border border-gray-200">
+              <div className="text-center">
+                <div className="text-lg mb-1">🤔</div>
+                <div className="text-lg font-bold font-child text-warning-600">
+                  {state.stats.difficultCards}
+                </div>
+                <div className="text-xs font-rounded text-gray-600">
+                  Need Practice
+                </div>
               </div>
-              <div className="text-sm font-rounded text-gray-500">
-                Review Today
+            </div>
+
+            {/* Review Today */}
+            <div className="bg-gray-50 rounded-xl p-3 border border-gray-200">
+              <div className="text-center">
+                <div className="text-lg mb-1">💪</div>
+                <div className="text-lg font-bold font-child text-secondary-600">
+                  {state.stats.reviewsToday}
+                </div>
+                <div className="text-xs font-rounded text-gray-600">Today</div>
               </div>
             </div>
           </div>
@@ -137,24 +140,30 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             onClick={handleStartReview}
             disabled={state.stats.dueCards === 0}
             className={`
-              w-full py-4 px-6 rounded-2xl font-bold font-child text-lg shadow-lg transform transition-all duration-200
+              w-full py-6 px-8 rounded-3xl font-bold font-child text-xl shadow-xl transform transition-all duration-200 border-4
               ${
                 state.stats.dueCards > 0
-                  ? "bg-gradient-to-r from-primary-500 to-primary-600 text-white hover:from-primary-600 hover:to-primary-700 hover:scale-105 active:scale-95"
-                  : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  ? "bg-gradient-to-r from-primary-500 to-primary-600 text-white border-primary-700 hover:from-primary-600 hover:to-primary-700 hover:scale-105 hover:shadow-2xl active:scale-95 active:shadow-lg"
+                  : "bg-gray-300 text-gray-500 border-gray-400 cursor-not-allowed"
               }
             `}
           >
             {state.stats.dueCards > 0 ? (
-              <>
-                🚀 Start Review ({Math.min(state.stats.dueCards, 20)}
-                {state.stats.dueCards > 20
-                  ? ` of ${state.stats.dueCards}`
-                  : ""}{" "}
-                cards)
-              </>
+              <div className="flex items-center justify-center">
+                <span className="text-2xl mr-3">🚀</span>
+                <span>
+                  Start Review ({Math.min(state.stats.dueCards, 20)}
+                  {state.stats.dueCards > 20
+                    ? ` of ${state.stats.dueCards}`
+                    : ""}{" "}
+                  cards)
+                </span>
+              </div>
             ) : (
-              <>🎉 All Done! Come back tomorrow</>
+              <div className="flex items-center justify-center">
+                <span className="text-2xl mr-3">🎉</span>
+                <span>All Done! Come back tomorrow</span>
+              </div>
             )}
           </button>
 
@@ -163,22 +172,21 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             onClick={handleResetProgress}
             disabled={state.loadingStates.savingProgress}
             className={`
-              w-full py-3 px-6 rounded-2xl font-rounded text-sm border-2 transition-colors duration-200
-              bg-white shadow-sm
+              w-full py-2 px-4 rounded-lg font-rounded text-xs transition-colors duration-200
               ${
                 state.loadingStates.savingProgress
-                  ? "border-gray-200 text-gray-400 cursor-not-allowed"
-                  : "border-gray-300 text-gray-600 hover:border-gray-400 hover:text-gray-700"
+                  ? "bg-transparent text-gray-300 cursor-not-allowed"
+                  : "bg-transparent text-gray-400 hover:text-gray-500"
               }
             `}
           >
             {state.loadingStates.savingProgress ? (
               <span className="flex items-center justify-center">
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-400 mr-2"></div>
+                <div className="animate-spin rounded-full h-3 w-3 border-b border-gray-300 mr-1"></div>
                 Resetting...
               </span>
             ) : (
-              "🔄 Reset Today's Progress"
+              "Reset Today's Progress"
             )}
           </button>
 
