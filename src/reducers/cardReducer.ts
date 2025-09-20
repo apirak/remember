@@ -40,7 +40,7 @@ export const cardReducer = (
           dueCards: stats.dueCards,
           masteredCards: stats.masteredCards,
           difficultCards: stats.difficultCards,
-          reviewsToday: stats.reviewsToday, // Now calculated from actual card data
+          reviewsToday: stats.reviewsToday,
         },
         isLoading: false,
       };
@@ -70,6 +70,10 @@ export const cardReducer = (
 
     case "RESET_TODAY_PROGRESS": {
       // Reset all cards to be due today and reset reviewsToday counter
+      // Set lastReviewDate to yesterday so cards won't be counted as "reviewed today"
+      const yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() - 1);
+
       const resetCards = state.allCards.map((card) => ({
         ...card,
         nextReviewDate: new Date(),
@@ -78,7 +82,7 @@ export const cardReducer = (
         totalReviews: 0,
         easinessFactor: 2.5, // Reset to default SM2 value
         isNew: true,
-        lastReviewDate: new Date(0), // Reset to epoch
+        lastReviewDate: yesterday,
       }));
 
       const stats = calculateFlashcardStats(resetCards);
@@ -92,7 +96,7 @@ export const cardReducer = (
           dueCards: stats.dueCards,
           masteredCards: stats.masteredCards,
           difficultCards: stats.difficultCards,
-          reviewsToday: stats.reviewsToday, // Will be 0 since all lastReviewDate reset to epoch
+          reviewsToday: stats.reviewsToday,
         },
         currentSession: null,
         currentCard: null,
