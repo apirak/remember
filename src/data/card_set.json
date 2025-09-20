@@ -1,0 +1,45 @@
+[
+  {
+    "id": "chinese_essentials_1",
+    "name": "Chinese Essentials 1",
+    "description": "Basic everyday communication",
+    "cover": "🇨🇳",
+    "cardCount": 103,
+    "category": "language_basics",
+    "tags": ["chinese", "beginner", "communication", "everyday"],
+    "dataFile": "chinese_essentials_in_communication_1.json",
+    "author": "Language Learning Team",
+    "isActive": true,
+    "createdAt": "2024-01-15T00:00:00Z",
+    "updatedAt": "2024-09-20T00:00:00Z"
+  },
+  {
+    "id": "chinese_essentials_2",
+    "name": "Chinese Essentials 2",
+    "description": "Intermediate conversations and expressions",
+    "cover": "🏮",
+    "cardCount": 87,
+    "difficulty": "intermediate",
+    "category": "language_intermediate",
+    "tags": ["chinese", "intermediate", "conversation", "expressions"],
+    "dataFile": "chinese_essentials_in_communication_2.json",
+    "author": "Language Learning Team",
+    "isActive": true,
+    "createdAt": "2024-02-15T00:00:00Z",
+    "updatedAt": "2024-09-20T00:00:00Z"
+  },
+  {
+    "id": "business_chinese",
+    "name": "Business Chinese",
+    "description": "Professional vocabulary and business communication",
+    "cover": "💼",
+    "cardCount": 156,
+    "category": "business_language",
+    "tags": ["chinese", "business", "professional", "advanced"],
+    "dataFile": "business_chinese.json",
+    "author": "Business Language Team",
+    "isActive": true,
+    "createdAt": "2024-03-15T00:00:00Z",
+    "updatedAt": "2024-09-20T00:00:00Z"
+  }
+]
