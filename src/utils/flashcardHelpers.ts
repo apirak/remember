@@ -142,7 +142,11 @@ export const calculateReviewsToday = (
   cards: Flashcard[],
   currentDate: Date = new Date()
 ): number => {
-  return cards.filter((card) => isCardReviewedToday(card, currentDate)).length;
+  const reviewedCards = cards.filter((card) =>
+    isCardReviewedToday(card, currentDate)
+  );
+
+  return reviewedCards.length;
 };
 
 /**

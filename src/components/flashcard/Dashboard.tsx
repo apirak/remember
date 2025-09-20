@@ -4,6 +4,7 @@
 import React from "react";
 import { useFlashcard } from "../../contexts/FlashcardContext";
 import LoginButton from "../auth/LoginButton";
+import { DebugPanel } from "../ui/DebugPanel";
 
 type AppRoute = "dashboard" | "review" | "complete";
 
@@ -187,6 +188,9 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
           </div>
         </div>
       </div>
+
+      {/* Debug Panel - only shows in development */}
+      <DebugPanel />
     </div>
   );
 };
