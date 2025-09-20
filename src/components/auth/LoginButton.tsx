@@ -44,11 +44,11 @@ const LoginButton: React.FC<LoginButtonProps> = () => {
         console.log("Successfully signed in:", result.user);
         // Auth state will be updated automatically via onAuthStateChanged
       } else {
-        setError(result.error || "เกิดข้อผิดพลาดในการเข้าสู่ระบบ");
+        setError(result.error || "An error occurred during login");
       }
     } catch (error) {
       console.error("Login error:", error);
-      setError("เกิดข้อผิดพลาดในการเข้าสู่ระบบ");
+      setError("An error occurred during login");
     } finally {
       setIsLoading(false);
     }
@@ -65,11 +65,11 @@ const LoginButton: React.FC<LoginButtonProps> = () => {
         console.log("Successfully signed out");
         // Auth state will be updated automatically via onAuthStateChanged
       } else {
-        setError(result.error || "เกิดข้อผิดพลาดในการออกจากระบบ");
+        setError(result.error || "An error occurred during logout");
       }
     } catch (error) {
       console.error("Logout error:", error);
-      setError("เกิดข้อผิดพลาดในการออกจากระบบ");
+      setError("An error occurred during logout");
     } finally {
       setIsLoading(false);
     }
@@ -140,9 +140,9 @@ const LoginButton: React.FC<LoginButtonProps> = () => {
 
       {/* Benefits of signing in */}
       <div className="text-xs font-rounded text-gray-600 text-center space-y-1">
-        <div>💾 บันทึกความคืบหน้าการเรียนรู้</div>
-        <div>📊 ติดตามสถิติการทบทวน</div>
-        <div>☁️ ซิงค์ข้อมูลข้ามอุปกรณ์</div>
+        <div>💾 Save learning progress</div>
+        <div>📊 Track review statistics</div>
+        <div>☁️ Sync data across devices</div>
       </div>
 
       {error && (

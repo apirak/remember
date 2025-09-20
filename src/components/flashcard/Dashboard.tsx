@@ -134,20 +134,20 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
         </div>
 
         {/* Action Buttons */}
-        <div className="space-y-4">
+        <div className="flex flex-col gap-4">
           {/* Start Review Button */}
           <button
             onClick={handleStartReview}
             disabled={state.stats.dueCards === 0}
             className={`
-              w-full py-4 px-8 rounded-2xl font-bold font-child text-3xl 
-              transform transition-all duration-200
-              ${
-                state.stats.dueCards > 0
-                  ? "bg-gradient-to-r from-primary-500 to-primary-600 text-white hover:scale-[102%] hover:shadow-2xl hover:shadow-primary-500/30 active:scale-95 active:shadow-lg active:shadow-primary-500/20"
-                  : "bg-gray-300 text-gray-500 border-gray-400 cursor-not-allowed"
-              }
-            `}
+                w-full py-4 px-8 rounded-2xl font-bold font-child text-3xl 
+                transform transition-all duration-200
+                ${
+                  state.stats.dueCards > 0
+                    ? "bg-gradient-to-r from-primary-500 to-primary-600 text-white hover:scale-[102%] hover:shadow-2xl hover:shadow-primary-500/30 active:scale-95 active:shadow-lg active:shadow-primary-500/20"
+                    : "bg-gray-300 text-gray-500 border-gray-400 cursor-not-allowed"
+                }
+              `}
           >
             {state.stats.dueCards > 0 ? (
               <div className="flex items-center justify-center">
@@ -162,37 +162,40 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             )}
           </button>
 
-          {state.stats.dueCards > 0 ? (
-            <div className="w-full text-center text-md text-primary-900">
-              {Math.min(state.stats.dueCards, 20)} cards ready for today.
-            </div>
-          ) : null}
+          <div className="flex flex-col">
+            {state.stats.dueCards > 0 ? (
+              <div className="w-full text-center text-md text-primary-900">
+                {Math.min(state.stats.dueCards, 20)} cards ready for today.
+              </div>
+            ) : null}
 
-          {/* Reset Progress Button */}
-          <button
-            onClick={handleResetProgress}
-            disabled={state.loadingStates.savingProgress}
-            className={`
-              w-full py-2 px-4 rounded-lg font-rounded text-xs transition-colors duration-200
-              ${
-                state.loadingStates.savingProgress
-                  ? "bg-transparent text-gray-300 cursor-not-allowed"
-                  : "bg-transparent text-gray-400 hover:text-gray-500"
-              }
-            `}
-          >
-            {state.loadingStates.savingProgress ? (
-              <span className="flex items-center justify-center">
-                <div className="animate-spin rounded-full h-3 w-3 border-b border-gray-300 mr-1"></div>
-                Resetting...
-              </span>
-            ) : (
-              "Reset Today's Progress"
-            )}
-          </button>
+            {/* Reset Progress Button */}
+            <button
+              onClick={handleResetProgress}
+              disabled={state.loadingStates.savingProgress}
+              className={`
+                w-full font-rounded text-xs transition-colors duration-200
+                py-2
+                ${
+                  state.loadingStates.savingProgress
+                    ? "bg-transparent text-gray-300 cursor-not-allowed"
+                    : "bg-transparent text-gray-400 hover:text-gray-500"
+                }
+              `}
+            >
+              {state.loadingStates.savingProgress ? (
+                <span className="flex items-center justify-center">
+                  <div className="animate-spin rounded-full h-3 w-3 border-b border-gray-300 mr-1"></div>
+                  Resetting...
+                </span>
+              ) : (
+                "Reset Today's Progress"
+              )}
+            </button>
+          </div>
 
           {/* Login Section */}
-          <div className="mt-4">
+          <div className="mt-2">
             <LoginButton />
           </div>
         </div>
