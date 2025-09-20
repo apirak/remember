@@ -1,7 +1,7 @@
 // CardSetSelection component - displays available card sets for user selection
 // Shows list of card sets with progress, descriptions, and navigation
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import EmojiText from "../EmojiSVG";
 
 // Type definitions for card set data structure
@@ -21,35 +21,43 @@ interface CardSetSelectionProps {
   onNavigate: (route: AppRoute) => void;
 }
 
-// Mock data for initial implementation (Step 2)
-const mockCardSets: CardSet[] = [
-  {
-    id: "chinese_essentials_1",
-    name: "Chinese Essentials 1",
-    description: "Basic everyday communication",
-    cover: "🇨🇳",
-    cardCount: 103,
-    progress: 45,
-  },
-  {
-    id: "chinese_essentials_2",
-    name: "Chinese Essentials 2",
-    description: "Intermediate conversations",
-    cover: "🏮",
-    cardCount: 87,
-    progress: 12,
-  },
-  {
-    id: "business_chinese",
-    name: "Business Chinese",
-    description: "Professional vocabulary",
-    cover: "💼",
-    cardCount: 156,
-    progress: 0,
-  },
-];
-
 const CardSetSelection: React.FC<CardSetSelectionProps> = ({ onNavigate }) => {
+  // State for loading card sets from JSON
+  const [cardSets, setCardSets] = useState<CardSet[]>([]);
+
+  // Load card sets from JSON file on component mount
+  useEffect(() => {
+    const loadCardSets = async () => {
+      try {
+        // Import the card set JSON data
+        const cardSetModule = await import("../../data/card_set.json");
+        const jsonData = cardSetModule.default || cardSetModule;
+
+        // Transform JSON data to match our CardSet interface
+        const transformedCardSets: CardSet[] = jsonData.map((item: any) => ({
+          id: item.id,
+          name: item.name,
+          description: item.description,
+          cover: item.cover,
+          cardCount: item.cardCount,
+          progress: 0, // Default progress for now
+        }));
+
+        setCardSets(transformedCardSets);
+        console.log(
+          "CardSetSelection: Loaded",
+          transformedCardSets.length,
+          "card sets from JSON"
+        );
+      } catch (error) {
+        console.error("CardSetSelection: Error loading card sets:", error);
+        // Fallback to empty array if loading fails
+        setCardSets([]);
+      }
+    };
+
+    loadCardSets();
+  }, []);
   // Handle card set selection
   const handleCardSetSelect = (cardSet: CardSet) => {
     console.log("CardSetSelection: Card set selected", {
@@ -99,7 +107,7 @@ const CardSetSelection: React.FC<CardSetSelectionProps> = ({ onNavigate }) => {
         {/* Card Sets List */}
         <div className="max-w-md w-full mx-auto flex-1">
           <div className="space-y-4">
-            {mockCardSets.map((cardSet) => (
+            {cardSets.map((cardSet) => (
               <div
                 key={cardSet.id}
                 onClick={() => handleCardSetSelect(cardSet)}
@@ -158,8 +166,8 @@ const CardSetSelection: React.FC<CardSetSelectionProps> = ({ onNavigate }) => {
             ))}
           </div>
 
-          {/* Empty state message if no card sets (future-proofing) */}
-          {mockCardSets.length === 0 && (
+          {/* Empty state message if no card sets */}
+          {cardSets.length === 0 && (
             <div className="text-center py-12">
               <EmojiText size={64}>📚</EmojiText>
               <h2 className="text-xl font-child text-gray-600 mt-4 mb-2">
