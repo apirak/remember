@@ -3,6 +3,7 @@
 
 import React, { useState, useEffect } from "react";
 import EmojiText from "../EmojiSVG";
+import { useFlashcard } from "../../contexts/FlashcardContext";
 
 // Type definitions for card set data structure
 interface CardSet {
@@ -12,6 +13,7 @@ interface CardSet {
   cover: string; // emoji
   cardCount: number;
   progress: number; // 0-100 percentage
+  dataFile: string; // JSON file containing the card data
 }
 
 // Navigation type to match existing patterns
@@ -22,6 +24,9 @@ interface CardSetSelectionProps {
 }
 
 const CardSetSelection: React.FC<CardSetSelectionProps> = ({ onNavigate }) => {
+  // Access FlashcardContext to set the current card set
+  const { setCurrentCardSet } = useFlashcard();
+
   // State for loading card sets from JSON
   const [cardSets, setCardSets] = useState<CardSet[]>([]);
 
@@ -41,6 +46,7 @@ const CardSetSelection: React.FC<CardSetSelectionProps> = ({ onNavigate }) => {
           cover: item.cover,
           cardCount: item.cardCount,
           progress: 0, // Default progress for now
+          dataFile: item.dataFile,
         }));
 
         setCardSets(transformedCardSets);
@@ -67,11 +73,19 @@ const CardSetSelection: React.FC<CardSetSelectionProps> = ({ onNavigate }) => {
       progress: cardSet.progress,
     });
 
-    // For Step 3: Navigate back to dashboard after selection
-    // In Step 4, this will actually load the selected card set data
+    // Set the current card set in the context
+    setCurrentCardSet({
+      id: cardSet.id,
+      name: cardSet.name,
+      cover: cardSet.cover,
+      dataFile: cardSet.dataFile,
+    });
+
     console.log(
-      `CardSetSelection: Navigating back to dashboard with selected set: ${cardSet.name}`
+      `CardSetSelection: Set current card set to ${cardSet.name} (${cardSet.dataFile})`
     );
+
+    // Navigate back to dashboard to see the updated card set
     onNavigate("dashboard");
   };
 

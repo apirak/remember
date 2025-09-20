@@ -56,6 +56,14 @@ export interface FlashcardContextState {
   currentSession: ReviewSession | null;
   currentCard: Flashcard | null;
 
+  // Card set management
+  currentCardSet: {
+    id: string;
+    name: string;
+    cover: string;
+    dataFile: string;
+  } | null;
+
   // UI state
   isLoading: boolean;
   isShowingBack: boolean;
@@ -134,7 +142,17 @@ export type FlashcardAction =
       payload: "none" | "pending" | "in-progress" | "completed" | "failed";
     }
   // User authentication
-  | { type: "SET_USER"; payload: { user: any; isGuest: boolean } };
+  | { type: "SET_USER"; payload: { user: any; isGuest: boolean } }
+  // Card set management
+  | {
+      type: "SET_CURRENT_CARD_SET";
+      payload: {
+        id: string;
+        name: string;
+        cover: string;
+        dataFile: string;
+      } | null;
+    };
 
 // Review statistics for dashboard display
 export interface ReviewStats {

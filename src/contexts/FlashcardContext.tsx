@@ -44,6 +44,15 @@ const initialState: FlashcardContextState = {
   dueCards: [],
   currentSession: null,
   currentCard: null,
+
+  // Card set management - default to first card set
+  currentCardSet: {
+    id: "chinese_essentials_1",
+    name: "Chinese Essentials 1",
+    cover: "🇨🇳",
+    dataFile: "chinese_essentials_in_communication_1.json",
+  },
+
   isLoading: false,
   isShowingBack: false,
 
@@ -129,7 +138,8 @@ const flashcardReducer = (
     action.type === "REMOVE_PENDING_OPERATION" ||
     action.type === "RETRY_PENDING_OPERATIONS" ||
     action.type === "SET_MIGRATION_STATUS" ||
-    action.type === "SET_USER"
+    action.type === "SET_USER" ||
+    action.type === "SET_CURRENT_CARD_SET"
   ) {
     const appStateUpdates = appStateReducer(state, action as AppStateAction);
     return { ...state, ...appStateUpdates };
@@ -150,6 +160,7 @@ const FlashcardContext = createContext<{
 
   // Core action helpers for flashcard operations
   loadCards: (cards: Flashcard[]) => void;
+  loadCardSetData: (dataFile: string) => Promise<void>;
   startReviewSession: () => void;
   showCardBack: () => void;
   rateCard: (quality: number) => Promise<void>;
@@ -170,6 +181,14 @@ const FlashcardContext = createContext<{
   clearError: () => void;
   retryPendingOperations: () => void;
   setUser: (user: any, isGuest: boolean) => void;
+  setCurrentCardSet: (
+    cardSet: {
+      id: string;
+      name: string;
+      cover: string;
+      dataFile: string;
+    } | null
+  ) => void;
 
   // Firestore integration methods
   loadCardsFromFirestore: () => Promise<void>;
@@ -188,19 +207,68 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
   const [state, dispatch] = useReducer(flashcardReducer, initialState);
 
   /**
+   * Load flashcard data for a specific card set
+   */
+  const loadCardSetData = async (dataFile: string) => {
+    try {
+      console.log(`FlashcardContext: Loading card set data from ${dataFile}`);
+      dispatch({ type: "SET_LOADING", payload: true });
+
+      // Dynamically import the card set data file
+      const cardSetModule = await import(`../data/${dataFile}`);
+      const cardSetData = cardSetModule.default || cardSetModule;
+
+      // Transform raw data to include SM-2 parameters
+      const transformedCards = (cardSetData as FlashcardData[]).map(
+        transformFlashcardData
+      );
+
+      dispatch({ type: "LOAD_CARDS", payload: transformedCards });
+      console.log(
+        `FlashcardContext: Loaded ${transformedCards.length} cards from ${dataFile}`
+      );
+    } catch (error) {
+      console.error(
+        `FlashcardContext: Error loading card set data from ${dataFile}:`,
+        error
+      );
+      // Fallback to default data if loading fails
+      const transformedCards = (flashcardsData as FlashcardData[]).map(
+        transformFlashcardData
+      );
+      dispatch({ type: "LOAD_CARDS", payload: transformedCards });
+    }
+  };
+
+  /**
    * Load initial flashcard data on component mount
    * Transforms raw JSON data to include SM-2 algorithm parameters
    */
   useEffect(() => {
-    dispatch({ type: "SET_LOADING", payload: true });
-
-    // Transform raw data to include SM-2 parameters
-    const transformedCards = (flashcardsData as FlashcardData[]).map(
-      transformFlashcardData
-    );
-
-    dispatch({ type: "LOAD_CARDS", payload: transformedCards });
+    // Load data for the initial card set
+    if (state.currentCardSet?.dataFile) {
+      loadCardSetData(state.currentCardSet.dataFile);
+    } else {
+      // Fallback to default data
+      dispatch({ type: "SET_LOADING", payload: true });
+      const transformedCards = (flashcardsData as FlashcardData[]).map(
+        transformFlashcardData
+      );
+      dispatch({ type: "LOAD_CARDS", payload: transformedCards });
+    }
   }, []);
+
+  /**
+   * Load new card set data when currentCardSet changes
+   */
+  useEffect(() => {
+    if (state.currentCardSet?.dataFile) {
+      console.log(
+        `FlashcardContext: Card set changed to ${state.currentCardSet.name}, loading new data`
+      );
+      loadCardSetData(state.currentCardSet.dataFile);
+    }
+  }, [state.currentCardSet?.dataFile]);
 
   /**
    * Monitor authentication state changes and load appropriate data
@@ -339,6 +407,21 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
     migrateGuestDataToFirestore,
   } = firestoreOperations;
 
+  /**
+   * Set the current card set
+   */
+  const setCurrentCardSet = (
+    cardSet: {
+      id: string;
+      name: string;
+      cover: string;
+      dataFile: string;
+    } | null
+  ) => {
+    console.log("FlashcardContext: Setting current card set", cardSet);
+    dispatch({ type: "SET_CURRENT_CARD_SET", payload: cardSet });
+  };
+
   // Create complex action helpers using the factory function
   const flashcardActions = createFlashcardActions({
     state,
@@ -361,6 +444,7 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
     dispatch,
     // Core flashcard operations
     loadCards,
+    loadCardSetData,
     startReviewSession,
     showCardBack,
     rateCard,
@@ -377,6 +461,7 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
     clearError,
     retryPendingOperations,
     setUser,
+    setCurrentCardSet,
     // Firestore integration methods
     loadCardsFromFirestore,
     saveCardToFirestore,

@@ -35,7 +35,17 @@ export type AppStateAction =
       payload: "none" | "in-progress" | "completed" | "failed";
     }
   // User authentication
-  | { type: "SET_USER"; payload: { user: any; isGuest: boolean } };
+  | { type: "SET_USER"; payload: { user: any; isGuest: boolean } }
+  // Card set management
+  | {
+      type: "SET_CURRENT_CARD_SET";
+      payload: {
+        id: string;
+        name: string;
+        cover: string;
+        dataFile: string;
+      } | null;
+    };
 
 /**
  * App state reducer - handles all app state-related updates
@@ -128,6 +138,13 @@ export const appStateReducer = (
       return {
         user,
         isGuest,
+      };
+    }
+
+    // Card set management
+    case "SET_CURRENT_CARD_SET": {
+      return {
+        currentCardSet: action.payload,
       };
     }
 

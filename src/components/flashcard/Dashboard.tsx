@@ -92,9 +92,11 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
 
         {/* Header */}
         <div className="text-center mb-8">
-          <EmojiText size={128}>🎓</EmojiText>
+          <EmojiText size={128}>
+            {state.currentCardSet?.cover || "🎓"}
+          </EmojiText>
           <h1 className="mt-2 text-4xl font-child text-gray-600 mb-2">
-            103 Everyday Chinese!
+            {state.currentCardSet?.name || "Flashcards"}
           </h1>
           <p className="text-md font-rounded text-gray-600">
             Remember Everything with <br />
