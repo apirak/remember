@@ -19,6 +19,32 @@ const FlashcardAppContent: React.FC = () => {
   const { state } = useFlashcard();
   const [currentRoute, setCurrentRoute] = React.useState<AppRoute>("dashboard");
 
+  // Safe navigation handler with validation
+  const handleNavigation = React.useCallback(
+    (route: AppRoute) => {
+      console.log(
+        `FlashcardApp: Navigation requested to '${route}' from '${currentRoute}'`
+      );
+
+      // Validate route exists in AppRoute type
+      const validRoutes: AppRoute[] = [
+        "dashboard",
+        "review",
+        "complete",
+        "card-sets",
+      ];
+      if (!validRoutes.includes(route)) {
+        console.error(
+          `FlashcardApp: Invalid route '${route}', staying on current route`
+        );
+        return;
+      }
+
+      setCurrentRoute(route);
+    },
+    [currentRoute]
+  );
+
   // Auto-navigate based on session state
   React.useEffect(() => {
     console.log("FlashcardApp navigation check:", {
@@ -27,33 +53,50 @@ const FlashcardAppContent: React.FC = () => {
       currentRoute,
     });
 
+    // Only auto-navigate if there's an active session or session just completed
     if (state.currentSession) {
       if (state.currentSession.isComplete) {
         console.log("Session complete, navigating to complete screen");
-        setCurrentRoute("complete");
+        handleNavigation("complete");
       } else {
         console.log("Session active, navigating to review screen");
-        setCurrentRoute("review");
+        handleNavigation("review");
       }
-    } else {
-      console.log("No session, navigating to dashboard");
-      setCurrentRoute("dashboard");
+    } else if (currentRoute === "review" || currentRoute === "complete") {
+      // Only auto-navigate to dashboard if coming from review/complete routes
+      // Preserve manual navigation to card-sets route
+      console.log("No session, navigating from review/complete to dashboard");
+      handleNavigation("dashboard");
     }
-  }, [state.currentSession?.isComplete, state.currentSession]);
+    // Note: card-sets route is preserved for manual navigation
+  }, [
+    state.currentSession?.isComplete,
+    state.currentSession,
+    currentRoute,
+    handleNavigation,
+  ]);
 
   // Render current screen
   const renderCurrentScreen = () => {
+    console.log(`FlashcardApp: Rendering route '${currentRoute}'`);
+
     switch (currentRoute) {
       case "review":
-        return <Review onNavigate={setCurrentRoute} />;
+        return <Review onNavigate={handleNavigation} />;
       case "complete":
-        return <Completion onNavigate={setCurrentRoute} />;
+        return <Completion onNavigate={handleNavigation} />;
       case "card-sets":
         console.log("Navigating to card sets selection screen");
-        return <CardSetSelection onNavigate={setCurrentRoute} />;
+        return <CardSetSelection onNavigate={handleNavigation} />;
       case "dashboard":
+        return <Dashboard onNavigate={handleNavigation} />;
       default:
-        return <Dashboard onNavigate={setCurrentRoute} />;
+        // Defensive handling for invalid routes
+        console.warn(
+          `FlashcardApp: Unknown route '${currentRoute}', falling back to dashboard`
+        );
+        setCurrentRoute("dashboard");
+        return <Dashboard onNavigate={handleNavigation} />;
     }
   };
 

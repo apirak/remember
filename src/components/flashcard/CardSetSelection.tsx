@@ -59,11 +59,12 @@ const CardSetSelection: React.FC<CardSetSelectionProps> = ({ onNavigate }) => {
       progress: cardSet.progress,
     });
 
-    // TODO: In Step 4, this will actually load the card set
-    // For now, just show confirmation and navigate back
-    alert(
-      `Selected: ${cardSet.name}\n(${cardSet.cardCount} cards, ${cardSet.progress}% complete)`
+    // For Step 3: Navigate back to dashboard after selection
+    // In Step 4, this will actually load the selected card set data
+    console.log(
+      `CardSetSelection: Navigating back to dashboard with selected set: ${cardSet.name}`
     );
+    onNavigate("dashboard");
   };
 
   // Handle back navigation
