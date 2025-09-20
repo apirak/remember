@@ -80,7 +80,7 @@ const LoginButton: React.FC<LoginButtonProps> = () => {
     return (
       <div className="space-y-3">
         {/* User Profile */}
-        <div className="flex bg-green-50 rounded-xl border border-green-200">
+        <div className="flex bg-white/50 rounded-xl border border-green-200">
           <div className="flex-1 flex items-center space-x-3">
             {user.photoURL && (
               <img
@@ -91,7 +91,7 @@ const LoginButton: React.FC<LoginButtonProps> = () => {
             )}
             <div className="flex-1">
               <div className="text-sm font-rounded font-semibold text-green-800">
-                {user.displayName || user.email || "ผู้ใช้"}
+                {user.displayName || user.email || "Logged in"}
               </div>
             </div>
           </div>

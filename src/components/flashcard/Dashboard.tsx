@@ -80,7 +80,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
         {/* Stats Cards */}
         <div className="mb-8">
           {/* Total Cards - Main Focus */}
-          <div className="bg-gradient-to-br from-primary-50 to-primary-100 rounded-2xl p-6 mb-6 border border-primary-200">
+          <div className="bg-gradient-to-br from-primary-50 to-primary-100 rounded-2xl p-6 mb-3 border border-primary-200">
             <div className="text-center">
               <div className="text-4xl mb-2">📚</div>
               <div className="text-4xl font-bold font-child text-primary-600">
@@ -140,10 +140,11 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             onClick={handleStartReview}
             disabled={state.stats.dueCards === 0}
             className={`
-              w-full py-6 px-8 rounded-3xl font-bold font-child text-xl shadow-xl transform transition-all duration-200 border-4
+              w-full py-4 px-8 rounded-2xl font-bold font-child text-3xl 
+              transform transition-all duration-200
               ${
                 state.stats.dueCards > 0
-                  ? "bg-gradient-to-r from-primary-500 to-primary-600 text-white border-primary-700 hover:from-primary-600 hover:to-primary-700 hover:scale-105 hover:shadow-2xl active:scale-95 active:shadow-lg"
+                  ? "bg-gradient-to-r from-primary-500 to-primary-600 text-white hover:scale-[102%] hover:shadow-2xl hover:shadow-primary-500/30 active:scale-95 active:shadow-lg active:shadow-primary-500/20"
                   : "bg-gray-300 text-gray-500 border-gray-400 cursor-not-allowed"
               }
             `}
@@ -151,13 +152,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             {state.stats.dueCards > 0 ? (
               <div className="flex items-center justify-center">
                 <span className="text-2xl mr-3">🚀</span>
-                <span>
-                  Start Review ({Math.min(state.stats.dueCards, 20)}
-                  {state.stats.dueCards > 20
-                    ? ` of ${state.stats.dueCards}`
-                    : ""}{" "}
-                  cards)
-                </span>
+                <span>Start Review</span>
               </div>
             ) : (
               <div className="flex items-center justify-center">
@@ -166,6 +161,12 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
               </div>
             )}
           </button>
+
+          {state.stats.dueCards > 0 ? (
+            <div className="w-full text-center text-md text-primary-900">
+              {Math.min(state.stats.dueCards, 20)} cards ready for today.
+            </div>
+          ) : null}
 
           {/* Reset Progress Button */}
           <button
