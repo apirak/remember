@@ -1,1341 +1,1350 @@
-[
-  {
-    "id": "basic-ch-wo",
-    "front": {
-      "icon": "",
-      "title": "我",
-      "description": "wǒ"
-    },
-    "back": {
-      "icon": "👤",
-      "title": "I, me",
-      "description": "First-person singular pronoun."
-    }
-  },
-  {
-    "id": "basic-ch-shi",
-    "front": {
-      "icon": "",
-      "title": "是",
-      "description": "shì"
-    },
-    "back": {
-      "icon": "✅",
-      "title": "to be",
-      "description": "Verb indicating existence or identity."
-    }
-  },
-  {
-    "id": "basic-ch-ni",
-    "front": {
-      "icon": "",
-      "title": "你",
-      "description": "nǐ"
-    },
-    "back": {
-      "icon": "👥",
-      "title": "you",
-      "description": "Second-person pronoun (informal)."
-    }
-  },
-  {
-    "id": "basic-ch-hao",
-    "front": {
-      "icon": "",
-      "title": "好",
-      "description": "hǎo"
-    },
-    "back": {
-      "icon": "👍",
-      "title": "good, well",
-      "description": "Adjective indicating good quality or well-being."
-    }
-  },
-  {
-    "id": "basic-ch-nin",
-    "front": {
-      "icon": "",
-      "title": "您",
-      "description": "nín"
-    },
-    "back": {
-      "icon": "👑",
-      "title": "you (polite form)",
-      "description": "Polite second-person pronoun."
-    }
-  },
-  {
-    "id": "basic-ch-nimen",
-    "front": {
-      "icon": "",
-      "title": "你们",
-      "description": "nǐmen"
-    },
-    "back": {
-      "icon": "👨‍👩‍👧‍👦",
-      "title": "you (plural form)",
-      "description": "Plural second-person pronoun."
-    }
-  },
-  {
-    "id": "basic-ch-jiao",
-    "front": {
-      "icon": "",
-      "title": "叫",
-      "description": "jiào"
-    },
-    "back": {
-      "icon": "🗣️",
-      "title": "to be called as",
-      "description": "Verb used for naming or calling."
-    }
-  },
-  {
-    "id": "basic-ch-shenme",
-    "front": {
-      "icon": "",
-      "title": "什么",
-      "description": "shénme"
-    },
-    "back": {
-      "icon": "❓",
-      "title": "what",
-      "description": "Interrogative pronoun."
-    }
-  },
-  {
-    "id": "basic-ch-mingzi",
-    "front": {
-      "icon": "",
-      "title": "名字",
-      "description": "míngzi"
-    },
-    "back": {
-      "icon": "🏷️",
-      "title": "name",
-      "description": "Noun for a person's name."
-    }
-  },
-  {
-    "id": "basic-ch-ta-she",
-    "front": {
-      "icon": "",
-      "title": "她",
-      "description": "tā"
-    },
-    "back": {
-      "icon": "👩",
-      "title": "she, her",
-      "description": "Third-person pronoun (female)."
-    }
-  },
-  {
-    "id": "basic-ch-shei",
-    "front": {
-      "icon": "",
-      "title": "谁",
-      "description": "shéi"
-    },
-    "back": {
-      "icon": "❓",
-      "title": "who",
-      "description": "Interrogative pronoun."
-    }
-  },
-  {
-    "id": "basic-ch-ta-he",
-    "front": {
-      "icon": "",
-      "title": "他",
-      "description": "tā"
-    },
-    "back": {
-      "icon": "👨",
-      "title": "he, him",
-      "description": "Third-person pronoun (male)."
-    }
-  },
-  {
-    "id": "basic-ch-laoshi",
-    "front": {
-      "icon": "",
-      "title": "老师",
-      "description": "lǎoshī"
-    },
-    "back": {
-      "icon": "🧑‍🏫",
-      "title": "teacher",
-      "description": "Noun for the profession of a teacher."
-    }
-  },
-  {
-    "id": "basic-ch-duibuqi",
-    "front": {
-      "icon": "",
-      "title": "对不起",
-      "description": "duìbuqǐ"
-    },
-    "back": {
-      "icon": "😔",
-      "title": "I'm sorry",
-      "description": "Expression of apology."
-    }
-  },
-  {
-    "id": "basic-ch-meiguanxi",
-    "front": {
-      "icon": "",
-      "title": "没关系",
-      "description": "méi guānxi"
-    },
-    "back": {
-      "icon": "😌",
-      "title": "it doesn't matter",
-      "description": "Response to an apology."
-    }
-  },
-  {
-    "id": "basic-ch-wei",
-    "front": {
-      "icon": "",
-      "title": "喂",
-      "description": "wéi"
-    },
-    "back": {
-      "icon": "📞",
-      "title": "hello (on the phone)",
-      "description": "Greeting used when answering the phone."
-    }
-  },
-  {
-    "id": "basic-ch-xuesheng",
-    "front": {
-      "icon": "",
-      "title": "学生",
-      "description": "xuéshēng"
-    },
-    "back": {
-      "icon": "🧑‍🎓",
-      "title": "student",
-      "description": "Noun for a student or learner."
-    }
-  },
-  {
-    "id": "basic-ch-ma",
-    "front": {
-      "icon": "",
-      "title": "吗",
-      "description": "ma"
-    },
-    "back": {
-      "icon": "❓",
-      "title": "a particle used at the end of a question",
-      "description": "A question particle."
-    }
-  },
-  {
-    "id": "basic-ch-guixing",
-    "front": {
-      "icon": "",
-      "title": "贵姓",
-      "description": "guìxìng"
-    },
-    "back": {
-      "icon": "🏷️",
-      "title": "your surname (honorific)",
-      "description": "Polite way to ask for a person's surname."
-    }
-  },
-  {
-    "id": "basic-ch-xing",
-    "front": {
-      "icon": "",
-      "title": "姓",
-      "description": "xìng"
-    },
-    "back": {
-      "icon": "🏷️",
-      "title": "to be surnamed",
-      "description": "Verb for having a surname."
-    }
-  },
-  {
-    "id": "basic-ch-qingwen",
-    "front": {
-      "icon": "",
-      "title": "请问",
-      "description": "qǐngwèn"
-    },
-    "back": {
-      "icon": "🙋‍♂️",
-      "title": "may I ask",
-      "description": "Polite phrase to start a question."
-    }
-  },
-  {
-    "id": "basic-ch-qing",
-    "front": {
-      "icon": "",
-      "title": "请",
-      "description": "qǐng"
-    },
-    "back": {
-      "icon": "🤲",
-      "title": "please",
-      "description": "Verb used for a polite request."
-    }
-  },
-  {
-    "id": "basic-ch-wen",
-    "front": {
-      "icon": "",
-      "title": "问",
-      "description": "wèn"
-    },
-    "back": {
-      "icon": "🗣️",
-      "title": "to ask",
-      "description": "Verb for asking a question."
-    }
-  },
-  {
-    "id": "basic-ch-renshi",
-    "front": {
-      "icon": "",
-      "title": "认识",
-      "description": "rènshi"
-    },
-    "back": {
-      "icon": "🤝",
-      "title": "to know (a person)",
-      "description": "Verb for knowing a person."
-    }
-  },
-  {
-    "id": "basic-ch-hen",
-    "front": {
-      "icon": "",
-      "title": "很",
-      "description": "hěn"
-    },
-    "back": {
-      "icon": "➕",
-      "title": "very, quite",
-      "description": "Adverb of degree."
-    }
-  },
-  {
-    "id": "basic-ch-gaoxing",
-    "front": {
-      "icon": "",
-      "title": "高兴",
-      "description": "gāoxìng"
-    },
-    "back": {
-      "icon": "😊",
-      "title": "happy",
-      "description": "Adjective expressing happiness."
-    }
-  },
-  {
-    "id": "basic-ch-ye",
-    "front": {
-      "icon": "",
-      "title": "也",
-      "description": "yě"
-    },
-    "back": {
-      "icon": "➡️",
-      "title": "too, also, as well",
-      "description": "Adverb indicating inclusion."
-    }
-  },
-  {
-    "id": "basic-ch-jieshao",
-    "front": {
-      "icon": "",
-      "title": "介绍",
-      "description": "jièshào"
-    },
-    "back": {
-      "icon": "🗣️",
-      "title": "to introduce",
-      "description": "Verb for introducing people."
-    }
-  },
-  {
-    "id": "basic-ch-lai",
-    "front": {
-      "icon": "",
-      "title": "来",
-      "description": "lái"
-    },
-    "back": {
-      "icon": "🚶‍♂️",
-      "title": "to come",
-      "description": "Verb indicating movement towards the speaker."
-    }
-  },
-  {
-    "id": "basic-ch-yixia",
-    "front": {
-      "icon": "",
-      "title": "一下",
-      "description": "yíxià"
-    },
-    "back": {
-      "icon": "⏳",
-      "title": "once, for a bit",
-      "description": "Suffix indicating a brief action."
-    }
-  },
-  {
-    "id": "basic-ch-xingming",
-    "front": {
-      "icon": "",
-      "title": "姓名",
-      "description": "xìngmíng"
-    },
-    "back": {
-      "icon": "🏷️",
-      "title": "full name",
-      "description": "Noun for a person's full name."
-    }
-  },
-  {
-    "id": "basic-ch-guoji",
-    "front": {
-      "icon": "",
-      "title": "国籍",
-      "description": "guójí"
-    },
-    "back": {
-      "icon": "🌍",
-      "title": "nationality",
-      "description": "Noun for one's nationality."
-    }
-  },
-  {
-    "id": "basic-ch-zai",
-    "front": {
-      "icon": "",
-      "title": "再",
-      "description": "zài"
-    },
-    "back": {
-      "icon": "🔄",
-      "title": "again, once more",
-      "description": "Adverb indicating repetition."
-    }
-  },
-  {
-    "id": "basic-ch-shuo",
-    "front": {
-      "icon": "",
-      "title": "说",
-      "description": "shuō"
-    },
-    "back": {
-      "icon": "🗣️",
-      "title": "to say, to speak",
-      "description": "Verb for speaking."
-    }
-  },
-  {
-    "id": "basic-ch-yi",
-    "front": {
-      "icon": "",
-      "title": "一",
-      "description": "yī"
-    },
-    "back": {
-      "icon": "1️⃣",
-      "title": "one",
-      "description": "The number one."
-    }
-  },
-  {
-    "id": "basic-ch-bian",
-    "front": {
-      "icon": "",
-      "title": "遍",
-      "description": "biàn"
-    },
-    "back": {
-      "icon": "🔄",
-      "title": "measure word for actions, a time",
-      "description": "Measure word for the number of times an action is performed."
-    }
-  },
-  {
-    "id": "basic-ch-na",
-    "front": {
-      "icon": "",
-      "title": "哪",
-      "description": "nǎ"
-    },
-    "back": {
-      "icon": "❓",
-      "title": "which, where",
-      "description": "Interrogative pronoun."
-    }
-  },
-  {
-    "id": "basic-ch-guo",
-    "front": {
-      "icon": "",
-      "title": "国",
-      "description": "guó"
-    },
-    "back": {
-      "icon": "🗺️",
-      "title": "country, state",
-      "description": "Noun for a country."
-    }
-  },
-  {
-    "id": "basic-ch-ren",
-    "front": {
-      "icon": "",
-      "title": "人",
-      "description": "rén"
-    },
-    "back": {
-      "icon": "🧑",
-      "title": "person, people",
-      "description": "Noun for a person."
-    }
-  },
-  {
-    "id": "basic-ch-de",
-    "front": {
-      "icon": "",
-      "title": "的",
-      "description": "de"
-    },
-    "back": {
-      "icon": "🔗",
-      "title": "a particle indicating possession or a descriptive phrase",
-      "description": "Possessive particle."
-    }
-  },
-  {
-    "id": "basic-ch-huzhao",
-    "front": {
-      "icon": "",
-      "title": "护照",
-      "description": "hùzhào"
-    },
-    "back": {
-      "icon": "🛂",
-      "title": "passport",
-      "description": "Noun for a passport."
-    }
-  },
-  {
-    "id": "basic-ch-gei",
-    "front": {
-      "icon": "",
-      "title": "给",
-      "description": "gěi"
-    },
-    "back": {
-      "icon": "🎁",
-      "title": "to give",
-      "description": "Verb for giving."
-    }
-  },
-  {
-    "id": "basic-ch-xiexie",
-    "front": {
-      "icon": "",
-      "title": "谢谢",
-      "description": "xièxie"
-    },
-    "back": {
-      "icon": "🙏",
-      "title": "to thank, thanks",
-      "description": "Expression of gratitude."
-    }
-  },
-  {
-    "id": "basic-ch-baba",
-    "front": {
-      "icon": "",
-      "title": "爸爸",
-      "description": "bàba"
-    },
-    "back": {
-      "icon": "👨‍🦳",
-      "title": "dad, father",
-      "description": "Noun for father."
-    }
-  },
-  {
-    "id": "basic-ch-mama",
-    "front": {
-      "icon": "",
-      "title": "妈妈",
-      "description": "māma"
-    },
-    "back": {
-      "icon": "👩‍🦳",
-      "title": "mom, mother",
-      "description": "Noun for mother."
-    }
-  },
-  {
-    "id": "basic-ch-difang",
-    "front": {
-      "icon": "",
-      "title": "地方",
-      "description": "dìfāng"
-    },
-    "back": {
-      "icon": "📍",
-      "title": "place",
-      "description": "Noun for a location."
-    }
-  },
-  {
-    "id": "basic-ch-cong",
-    "front": {
-      "icon": "",
-      "title": "从",
-      "description": "cóng"
-    },
-    "back": {
-      "icon": "➡️",
-      "title": "from",
-      "description": "Preposition indicating origin."
-    }
-  },
-  {
-    "id": "basic-ch-dan",
-    "front": {
-      "icon": "",
-      "title": "但",
-      "description": "dàn"
-    },
-    "back": {
-      "icon": "↔️",
-      "title": "but",
-      "description": "Conjunction showing contrast."
-    }
-  },
-  {
-    "id": "basic-ch-o",
-    "front": {
-      "icon": "",
-      "title": "哦",
-      "description": "ò"
-    },
-    "back": {
-      "icon": "💡",
-      "title": "oh (expressing realization or understanding)",
-      "description": "Interjection for realization."
-    }
-  },
-  {
-    "id": "basic-ch-ba",
-    "front": {
-      "icon": "",
-      "title": "吧",
-      "description": "ba"
-    },
-    "back": {
-      "icon": "🤔",
-      "title": "a particle used at the end of a question or suggestion",
-      "description": "Particle for suggestions or mild questions."
-    }
-  },
-  {
-    "id": "basic-ch-bu",
-    "front": {
-      "icon": "",
-      "title": "不",
-      "description": "bù"
-    },
-    "back": {
-      "icon": "❌",
-      "title": "no, not",
-      "description": "Adverb of negation."
-    }
-  },
-  {
-    "id": "basic-ch-meitian",
-    "front": {
-      "icon": "",
-      "title": "每天",
-      "description": "měitiān"
-    },
-    "back": {
-      "icon": "📅",
-      "title": "every day",
-      "description": "Noun phrase for daily time."
-    }
-  },
-  {
-    "id": "basic-ch-tian",
-    "front": {
-      "icon": "",
-      "title": "天",
-      "description": "tiān"
-    },
-    "back": {
-      "icon": "☀️",
-      "title": "day",
-      "description": "Noun for a day."
-    }
-  },
-  {
-    "id": "basic-ch-tushuguan",
-    "front": {
-      "icon": "",
-      "title": "图书馆",
-      "description": "túshūguǎn"
-    },
-    "back": {
-      "icon": "📚",
-      "title": "library",
-      "description": "Noun for a library."
-    }
-  },
-  {
-    "id": "basic-ch-xiawu",
-    "front": {
-      "icon": "",
-      "title": "下午",
-      "description": "xiàwǔ"
-    },
-    "back": {
-      "icon": "🌆",
-      "title": "afternoon",
-      "description": "Noun for the afternoon."
-    }
-  },
-  {
-    "id": "basic-ch-gongzuo",
-    "front": {
-      "icon": "",
-      "title": "工作",
-      "description": "gōngzuò"
-    },
-    "back": {
-      "icon": "💼",
-      "title": "to work, job",
-      "description": "Verb for working or a noun for a job."
-    }
-  },
-  {
-    "id": "basic-ch-zai-at",
-    "front": {
-      "icon": "",
-      "title": "在",
-      "description": "zài"
-    },
-    "back": {
-      "icon": "📍",
-      "title": "at, in, on",
-      "description": "Preposition of location."
-    }
-  },
-  {
-    "id": "basic-ch-nar",
-    "front": {
-      "icon": "",
-      "title": "哪儿",
-      "description": "nǎr"
-    },
-    "back": {
-      "icon": "❓",
-      "title": "where",
-      "description": "Interrogative pronoun."
-    }
-  },
-  {
-    "id": "basic-ch-jia",
-    "front": {
-      "icon": "",
-      "title": "家",
-      "description": "jiā"
-    },
-    "back": {
-      "icon": "🏠",
-      "title": "home (measure word for companies, stores)",
-      "description": "Noun for a home or family."
-    }
-  },
-  {
-    "id": "basic-ch-gongsi",
-    "front": {
-      "icon": "",
-      "title": "公司",
-      "description": "gōngsī"
-    },
-    "back": {
-      "icon": "🏢",
-      "title": "company",
-      "description": "Noun for a company."
-    }
-  },
-  {
-    "id": "basic-ch-bumenjingli",
-    "front": {
-      "icon": "",
-      "title": "部门经理",
-      "description": "bùmén jīnglǐ"
-    },
-    "back": {
-      "icon": "👨‍💼",
-      "title": "department manager",
-      "description": "Noun for a job title."
-    }
-  },
-  {
-    "id": "basic-ch-zuo",
-    "front": {
-      "icon": "",
-      "title": "做",
-      "description": "zuò"
-    },
-    "back": {
-      "icon": "🛠️",
-      "title": "to do, to make",
-      "description": "Verb for doing or making."
-    }
-  },
-  {
-    "id": "basic-ch-zhiyuan",
-    "front": {
-      "icon": "",
-      "title": "职员",
-      "description": "zhíyuán"
-    },
-    "back": {
-      "icon": "🧑‍💼",
-      "title": "clerk",
-      "description": "Noun for a clerk or office worker."
-    }
-  },
-  {
-    "id": "basic-ch-jizhe",
-    "front": {
-      "icon": "",
-      "title": "记者",
-      "description": "jìzhě"
-    },
-    "back": {
-      "icon": "✍️",
-      "title": "reporter",
-      "description": "Noun for a reporter."
-    }
-  },
-  {
-    "id": "basic-ch-xihuan",
-    "front": {
-      "icon": "",
-      "title": "喜欢",
-      "description": "xǐhuan"
-    },
-    "back": {
-      "icon": "💖",
-      "title": "to like",
-      "description": "Verb for expressing a preference."
-    }
-  },
-  {
-    "id": "basic-ch-zhege",
-    "front": {
-      "icon": "",
-      "title": "这个",
-      "description": "zhège"
-    },
-    "back": {
-      "icon": "👉",
-      "title": "this one",
-      "description": "Demonstrative pronoun."
-    }
-  },
-  {
-    "id": "basic-ch-xianzai",
-    "front": {
-      "icon": "",
-      "title": "现在",
-      "description": "xiànzài"
-    },
-    "back": {
-      "icon": "⏰",
-      "title": "now",
-      "description": "Noun for the present time."
-    }
-  },
-  {
-    "id": "basic-ch-hua",
-    "front": {
-      "icon": "",
-      "title": "画",
-      "description": "huà"
-    },
-    "back": {
-      "icon": "🎨",
-      "title": "to paint, painting",
-      "description": "Verb for painting or a noun for a painting."
-    }
-  },
-  {
-    "id": "basic-ch-a",
-    "front": {
-      "icon": "",
-      "title": "啊",
-      "description": "à"
-    },
-    "back": {
-      "icon": "😮",
-      "title": "aha (expressing sudden realization)",
-      "description": "Interjection showing sudden realization."
-    }
-  },
-  {
-    "id": "basic-ch-ge",
-    "front": {
-      "icon": "",
-      "title": "个",
-      "description": "gè"
-    },
-    "back": {
-      "icon": "🔢",
-      "title": "a general measure word",
-      "description": "A common measure word."
-    }
-  },
-  {
-    "id": "basic-ch-huajia",
-    "front": {
-      "icon": "",
-      "title": "画家",
-      "description": "huàjiā"
-    },
-    "back": {
-      "icon": "👨‍🎨",
-      "title": "painter, artist",
-      "description": "Noun for a painter."
-    }
-  },
-  {
-    "id": "basic-ch-xiaopengyou",
-    "front": {
-      "icon": "",
-      "title": "小朋友",
-      "description": "xiǎopéngyǒu"
-    },
-    "back": {
-      "icon": "👧",
-      "title": "little friend",
-      "description": "Noun for a child."
-    }
-  },
-  {
-    "id": "basic-ch-ji",
-    "front": {
-      "icon": "",
-      "title": "几",
-      "description": "jǐ"
-    },
-    "back": {
-      "icon": "❓",
-      "title": "how many, several",
-      "description": "Interrogative adverb."
-    }
-  },
-  {
-    "id": "basic-ch-sui",
-    "front": {
-      "icon": "",
-      "title": "岁",
-      "description": "suì"
-    },
-    "back": {
-      "icon": "🎂",
-      "title": "measure word for age, years old",
-      "description": "Measure word for a person's age."
-    }
-  },
-  {
-    "id": "basic-ch-cai",
-    "front": {
-      "icon": "",
-      "title": "猜",
-      "description": "cāi"
-    },
-    "back": {
-      "icon": "❓",
-      "title": "to guess",
-      "description": "Verb for guessing."
-    }
-  },
-  {
-    "id": "basic-ch-dui",
-    "front": {
-      "icon": "",
-      "title": "对",
-      "description": "duì"
-    },
-    "back": {
-      "icon": "✅",
-      "title": "correct, right",
-      "description": "Adjective indicating correctness."
-    }
-  },
-  {
-    "id": "basic-ch-ayi",
-    "front": {
-      "icon": "",
-      "title": "阿姨",
-      "description": "āyí"
-    },
-    "back": {
-      "icon": "👩",
-      "title": "aunt, aunty",
-      "description": "Term of address for an older woman."
-    }
-  },
-  {
-    "id": "basic-ch-duoda",
-    "front": {
-      "icon": "",
-      "title": "多大",
-      "description": "duō dà"
-    },
-    "back": {
-      "icon": "❓",
-      "title": "how old",
-      "description": "Question about age."
-    }
-  },
-  {
-    "id": "basic-ch-duo",
-    "front": {
-      "icon": "",
-      "title": "多",
-      "description": "duō"
-    },
-    "back": {
-      "icon": "➕",
-      "title": "how, many, much",
-      "description": "Adverb indicating quantity or degree."
-    }
-  },
-  {
-    "id": "basic-ch-da",
-    "front": {
-      "icon": "",
-      "title": "大",
-      "description": "dà"
-    },
-    "back": {
-      "icon": "🐘",
-      "title": "big, old",
-      "description": "Adjective for size or age."
-    }
-  },
-  {
-    "id": "basic-ch-zhe",
-    "front": {
-      "icon": "",
-      "title": "这",
-      "description": "zhè"
-    },
-    "back": {
-      "icon": "👉",
-      "title": "this",
-      "description": "Demonstrative pronoun."
-    }
-  },
-  {
-    "id": "basic-ch-mimi",
-    "front": {
-      "icon": "",
-      "title": "秘密",
-      "description": "mìmì"
-    },
-    "back": {
-      "icon": "🤫",
-      "title": "secret",
-      "description": "Noun for a secret."
-    }
-  },
-  {
-    "id": "basic-ch-dama",
-    "front": {
-      "icon": "",
-      "title": "大妈",
-      "description": "dàmā"
-    },
-    "back": {
-      "icon": "👵",
-      "title": "elderly woman, aunt",
-      "description": "Term of address for a middle-aged to elderly woman."
-    }
-  },
-  {
-    "id": "basic-ch-jingju",
-    "front": {
-      "icon": "",
-      "title": "京剧",
-      "description": "jīngjù"
-    },
-    "back": {
-      "icon": "🎭",
-      "title": "Peking opera",
-      "description": "Noun for the art form of Peking opera."
-    }
-  },
-  {
-    "id": "basic-ch-shengyin",
-    "front": {
-      "icon": "",
-      "title": "声音",
-      "description": "shēngyīn"
-    },
-    "back": {
-      "icon": "🔊",
-      "title": "voice",
-      "description": "Noun for voice or sound."
-    }
-  },
-  {
-    "id": "basic-ch-zhen",
-    "front": {
-      "icon": "",
-      "title": "真",
-      "description": "zhēn"
-    },
-    "back": {
-      "icon": "✨",
-      "title": "really",
-      "description": "Adverb for emphasis."
-    }
-  },
-  {
-    "id": "basic-ch-haoting",
-    "front": {
-      "icon": "",
-      "title": "好听",
-      "description": "hǎotīng"
-    },
-    "back": {
-      "icon": "🎧",
-      "title": "pleasant to hear, sounds nice",
-      "description": "Adjective describing a nice sound."
-    }
-  },
-  {
-    "id": "basic-ch-nianji",
-    "front": {
-      "icon": "",
-      "title": "年纪",
-      "description": "niánjì"
-    },
-    "back": {
-      "icon": "🎂",
-      "title": "age",
-      "description": "Noun for a person's age."
-    }
-  },
-  {
-    "id": "basic-ch-waipo",
-    "front": {
-      "icon": "",
-      "title": "外婆",
-      "description": "wàipó"
-    },
-    "back": {
-      "icon": "👵",
-      "title": "grandmother (mother's mother)",
-      "description": "Noun for maternal grandmother."
-    }
-  },
-  {
-    "id": "basic-ch-kan",
-    "front": {
-      "icon": "",
-      "title": "看",
-      "description": "kàn"
-    },
-    "back": {
-      "icon": "👀",
-      "title": "to look, to watch",
-      "description": "Verb for seeing or watching."
-    }
-  },
-  {
-    "id": "basic-ch-keyi",
-    "front": {
-      "icon": "",
-      "title": "可以",
-      "description": "kěyǐ"
-    },
-    "back": {
-      "icon": "🆗",
-      "title": "can, may",
-      "description": "Modal verb indicating ability or permission."
-    }
-  },
-  {
-    "id": "basic-ch-shi-matter",
-    "front": {
-      "icon": "",
-      "title": "事",
-      "description": "shì"
-    },
-    "back": {
-      "icon": "📝",
-      "title": "business, matter",
-      "description": "Noun for a matter or affair."
-    }
-  },
-  {
-    "id": "basic-ch-xiang",
-    "front": {
-      "icon": "",
-      "title": "想",
-      "description": "xiǎng"
-    },
-    "back": {
-      "icon": "🧠",
-      "title": "to want, to think",
-      "description": "Verb for wanting or thinking."
-    }
-  },
-  {
-    "id": "basic-ch-jianshen",
-    "front": {
-      "icon": "",
-      "title": "健身",
-      "description": "jiànshēn"
-    },
-    "back": {
-      "icon": "🏋️",
-      "title": "to keep fit, to exercise",
-      "description": "Verb for exercising."
-    }
-  },
-  {
-    "id": "basic-ch-jinnian",
-    "front": {
-      "icon": "",
-      "title": "今年",
-      "description": "jīnnián"
-    },
-    "back": {
-      "icon": "🗓️",
-      "title": "this year",
-      "description": "Noun for the current year."
-    }
-  },
-  {
-    "id": "basic-ch-nu",
-    "front": {
-      "icon": "",
-      "title": "女",
-      "description": "nǚ"
-    },
-    "back": {
-      "icon": "♀️",
-      "title": "female",
-      "description": "Adjective for the female gender."
-    }
-  },
-  {
-    "id": "basic-ch-xingqiliu",
-    "front": {
-      "icon": "",
-      "title": "星期六",
-      "description": "xīngqīliù"
-    },
-    "back": {
-      "icon": "🗓️",
-      "title": "Saturday",
-      "description": "Noun for a day of the week."
-    }
-  },
-  {
-    "id": "basic-ch-shangwu",
-    "front": {
-      "icon": "",
-      "title": "上午",
-      "description": "shàngwǔ"
-    },
-    "back": {
-      "icon": "🌅",
-      "title": "morning, AM",
-      "description": "Noun for the morning time."
-    }
-  },
-  {
-    "id": "basic-ch-dajia",
-    "front": {
-      "icon": "",
-      "title": "大家",
-      "description": "dàjiā"
-    },
-    "back": {
-      "icon": "👥",
-      "title": "everybody",
-      "description": "Pronoun for all people."
-    }
-  },
-  {
-    "id": "basic-ch-jiaolian",
-    "front": {
-      "icon": "",
-      "title": "教练",
-      "description": "jiàoliàn"
-    },
-    "back": {
-      "icon": "🧑‍💼",
-      "title": "coach",
-      "description": "Noun for a coach or instructor."
-    }
-  },
-  {
-    "id": "basic-ch-hushi",
-    "front": {
-      "icon": "",
-      "title": "护士",
-      "description": "hùshì"
-    },
-    "back": {
-      "icon": "🩺",
-      "title": "nurse",
-      "description": "Noun for a nurse."
-    }
-  },
-  {
-    "id": "basic-ch-mishu",
-    "front": {
-      "icon": "",
-      "title": "秘书",
-      "description": "mìshū"
-    },
-    "back": {
-      "icon": "👩‍💼",
-      "title": "secretary",
-      "description": "Noun for a secretary."
-    }
-  },
-  {
-    "id": "basic-ch-daxuesheng",
-    "front": {
-      "icon": "",
-      "title": "大学生",
-      "description": "dàxuéshēng"
-    },
-    "back": {
-      "icon": "🧑‍🎓",
-      "title": "college student",
-      "description": "Noun for a university student."
-    }
-  }
-]
+{
+  "metadata": {
+    "id": "chinese_essentials_1",
+    "name": "Chinese Essentials 1",
+    "description": "Basic everyday communication",
+    "cover": "🇨🇳",
+    "cardCount": 103
+  },
+  "cards": [
+    {
+      "id": "basic-ch-wo",
+      "front": {
+        "icon": "",
+        "title": "我",
+        "description": "wǒ"
+      },
+      "back": {
+        "icon": "👤",
+        "title": "I, me",
+        "description": "First-person singular pronoun."
+      }
+    },
+    {
+      "id": "basic-ch-shi",
+      "front": {
+        "icon": "",
+        "title": "是",
+        "description": "shì"
+      },
+      "back": {
+        "icon": "✅",
+        "title": "to be",
+        "description": "Verb indicating existence or identity."
+      }
+    },
+    {
+      "id": "basic-ch-ni",
+      "front": {
+        "icon": "",
+        "title": "你",
+        "description": "nǐ"
+      },
+      "back": {
+        "icon": "👥",
+        "title": "you",
+        "description": "Second-person pronoun (informal)."
+      }
+    },
+    {
+      "id": "basic-ch-hao",
+      "front": {
+        "icon": "",
+        "title": "好",
+        "description": "hǎo"
+      },
+      "back": {
+        "icon": "👍",
+        "title": "good, well",
+        "description": "Adjective indicating good quality or well-being."
+      }
+    },
+    {
+      "id": "basic-ch-nin",
+      "front": {
+        "icon": "",
+        "title": "您",
+        "description": "nín"
+      },
+      "back": {
+        "icon": "👑",
+        "title": "you (polite form)",
+        "description": "Polite second-person pronoun."
+      }
+    },
+    {
+      "id": "basic-ch-nimen",
+      "front": {
+        "icon": "",
+        "title": "你们",
+        "description": "nǐmen"
+      },
+      "back": {
+        "icon": "👨‍👩‍👧‍👦",
+        "title": "you (plural form)",
+        "description": "Plural second-person pronoun."
+      }
+    },
+    {
+      "id": "basic-ch-jiao",
+      "front": {
+        "icon": "",
+        "title": "叫",
+        "description": "jiào"
+      },
+      "back": {
+        "icon": "🗣️",
+        "title": "to be called as",
+        "description": "Verb used for naming or calling."
+      }
+    },
+    {
+      "id": "basic-ch-shenme",
+      "front": {
+        "icon": "",
+        "title": "什么",
+        "description": "shénme"
+      },
+      "back": {
+        "icon": "❓",
+        "title": "what",
+        "description": "Interrogative pronoun."
+      }
+    },
+    {
+      "id": "basic-ch-mingzi",
+      "front": {
+        "icon": "",
+        "title": "名字",
+        "description": "míngzi"
+      },
+      "back": {
+        "icon": "🏷️",
+        "title": "name",
+        "description": "Noun for a person's name."
+      }
+    },
+    {
+      "id": "basic-ch-ta-she",
+      "front": {
+        "icon": "",
+        "title": "她",
+        "description": "tā"
+      },
+      "back": {
+        "icon": "👩",
+        "title": "she, her",
+        "description": "Third-person pronoun (female)."
+      }
+    },
+    {
+      "id": "basic-ch-shei",
+      "front": {
+        "icon": "",
+        "title": "谁",
+        "description": "shéi"
+      },
+      "back": {
+        "icon": "❓",
+        "title": "who",
+        "description": "Interrogative pronoun."
+      }
+    },
+    {
+      "id": "basic-ch-ta-he",
+      "front": {
+        "icon": "",
+        "title": "他",
+        "description": "tā"
+      },
+      "back": {
+        "icon": "👨",
+        "title": "he, him",
+        "description": "Third-person pronoun (male)."
+      }
+    },
+    {
+      "id": "basic-ch-laoshi",
+      "front": {
+        "icon": "",
+        "title": "老师",
+        "description": "lǎoshī"
+      },
+      "back": {
+        "icon": "🧑‍🏫",
+        "title": "teacher",
+        "description": "Noun for the profession of a teacher."
+      }
+    },
+    {
+      "id": "basic-ch-duibuqi",
+      "front": {
+        "icon": "",
+        "title": "对不起",
+        "description": "duìbuqǐ"
+      },
+      "back": {
+        "icon": "😔",
+        "title": "I'm sorry",
+        "description": "Expression of apology."
+      }
+    },
+    {
+      "id": "basic-ch-meiguanxi",
+      "front": {
+        "icon": "",
+        "title": "没关系",
+        "description": "méi guānxi"
+      },
+      "back": {
+        "icon": "😌",
+        "title": "it doesn't matter",
+        "description": "Response to an apology."
+      }
+    },
+    {
+      "id": "basic-ch-wei",
+      "front": {
+        "icon": "",
+        "title": "喂",
+        "description": "wéi"
+      },
+      "back": {
+        "icon": "📞",
+        "title": "hello (on the phone)",
+        "description": "Greeting used when answering the phone."
+      }
+    },
+    {
+      "id": "basic-ch-xuesheng",
+      "front": {
+        "icon": "",
+        "title": "学生",
+        "description": "xuéshēng"
+      },
+      "back": {
+        "icon": "🧑‍🎓",
+        "title": "student",
+        "description": "Noun for a student or learner."
+      }
+    },
+    {
+      "id": "basic-ch-ma",
+      "front": {
+        "icon": "",
+        "title": "吗",
+        "description": "ma"
+      },
+      "back": {
+        "icon": "❓",
+        "title": "a particle used at the end of a question",
+        "description": "A question particle."
+      }
+    },
+    {
+      "id": "basic-ch-guixing",
+      "front": {
+        "icon": "",
+        "title": "贵姓",
+        "description": "guìxìng"
+      },
+      "back": {
+        "icon": "🏷️",
+        "title": "your surname (honorific)",
+        "description": "Polite way to ask for a person's surname."
+      }
+    },
+    {
+      "id": "basic-ch-xing",
+      "front": {
+        "icon": "",
+        "title": "姓",
+        "description": "xìng"
+      },
+      "back": {
+        "icon": "🏷️",
+        "title": "to be surnamed",
+        "description": "Verb for having a surname."
+      }
+    },
+    {
+      "id": "basic-ch-qingwen",
+      "front": {
+        "icon": "",
+        "title": "请问",
+        "description": "qǐngwèn"
+      },
+      "back": {
+        "icon": "🙋‍♂️",
+        "title": "may I ask",
+        "description": "Polite phrase to start a question."
+      }
+    },
+    {
+      "id": "basic-ch-qing",
+      "front": {
+        "icon": "",
+        "title": "请",
+        "description": "qǐng"
+      },
+      "back": {
+        "icon": "🤲",
+        "title": "please",
+        "description": "Verb used for a polite request."
+      }
+    },
+    {
+      "id": "basic-ch-wen",
+      "front": {
+        "icon": "",
+        "title": "问",
+        "description": "wèn"
+      },
+      "back": {
+        "icon": "🗣️",
+        "title": "to ask",
+        "description": "Verb for asking a question."
+      }
+    },
+    {
+      "id": "basic-ch-renshi",
+      "front": {
+        "icon": "",
+        "title": "认识",
+        "description": "rènshi"
+      },
+      "back": {
+        "icon": "🤝",
+        "title": "to know (a person)",
+        "description": "Verb for knowing a person."
+      }
+    },
+    {
+      "id": "basic-ch-hen",
+      "front": {
+        "icon": "",
+        "title": "很",
+        "description": "hěn"
+      },
+      "back": {
+        "icon": "➕",
+        "title": "very, quite",
+        "description": "Adverb of degree."
+      }
+    },
+    {
+      "id": "basic-ch-gaoxing",
+      "front": {
+        "icon": "",
+        "title": "高兴",
+        "description": "gāoxìng"
+      },
+      "back": {
+        "icon": "😊",
+        "title": "happy",
+        "description": "Adjective expressing happiness."
+      }
+    },
+    {
+      "id": "basic-ch-ye",
+      "front": {
+        "icon": "",
+        "title": "也",
+        "description": "yě"
+      },
+      "back": {
+        "icon": "➡️",
+        "title": "too, also, as well",
+        "description": "Adverb indicating inclusion."
+      }
+    },
+    {
+      "id": "basic-ch-jieshao",
+      "front": {
+        "icon": "",
+        "title": "介绍",
+        "description": "jièshào"
+      },
+      "back": {
+        "icon": "🗣️",
+        "title": "to introduce",
+        "description": "Verb for introducing people."
+      }
+    },
+    {
+      "id": "basic-ch-lai",
+      "front": {
+        "icon": "",
+        "title": "来",
+        "description": "lái"
+      },
+      "back": {
+        "icon": "🚶‍♂️",
+        "title": "to come",
+        "description": "Verb indicating movement towards the speaker."
+      }
+    },
+    {
+      "id": "basic-ch-yixia",
+      "front": {
+        "icon": "",
+        "title": "一下",
+        "description": "yíxià"
+      },
+      "back": {
+        "icon": "⏳",
+        "title": "once, for a bit",
+        "description": "Suffix indicating a brief action."
+      }
+    },
+    {
+      "id": "basic-ch-xingming",
+      "front": {
+        "icon": "",
+        "title": "姓名",
+        "description": "xìngmíng"
+      },
+      "back": {
+        "icon": "🏷️",
+        "title": "full name",
+        "description": "Noun for a person's full name."
+      }
+    },
+    {
+      "id": "basic-ch-guoji",
+      "front": {
+        "icon": "",
+        "title": "国籍",
+        "description": "guójí"
+      },
+      "back": {
+        "icon": "🌍",
+        "title": "nationality",
+        "description": "Noun for one's nationality."
+      }
+    },
+    {
+      "id": "basic-ch-zai",
+      "front": {
+        "icon": "",
+        "title": "再",
+        "description": "zài"
+      },
+      "back": {
+        "icon": "🔄",
+        "title": "again, once more",
+        "description": "Adverb indicating repetition."
+      }
+    },
+    {
+      "id": "basic-ch-shuo",
+      "front": {
+        "icon": "",
+        "title": "说",
+        "description": "shuō"
+      },
+      "back": {
+        "icon": "🗣️",
+        "title": "to say, to speak",
+        "description": "Verb for speaking."
+      }
+    },
+    {
+      "id": "basic-ch-yi",
+      "front": {
+        "icon": "",
+        "title": "一",
+        "description": "yī"
+      },
+      "back": {
+        "icon": "1️⃣",
+        "title": "one",
+        "description": "The number one."
+      }
+    },
+    {
+      "id": "basic-ch-bian",
+      "front": {
+        "icon": "",
+        "title": "遍",
+        "description": "biàn"
+      },
+      "back": {
+        "icon": "🔄",
+        "title": "measure word for actions, a time",
+        "description": "Measure word for the number of times an action is performed."
+      }
+    },
+    {
+      "id": "basic-ch-na",
+      "front": {
+        "icon": "",
+        "title": "哪",
+        "description": "nǎ"
+      },
+      "back": {
+        "icon": "❓",
+        "title": "which, where",
+        "description": "Interrogative pronoun."
+      }
+    },
+    {
+      "id": "basic-ch-guo",
+      "front": {
+        "icon": "",
+        "title": "国",
+        "description": "guó"
+      },
+      "back": {
+        "icon": "🗺️",
+        "title": "country, state",
+        "description": "Noun for a country."
+      }
+    },
+    {
+      "id": "basic-ch-ren",
+      "front": {
+        "icon": "",
+        "title": "人",
+        "description": "rén"
+      },
+      "back": {
+        "icon": "🧑",
+        "title": "person, people",
+        "description": "Noun for a person."
+      }
+    },
+    {
+      "id": "basic-ch-de",
+      "front": {
+        "icon": "",
+        "title": "的",
+        "description": "de"
+      },
+      "back": {
+        "icon": "🔗",
+        "title": "a particle indicating possession or a descriptive phrase",
+        "description": "Possessive particle."
+      }
+    },
+    {
+      "id": "basic-ch-huzhao",
+      "front": {
+        "icon": "",
+        "title": "护照",
+        "description": "hùzhào"
+      },
+      "back": {
+        "icon": "🛂",
+        "title": "passport",
+        "description": "Noun for a passport."
+      }
+    },
+    {
+      "id": "basic-ch-gei",
+      "front": {
+        "icon": "",
+        "title": "给",
+        "description": "gěi"
+      },
+      "back": {
+        "icon": "🎁",
+        "title": "to give",
+        "description": "Verb for giving."
+      }
+    },
+    {
+      "id": "basic-ch-xiexie",
+      "front": {
+        "icon": "",
+        "title": "谢谢",
+        "description": "xièxie"
+      },
+      "back": {
+        "icon": "🙏",
+        "title": "to thank, thanks",
+        "description": "Expression of gratitude."
+      }
+    },
+    {
+      "id": "basic-ch-baba",
+      "front": {
+        "icon": "",
+        "title": "爸爸",
+        "description": "bàba"
+      },
+      "back": {
+        "icon": "👨‍🦳",
+        "title": "dad, father",
+        "description": "Noun for father."
+      }
+    },
+    {
+      "id": "basic-ch-mama",
+      "front": {
+        "icon": "",
+        "title": "妈妈",
+        "description": "māma"
+      },
+      "back": {
+        "icon": "👩‍🦳",
+        "title": "mom, mother",
+        "description": "Noun for mother."
+      }
+    },
+    {
+      "id": "basic-ch-difang",
+      "front": {
+        "icon": "",
+        "title": "地方",
+        "description": "dìfāng"
+      },
+      "back": {
+        "icon": "📍",
+        "title": "place",
+        "description": "Noun for a location."
+      }
+    },
+    {
+      "id": "basic-ch-cong",
+      "front": {
+        "icon": "",
+        "title": "从",
+        "description": "cóng"
+      },
+      "back": {
+        "icon": "➡️",
+        "title": "from",
+        "description": "Preposition indicating origin."
+      }
+    },
+    {
+      "id": "basic-ch-dan",
+      "front": {
+        "icon": "",
+        "title": "但",
+        "description": "dàn"
+      },
+      "back": {
+        "icon": "↔️",
+        "title": "but",
+        "description": "Conjunction showing contrast."
+      }
+    },
+    {
+      "id": "basic-ch-o",
+      "front": {
+        "icon": "",
+        "title": "哦",
+        "description": "ò"
+      },
+      "back": {
+        "icon": "💡",
+        "title": "oh (expressing realization or understanding)",
+        "description": "Interjection for realization."
+      }
+    },
+    {
+      "id": "basic-ch-ba",
+      "front": {
+        "icon": "",
+        "title": "吧",
+        "description": "ba"
+      },
+      "back": {
+        "icon": "🤔",
+        "title": "a particle used at the end of a question or suggestion",
+        "description": "Particle for suggestions or mild questions."
+      }
+    },
+    {
+      "id": "basic-ch-bu",
+      "front": {
+        "icon": "",
+        "title": "不",
+        "description": "bù"
+      },
+      "back": {
+        "icon": "❌",
+        "title": "no, not",
+        "description": "Adverb of negation."
+      }
+    },
+    {
+      "id": "basic-ch-meitian",
+      "front": {
+        "icon": "",
+        "title": "每天",
+        "description": "měitiān"
+      },
+      "back": {
+        "icon": "📅",
+        "title": "every day",
+        "description": "Noun phrase for daily time."
+      }
+    },
+    {
+      "id": "basic-ch-tian",
+      "front": {
+        "icon": "",
+        "title": "天",
+        "description": "tiān"
+      },
+      "back": {
+        "icon": "☀️",
+        "title": "day",
+        "description": "Noun for a day."
+      }
+    },
+    {
+      "id": "basic-ch-tushuguan",
+      "front": {
+        "icon": "",
+        "title": "图书馆",
+        "description": "túshūguǎn"
+      },
+      "back": {
+        "icon": "📚",
+        "title": "library",
+        "description": "Noun for a library."
+      }
+    },
+    {
+      "id": "basic-ch-xiawu",
+      "front": {
+        "icon": "",
+        "title": "下午",
+        "description": "xiàwǔ"
+      },
+      "back": {
+        "icon": "🌆",
+        "title": "afternoon",
+        "description": "Noun for the afternoon."
+      }
+    },
+    {
+      "id": "basic-ch-gongzuo",
+      "front": {
+        "icon": "",
+        "title": "工作",
+        "description": "gōngzuò"
+      },
+      "back": {
+        "icon": "💼",
+        "title": "to work, job",
+        "description": "Verb for working or a noun for a job."
+      }
+    },
+    {
+      "id": "basic-ch-zai-at",
+      "front": {
+        "icon": "",
+        "title": "在",
+        "description": "zài"
+      },
+      "back": {
+        "icon": "📍",
+        "title": "at, in, on",
+        "description": "Preposition of location."
+      }
+    },
+    {
+      "id": "basic-ch-nar",
+      "front": {
+        "icon": "",
+        "title": "哪儿",
+        "description": "nǎr"
+      },
+      "back": {
+        "icon": "❓",
+        "title": "where",
+        "description": "Interrogative pronoun."
+      }
+    },
+    {
+      "id": "basic-ch-jia",
+      "front": {
+        "icon": "",
+        "title": "家",
+        "description": "jiā"
+      },
+      "back": {
+        "icon": "🏠",
+        "title": "home (measure word for companies, stores)",
+        "description": "Noun for a home or family."
+      }
+    },
+    {
+      "id": "basic-ch-gongsi",
+      "front": {
+        "icon": "",
+        "title": "公司",
+        "description": "gōngsī"
+      },
+      "back": {
+        "icon": "🏢",
+        "title": "company",
+        "description": "Noun for a company."
+      }
+    },
+    {
+      "id": "basic-ch-bumenjingli",
+      "front": {
+        "icon": "",
+        "title": "部门经理",
+        "description": "bùmén jīnglǐ"
+      },
+      "back": {
+        "icon": "👨‍💼",
+        "title": "department manager",
+        "description": "Noun for a job title."
+      }
+    },
+    {
+      "id": "basic-ch-zuo",
+      "front": {
+        "icon": "",
+        "title": "做",
+        "description": "zuò"
+      },
+      "back": {
+        "icon": "🛠️",
+        "title": "to do, to make",
+        "description": "Verb for doing or making."
+      }
+    },
+    {
+      "id": "basic-ch-zhiyuan",
+      "front": {
+        "icon": "",
+        "title": "职员",
+        "description": "zhíyuán"
+      },
+      "back": {
+        "icon": "🧑‍💼",
+        "title": "clerk",
+        "description": "Noun for a clerk or office worker."
+      }
+    },
+    {
+      "id": "basic-ch-jizhe",
+      "front": {
+        "icon": "",
+        "title": "记者",
+        "description": "jìzhě"
+      },
+      "back": {
+        "icon": "✍️",
+        "title": "reporter",
+        "description": "Noun for a reporter."
+      }
+    },
+    {
+      "id": "basic-ch-xihuan",
+      "front": {
+        "icon": "",
+        "title": "喜欢",
+        "description": "xǐhuan"
+      },
+      "back": {
+        "icon": "💖",
+        "title": "to like",
+        "description": "Verb for expressing a preference."
+      }
+    },
+    {
+      "id": "basic-ch-zhege",
+      "front": {
+        "icon": "",
+        "title": "这个",
+        "description": "zhège"
+      },
+      "back": {
+        "icon": "👉",
+        "title": "this one",
+        "description": "Demonstrative pronoun."
+      }
+    },
+    {
+      "id": "basic-ch-xianzai",
+      "front": {
+        "icon": "",
+        "title": "现在",
+        "description": "xiànzài"
+      },
+      "back": {
+        "icon": "⏰",
+        "title": "now",
+        "description": "Noun for the present time."
+      }
+    },
+    {
+      "id": "basic-ch-hua",
+      "front": {
+        "icon": "",
+        "title": "画",
+        "description": "huà"
+      },
+      "back": {
+        "icon": "🎨",
+        "title": "to paint, painting",
+        "description": "Verb for painting or a noun for a painting."
+      }
+    },
+    {
+      "id": "basic-ch-a",
+      "front": {
+        "icon": "",
+        "title": "啊",
+        "description": "à"
+      },
+      "back": {
+        "icon": "😮",
+        "title": "aha (expressing sudden realization)",
+        "description": "Interjection showing sudden realization."
+      }
+    },
+    {
+      "id": "basic-ch-ge",
+      "front": {
+        "icon": "",
+        "title": "个",
+        "description": "gè"
+      },
+      "back": {
+        "icon": "🔢",
+        "title": "a general measure word",
+        "description": "A common measure word."
+      }
+    },
+    {
+      "id": "basic-ch-huajia",
+      "front": {
+        "icon": "",
+        "title": "画家",
+        "description": "huàjiā"
+      },
+      "back": {
+        "icon": "👨‍🎨",
+        "title": "painter, artist",
+        "description": "Noun for a painter."
+      }
+    },
+    {
+      "id": "basic-ch-xiaopengyou",
+      "front": {
+        "icon": "",
+        "title": "小朋友",
+        "description": "xiǎopéngyǒu"
+      },
+      "back": {
+        "icon": "👧",
+        "title": "little friend",
+        "description": "Noun for a child."
+      }
+    },
+    {
+      "id": "basic-ch-ji",
+      "front": {
+        "icon": "",
+        "title": "几",
+        "description": "jǐ"
+      },
+      "back": {
+        "icon": "❓",
+        "title": "how many, several",
+        "description": "Interrogative adverb."
+      }
+    },
+    {
+      "id": "basic-ch-sui",
+      "front": {
+        "icon": "",
+        "title": "岁",
+        "description": "suì"
+      },
+      "back": {
+        "icon": "🎂",
+        "title": "measure word for age, years old",
+        "description": "Measure word for a person's age."
+      }
+    },
+    {
+      "id": "basic-ch-cai",
+      "front": {
+        "icon": "",
+        "title": "猜",
+        "description": "cāi"
+      },
+      "back": {
+        "icon": "❓",
+        "title": "to guess",
+        "description": "Verb for guessing."
+      }
+    },
+    {
+      "id": "basic-ch-dui",
+      "front": {
+        "icon": "",
+        "title": "对",
+        "description": "duì"
+      },
+      "back": {
+        "icon": "✅",
+        "title": "correct, right",
+        "description": "Adjective indicating correctness."
+      }
+    },
+    {
+      "id": "basic-ch-ayi",
+      "front": {
+        "icon": "",
+        "title": "阿姨",
+        "description": "āyí"
+      },
+      "back": {
+        "icon": "👩",
+        "title": "aunt, aunty",
+        "description": "Term of address for an older woman."
+      }
+    },
+    {
+      "id": "basic-ch-duoda",
+      "front": {
+        "icon": "",
+        "title": "多大",
+        "description": "duō dà"
+      },
+      "back": {
+        "icon": "❓",
+        "title": "how old",
+        "description": "Question about age."
+      }
+    },
+    {
+      "id": "basic-ch-duo",
+      "front": {
+        "icon": "",
+        "title": "多",
+        "description": "duō"
+      },
+      "back": {
+        "icon": "➕",
+        "title": "how, many, much",
+        "description": "Adverb indicating quantity or degree."
+      }
+    },
+    {
+      "id": "basic-ch-da",
+      "front": {
+        "icon": "",
+        "title": "大",
+        "description": "dà"
+      },
+      "back": {
+        "icon": "🐘",
+        "title": "big, old",
+        "description": "Adjective for size or age."
+      }
+    },
+    {
+      "id": "basic-ch-zhe",
+      "front": {
+        "icon": "",
+        "title": "这",
+        "description": "zhè"
+      },
+      "back": {
+        "icon": "👉",
+        "title": "this",
+        "description": "Demonstrative pronoun."
+      }
+    },
+    {
+      "id": "basic-ch-mimi",
+      "front": {
+        "icon": "",
+        "title": "秘密",
+        "description": "mìmì"
+      },
+      "back": {
+        "icon": "🤫",
+        "title": "secret",
+        "description": "Noun for a secret."
+      }
+    },
+    {
+      "id": "basic-ch-dama",
+      "front": {
+        "icon": "",
+        "title": "大妈",
+        "description": "dàmā"
+      },
+      "back": {
+        "icon": "👵",
+        "title": "elderly woman, aunt",
+        "description": "Term of address for a middle-aged to elderly woman."
+      }
+    },
+    {
+      "id": "basic-ch-jingju",
+      "front": {
+        "icon": "",
+        "title": "京剧",
+        "description": "jīngjù"
+      },
+      "back": {
+        "icon": "🎭",
+        "title": "Peking opera",
+        "description": "Noun for the art form of Peking opera."
+      }
+    },
+    {
+      "id": "basic-ch-shengyin",
+      "front": {
+        "icon": "",
+        "title": "声音",
+        "description": "shēngyīn"
+      },
+      "back": {
+        "icon": "🔊",
+        "title": "voice",
+        "description": "Noun for voice or sound."
+      }
+    },
+    {
+      "id": "basic-ch-zhen",
+      "front": {
+        "icon": "",
+        "title": "真",
+        "description": "zhēn"
+      },
+      "back": {
+        "icon": "✨",
+        "title": "really",
+        "description": "Adverb for emphasis."
+      }
+    },
+    {
+      "id": "basic-ch-haoting",
+      "front": {
+        "icon": "",
+        "title": "好听",
+        "description": "hǎotīng"
+      },
+      "back": {
+        "icon": "🎧",
+        "title": "pleasant to hear, sounds nice",
+        "description": "Adjective describing a nice sound."
+      }
+    },
+    {
+      "id": "basic-ch-nianji",
+      "front": {
+        "icon": "",
+        "title": "年纪",
+        "description": "niánjì"
+      },
+      "back": {
+        "icon": "🎂",
+        "title": "age",
+        "description": "Noun for a person's age."
+      }
+    },
+    {
+      "id": "basic-ch-waipo",
+      "front": {
+        "icon": "",
+        "title": "外婆",
+        "description": "wàipó"
+      },
+      "back": {
+        "icon": "👵",
+        "title": "grandmother (mother's mother)",
+        "description": "Noun for maternal grandmother."
+      }
+    },
+    {
+      "id": "basic-ch-kan",
+      "front": {
+        "icon": "",
+        "title": "看",
+        "description": "kàn"
+      },
+      "back": {
+        "icon": "👀",
+        "title": "to look, to watch",
+        "description": "Verb for seeing or watching."
+      }
+    },
+    {
+      "id": "basic-ch-keyi",
+      "front": {
+        "icon": "",
+        "title": "可以",
+        "description": "kěyǐ"
+      },
+      "back": {
+        "icon": "🆗",
+        "title": "can, may",
+        "description": "Modal verb indicating ability or permission."
+      }
+    },
+    {
+      "id": "basic-ch-shi-matter",
+      "front": {
+        "icon": "",
+        "title": "事",
+        "description": "shì"
+      },
+      "back": {
+        "icon": "📝",
+        "title": "business, matter",
+        "description": "Noun for a matter or affair."
+      }
+    },
+    {
+      "id": "basic-ch-xiang",
+      "front": {
+        "icon": "",
+        "title": "想",
+        "description": "xiǎng"
+      },
+      "back": {
+        "icon": "🧠",
+        "title": "to want, to think",
+        "description": "Verb for wanting or thinking."
+      }
+    },
+    {
+      "id": "basic-ch-jianshen",
+      "front": {
+        "icon": "",
+        "title": "健身",
+        "description": "jiànshēn"
+      },
+      "back": {
+        "icon": "🏋️",
+        "title": "to keep fit, to exercise",
+        "description": "Verb for exercising."
+      }
+    },
+    {
+      "id": "basic-ch-jinnian",
+      "front": {
+        "icon": "",
+        "title": "今年",
+        "description": "jīnnián"
+      },
+      "back": {
+        "icon": "🗓️",
+        "title": "this year",
+        "description": "Noun for the current year."
+      }
+    },
+    {
+      "id": "basic-ch-nu",
+      "front": {
+        "icon": "",
+        "title": "女",
+        "description": "nǚ"
+      },
+      "back": {
+        "icon": "♀️",
+        "title": "female",
+        "description": "Adjective for the female gender."
+      }
+    },
+    {
+      "id": "basic-ch-xingqiliu",
+      "front": {
+        "icon": "",
+        "title": "星期六",
+        "description": "xīngqīliù"
+      },
+      "back": {
+        "icon": "🗓️",
+        "title": "Saturday",
+        "description": "Noun for a day of the week."
+      }
+    },
+    {
+      "id": "basic-ch-shangwu",
+      "front": {
+        "icon": "",
+        "title": "上午",
+        "description": "shàngwǔ"
+      },
+      "back": {
+        "icon": "🌅",
+        "title": "morning, AM",
+        "description": "Noun for the morning time."
+      }
+    },
+    {
+      "id": "basic-ch-dajia",
+      "front": {
+        "icon": "",
+        "title": "大家",
+        "description": "dàjiā"
+      },
+      "back": {
+        "icon": "👥",
+        "title": "everybody",
+        "description": "Pronoun for all people."
+      }
+    },
+    {
+      "id": "basic-ch-jiaolian",
+      "front": {
+        "icon": "",
+        "title": "教练",
+        "description": "jiàoliàn"
+      },
+      "back": {
+        "icon": "🧑‍💼",
+        "title": "coach",
+        "description": "Noun for a coach or instructor."
+      }
+    },
+    {
+      "id": "basic-ch-hushi",
+      "front": {
+        "icon": "",
+        "title": "护士",
+        "description": "hùshì"
+      },
+      "back": {
+        "icon": "🩺",
+        "title": "nurse",
+        "description": "Noun for a nurse."
+      }
+    },
+    {
+      "id": "basic-ch-mishu",
+      "front": {
+        "icon": "",
+        "title": "秘书",
+        "description": "mìshū"
+      },
+      "back": {
+        "icon": "👩‍💼",
+        "title": "secretary",
+        "description": "Noun for a secretary."
+      }
+    },
+    {
+      "id": "basic-ch-daxuesheng",
+      "front": {
+        "icon": "",
+        "title": "大学生",
+        "description": "dàxuéshēng"
+      },
+      "back": {
+        "icon": "🧑‍🎓",
+        "title": "college student",
+        "description": "Noun for a university student."
+      }
+    }
+  ]
+}
