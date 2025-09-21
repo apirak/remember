@@ -44,101 +44,112 @@ export const DebugPanel: React.FC = () => {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
-      <button
-        onClick={() => setIsExpanded(!isExpanded)}
-        className="bg-purple-600 hover:bg-purple-700 text-white px-3 py-2 rounded-lg text-sm font-mono shadow-lg"
-      >
-        🐛 Debug {isExpanded ? "▼" : "▲"}
-      </button>
+    <div className="h-screen flex flex-col bg-gray-900 text-green-400">
+      {/* Header */}
+      <div className="bg-purple-600 text-white px-4 py-3 flex items-center justify-between">
+        <h2 className="text-lg font-mono font-bold">🐛 Debug Panel</h2>
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="bg-purple-700 hover:bg-purple-800 text-white px-3 py-1 rounded text-sm font-mono"
+        >
+          {isExpanded ? "Collapse ▼" : "Expand ▲"}
+        </button>
+      </div>
 
-      {isExpanded && (
-        <div className="absolute bottom-12 right-0 bg-gray-900 text-green-400 p-4 rounded-lg shadow-xl max-w-md text-xs font-mono max-h-96 overflow-y-auto">
-          <h3 className="text-yellow-400 font-bold mb-2">🔍 Debug Info</h3>
+      {/* Content */}
+      <div className="flex-1 p-4 overflow-y-auto">
+        {isExpanded && (
+          <div className="text-xs font-mono">
+            <h3 className="text-yellow-400 font-bold mb-2">🔍 Debug Info</h3>
 
-          <div className="space-y-2">
-            <div>
-              <span className="text-blue-400">Current Date:</span>{" "}
-              {debugInfo.currentDate}
+            <div className="space-y-2">
+              <div>
+                <span className="text-blue-400">Current Date:</span>{" "}
+                {debugInfo.currentDate}
+              </div>
+              <div>
+                <span className="text-blue-400">Total Cards:</span>{" "}
+                {debugInfo.totalCards}
+              </div>
+              <div>
+                <span className="text-blue-400">Reviews Today (calc):</span>{" "}
+                {debugInfo.reviewsToday}
+              </div>
+              <div>
+                <span className="text-blue-400">Reviews Today (stats):</span>{" "}
+                {debugInfo.statsReviewsToday}
+              </div>
+              <div>
+                <span className="text-blue-400">Data Source:</span>{" "}
+                {debugInfo.dataSource}
+              </div>
+              <div>
+                <span className="text-blue-400">Is Guest:</span>{" "}
+                {debugInfo.isGuest.toString()}
+              </div>
+              <div>
+                <span className="text-blue-400">Sync Status:</span>{" "}
+                {debugInfo.syncStatus}
+              </div>
             </div>
-            <div>
-              <span className="text-blue-400">Total Cards:</span>{" "}
-              {debugInfo.totalCards}
+
+            <div className="mt-3 pt-3 border-t border-gray-700">
+              <h4 className="text-yellow-400 font-bold">
+                📋 Reviewed Today Cards:
+              </h4>
+              <div className="text-xs">
+                {reviewedTodayCards.length === 0 ? (
+                  <div className="text-red-400">No cards reviewed today</div>
+                ) : (
+                  reviewedTodayCards.slice(0, 5).map((card: Flashcard) => (
+                    <div key={card.id} className="text-green-300">
+                      {card.id}:{" "}
+                      {card.lastReviewDate instanceof Date
+                        ? card.lastReviewDate.toDateString()
+                        : "Invalid Date"}
+                    </div>
+                  ))
+                )}
+              </div>
             </div>
-            <div>
-              <span className="text-blue-400">Reviews Today (calc):</span>{" "}
-              {debugInfo.reviewsToday}
-            </div>
-            <div>
-              <span className="text-blue-400">Reviews Today (stats):</span>{" "}
-              {debugInfo.statsReviewsToday}
-            </div>
-            <div>
-              <span className="text-blue-400">Data Source:</span>{" "}
-              {debugInfo.dataSource}
-            </div>
-            <div>
-              <span className="text-blue-400">Is Guest:</span>{" "}
-              {debugInfo.isGuest.toString()}
-            </div>
-            <div>
-              <span className="text-blue-400">Sync Status:</span>{" "}
-              {debugInfo.syncStatus}
+
+            <div className="mt-3 pt-3 border-t border-gray-700">
+              <h4 className="text-yellow-400 font-bold">
+                🔬 Sample Cards Data:
+              </h4>
+              <div className="text-xs space-y-1">
+                {debugInfo.sampleCards.map((card: any, idx: number) => (
+                  <div key={idx} className="bg-gray-800 p-2 rounded">
+                    <div>
+                      <span className="text-blue-400">ID:</span> {card.id}
+                    </div>
+                    <div>
+                      <span className="text-blue-400">Type:</span>{" "}
+                      {card.lastReviewDateType}
+                    </div>
+                    <div>
+                      <span className="text-blue-400">Date:</span>{" "}
+                      {card.lastReviewDateString}
+                    </div>
+                    <div>
+                      <span className="text-blue-400">Today?:</span>
+                      <span
+                        className={
+                          card.isReviewedToday
+                            ? "text-green-400"
+                            : "text-red-400"
+                        }
+                      >
+                        {card.isReviewedToday.toString()}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-
-          <div className="mt-3 pt-3 border-t border-gray-700">
-            <h4 className="text-yellow-400 font-bold">
-              📋 Reviewed Today Cards:
-            </h4>
-            <div className="text-xs">
-              {reviewedTodayCards.length === 0 ? (
-                <div className="text-red-400">No cards reviewed today</div>
-              ) : (
-                reviewedTodayCards.slice(0, 5).map((card: Flashcard) => (
-                  <div key={card.id} className="text-green-300">
-                    {card.id}:{" "}
-                    {card.lastReviewDate instanceof Date
-                      ? card.lastReviewDate.toDateString()
-                      : "Invalid Date"}
-                  </div>
-                ))
-              )}
-            </div>
-          </div>
-
-          <div className="mt-3 pt-3 border-t border-gray-700">
-            <h4 className="text-yellow-400 font-bold">🔬 Sample Cards Data:</h4>
-            <div className="text-xs space-y-1">
-              {debugInfo.sampleCards.map((card: any, idx: number) => (
-                <div key={idx} className="bg-gray-800 p-2 rounded">
-                  <div>
-                    <span className="text-blue-400">ID:</span> {card.id}
-                  </div>
-                  <div>
-                    <span className="text-blue-400">Type:</span>{" "}
-                    {card.lastReviewDateType}
-                  </div>
-                  <div>
-                    <span className="text-blue-400">Date:</span>{" "}
-                    {card.lastReviewDateString}
-                  </div>
-                  <div>
-                    <span className="text-blue-400">Today?:</span>
-                    <span
-                      className={
-                        card.isReviewedToday ? "text-green-400" : "text-red-400"
-                      }
-                    >
-                      {card.isReviewedToday.toString()}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
