@@ -79,7 +79,11 @@ const initialState: FlashcardContextState = {
   currentSession: null,
   currentCard: null,
 
-  // Card set management - will be initialized in provider
+  // Card set management (new)
+  selectedCardSet: null,
+  availableCardSets: [],
+
+  // Card set management (legacy) - will be initialized in provider
   currentCardSet: null,
 
   // Track last successfully loaded card set for error recovery
@@ -207,8 +211,8 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
       }
 
       // Transform raw data to include SM-2 parameters
-      const transformedCards = (cardSetData as FlashcardData[]).map(
-        transformFlashcardData
+      const transformedCards = (cardSetData as FlashcardData[]).map((data) =>
+        transformFlashcardData(data, "default")
       );
 
       // Check if we have any valid cards after transformation
@@ -272,7 +276,7 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
           validateCardSetData(lastWorkingData);
 
           const fallbackCards = (lastWorkingData as FlashcardData[]).map(
-            transformFlashcardData
+            (data) => transformFlashcardData(data, "default")
           );
 
           if (fallbackCards.length > 0) {
@@ -299,8 +303,8 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
 
       // Final fallback to default data if all else fails
       console.log("FlashcardContext: Falling back to default flashcard data");
-      const transformedCards = (flashcardsData as FlashcardData[]).map(
-        transformFlashcardData
+      const transformedCards = (flashcardsData as FlashcardData[]).map((data) =>
+        transformFlashcardData(data, "default")
       );
       dispatch({ type: "LOAD_CARDS", payload: transformedCards });
     } finally {
@@ -330,8 +334,8 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
     } else {
       // Fallback to default data
       dispatch({ type: "SET_LOADING", payload: true });
-      const transformedCards = (flashcardsData as FlashcardData[]).map(
-        transformFlashcardData
+      const transformedCards = (flashcardsData as FlashcardData[]).map((data) =>
+        transformFlashcardData(data, "default")
       );
       dispatch({ type: "LOAD_CARDS", payload: transformedCards });
     }
@@ -382,7 +386,7 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
 
         // Load default cards
         const transformedCards = (flashcardsData as FlashcardData[]).map(
-          transformFlashcardData
+          (data) => transformFlashcardData(data, "default")
         );
         dispatch({ type: "LOAD_CARDS", payload: transformedCards });
       }

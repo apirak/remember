@@ -9,12 +9,16 @@ import flashcardsData from "../data/flashcards.json";
 export const TEST_USER_EMAIL = "apriakb@gmail.com";
 
 // Transform raw flashcard data to include SM-2 parameters
-export const transformFlashcardData = (data: FlashcardData): Flashcard => {
+export const transformFlashcardData = (
+  data: FlashcardData,
+  cardSetId: string = "default"
+): Flashcard => {
   const sm2Params = initializeSM2Params();
   const now = new Date();
 
   return {
     ...data,
+    cardSetId,
     ...sm2Params,
     createdAt: now,
     updatedAt: now,
@@ -23,8 +27,12 @@ export const transformFlashcardData = (data: FlashcardData): Flashcard => {
 };
 
 // Get default seed flashcards (transformed with SM-2 params)
-export const getDefaultSeedCards = (): Flashcard[] => {
-  return (flashcardsData as FlashcardData[]).map(transformFlashcardData);
+export const getDefaultSeedCards = (
+  cardSetId: string = "default"
+): Flashcard[] => {
+  return (flashcardsData as FlashcardData[]).map((data) =>
+    transformFlashcardData(data, cardSetId)
+  );
 };
 
 // Create sample progress cards with various states for testing

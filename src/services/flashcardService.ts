@@ -62,8 +62,8 @@ export class FlashcardService {
         );
 
         // Transform default cards to include SM-2 parameters
-        const defaultCards = (flashcardsData as FlashcardData[]).map(
-          transformFlashcardData
+        const defaultCards = (flashcardsData as FlashcardData[]).map((data) =>
+          transformFlashcardData(data, "default")
         );
 
         // Save default cards to Firestore for the new user
@@ -286,7 +286,9 @@ export class FlashcardService {
    * @returns Array of default flashcards with SM-2 parameters
    */
   static getDefaultFlashcards(): Flashcard[] {
-    return (flashcardsData as FlashcardData[]).map(transformFlashcardData);
+    return (flashcardsData as FlashcardData[]).map((data) =>
+      transformFlashcardData(data, "default")
+    );
   }
 
   /**

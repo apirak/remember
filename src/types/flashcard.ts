@@ -1,5 +1,34 @@
 // TypeScript type definitions for the flashcard application
 
+// Card set metadata structure (from card_set.json)
+export interface CardSet {
+  id: string;
+  name: string;
+  description: string;
+  cover: string;
+  cardCount: number;
+  category: string;
+  tags: string[];
+  dataFile: string;
+  author: string;
+  isActive: boolean;
+  difficulty?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// Card set with user progress information
+export interface CardSetWithProgress extends CardSet {
+  userProgress?: {
+    totalCards: number;
+    dueCards: number;
+    masteredCards: number;
+    reviewsToday: number;
+    lastReviewDate: Date | null;
+    hasStarted: boolean;
+  };
+}
+
 // Core flashcard data structure
 export interface FlashcardContent {
   icon: string;
@@ -15,6 +44,9 @@ export interface FlashcardData {
 
 // Enhanced flashcard with SM-2 parameters and progress tracking
 export interface Flashcard extends FlashcardData {
+  // Card set identifier
+  cardSetId: string;
+
   // SM-2 spaced repetition parameters
   easinessFactor: number;
   repetitions: number;
@@ -73,6 +105,10 @@ export interface FlashcardContextState {
   currentCard: Flashcard | null;
 
   // Card set management
+  selectedCardSet: CardSet | null;
+  availableCardSets: CardSet[];
+
+  // Legacy support - will be removed after migration
   currentCardSet: {
     id: string;
     name: string;
@@ -167,7 +203,10 @@ export type FlashcardAction =
     }
   // User authentication
   | { type: "SET_USER"; payload: { user: any; isGuest: boolean } }
-  // Card set management
+  // Card set management (new)
+  | { type: "SET_SELECTED_CARD_SET"; payload: CardSet | null }
+  | { type: "SET_AVAILABLE_CARD_SETS"; payload: CardSet[] }
+  // Card set management (legacy - will be removed)
   | {
       type: "SET_CURRENT_CARD_SET";
       payload: {
