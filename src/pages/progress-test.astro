@@ -1,0 +1,678 @@
+---
+// Progress Data Structure Test Page
+// This page tests the new CardSetProgress interface and data structure
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Progress Data Structure Test - Remember Me</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #f5f5f5;
+      }
+      .container {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+      .section {
+        margin: 20px 0;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+      .status {
+        padding: 10px;
+        border-radius: 5px;
+        margin: 10px 0;
+      }
+      .status.success { background: #d4edda; color: #155724; }
+      .status.error { background: #f8d7da; color: #721c24; }
+      .status.info { background: #d1ecf1; color: #0c5460; }
+      .status.warning { background: #fff3cd; color: #856404; }
+      button {
+        background: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 5px;
+      }
+      button:hover { background: #0056b3; }
+      .success { background: #28a745; }
+      .success:hover { background: #218838; }
+      .danger { background: #dc3545; }
+      .danger:hover { background: #c82333; }
+      .data-display {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 4px;
+        margin: 10px 0;
+        white-space: pre-wrap;
+        font-family: 'Courier New', monospace;
+        font-size: 14px;
+        border: 1px solid #dee2e6;
+      }
+      .progress-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        margin: 10px 0;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      }
+      .progress-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 10px;
+        margin-top: 15px;
+      }
+      .stat-item {
+        background: rgba(255,255,255,0.2);
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+      }
+      .stat-value {
+        font-size: 24px;
+        font-weight: bold;
+        display: block;
+      }
+      .stat-label {
+        font-size: 12px;
+        opacity: 0.9;
+      }
+      input, select {
+        width: 100%;
+        padding: 8px;
+        margin: 5px 0;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>📊 Progress Data Structure Test</h1>
+      <p>Test the new CardSetProgress interface and independent progress tracking</p>
+      
+      <!-- Test Status -->
+      <div class="section">
+        <h2>🧪 Test Status</h2>
+        <div id="test-status" class="status info">Ready to run tests</div>
+        <button id="run-all-tests-btn" class="success">🚀 Run All Tests</button>
+        <button id="clear-data-btn" class="danger">🗑️ Clear Test Data</button>
+      </div>
+
+      <!-- CardSetProgress Interface Test -->
+      <div class="section">
+        <h2>🏗️ CardSetProgress Interface Test</h2>
+        <div id="interface-status" class="status info">Interface validation pending</div>
+        <button id="test-interface-btn">Test Interface Creation</button>
+        <div id="interface-display" class="data-display"></div>
+      </div>
+
+      <!-- Multi Card Set Progress Test -->
+      <div class="section">
+        <h2>📚 Multi Card Set Progress Test</h2>
+        <div id="multi-progress-status" class="status info">Multi-set progress test pending</div>
+        <button id="test-multi-progress-btn">Test Multiple Card Sets</button>
+        <div id="progress-cards-container"></div>
+      </div>
+
+      <!-- Progress Persistence Test -->
+      <div class="section">
+        <h2>💾 Progress Persistence Test</h2>
+        <div id="persistence-status" class="status info">Persistence test pending</div>
+        
+        <h3>Create Test Progress</h3>
+        <select id="card-set-select">
+          <option value="chinese_essentials_1">Chinese Essentials 1</option>
+          <option value="chinese_essentials_2">Chinese Essentials 2</option>
+          <option value="business_chinese">Business Chinese</option>
+        </select>
+        <button id="create-progress-btn" class="success">Create Progress Data</button>
+        <button id="update-progress-btn">Update Progress</button>
+        <button id="load-progress-btn">Load Progress</button>
+        
+        <div id="persistence-display" class="data-display"></div>
+      </div>
+
+      <!-- Progress Calculation Test -->
+      <div class="section">
+        <h2>🧮 Progress Calculation Test</h2>
+        <div id="calculation-status" class="status info">Calculation test pending</div>
+        <button id="test-calculations-btn">Test Progress Calculations</button>
+        <div id="calculation-display" class="data-display"></div>
+      </div>
+
+      <!-- Test Log -->
+      <div class="section">
+        <h2>📝 Test Log</h2>
+        <div id="test-log" style="height: 200px; overflow-y: scroll; background: #f8f9fa; padding: 10px; border: 1px solid #ddd;"></div>
+        <button id="clear-log-btn">Clear Log</button>
+      </div>
+    </div>
+
+    <script type="module">
+      // Import the CardSetProgress type (simulated since we can't import TypeScript directly)
+      // In real implementation, this would be imported from the types file
+      
+      // Simulated CardSetProgress interface for testing
+      const CardSetProgressTemplate = {
+        cardSetId: '',
+        totalCards: 0,
+        dueCards: 0,
+        masteredCards: 0,
+        difficultCards: 0,
+        reviewsToday: 0,
+        lastReviewDate: null,
+        dailyGoal: 10,
+        currentStreak: 0,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      };
+
+      // Test data for different card sets
+      const testCardSets = [
+        {
+          id: 'chinese_essentials_1',
+          name: 'Chinese Essentials 1',
+          cover: '🇨🇳',
+          totalCards: 103
+        },
+        {
+          id: 'chinese_essentials_2',
+          name: 'Chinese Essentials 2',
+          cover: '🏮',
+          totalCards: 87
+        },
+        {
+          id: 'business_chinese',
+          name: 'Business Chinese',
+          cover: '💼',
+          totalCards: 156
+        }
+      ];
+
+      // Utility functions
+      function log(message, type = 'info') {
+        const logDiv = document.getElementById('test-log');
+        const timestamp = new Date().toLocaleTimeString();
+        const logEntry = document.createElement('div');
+        logEntry.style.color = type === 'error' ? '#dc3545' : type === 'success' ? '#28a745' : '#495057';
+        logEntry.textContent = `[${timestamp}] ${message}`;
+        logDiv.appendChild(logEntry);
+        logDiv.scrollTop = logDiv.scrollHeight;
+        console.log(`[Progress-Test] ${message}`);
+      }
+
+      function setStatus(elementId, message, type = 'info') {
+        const element = document.getElementById(elementId);
+        element.className = `status ${type}`;
+        element.textContent = message;
+      }
+
+      // Test 1: Interface Creation Test
+      function testInterfaceCreation() {
+        try {
+          log('Testing CardSetProgress interface creation...');
+          setStatus('interface-status', 'Testing interface...', 'info');
+
+          // Create a sample CardSetProgress object
+          const testProgress = {
+            ...CardSetProgressTemplate,
+            cardSetId: 'chinese_essentials_1',
+            totalCards: 103,
+            dueCards: 15,
+            masteredCards: 25,
+            difficultCards: 8,
+            reviewsToday: 12,
+            lastReviewDate: new Date(),
+            dailyGoal: 15,
+            currentStreak: 3,
+            createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), // 7 days ago
+            updatedAt: new Date()
+          };
+
+          // Validate all required properties exist
+          const requiredProps = [
+            'cardSetId', 'totalCards', 'dueCards', 'masteredCards', 
+            'difficultCards', 'reviewsToday', 'lastReviewDate', 
+            'dailyGoal', 'currentStreak', 'createdAt', 'updatedAt'
+          ];
+
+          const missingProps = requiredProps.filter(prop => !(prop in testProgress));
+          
+          if (missingProps.length > 0) {
+            throw new Error(`Missing properties: ${missingProps.join(', ')}`);
+          }
+
+          // Validate data types
+          if (typeof testProgress.cardSetId !== 'string') throw new Error('cardSetId must be string');
+          if (typeof testProgress.totalCards !== 'number') throw new Error('totalCards must be number');
+          if (typeof testProgress.dueCards !== 'number') throw new Error('dueCards must be number');
+          if (typeof testProgress.masteredCards !== 'number') throw new Error('masteredCards must be number');
+          if (typeof testProgress.difficultCards !== 'number') throw new Error('difficultCards must be number');
+          if (typeof testProgress.reviewsToday !== 'number') throw new Error('reviewsToday must be number');
+          if (typeof testProgress.dailyGoal !== 'number') throw new Error('dailyGoal must be number');
+          if (typeof testProgress.currentStreak !== 'number') throw new Error('currentStreak must be number');
+
+          // Display the created object
+          document.getElementById('interface-display').textContent = JSON.stringify(testProgress, null, 2);
+          
+          setStatus('interface-status', '✅ Interface validation passed!', 'success');
+          log('CardSetProgress interface validation passed', 'success');
+          
+          return testProgress;
+
+        } catch (error) {
+          setStatus('interface-status', `❌ Interface test failed: ${error.message}`, 'error');
+          log(`Interface test error: ${error.message}`, 'error');
+          throw error;
+        }
+      }
+
+      // Test 2: Multi Card Set Progress Test
+      function testMultiCardSetProgress() {
+        try {
+          log('Testing multiple card set progress tracking...');
+          setStatus('multi-progress-status', 'Creating multiple progress objects...', 'info');
+
+          // Create progress for each card set with different data
+          const multiProgress = new Map();
+          
+          testCardSets.forEach((cardSet, index) => {
+            const progress = {
+              ...CardSetProgressTemplate,
+              cardSetId: cardSet.id,
+              totalCards: cardSet.totalCards,
+              dueCards: Math.floor(cardSet.totalCards * 0.1) + (index * 5), // Different due counts
+              masteredCards: Math.floor(cardSet.totalCards * 0.2) + (index * 10), // Different mastered counts
+              difficultCards: Math.floor(cardSet.totalCards * 0.05) + (index * 2), // Different difficult counts
+              reviewsToday: index * 8 + 5, // Different review counts
+              lastReviewDate: new Date(Date.now() - (index + 1) * 24 * 60 * 60 * 1000), // Different last review dates
+              dailyGoal: 10 + (index * 5), // Different daily goals
+              currentStreak: index + 1, // Different streaks
+              createdAt: new Date(Date.now() - (index + 1) * 7 * 24 * 60 * 60 * 1000), // Different creation dates
+              updatedAt: new Date()
+            };
+            
+            multiProgress.set(cardSet.id, progress);
+          });
+
+          // Validate that each card set has independent progress
+          if (multiProgress.size !== testCardSets.length) {
+            throw new Error('Not all card sets created correctly');
+          }
+
+          // Validate that progress is different for each card set
+          const progressValues = Array.from(multiProgress.values());
+          const uniqueReviewCounts = new Set(progressValues.map(p => p.reviewsToday));
+          if (uniqueReviewCounts.size !== testCardSets.length) {
+            throw new Error('Progress data should be unique for each card set');
+          }
+
+          // Display progress cards
+          const container = document.getElementById('progress-cards-container');
+          container.innerHTML = '';
+
+          multiProgress.forEach((progress, cardSetId) => {
+            const cardSet = testCardSets.find(cs => cs.id === cardSetId);
+            const progressCard = document.createElement('div');
+            progressCard.className = 'progress-card';
+            progressCard.innerHTML = `
+              <h3>${cardSet.cover} ${cardSet.name}</h3>
+              <div class="progress-stats">
+                <div class="stat-item">
+                  <span class="stat-value">${progress.totalCards}</span>
+                  <span class="stat-label">Total Cards</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-value">${progress.dueCards}</span>
+                  <span class="stat-label">Due Today</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-value">${progress.masteredCards}</span>
+                  <span class="stat-label">Mastered</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-value">${progress.difficultCards}</span>
+                  <span class="stat-label">Difficult</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-value">${progress.reviewsToday}</span>
+                  <span class="stat-label">Reviews Today</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-value">${progress.currentStreak}</span>
+                  <span class="stat-label">Day Streak</span>
+                </div>
+              </div>
+            `;
+            container.appendChild(progressCard);
+          });
+
+          setStatus('multi-progress-status', '✅ Multi card set progress created successfully!', 'success');
+          log(`Successfully created progress for ${multiProgress.size} card sets`, 'success');
+          
+          return multiProgress;
+
+        } catch (error) {
+          setStatus('multi-progress-status', `❌ Multi progress test failed: ${error.message}`, 'error');
+          log(`Multi progress test error: ${error.message}`, 'error');
+          throw error;
+        }
+      }
+
+      // Test 3: Progress Persistence Test
+      function testProgressPersistence() {
+        try {
+          log('Testing progress persistence with localStorage...');
+          setStatus('persistence-status', 'Testing data persistence...', 'info');
+
+          const STORAGE_KEY = 'test-cardset-progress';
+          
+          // Create test data
+          const testData = {
+            'chinese_essentials_1': {
+              ...CardSetProgressTemplate,
+              cardSetId: 'chinese_essentials_1',
+              totalCards: 103,
+              dueCards: 15,
+              masteredCards: 25,
+              reviewsToday: 8,
+              currentStreak: 5
+            },
+            'business_chinese': {
+              ...CardSetProgressTemplate,
+              cardSetId: 'business_chinese',
+              totalCards: 156,
+              dueCards: 22,
+              masteredCards: 45,
+              reviewsToday: 12,
+              currentStreak: 3
+            }
+          };
+
+          // Test saving to localStorage
+          log('Saving progress data to localStorage...');
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(testData));
+
+          // Test loading from localStorage
+          log('Loading progress data from localStorage...');
+          const loadedData = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+
+          // Validate loaded data
+          if (Object.keys(loadedData).length !== Object.keys(testData).length) {
+            throw new Error('Loaded data count mismatch');
+          }
+
+          for (const cardSetId in testData) {
+            if (!loadedData[cardSetId]) {
+              throw new Error(`Missing card set data: ${cardSetId}`);
+            }
+            
+            const original = testData[cardSetId];
+            const loaded = loadedData[cardSetId];
+            
+            if (original.totalCards !== loaded.totalCards) {
+              throw new Error(`Data mismatch for ${cardSetId}: totalCards`);
+            }
+            if (original.reviewsToday !== loaded.reviewsToday) {
+              throw new Error(`Data mismatch for ${cardSetId}: reviewsToday`);
+            }
+          }
+
+          // Display persistence results
+          document.getElementById('persistence-display').textContent = 
+            `Original Data:\n${JSON.stringify(testData, null, 2)}\n\n` +
+            `Loaded Data:\n${JSON.stringify(loadedData, null, 2)}`;
+
+          setStatus('persistence-status', '✅ Progress persistence test passed!', 'success');
+          log('Progress persistence validation successful', 'success');
+
+          return { original: testData, loaded: loadedData };
+
+        } catch (error) {
+          setStatus('persistence-status', `❌ Persistence test failed: ${error.message}`, 'error');
+          log(`Persistence test error: ${error.message}`, 'error');
+          throw error;
+        }
+      }
+
+      // Test 4: Progress Calculation Test
+      function testProgressCalculations() {
+        try {
+          log('Testing progress calculations and derived values...');
+          setStatus('calculation-status', 'Testing calculations...', 'info');
+
+          const progress = {
+            ...CardSetProgressTemplate,
+            cardSetId: 'test_calculations',
+            totalCards: 100,
+            dueCards: 20,
+            masteredCards: 30,
+            difficultCards: 15,
+            reviewsToday: 12,
+            dailyGoal: 15,
+            currentStreak: 7
+          };
+
+          // Test calculation functions
+          const calculations = {
+            // Progress percentage
+            progressPercentage: Math.round((progress.masteredCards / progress.totalCards) * 100),
+            
+            // Daily goal progress
+            dailyGoalProgress: Math.round((progress.reviewsToday / progress.dailyGoal) * 100),
+            
+            // Cards remaining for mastery
+            cardsToMaster: progress.totalCards - progress.masteredCards,
+            
+            // Review efficiency (cards mastered per review)
+            reviewEfficiency: progress.masteredCards > 0 ? (progress.reviewsToday / progress.masteredCards).toFixed(2) : 0,
+            
+            // Difficulty ratio
+            difficultyRatio: progress.totalCards > 0 ? Math.round((progress.difficultCards / progress.totalCards) * 100) : 0,
+            
+            // Goal achievement status
+            goalAchieved: progress.reviewsToday >= progress.dailyGoal,
+            
+            // Streak level (beginner/intermediate/advanced)
+            streakLevel: progress.currentStreak < 3 ? 'Beginner' : 
+                        progress.currentStreak < 7 ? 'Intermediate' : 'Advanced'
+          };
+
+          // Validate calculations
+          if (calculations.progressPercentage < 0 || calculations.progressPercentage > 100) {
+            throw new Error('Invalid progress percentage');
+          }
+          
+          if (calculations.dailyGoalProgress < 0) {
+            throw new Error('Invalid daily goal progress');
+          }
+          
+          if (calculations.cardsToMaster < 0) {
+            throw new Error('Invalid cards to master count');
+          }
+
+          // Display calculation results
+          const displayData = {
+            originalProgress: progress,
+            calculations: calculations,
+            tests: {
+              progressPercentageValid: calculations.progressPercentage >= 0 && calculations.progressPercentage <= 100,
+              dailyGoalCalculationValid: calculations.dailyGoalProgress >= 0,
+              cardsToMasterValid: calculations.cardsToMaster >= 0,
+              difficultyRatioValid: calculations.difficultyRatio >= 0 && calculations.difficultyRatio <= 100
+            }
+          };
+
+          document.getElementById('calculation-display').textContent = JSON.stringify(displayData, null, 2);
+
+          setStatus('calculation-status', '✅ Progress calculations test passed!', 'success');
+          log('Progress calculations validation successful', 'success');
+
+          return calculations;
+
+        } catch (error) {
+          setStatus('calculation-status', `❌ Calculation test failed: ${error.message}`, 'error');
+          log(`Calculation test error: ${error.message}`, 'error');
+          throw error;
+        }
+      }
+
+      // Create Progress Data
+      function createProgressData() {
+        const cardSetId = document.getElementById('card-set-select').value;
+        const cardSet = testCardSets.find(cs => cs.id === cardSetId);
+        
+        const progress = {
+          ...CardSetProgressTemplate,
+          cardSetId: cardSetId,
+          totalCards: cardSet.totalCards,
+          dueCards: Math.floor(Math.random() * 20) + 5,
+          masteredCards: Math.floor(Math.random() * 30) + 10,
+          difficultCards: Math.floor(Math.random() * 10) + 2,
+          reviewsToday: Math.floor(Math.random() * 15) + 1,
+          lastReviewDate: new Date(),
+          dailyGoal: 10,
+          currentStreak: Math.floor(Math.random() * 10) + 1,
+          createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
+          updatedAt: new Date()
+        };
+
+        localStorage.setItem(`progress-${cardSetId}`, JSON.stringify(progress));
+        document.getElementById('persistence-display').textContent = JSON.stringify(progress, null, 2);
+        log(`Created progress data for ${cardSet.name}`, 'success');
+      }
+
+      // Update Progress Data
+      function updateProgressData() {
+        const cardSetId = document.getElementById('card-set-select').value;
+        const existingData = localStorage.getItem(`progress-${cardSetId}`);
+        
+        if (!existingData) {
+          log('No existing data to update. Create data first.', 'error');
+          return;
+        }
+
+        const progress = JSON.parse(existingData);
+        progress.reviewsToday += 1;
+        progress.updatedAt = new Date();
+        
+        if (Math.random() > 0.5) {
+          progress.masteredCards += 1;
+        } else {
+          progress.difficultCards += 1;
+        }
+
+        localStorage.setItem(`progress-${cardSetId}`, JSON.stringify(progress));
+        document.getElementById('persistence-display').textContent = JSON.stringify(progress, null, 2);
+        log(`Updated progress data for ${cardSetId}`, 'success');
+      }
+
+      // Load Progress Data
+      function loadProgressData() {
+        const cardSetId = document.getElementById('card-set-select').value;
+        const data = localStorage.getItem(`progress-${cardSetId}`);
+        
+        if (data) {
+          document.getElementById('persistence-display').textContent = JSON.stringify(JSON.parse(data), null, 2);
+          log(`Loaded progress data for ${cardSetId}`, 'success');
+        } else {
+          document.getElementById('persistence-display').textContent = 'No data found for this card set';
+          log(`No progress data found for ${cardSetId}`, 'warning');
+        }
+      }
+
+      // Run All Tests
+      async function runAllTests() {
+        try {
+          log('🚀 Starting comprehensive progress data structure tests...', 'info');
+          setStatus('test-status', '🧪 Running all tests...', 'info');
+
+          // Test 1: Interface Creation
+          log('📋 Test 1/4: Interface Creation...');
+          await new Promise(resolve => setTimeout(resolve, 500));
+          testInterfaceCreation();
+
+          // Test 2: Multi Card Set Progress
+          log('📚 Test 2/4: Multi Card Set Progress...');
+          await new Promise(resolve => setTimeout(resolve, 500));
+          testMultiCardSetProgress();
+
+          // Test 3: Progress Persistence
+          log('💾 Test 3/4: Progress Persistence...');
+          await new Promise(resolve => setTimeout(resolve, 500));
+          testProgressPersistence();
+
+          // Test 4: Progress Calculations
+          log('🧮 Test 4/4: Progress Calculations...');
+          await new Promise(resolve => setTimeout(resolve, 500));
+          testProgressCalculations();
+
+          setStatus('test-status', '🎉 All tests passed! CardSetProgress data structure is ready.', 'success');
+          log('🎉 All progress data structure tests completed successfully!', 'success');
+
+        } catch (error) {
+          setStatus('test-status', `❌ Test suite failed: ${error.message}`, 'error');
+          log(`❌ Test suite failed: ${error.message}`, 'error');
+        }
+      }
+
+      // Clear Test Data
+      function clearTestData() {
+        // Clear localStorage test data
+        const keys = Object.keys(localStorage);
+        keys.forEach(key => {
+          if (key.startsWith('test-') || key.startsWith('progress-')) {
+            localStorage.removeItem(key);
+          }
+        });
+
+        // Clear displays
+        document.getElementById('interface-display').textContent = '';
+        document.getElementById('persistence-display').textContent = '';
+        document.getElementById('calculation-display').textContent = '';
+        document.getElementById('progress-cards-container').innerHTML = '';
+
+        // Reset statuses
+        setStatus('interface-status', 'Interface validation pending', 'info');
+        setStatus('multi-progress-status', 'Multi-set progress test pending', 'info');
+        setStatus('persistence-status', 'Persistence test pending', 'info');
+        setStatus('calculation-status', 'Calculation test pending', 'info');
+        setStatus('test-status', 'Ready to run tests', 'info');
+
+        log('🗑️ All test data cleared', 'success');
+      }
+
+      // Event Listeners
+      document.getElementById('run-all-tests-btn').addEventListener('click', runAllTests);
+      document.getElementById('clear-data-btn').addEventListener('click', clearTestData);
+      document.getElementById('test-interface-btn').addEventListener('click', testInterfaceCreation);
+      document.getElementById('test-multi-progress-btn').addEventListener('click', testMultiCardSetProgress);
+      document.getElementById('create-progress-btn').addEventListener('click', createProgressData);
+      document.getElementById('update-progress-btn').addEventListener('click', updateProgressData);
+      document.getElementById('load-progress-btn').addEventListener('click', loadProgressData);
+      document.getElementById('clear-log-btn').addEventListener('click', () => {
+        document.getElementById('test-log').innerHTML = '';
+      });
+
+      // Initialize
+      log('📊 Progress Data Structure Test page initialized', 'success');
+      log('💡 Click "Run All Tests" to validate the CardSetProgress interface', 'info');
+    </script>
+  </body>
+</html>

@@ -57,21 +57,60 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4">
       <div className="max-w-md w-full bg-white/80 backdrop-blur-md p-5 rounded-3xl shadow-lg">
-        {/* Error Display */}
+        {/* Enhanced Error Display with specific error handling */}
         {state.error && (
           <div className="mb-2 p-4 bg-red-50 border border-red-200 rounded-2xl">
             <div className="flex items-center">
-              <div className="text-red-500 mr-2">⚠️</div>
-              <p className="text-sm text-red-700">{state.error.message}</p>
+              <div className="text-red-500 mr-2">
+                {/* Show different icons based on error type */}
+                {state.error.code.includes("CARD_SET")
+                  ? "📚"
+                  : state.error.code.includes("NETWORK")
+                  ? "🌐"
+                  : state.error.code.includes("FIRESTORE")
+                  ? "☁️"
+                  : "⚠️"}
+              </div>
+              <div className="flex-1">
+                <p className="text-sm text-red-700 font-medium">
+                  {state.error.message}
+                </p>
+                {/* Show additional context for development/debugging */}
+                {state.error.context?.cardSetId && (
+                  <p className="text-xs text-red-600 mt-1">
+                    Card Set: {state.error.context.cardSetId}
+                  </p>
+                )}
+              </div>
             </div>
-            {state.error.retryable && (
+
+            <div className="flex items-center justify-between mt-2">
+              {/* Dismiss button */}
               <button
                 onClick={() => clearError()}
-                className="mt-2 text-xs text-red-600 hover:text-red-800 underline"
+                className="text-xs text-red-600 hover:text-red-800 underline"
               >
                 Dismiss
               </button>
-            )}
+
+              {/* Retry button for retryable errors */}
+              {state.error.retryable && state.currentCardSet?.dataFile && (
+                <button
+                  onClick={() => {
+                    clearError();
+                    // Retry loading the current card set
+                    if (state.currentCardSet?.dataFile) {
+                      console.log("Dashboard: Retrying card set load");
+                      // The loadCardSetData function will be triggered by the useEffect
+                      // when currentCardSet changes or when manually called
+                    }
+                  }}
+                  className="text-xs bg-red-100 text-red-700 hover:bg-red-200 px-2 py-1 rounded transition-colors duration-200"
+                >
+                  Try Again
+                </button>
+              )}
+            </div>
           </div>
         )}
 

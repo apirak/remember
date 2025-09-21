@@ -46,6 +46,22 @@ export interface ReviewSession {
   reviewedCardIds: Set<string>; // Track which unique cards have been completed
 }
 
+// Card set specific progress tracking
+// This interface tracks progress independently for each card set
+export interface CardSetProgress {
+  cardSetId: string; // Unique identifier for the card set
+  totalCards: number; // Total number of cards in this set
+  dueCards: number; // Cards that are due for review today
+  masteredCards: number; // Cards that have been mastered (high ease factor)
+  difficultCards: number; // Cards that are marked as difficult (low ease factor)
+  reviewsToday: number; // Number of cards reviewed today in this set
+  lastReviewDate: Date | null; // When this card set was last reviewed
+  dailyGoal: number; // Daily review goal for this card set (default: 10)
+  currentStreak: number; // Consecutive days of meeting daily goal
+  createdAt: Date; // When progress tracking started for this set
+  updatedAt: Date; // Last time progress was updated
+}
+
 // Application state for the flashcard context
 export interface FlashcardContextState {
   // Card management
@@ -203,6 +219,23 @@ export interface AppError {
   retryable: boolean;
   timestamp: Date;
   context?: any;
+}
+
+// Specific error codes for better error handling and user feedback
+export type ErrorCode =
+  | "CONTEXT_ERROR" // Generic context errors
+  | "CARD_SET_NOT_FOUND" // Card set file doesn't exist
+  | "CARD_SET_INVALID_DATA" // Card set data is corrupted/invalid
+  | "CARD_SET_LOAD_FAILED" // General loading failure
+  | "CARD_SET_EMPTY" // Card set contains no valid cards
+  | "FIRESTORE_ERROR" // Firebase/Firestore related errors
+  | "NETWORK_ERROR" // Network connectivity issues
+  | "SESSION_ERROR"; // Review session related errors
+
+// Helper function to create specific card set errors with user-friendly messages
+export interface CardSetError extends AppError {
+  cardSetId?: string;
+  dataFile?: string;
 }
 
 // Pending operation for offline/fallback support

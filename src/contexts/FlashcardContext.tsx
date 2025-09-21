@@ -16,6 +16,12 @@ import type {
 } from "../types/flashcard";
 import flashcardsData from "../data/flashcards.json";
 import { transformFlashcardData } from "../utils/seedData";
+// Enhanced error handling for card set operations
+import {
+  createCardSetError,
+  getErrorCodeFromException,
+  validateCardSetData,
+} from "../utils/cardSetErrors";
 // Auth utilities for authentication monitoring
 import { onAuthStateChange } from "../utils/auth";
 // Session reducer for session management
@@ -207,7 +213,8 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
   const [state, dispatch] = useReducer(flashcardReducer, initialState);
 
   /**
-   * Load flashcard data for a specific card set
+   * Load flashcard data for a specific card set with enhanced error handling
+   * @param dataFile - The JSON file name to load card data from
    */
   const loadCardSetData = async (dataFile: string) => {
     try {
@@ -218,25 +225,65 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
       const cardSetModule = await import(`../data/${dataFile}`);
       const cardSetData = cardSetModule.default || cardSetModule;
 
+      // Validate the loaded data structure
+      try {
+        validateCardSetData(cardSetData);
+      } catch (validationError) {
+        throw createCardSetError(
+          "CARD_SET_INVALID_DATA",
+          state.currentCardSet?.id,
+          dataFile,
+          validationError
+        );
+      }
+
       // Transform raw data to include SM-2 parameters
       const transformedCards = (cardSetData as FlashcardData[]).map(
         transformFlashcardData
       );
 
+      // Check if we have any valid cards after transformation
+      if (transformedCards.length === 0) {
+        throw createCardSetError(
+          "CARD_SET_EMPTY",
+          state.currentCardSet?.id,
+          dataFile
+        );
+      }
+
       dispatch({ type: "LOAD_CARDS", payload: transformedCards });
       console.log(
-        `FlashcardContext: Loaded ${transformedCards.length} cards from ${dataFile}`
+        `FlashcardContext: Successfully loaded ${transformedCards.length} cards from ${dataFile}`
       );
     } catch (error) {
       console.error(
         `FlashcardContext: Error loading card set data from ${dataFile}:`,
         error
       );
-      // Fallback to default data if loading fails
+
+      // Create specific error based on the type of failure
+      const errorCode = getErrorCodeFromException(error);
+      const cardSetError = createCardSetError(
+        errorCode,
+        state.currentCardSet?.id,
+        dataFile,
+        error
+      );
+
+      // Set the specific error for user feedback
+      dispatch({
+        type: "SET_ERROR",
+        payload: cardSetError,
+      });
+
+      // Fallback to default data if loading fails (but still show the error)
+      console.log("FlashcardContext: Falling back to default flashcard data");
       const transformedCards = (flashcardsData as FlashcardData[]).map(
         transformFlashcardData
       );
       dispatch({ type: "LOAD_CARDS", payload: transformedCards });
+    } finally {
+      dispatch({ type: "SET_LOADING", payload: false });
     }
   };
 
