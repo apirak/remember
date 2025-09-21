@@ -82,6 +82,9 @@ const initialState: FlashcardContextState = {
   // Card set management - will be initialized in provider
   currentCardSet: null,
 
+  // Track last successfully loaded card set for error recovery
+  lastWorkingCardSet: null,
+
   isLoading: false,
   isShowingBack: false,
 
@@ -221,6 +224,14 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
       console.log(
         `FlashcardContext: Successfully loaded ${transformedCards.length} cards from ${dataFile}`
       );
+
+      // Mark this card set as the last working one on successful load
+      if (state.currentCardSet) {
+        dispatch({
+          type: "SET_LAST_WORKING_CARD_SET",
+          payload: state.currentCardSet,
+        });
+      }
     } catch (error) {
       console.error(
         `FlashcardContext: Error loading card set data from ${dataFile}:`,
@@ -242,7 +253,51 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
         payload: cardSetError,
       });
 
-      // Fallback to default data if loading fails (but still show the error)
+      // Enhanced fallback strategy: try last working card set first
+      if (
+        state.lastWorkingCardSet &&
+        state.lastWorkingCardSet.dataFile !== dataFile
+      ) {
+        console.log(
+          `FlashcardContext: Attempting fallback to last working card set: ${state.lastWorkingCardSet.name}`
+        );
+
+        try {
+          // Try to load the last working card set
+          const lastWorkingModule = await import(
+            /* @vite-ignore */ `../data/${state.lastWorkingCardSet.dataFile}`
+          );
+          const lastWorkingData =
+            lastWorkingModule.default || lastWorkingModule;
+          validateCardSetData(lastWorkingData);
+
+          const fallbackCards = (lastWorkingData as FlashcardData[]).map(
+            transformFlashcardData
+          );
+
+          if (fallbackCards.length > 0) {
+            dispatch({ type: "LOAD_CARDS", payload: fallbackCards });
+
+            // Revert to the last working card set
+            dispatch({
+              type: "SET_CURRENT_CARD_SET",
+              payload: state.lastWorkingCardSet,
+            });
+
+            console.log(
+              `FlashcardContext: Successfully fell back to ${state.lastWorkingCardSet.name}`
+            );
+            return; // Exit early since we successfully recovered
+          }
+        } catch (fallbackError) {
+          console.error(
+            `FlashcardContext: Fallback to last working card set also failed:`,
+            fallbackError
+          );
+        }
+      }
+
+      // Final fallback to default data if all else fails
       console.log("FlashcardContext: Falling back to default flashcard data");
       const transformedCards = (flashcardsData as FlashcardData[]).map(
         transformFlashcardData

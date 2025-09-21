@@ -65,6 +65,40 @@ const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
     );
   }
 
+  // Validate card-to-cardset consistency
+  // Ensure current card belongs to the session cards (which should match current card set)
+  const isCardValid = state.currentSession.cards.some(
+    (sessionCard) => sessionCard.id === state.currentCard?.id
+  );
+
+  if (!isCardValid) {
+    console.warn(
+      "Review: Card validation failed - current card doesn't belong to session cards",
+      {
+        currentCardId: state.currentCard.id,
+        sessionCardIds: state.currentSession.cards.map((c) => c.id),
+        currentCardSet: state.currentCardSet?.name,
+      }
+    );
+
+    // Reset session and redirect to dashboard for safety
+    // This prevents showing cards from wrong card sets
+    resetSession();
+    onNavigate("dashboard");
+
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-red-500 text-xl mb-4">⚠️</div>
+          <p className="text-lg font-rounded text-gray-600 mb-4">
+            Card set mismatch detected. Returning to dashboard...
+          </p>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-500 mx-auto"></div>
+        </div>
+      </div>
+    );
+  }
+
   const { currentSession, currentCard, isShowingBack } = state;
   const progress =
     (currentSession.reviewedCards / currentSession.totalCards) * 100;

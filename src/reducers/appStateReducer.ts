@@ -45,6 +45,15 @@ export type AppStateAction =
         cover: string;
         dataFile: string;
       } | null;
+    }
+  | {
+      type: "SET_LAST_WORKING_CARD_SET";
+      payload: {
+        id: string;
+        name: string;
+        cover: string;
+        dataFile: string;
+      } | null;
     };
 
 /**
@@ -145,6 +154,12 @@ export const appStateReducer = (
     case "SET_CURRENT_CARD_SET": {
       return {
         currentCardSet: action.payload,
+      };
+    }
+
+    case "SET_LAST_WORKING_CARD_SET": {
+      return {
+        lastWorkingCardSet: action.payload,
       };
     }
 

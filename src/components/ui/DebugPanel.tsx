@@ -119,6 +119,16 @@ export const DebugPanel: React.FC<DebugPanelProps> = ({
           <div>
             <span className="text-blue-400">Card Set:</span>{" "}
             {debugInfo.currentCardSet}
+            {state.currentCardSet && (
+              <div className="text-gray-400 ml-4">
+                ID: {state.currentCardSet.id}
+              </div>
+            )}
+            {state.currentCardSet && (
+              <div className="text-gray-400 ml-4">
+                File: {state.currentCardSet.dataFile}
+              </div>
+            )}
           </div>
           <div>
             <span className="text-blue-400">Total Cards:</span>{" "}
@@ -145,15 +155,37 @@ export const DebugPanel: React.FC<DebugPanelProps> = ({
             {debugInfo.isGuest ? "Guest" : "Authenticated"}
           </div>
 
-          {/* Loading states */}
+          {/* Enhanced loading states */}
           {state.isLoading && (
-            <div className="text-yellow-400">⏳ Loading...</div>
+            <div className="text-yellow-400">⏳ Loading card set data...</div>
           )}
           {state.loadingStates.savingProgress && (
             <div className="text-yellow-400">💾 Saving progress...</div>
           )}
           {state.loadingStates.fetchingCards && (
-            <div className="text-yellow-400">📚 Fetching cards...</div>
+            <div className="text-yellow-400">
+              📚 Fetching cards from Firestore...
+            </div>
+          )}
+
+          {/* Card set transition status */}
+          {state.isLoading && state.currentCardSet && (
+            <div className="text-orange-400">
+              📂 Loading: {state.currentCardSet.name}
+            </div>
+          )}
+
+          {/* Error states */}
+          {state.error && (
+            <div className="text-red-400 mt-2 pt-2 border-t border-gray-700">
+              <div className="font-bold">⚠️ Error:</div>
+              <div className="text-xs break-words">{state.error.message}</div>
+              {state.error.context?.cardSetId && (
+                <div className="text-xs text-gray-400">
+                  Card Set: {state.error.context.cardSetId}
+                </div>
+              )}
+            </div>
           )}
 
           {/* Current session info */}
@@ -169,6 +201,29 @@ export const DebugPanel: React.FC<DebugPanelProps> = ({
               <div>Easy: {state.currentSession.easyCount}</div>
               <div>Hard: {state.currentSession.hardCount}</div>
               <div>Again: {state.currentSession.againCount}</div>
+
+              {/* Current card info */}
+              {state.currentCard && (
+                <div className="mt-2 text-cyan-400">
+                  <div className="font-bold">🃏 Current Card:</div>
+                  <div className="text-xs">ID: {state.currentCard.id}</div>
+                  <div className="text-xs">
+                    Front: {state.currentCard.front.title.substring(0, 30)}
+                    {state.currentCard.front.title.length > 30 ? "..." : ""}
+                  </div>
+                  {/* Card set validation info */}
+                  {state.currentCardSet && (
+                    <div className="text-xs mt-1">
+                      <span className="text-purple-400">Card-Set Match:</span>{" "}
+                      {state.currentSession.cards.some(
+                        (c) => c.id === state.currentCard?.id
+                      )
+                        ? "✅ Valid"
+                        : "⚠️ Mismatch"}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           )}
 

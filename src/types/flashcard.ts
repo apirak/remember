@@ -80,6 +80,14 @@ export interface FlashcardContextState {
     dataFile: string;
   } | null;
 
+  // Track last successfully loaded card set for error recovery
+  lastWorkingCardSet: {
+    id: string;
+    name: string;
+    cover: string;
+    dataFile: string;
+  } | null;
+
   // UI state
   isLoading: boolean;
   isShowingBack: boolean;
@@ -162,6 +170,15 @@ export type FlashcardAction =
   // Card set management
   | {
       type: "SET_CURRENT_CARD_SET";
+      payload: {
+        id: string;
+        name: string;
+        cover: string;
+        dataFile: string;
+      } | null;
+    }
+  | {
+      type: "SET_LAST_WORKING_CARD_SET";
       payload: {
         id: string;
         name: string;
