@@ -7,7 +7,6 @@ import {
   useFlashcard,
 } from "../../contexts/FlashcardContext";
 import LoginButton from "../auth/LoginButton";
-import { DebugPanel } from "../ui/DebugPanel";
 import EmojiText from "../EmojiSVG";
 
 type AppRoute = "dashboard" | "review" | "complete" | "card-sets";
@@ -57,10 +56,10 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4">
-      <div className="max-w-md w-full bg-white/80 backdrop-blur-md p-6 rounded-3xl shadow-lg">
+      <div className="max-w-md w-full bg-white/80 backdrop-blur-md p-5 rounded-3xl shadow-lg">
         {/* Error Display */}
         {state.error && (
-          <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-2xl">
+          <div className="mb-2 p-4 bg-red-50 border border-red-200 rounded-2xl">
             <div className="flex items-center">
               <div className="text-red-500 mr-2">⚠️</div>
               <p className="text-sm text-red-700">{state.error.message}</p>
@@ -77,28 +76,28 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
         )}
 
         {/* All Sets Navigation Button - Top Left */}
-        <div className="mb-4">
+        <div className="">
           <button
             onClick={() => {
               console.log("Dashboard: All Sets button clicked");
               onNavigate("card-sets");
             }}
-            className="flex items-center px-3 py-2 text-sm font-rounded text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-colors duration-200"
+            className="flex items-center text-sm font-rounded text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-colors duration-200"
           >
-            <span className="mr-2">📚</span>
+            <EmojiText size={12}>📚</EmojiText>&nbsp;
             <span>All Sets</span>
           </button>
         </div>
 
         {/* Header */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-5">
           <EmojiText size={128}>
             {state.currentCardSet?.cover || "🎓"}
           </EmojiText>
-          <h1 className="mt-2 text-4xl font-child text-gray-600 mb-2">
+          <h1 className="text-3xl font-child text-gray-600 mb-2">
             {state.currentCardSet?.name || "Flashcards"}
           </h1>
-          <p className="text-md font-rounded text-gray-600">
+          <p className="text-sm font-rounded text-gray-600">
             Remember Everything with <br />
             <a
               className="text-blue-600 hover:text-blue-800 no-underline"
@@ -110,7 +109,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
         </div>
 
         {/* Stats Cards */}
-        <div className="mb-8">
+        <div className="mb-5">
           {/* Supporting Stats */}
           <div className="grid grid-cols-3 gap-3 bg-white border border-gray-100 rounded-xl p-3">
             {/* Mastered Cards */}
@@ -216,12 +215,9 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
       </div>
 
       {/* Login Section */}
-      <div className="mt-4">
+      <div className="mt-2">
         <LoginButton />
       </div>
-
-      {/* Debug Panel - only shows in development */}
-      <DebugPanel />
     </div>
   );
 };

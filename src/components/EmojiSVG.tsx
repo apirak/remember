@@ -16,10 +16,15 @@ const EmojiText: React.FC<EmojiTextProps> = ({ children, size = 24 }) => {
   // Add inline style to <img>
   html = html.replace(
     /<img /,
-    `<img style="width:${size}px;height:${size}px;display:inline-block;vertical-align:middle;" `
+    `<img style="width:${size}px;height:${size}px;vertical-align:middle;" `
   );
 
-  return <span dangerouslySetInnerHTML={{ __html: html }} />;
+  return (
+    <span
+      className="flex justify-center items-center"
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
+  );
 };
 
 export default EmojiText;
