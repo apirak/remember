@@ -76,13 +76,13 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
         )}
 
         {/* All Sets Navigation Button - Top Left */}
-        <div className="">
+        <div>
           <button
             onClick={() => {
               console.log("Dashboard: All Sets button clicked");
               onNavigate("card-sets");
             }}
-            className="flex items-center text-sm font-rounded text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-colors duration-200"
+            className="flex py-1 px-2 items-center text-sm font-rounded text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-colors duration-200"
           >
             <EmojiText size={12}>📚</EmojiText>&nbsp;
             <span>All Sets</span>
@@ -90,8 +90,8 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
         </div>
 
         {/* Header */}
-        <div className="text-center mb-5">
-          <EmojiText size={128}>
+        <div className="text-center mb-5 mt-2">
+          <EmojiText size={64} className="p-4">
             {state.currentCardSet?.cover || "🎓"}
           </EmojiText>
           <h1 className="text-3xl font-child text-gray-600 mb-2">

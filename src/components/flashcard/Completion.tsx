@@ -1,10 +1,10 @@
 // Completion component - shown when review session is finished
 // Displays session results and provides options to continue or return to dashboard
 
-import React from 'react';
-import { useFlashcard } from '../../contexts/FlashcardContext';
+import React from "react";
+import { useFlashcard } from "../../contexts/FlashcardContext";
 
-type AppRoute = 'dashboard' | 'review' | 'complete';
+type AppRoute = "dashboard" | "review" | "complete";
 
 interface CompletionProps {
   onNavigate: (route: AppRoute) => void;
@@ -19,7 +19,9 @@ const Completion: React.FC<CompletionProps> = ({ onNavigate }) => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto mb-4"></div>
-          <p className="text-lg font-rounded text-gray-600">Loading results...</p>
+          <p className="text-lg font-rounded text-gray-600">
+            Loading results...
+          </p>
         </div>
       </div>
     );
@@ -27,28 +29,31 @@ const Completion: React.FC<CompletionProps> = ({ onNavigate }) => {
 
   // Redirect if no completed session
   if (!state.currentSession.isComplete) {
-    console.log('Session not complete, redirecting to dashboard');
-    onNavigate('dashboard');
+    console.log("Session not complete, redirecting to dashboard");
+    onNavigate("dashboard");
     return null;
   }
 
   const { currentSession } = state;
-  
+
   // Calculate accuracy based on Easy responses vs total unique cards reviewed
-  const accuracy = currentSession.reviewedCards > 0 
-    ? Math.round((currentSession.easyCount / currentSession.reviewedCards) * 100)
-    : 0;
+  const accuracy =
+    currentSession.reviewedCards > 0
+      ? Math.round(
+          (currentSession.easyCount / currentSession.reviewedCards) * 100
+        )
+      : 0;
 
   const handleReturnToDashboard = () => {
     resetSession();
-    onNavigate('dashboard');
+    onNavigate("dashboard");
   };
 
   const handleReviewAgain = () => {
     if (state.stats.dueCards > 0) {
       resetSession();
       startReviewSession();
-      onNavigate('review');
+      onNavigate("review");
     } else {
       handleReturnToDashboard();
     }
@@ -57,13 +62,29 @@ const Completion: React.FC<CompletionProps> = ({ onNavigate }) => {
   // Determine celebration message based on performance
   const getCelebrationMessage = () => {
     if (accuracy >= 90) {
-      return { emoji: "🌟", message: "Outstanding!", subtext: "You're a vocabulary superstar!" };
+      return {
+        emoji: "🌟",
+        message: "Outstanding!",
+        subtext: "You're a vocabulary superstar!",
+      };
     } else if (accuracy >= 75) {
-      return { emoji: "🎉", message: "Great job!", subtext: "You're making excellent progress!" };
+      return {
+        emoji: "🎉",
+        message: "Great job!",
+        subtext: "You're making excellent progress!",
+      };
     } else if (accuracy >= 50) {
-      return { emoji: "👍", message: "Good work!", subtext: "Keep practicing and you'll improve!" };
+      return {
+        emoji: "👍",
+        message: "Good work!",
+        subtext: "Keep practicing and you'll improve!",
+      };
     } else {
-      return { emoji: "💪", message: "Keep trying!", subtext: "Every practice session makes you stronger!" };
+      return {
+        emoji: "💪",
+        message: "Keep trying!",
+        subtext: "Every practice session makes you stronger!",
+      };
     }
   };
 
@@ -118,20 +139,16 @@ const Completion: React.FC<CompletionProps> = ({ onNavigate }) => {
                   <div className="text-xl font-bold font-child text-success-600">
                     {currentSession.easyCount}
                   </div>
-                  <div className="text-xs font-rounded text-gray-500">
-                    Easy
-                  </div>
+                  <div className="text-xs font-rounded text-gray-500">Easy</div>
                 </div>
-                
+
                 <div>
                   <div className="text-xl font-bold font-child text-warning-600">
                     {currentSession.hardCount}
                   </div>
-                  <div className="text-xs font-rounded text-gray-500">
-                    Hard
-                  </div>
+                  <div className="text-xs font-rounded text-gray-500">Hard</div>
                 </div>
-                
+
                 <div>
                   <div className="text-xl font-bold font-child text-primary-600">
                     {currentSession.reviewedCards}
@@ -146,9 +163,14 @@ const Completion: React.FC<CompletionProps> = ({ onNavigate }) => {
             {/* Session duration */}
             <div className="border-t border-gray-200 pt-4">
               <div className="text-sm font-rounded text-gray-500">
-                Session completed in{' '}
+                Session completed in{" "}
                 <span className="font-semibold text-gray-700">
-                  {Math.round((Date.now() - currentSession.startTime.getTime()) / 1000 / 60)} minutes
+                  {Math.round(
+                    (Date.now() - currentSession.startTime.getTime()) /
+                      1000 /
+                      60
+                  )}{" "}
+                  minutes
                 </span>
               </div>
             </div>
@@ -192,19 +214,6 @@ const Completion: React.FC<CompletionProps> = ({ onNavigate }) => {
           >
             📊 Back to Dashboard
           </button>
-        </div>
-
-        {/* Encouragement message */}
-        <div className="mt-6 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl border border-blue-200">
-          <div className="text-center">
-            <div className="text-sm font-rounded text-blue-600 font-semibold">
-              💡 Learning Tip
-            </div>
-            <div className="text-xs font-rounded text-blue-500 mt-1">
-              Regular practice is the key to mastering vocabulary. 
-              Even 5 minutes a day makes a big difference!
-            </div>
-          </div>
         </div>
       </div>
     </div>

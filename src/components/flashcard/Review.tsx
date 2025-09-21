@@ -12,7 +12,8 @@ interface ReviewProps {
 }
 
 const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
-  const { state, showCardBack, rateCard, knowCard } = useFlashcard();
+  const { state, showCardBack, rateCard, knowCard, resetSession } =
+    useFlashcard();
   const [isFlipping, setIsFlipping] = useState(false);
 
   // All hooks must be called before any conditional returns
@@ -27,6 +28,12 @@ const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
   const handleKnowCard = () => {
     knowCard();
     setIsFlipping(false); // Reset flip state for next card
+  };
+
+  // Handle back to dashboard - reset session first
+  const handleBackToDashboard = () => {
+    resetSession();
+    onNavigate("dashboard");
   };
 
   // Handle card flip animation
@@ -234,7 +241,7 @@ const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
           {/* Exit button */}
           <div className="mt-6 text-center">
             <button
-              onClick={() => onNavigate("dashboard")}
+              onClick={handleBackToDashboard}
               className="
                 py-2 px-4 text-gray-500 font-rounded text-sm
                 hover:text-gray-700 transition-colors duration-200
