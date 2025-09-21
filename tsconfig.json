@@ -11,34 +11,38 @@
     // React JSX configuration
     "jsx": "react-jsx",
     "jsxImportSource": "react",
-    
     // Enhanced type checking for our flashcard app
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    
     // Module resolution for Firebase and other libraries
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    
     // Enhanced IDE experience
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    
     // Path mapping for cleaner imports (optional)
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@/components/*": ["src/components/*"],
-      "@/utils/*": ["src/utils/*"],
-      "@/types/*": ["src/types/*"]
+      "@/*": [
+        "src/*"
+      ],
+      "@/components/*": [
+        "src/components/*"
+      ],
+      "@/utils/*": [
+        "src/utils/*"
+      ],
+      "@/types/*": [
+        "src/types/*"
+      ]
     }
   }
 }

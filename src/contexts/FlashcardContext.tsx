@@ -37,8 +37,43 @@ import {
 import { createFirestoreOperations } from "../hooks/useFirestoreOperations";
 // Complex action hooks
 import { createFlashcardActions } from "../hooks/useFlashcardActions";
+// Card set persistence for remembering user's last selected set
+import {
+  saveLastCardSet,
+  loadLastCardSet,
+  isStorageAvailable,
+} from "../utils/cardSetPersistence";
 
 export const MAX_REVIEW_CARDS = 10;
+
+/**
+ * Get initial card set with persistence support
+ * Tries to load from localStorage first, falls back to default
+ */
+const getInitialCardSet = () => {
+  // Try to load from localStorage if available
+  if (isStorageAvailable()) {
+    const savedCardSet = loadLastCardSet();
+    if (savedCardSet) {
+      console.log(
+        "FlashcardContext: Restored card set from localStorage",
+        savedCardSet.name
+      );
+      return savedCardSet;
+    }
+  }
+
+  // Default fallback card set
+  const defaultCardSet = {
+    id: "chinese_essentials_1",
+    name: "Chinese Essentials 1",
+    cover: "🇨🇳",
+    dataFile: "chinese_essentials_in_communication_1.json",
+  };
+
+  console.log("FlashcardContext: Using default card set", defaultCardSet.name);
+  return defaultCardSet;
+};
 
 /**
  * Initial state for the FlashcardContext
@@ -51,13 +86,8 @@ const initialState: FlashcardContextState = {
   currentSession: null,
   currentCard: null,
 
-  // Card set management - default to first card set
-  currentCardSet: {
-    id: "chinese_essentials_1",
-    name: "Chinese Essentials 1",
-    cover: "🇨🇳",
-    dataFile: "chinese_essentials_in_communication_1.json",
-  },
+  // Card set management - will be initialized in provider
+  currentCardSet: null,
 
   isLoading: false,
   isShowingBack: false,
@@ -222,7 +252,9 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
       dispatch({ type: "SET_LOADING", payload: true });
 
       // Dynamically import the card set data file
-      const cardSetModule = await import(`../data/${dataFile}`);
+      const cardSetModule = await import(
+        /* @vite-ignore */ `../data/${dataFile}`
+      );
       const cardSetData = cardSetModule.default || cardSetModule;
 
       // Validate the loaded data structure
@@ -288,6 +320,17 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   /**
+   * Initialize card set from localStorage on component mount
+   */
+  useEffect(() => {
+    // Only initialize if currentCardSet is null (initial state)
+    if (!state.currentCardSet) {
+      const initialCardSet = getInitialCardSet();
+      dispatch({ type: "SET_CURRENT_CARD_SET", payload: initialCardSet });
+    }
+  }, []);
+
+  /**
    * Load initial flashcard data on component mount
    * Transforms raw JSON data to include SM-2 algorithm parameters
    */
@@ -303,7 +346,7 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
       );
       dispatch({ type: "LOAD_CARDS", payload: transformedCards });
     }
-  }, []);
+  }, [state.currentCardSet]); // Now depends on currentCardSet
 
   /**
    * Load new card set data when currentCardSet changes
@@ -455,7 +498,7 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
   } = firestoreOperations;
 
   /**
-   * Set the current card set
+   * Set the current card set and persist to localStorage
    */
   const setCurrentCardSet = (
     cardSet: {
@@ -466,7 +509,14 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
     } | null
   ) => {
     console.log("FlashcardContext: Setting current card set", cardSet);
+
+    // Update context state
     dispatch({ type: "SET_CURRENT_CARD_SET", payload: cardSet });
+
+    // Persist to localStorage if card set is valid and storage is available
+    if (cardSet && isStorageAvailable()) {
+      saveLastCardSet(cardSet);
+    }
   };
 
   // Create complex action helpers using the factory function
