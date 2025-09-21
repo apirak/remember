@@ -9,6 +9,7 @@ import { FlashcardService } from "../services/flashcardService";
  * Dependencies required by Firestore operations
  */
 export interface FirestoreOperationsDeps {
+  state: FlashcardContextState;
   dispatch: React.Dispatch<any>;
   setLoadingState: (
     key: keyof FlashcardContextState["loadingStates"],
@@ -27,6 +28,7 @@ export interface FirestoreOperationsDeps {
  */
 export const createFirestoreOperations = (deps: FirestoreOperationsDeps) => {
   const {
+    state,
     dispatch,
     setLoadingState,
     setSyncStatus,
@@ -36,7 +38,8 @@ export const createFirestoreOperations = (deps: FirestoreOperationsDeps) => {
   } = deps;
 
   /**
-   * Load user's flashcards from Firestore
+   * Load user's flashcards from Firestore for current card set
+   * Falls back to JSON if Firestore load fails
    */
   const loadCardsFromFirestore = async (): Promise<void> => {
     try {
@@ -44,31 +47,42 @@ export const createFirestoreOperations = (deps: FirestoreOperationsDeps) => {
       setSyncStatus("syncing");
       clearError();
 
-      const result = await FlashcardService.loadUserFlashcards();
+      // Get current card set info with fallback to default
+      let currentCardSet = state.currentCardSet;
+      if (!currentCardSet) {
+        // Use default card set if none is selected
+        currentCardSet = {
+          id: "chinese_essentials_1",
+          name: "Chinese Essentials 1",
+          cover: "🇨🇳",
+          dataFile: "chinese_essentials_in_communication_1.json",
+        };
+        console.log("Using default card set as fallback:", currentCardSet.name);
+      }
+
+      const result = await FlashcardService.loadCardSetData(
+        currentCardSet.id,
+        currentCardSet.dataFile
+      );
 
       if (result.success && result.data) {
-        dispatch({ type: "LOAD_CARDS", payload: result.data });
-        setDataSource("firestore");
+        dispatch({ type: "LOAD_CARDS", payload: result.data.cards });
+        setDataSource(
+          result.data.source === "firestore" ? "firestore" : "fallback"
+        );
         setSyncStatus("idle");
         dispatch({ type: "SET_LAST_SYNC_TIME", payload: new Date() });
 
-        console.log(`Loaded ${result.data.length} cards from Firestore`);
+        console.log(
+          `Loaded ${result.data.cards.length} cards from ${result.data.source} for card set: ${currentCardSet.name}`
+        );
       } else {
-        throw new Error(result.error || "Failed to load cards from Firestore");
+        throw new Error(result.error || "Failed to load cards");
       }
     } catch (error) {
-      console.error("Error loading cards from Firestore:", error);
-      setError(
-        error instanceof Error
-          ? error.message
-          : "Failed to load cards from Firestore"
-      );
+      console.error("Error loading cards:", error);
+      setError(error instanceof Error ? error.message : "Failed to load cards");
       setSyncStatus("error");
-
-      // Fallback to default cards if Firestore fails
-      console.log("Falling back to default cards due to Firestore error");
-      const defaultCards = FlashcardService.getDefaultFlashcards();
-      dispatch({ type: "LOAD_CARDS", payload: defaultCards });
       setDataSource("fallback");
     } finally {
       setLoadingState("fetchingCards", false);
@@ -85,12 +99,26 @@ export const createFirestoreOperations = (deps: FirestoreOperationsDeps) => {
       setSyncStatus("syncing");
       clearError();
 
-      const result = await FlashcardService.saveCard(card);
+      // Get current card set info with fallback to default
+      let currentCardSet = state.currentCardSet;
+      if (!currentCardSet) {
+        // Use default card set if none is selected
+        currentCardSet = {
+          id: "chinese_essentials_1",
+          name: "Chinese Essentials 1",
+          cover: "🇨🇳",
+          dataFile: "chinese_essentials_in_communication_1.json",
+        };
+      }
+
+      const result = await FlashcardService.saveCard(card, currentCardSet.id);
 
       if (result.success) {
         setSyncStatus("idle");
         dispatch({ type: "SET_LAST_SYNC_TIME", payload: new Date() });
-        console.log(`Saved card ${card.id} to Firestore`);
+        console.log(
+          `Saved card ${card.id} to Firestore in card set: ${currentCardSet.name}`
+        );
       } else {
         throw new Error(result.error || "Failed to save card to Firestore");
       }
@@ -104,10 +132,10 @@ export const createFirestoreOperations = (deps: FirestoreOperationsDeps) => {
       setSyncStatus("error");
 
       // Add to pending operations for retry
-      const pendingOp = FlashcardService.createPendingOperation(
-        "add_card",
-        card
-      );
+      const pendingOp = FlashcardService.createPendingOperation("add_card", {
+        ...card,
+        cardSetId: state.currentCardSet?.id,
+      });
       dispatch({ type: "ADD_PENDING_OPERATION", payload: pendingOp });
     } finally {
       setLoadingState("savingProgress", false);
@@ -128,12 +156,30 @@ export const createFirestoreOperations = (deps: FirestoreOperationsDeps) => {
       setSyncStatus("syncing");
       clearError();
 
-      const result = await FlashcardService.saveProgress(cardId, progressData);
+      // Get current card set info with fallback to default
+      let currentCardSet = state.currentCardSet;
+      if (!currentCardSet) {
+        // Use default card set if none is selected
+        currentCardSet = {
+          id: "chinese_essentials_1",
+          name: "Chinese Essentials 1",
+          cover: "🇨🇳",
+          dataFile: "chinese_essentials_in_communication_1.json",
+        };
+      }
+
+      const result = await FlashcardService.saveProgress(
+        cardId,
+        currentCardSet.id,
+        progressData
+      );
 
       if (result.success) {
         setSyncStatus("idle");
         dispatch({ type: "SET_LAST_SYNC_TIME", payload: new Date() });
-        console.log(`Updated progress for card ${cardId} in Firestore`);
+        console.log(
+          `Updated progress for card ${cardId} in Firestore (card set: ${currentCardSet.name})`
+        );
       } else {
         throw new Error(result.error || "Failed to save progress to Firestore");
       }
@@ -149,6 +195,7 @@ export const createFirestoreOperations = (deps: FirestoreOperationsDeps) => {
       // Add to pending operations for retry
       const pendingOp = FlashcardService.createPendingOperation("rate_card", {
         cardId,
+        cardSetId: state.currentCardSet?.id,
         progressData,
       });
       dispatch({ type: "ADD_PENDING_OPERATION", payload: pendingOp });

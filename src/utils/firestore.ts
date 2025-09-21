@@ -37,17 +37,46 @@ export interface FirestoreResult<T = any> {
 // Firestore collection names
 export const COLLECTIONS = {
   USERS: "users",
+  CARD_SETS: "cardSets",
   CARDS: "cards",
 } as const;
 
-// Helper function to get user's cards collection reference
-const getUserCardsCollection = (userId: string) => {
-  return collection(firestore, COLLECTIONS.USERS, userId, COLLECTIONS.CARDS);
+// Helper function to get user's cards collection reference for a specific card set
+const getUserCardSetCardsCollection = (userId: string, cardSetId: string) => {
+  return collection(
+    firestore,
+    COLLECTIONS.USERS,
+    userId,
+    COLLECTIONS.CARD_SETS,
+    cardSetId,
+    COLLECTIONS.CARDS
+  );
+};
+
+// Helper function to get user's card sets collection reference
+const getUserCardSetsCollection = (userId: string) => {
+  return collection(
+    firestore,
+    COLLECTIONS.USERS,
+    userId,
+    COLLECTIONS.CARD_SETS
+  );
 };
 
 // Helper function to get user document reference
 const getUserDocRef = (userId: string) => {
   return doc(firestore, COLLECTIONS.USERS, userId);
+};
+
+// Helper function to get card set document reference
+const getCardSetDocRef = (userId: string, cardSetId: string) => {
+  return doc(
+    firestore,
+    COLLECTIONS.USERS,
+    userId,
+    COLLECTIONS.CARD_SETS,
+    cardSetId
+  );
 };
 
 // Create or update user profile in Firestore
@@ -104,9 +133,10 @@ export const getUserProfile = async (
   }
 };
 
-// Save a single flashcard to Firestore
+// Save a single flashcard to Firestore for a specific card set
 export const saveFlashcard = async (
-  cardData: any
+  cardData: any,
+  cardSetId: string
 ): Promise<FirestoreResult> => {
   try {
     const currentUser = getCurrentUser();
@@ -117,11 +147,16 @@ export const saveFlashcard = async (
       };
     }
 
-    const cardsCollection = getUserCardsCollection(currentUser.uid);
+    // Use card set-specific collection
+    const cardsCollection = getUserCardSetCardsCollection(
+      currentUser.uid,
+      cardSetId
+    );
     const cardDocRef = doc(cardsCollection, cardData.id);
 
     const cardWithTimestamp = {
       ...cardData,
+      cardSetId, // Add cardSetId to the card data
       updatedAt: serverTimestamp(),
       createdAt: cardData.createdAt || serverTimestamp(),
     };
@@ -141,9 +176,10 @@ export const saveFlashcard = async (
   }
 };
 
-// Save multiple flashcards in a batch operation
+// Save multiple flashcards in a batch operation for a specific card set
 export const saveFlashcardsBatch = async (
-  cards: any[]
+  cards: any[],
+  cardSetId: string
 ): Promise<FirestoreResult> => {
   try {
     const currentUser = getCurrentUser();
@@ -155,12 +191,16 @@ export const saveFlashcardsBatch = async (
     }
 
     const batch: WriteBatch = writeBatch(firestore);
-    const cardsCollection = getUserCardsCollection(currentUser.uid);
+    const cardsCollection = getUserCardSetCardsCollection(
+      currentUser.uid,
+      cardSetId
+    );
 
     cards.forEach((cardData) => {
       const cardDocRef = doc(cardsCollection, cardData.id);
       const cardWithTimestamp = {
         ...cardData,
+        cardSetId, // Add cardSetId to each card
         updatedAt: serverTimestamp(),
         createdAt: cardData.createdAt || serverTimestamp(),
       };
@@ -183,8 +223,10 @@ export const saveFlashcardsBatch = async (
   }
 };
 
-// Get all flashcards for the current user
-export const getUserFlashcards = async (): Promise<FirestoreResult<any[]>> => {
+// Get all flashcards for a specific card set
+export const getUserFlashcards = async (
+  cardSetId: string
+): Promise<FirestoreResult<any[]>> => {
   try {
     const currentUser = getCurrentUser();
     if (!currentUser) {
@@ -194,7 +236,10 @@ export const getUserFlashcards = async (): Promise<FirestoreResult<any[]>> => {
       };
     }
 
-    const cardsCollection = getUserCardsCollection(currentUser.uid);
+    const cardsCollection = getUserCardSetCardsCollection(
+      currentUser.uid,
+      cardSetId
+    );
     const cardsQuery = query(cardsCollection, orderBy("createdAt", "desc"));
 
     const querySnapshot: QuerySnapshot<DocumentData> = await getDocs(
@@ -223,8 +268,10 @@ export const getUserFlashcards = async (): Promise<FirestoreResult<any[]>> => {
   }
 };
 
-// Get flashcards due for review
-export const getDueFlashcards = async (): Promise<FirestoreResult<any[]>> => {
+// Get flashcards due for review for a specific card set
+export const getDueFlashcards = async (
+  cardSetId: string
+): Promise<FirestoreResult<any[]>> => {
   try {
     const currentUser = getCurrentUser();
     if (!currentUser) {
@@ -234,7 +281,10 @@ export const getDueFlashcards = async (): Promise<FirestoreResult<any[]>> => {
       };
     }
 
-    const cardsCollection = getUserCardsCollection(currentUser.uid);
+    const cardsCollection = getUserCardSetCardsCollection(
+      currentUser.uid,
+      cardSetId
+    );
     const now = Timestamp.fromDate(new Date());
 
     const dueCardsQuery = query(
@@ -267,9 +317,10 @@ export const getDueFlashcards = async (): Promise<FirestoreResult<any[]>> => {
   }
 };
 
-// Update flashcard progress (SM-2 algorithm results)
+// Update flashcard progress (SM-2 algorithm results) for a specific card set
 export const updateFlashcardProgress = async (
   cardId: string,
+  cardSetId: string,
   progressData: any
 ): Promise<FirestoreResult> => {
   try {
@@ -281,10 +332,14 @@ export const updateFlashcardProgress = async (
       };
     }
 
-    const cardDocRef = doc(getUserCardsCollection(currentUser.uid), cardId);
+    const cardDocRef = doc(
+      getUserCardSetCardsCollection(currentUser.uid, cardSetId),
+      cardId
+    );
 
     const updateData = {
       ...progressData,
+      cardSetId, // Ensure cardSetId is included
       updatedAt: serverTimestamp(),
       // Convert Date objects to Firestore timestamps for storage
       nextReviewDate: progressData.nextReviewDate
@@ -307,9 +362,10 @@ export const updateFlashcardProgress = async (
   }
 };
 
-// Delete a flashcard
+// Delete a flashcard from a specific card set
 export const deleteFlashcard = async (
-  cardId: string
+  cardId: string,
+  cardSetId: string
 ): Promise<FirestoreResult> => {
   try {
     const currentUser = getCurrentUser();
@@ -320,10 +376,13 @@ export const deleteFlashcard = async (
       };
     }
 
-    const cardDocRef = doc(getUserCardsCollection(currentUser.uid), cardId);
+    const cardDocRef = doc(
+      getUserCardSetCardsCollection(currentUser.uid, cardSetId),
+      cardId
+    );
     await deleteDoc(cardDocRef);
 
-    console.log("Flashcard deleted:", cardId);
+    console.log("Flashcard deleted:", cardId, "from card set:", cardSetId);
     return { success: true };
   } catch (error) {
     console.error("Error deleting flashcard:", error);
@@ -361,8 +420,12 @@ export const migrateGuestDataToUser = async (
       migrationDate: serverTimestamp(),
     });
 
-    // Migrate flashcards
-    const migrationResult = await saveFlashcardsBatch(guestData.cards);
+    // Migrate flashcards to default card set (chinese_essentials_1)
+    const defaultCardSetId = "chinese_essentials_1";
+    const migrationResult = await saveFlashcardsBatch(
+      guestData.cards,
+      defaultCardSetId
+    );
 
     if (migrationResult.success) {
       console.log(
@@ -383,8 +446,9 @@ export const migrateGuestDataToUser = async (
   }
 };
 
-// Real-time listener for user's flashcards (optional, for future use)
+// Real-time listener for user's flashcards in a specific card set
 export const subscribeToUserFlashcards = (
+  cardSetId: string,
   callback: (cards: any[]) => void
 ): (() => void) => {
   const currentUser = getCurrentUser();
@@ -393,7 +457,10 @@ export const subscribeToUserFlashcards = (
     return () => {};
   }
 
-  const cardsCollection = getUserCardsCollection(currentUser.uid);
+  const cardsCollection = getUserCardSetCardsCollection(
+    currentUser.uid,
+    cardSetId
+  );
   const cardsQuery = query(cardsCollection, orderBy("createdAt", "desc"));
 
   return onSnapshot(
@@ -415,6 +482,83 @@ export const subscribeToUserFlashcards = (
   );
 };
 
+// Get all card sets for a user (returns basic metadata, not the cards themselves)
+export const getUserCardSets = async (): Promise<FirestoreResult<any[]>> => {
+  try {
+    const currentUser = getCurrentUser();
+    if (!currentUser) {
+      return {
+        success: false,
+        error: "User must be authenticated to get card sets.",
+      };
+    }
+
+    const cardSetsCollection = getUserCardSetsCollection(currentUser.uid);
+    const cardSetsQuery = query(
+      cardSetsCollection,
+      orderBy("lastAccessedAt", "desc")
+    );
+
+    const querySnapshot = await getDocs(cardSetsQuery);
+    const cardSets = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+      createdAt: doc.data().createdAt?.toDate() || new Date(),
+      updatedAt: doc.data().updatedAt?.toDate() || new Date(),
+      lastAccessedAt: doc.data().lastAccessedAt?.toDate() || new Date(),
+    }));
+
+    console.log(`Found ${cardSets.length} card sets for user`);
+    return { success: true, data: cardSets };
+  } catch (error) {
+    console.error("Error getting user card sets:", error);
+
+    if (isFirebaseError(error)) {
+      return { success: false, error: getFirebaseErrorMessage(error) };
+    }
+
+    return { success: false, error: "Failed to get card sets." };
+  }
+};
+
+// Create or update card set metadata
+export const updateCardSetMetadata = async (
+  cardSetId: string,
+  metadata: any
+): Promise<FirestoreResult> => {
+  try {
+    const currentUser = getCurrentUser();
+    if (!currentUser) {
+      return {
+        success: false,
+        error: "User must be authenticated to update card set metadata.",
+      };
+    }
+
+    const cardSetDocRef = getCardSetDocRef(currentUser.uid, cardSetId);
+
+    const updateData = {
+      ...metadata,
+      lastAccessedAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
+      createdAt: metadata.createdAt || serverTimestamp(),
+    };
+
+    await setDoc(cardSetDocRef, updateData, { merge: true });
+
+    console.log("Card set metadata updated:", cardSetId);
+    return { success: true };
+  } catch (error) {
+    console.error("Error updating card set metadata:", error);
+
+    if (isFirebaseError(error)) {
+      return { success: false, error: getFirebaseErrorMessage(error) };
+    }
+
+    return { success: false, error: "Failed to update card set metadata." };
+  }
+};
+
 // Export Firestore utilities as default
 export default {
   createUserProfile,
@@ -427,4 +571,6 @@ export default {
   deleteFlashcard,
   migrateGuestDataToUser,
   subscribeToUserFlashcards,
+  getUserCardSets,
+  updateCardSetMetadata,
 };

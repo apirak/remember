@@ -30,11 +30,14 @@ export interface ServiceResult<T = any> {
  */
 export class FlashcardService {
   /**
-   * Load all flashcards for the current user from Firestore
-   * If user has no cards, initializes with default cards
+   * Load all flashcards for a specific card set from Firestore
+   * If user has no cards for this card set, returns empty array (lazy creation)
+   * @param cardSetId - The card set identifier
    * @returns Service result with flashcard array
    */
-  static async loadUserFlashcards(): Promise<ServiceResult<Flashcard[]>> {
+  static async loadUserFlashcards(
+    cardSetId: string
+  ): Promise<ServiceResult<Flashcard[]>> {
     try {
       const currentUser = getCurrentUser();
       if (!currentUser) {
@@ -44,7 +47,180 @@ export class FlashcardService {
         };
       }
 
-      const result = await getUserFlashcards();
+      const result = await getUserFlashcards(cardSetId);
+
+      if (!result.success) {
+        return {
+          success: false,
+          error: result.error || "Failed to load cards from Firestore",
+        };
+      }
+
+      let cards: Flashcard[] = [];
+
+      // If user has cards in Firestore for this card set, use them
+      if (result.data && result.data.length > 0) {
+        // Convert existing Firestore data to our Flashcard format
+        cards = result.data.map((cardData: any) => ({
+          ...cardData,
+          // Ensure proper date conversion
+          nextReviewDate:
+            cardData.nextReviewDate instanceof Date
+              ? cardData.nextReviewDate
+              : new Date(cardData.nextReviewDate),
+          lastReviewDate:
+            cardData.lastReviewDate instanceof Date
+              ? cardData.lastReviewDate
+              : new Date(cardData.lastReviewDate),
+          createdAt:
+            cardData.createdAt instanceof Date
+              ? cardData.createdAt
+              : new Date(cardData.createdAt),
+          updatedAt:
+            cardData.updatedAt instanceof Date
+              ? cardData.updatedAt
+              : new Date(cardData.updatedAt),
+        }));
+
+        console.log(
+          `Loaded ${cards.length} cards from Firestore for card set: ${cardSetId}`
+        );
+      } else {
+        console.log(
+          `No cards found in Firestore for card set: ${cardSetId}, returning empty array for lazy creation`
+        );
+      }
+
+      return {
+        success: true,
+        data: cards,
+      };
+    } catch (error) {
+      console.error("Error loading cards from Firestore:", error);
+      return {
+        success: false,
+        error:
+          error instanceof Error
+            ? error.message
+            : "Failed to load cards from Firestore",
+      };
+    }
+  }
+
+  /**
+   * Load cards from JSON file for a specific card set
+   * Used as fallback or for seeding new card sets
+   * @param cardSetDataFile - JSON file name (e.g., "business_chinese.json")
+   * @returns Service result with flashcard array
+   */
+  static async loadCardsFromJSON(
+    cardSetDataFile: string
+  ): Promise<ServiceResult<Flashcard[]>> {
+    try {
+      // Dynamically import the card set data
+      const cardSetData = await import(`../data/${cardSetDataFile}`);
+      const cardsData = cardSetData.default as FlashcardData[];
+
+      // Transform to include SM-2 parameters
+      const cards = cardsData.map((data) =>
+        transformFlashcardData(data, cardSetDataFile.replace(".json", ""))
+      );
+
+      console.log(
+        `Loaded ${cards.length} cards from JSON file: ${cardSetDataFile}`
+      );
+      return {
+        success: true,
+        data: cards,
+      };
+    } catch (error) {
+      console.error(
+        `Error loading cards from JSON file ${cardSetDataFile}:`,
+        error
+      );
+      return {
+        success: false,
+        error: `Failed to load cards from ${cardSetDataFile}`,
+      };
+    }
+  }
+
+  /**
+   * Load cards for a specific card set (Firestore first, then JSON fallback)
+   * @param cardSetId - The card set identifier
+   * @param cardSetDataFile - JSON file name for fallback
+   * @returns Service result with flashcard array and source info
+   */
+  static async loadCardSetData(
+    cardSetId: string,
+    cardSetDataFile: string
+  ): Promise<
+    ServiceResult<{ cards: Flashcard[]; source: "firestore" | "json" }>
+  > {
+    try {
+      // First, try to load from Firestore
+      const firestoreResult = await this.loadUserFlashcards(cardSetId);
+
+      if (
+        firestoreResult.success &&
+        firestoreResult.data &&
+        firestoreResult.data.length > 0
+      ) {
+        return {
+          success: true,
+          data: {
+            cards: firestoreResult.data,
+            source: "firestore",
+          },
+        };
+      }
+
+      // If no Firestore data, load from JSON
+      const jsonResult = await this.loadCardsFromJSON(cardSetDataFile);
+
+      if (jsonResult.success) {
+        return {
+          success: true,
+          data: {
+            cards: jsonResult.data || [],
+            source: "json",
+          },
+        };
+      }
+
+      return {
+        success: false,
+        error: `Failed to load cards for card set ${cardSetId} from both Firestore and JSON`,
+      };
+    } catch (error) {
+      console.error(`Error loading card set data for ${cardSetId}:`, error);
+      return {
+        success: false,
+        error:
+          error instanceof Error
+            ? error.message
+            : "Failed to load card set data",
+      };
+    }
+  }
+
+  /**
+   * Legacy method - will be removed after migration
+   * @deprecated Use loadCardSetData instead
+   */
+  static async loadUserFlashcardsLegacy(): Promise<ServiceResult<Flashcard[]>> {
+    try {
+      const currentUser = getCurrentUser();
+      if (!currentUser) {
+        return {
+          success: false,
+          error: "User must be authenticated to load cards from Firestore.",
+        };
+      }
+
+      // Use default card set for legacy support
+      const defaultCardSetId = "chinese_essentials_1";
+      const result = await getUserFlashcards(defaultCardSetId);
 
       if (!result.success) {
         return {
@@ -68,7 +244,10 @@ export class FlashcardService {
 
         // Save default cards to Firestore for the new user
         try {
-          const saveResult = await saveFlashcardsBatch(defaultCards);
+          const saveResult = await saveFlashcardsBatch(
+            defaultCards,
+            defaultCardSetId
+          );
           if (saveResult.success) {
             console.log(
               "Successfully saved default cards to Firestore for new user"
@@ -126,11 +305,15 @@ export class FlashcardService {
   }
 
   /**
-   * Save a single flashcard to Firestore
+   * Save a single flashcard to Firestore for a specific card set
    * @param card - The flashcard to save
+   * @param cardSetId - The card set identifier
    * @returns Service result with success status
    */
-  static async saveCard(card: Flashcard): Promise<ServiceResult> {
+  static async saveCard(
+    card: Flashcard,
+    cardSetId: string
+  ): Promise<ServiceResult> {
     try {
       const currentUser = getCurrentUser();
       if (!currentUser) {
@@ -140,10 +323,12 @@ export class FlashcardService {
         };
       }
 
-      const result = await saveFlashcard(card);
+      const result = await saveFlashcard(card, cardSetId);
 
       if (result.success) {
-        console.log(`Saved card ${card.id} to Firestore`);
+        console.log(
+          `Saved card ${card.id} to Firestore in card set: ${cardSetId}`
+        );
         return { success: true };
       } else {
         return {
@@ -164,13 +349,15 @@ export class FlashcardService {
   }
 
   /**
-   * Update flashcard progress (SM-2 parameters) in Firestore
+   * Update flashcard progress (SM-2 parameters) in Firestore for a specific card set
    * @param cardId - The ID of the card to update
+   * @param cardSetId - The card set identifier
    * @param progressData - The progress data to save
    * @returns Service result with success status
    */
   static async saveProgress(
     cardId: string,
+    cardSetId: string,
     progressData: any
   ): Promise<ServiceResult> {
     try {
@@ -182,10 +369,16 @@ export class FlashcardService {
         };
       }
 
-      const result = await updateFlashcardProgress(cardId, progressData);
+      const result = await updateFlashcardProgress(
+        cardId,
+        cardSetId,
+        progressData
+      );
 
       if (result.success) {
-        console.log(`Updated progress for card ${cardId} in Firestore`);
+        console.log(
+          `Updated progress for card ${cardId} in Firestore (card set: ${cardSetId})`
+        );
         return { success: true };
       } else {
         return {
@@ -206,11 +399,15 @@ export class FlashcardService {
   }
 
   /**
-   * Save multiple flashcards to Firestore in batch
+   * Save multiple flashcards to Firestore in batch for a specific card set
    * @param cards - Array of flashcards to save
+   * @param cardSetId - The card set identifier
    * @returns Service result with success status
    */
-  static async saveCardsBatch(cards: Flashcard[]): Promise<ServiceResult> {
+  static async saveCardsBatch(
+    cards: Flashcard[],
+    cardSetId: string
+  ): Promise<ServiceResult> {
     try {
       const currentUser = getCurrentUser();
       if (!currentUser) {
@@ -220,10 +417,12 @@ export class FlashcardService {
         };
       }
 
-      const result = await saveFlashcardsBatch(cards);
+      const result = await saveFlashcardsBatch(cards, cardSetId);
 
       if (result.success) {
-        console.log(`Saved ${cards.length} cards to Firestore in batch`);
+        console.log(
+          `Saved ${cards.length} cards to Firestore in batch (card set: ${cardSetId})`
+        );
         return { success: true };
       } else {
         return {
@@ -322,18 +521,22 @@ export class FlashcardService {
     operation: PendingOperation
   ): Promise<ServiceResult> {
     try {
+      // For legacy operations without cardSetId, use default
+      const cardSetId = operation.data?.cardSetId || "chinese_essentials_1";
+
       switch (operation.type) {
         case "add_card":
-          return await this.saveCard(operation.data);
+          return await this.saveCard(operation.data, cardSetId);
 
         case "rate_card":
           return await this.saveProgress(
             operation.data.cardId,
+            cardSetId,
             operation.data.progressData
           );
 
         case "edit_card":
-          return await this.saveCard(operation.data);
+          return await this.saveCard(operation.data, cardSetId);
 
         default:
           return {

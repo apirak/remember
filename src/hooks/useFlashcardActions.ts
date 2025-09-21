@@ -140,12 +140,28 @@ export const createFlashcardActions = (deps: FlashcardActionsDeps) => {
         }));
 
         // Save all reset cards to Firestore using batch operation
-        const result = await FlashcardService.saveCardsBatch(resetCards);
+        let currentCardSet = state.currentCardSet;
+        if (!currentCardSet) {
+          // Use default card set if none is selected
+          currentCardSet = {
+            id: "chinese_essentials_1",
+            name: "Chinese Essentials 1",
+            cover: "🇨🇳",
+            dataFile: "chinese_essentials_in_communication_1.json",
+          };
+        }
+
+        const result = await FlashcardService.saveCardsBatch(
+          resetCards,
+          currentCardSet.id
+        );
 
         if (result.success) {
           setSyncStatus("idle");
           dispatch({ type: "SET_LAST_SYNC_TIME", payload: new Date() });
-          console.log("Successfully reset all cards progress in Firestore");
+          console.log(
+            `Successfully reset all cards progress in Firestore for card set: ${currentCardSet.name}`
+          );
         } else {
           throw new Error(
             result.error || "Failed to reset progress in Firestore"

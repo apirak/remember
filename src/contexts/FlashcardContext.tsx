@@ -474,6 +474,7 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
 
   // Create Firestore operations using the factory function
   const firestoreOperations = createFirestoreOperations({
+    state,
     dispatch,
     setLoadingState,
     setSyncStatus,
