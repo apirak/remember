@@ -8,7 +8,6 @@ import {
 } from "../../contexts/FlashcardContext";
 import LoginButton from "../auth/LoginButton";
 import EmojiText from "../EmojiSVG";
-import { DebugPanel } from "../ui/DebugPanel";
 
 type AppRoute = "dashboard" | "review" | "complete" | "card-sets";
 
@@ -57,8 +56,8 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
 
   return (
     <div className="min-h-screen flex">
-      {/* Left half - Main content */}
-      <div className="w-1/2 flex flex-col items-center justify-center p-4">
+      {/* Main content - now full width */}
+      <div className="w-full flex flex-col items-center justify-center p-4">
         <div className="max-w-md w-full bg-white/80 backdrop-blur-md p-5 rounded-3xl shadow-lg">
           {/* Enhanced Error Display with specific error handling */}
           {state.error && (
@@ -262,11 +261,6 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
         <div className="mt-2">
           <LoginButton />
         </div>
-      </div>
-
-      {/* Right half - Debug Panel */}
-      <div className="w-1/2">
-        <DebugPanel />
       </div>
     </div>
   );
