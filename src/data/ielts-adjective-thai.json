@@ -1,0 +1,2602 @@
+[
+  {
+    "id": "ielts-001-adequate",
+    "front": {
+      "icon": "",
+      "title": "adequate",
+      "description": "/ˈædɪkwət/"
+    },
+    "back": {
+      "icon": "✅",
+      "title": "เพียงพอ",
+      "description": "The resources were not **adequate** to complete the project on time."
+    }
+  },
+  {
+    "id": "ielts-002-analytical",
+    "front": {
+      "icon": "",
+      "title": "analytical",
+      "description": "/ˌænəˈlɪtɪkl/"
+    },
+    "back": {
+      "icon": "🧠",
+      "title": "เกี่ยวกับการวิเคราะห์",
+      "description": "He has a strong **analytical** mind and is great at solving complex problems."
+    }
+  },
+  {
+    "id": "ielts-003-apparent",
+    "front": {
+      "icon": "",
+      "title": "apparent",
+      "description": "/əˈpærənt/"
+    },
+    "back": {
+      "icon": "💡",
+      "title": "ที่เห็นได้ชัด",
+      "description": "It was **apparent** from his expression that he was disappointed."
+    }
+  },
+  {
+    "id": "ielts-004-appropriate",
+    "front": {
+      "icon": "",
+      "title": "appropriate",
+      "description": "/əˈproʊpriət/"
+    },
+    "back": {
+      "icon": "👌",
+      "title": "ที่เหมาะสม",
+      "description": "Please wear **appropriate** attire for the formal dinner."
+    }
+  },
+  {
+    "id": "ielts-005-authentic",
+    "front": {
+      "icon": "",
+      "title": "authentic",
+      "description": "/ɔːˈθentɪk/"
+    },
+    "back": {
+      "icon": "💯",
+      "title": "แท้จริง",
+      "description": "The museum exhibits a collection of **authentic** Roman artifacts."
+    }
+  },
+  {
+    "id": "ielts-006-beneficial",
+    "front": {
+      "icon": "",
+      "title": "beneficial",
+      "description": "/ˌbenɪˈfɪʃl/"
+    },
+    "back": {
+      "icon": "👍",
+      "title": "มีประโยชน์",
+      "description": "Regular exercise has a **beneficial** effect on mental health."
+    }
+  },
+  {
+    "id": "ielts-007-cognitive",
+    "front": {
+      "icon": "",
+      "title": "cognitive",
+      "description": "/ˈkɑːɡnətɪv/"
+    },
+    "back": {
+      "icon": "🧠",
+      "title": "เกี่ยวกับกระบวนการคิด",
+      "description": "The research focuses on the **cognitive** development of young children."
+    }
+  },
+  {
+    "id": "ielts-008-compelling",
+    "front": {
+      "icon": "",
+      "title": "compelling",
+      "description": "/kəmˈpelɪŋ/"
+    },
+    "back": {
+      "icon": "😲",
+      "title": "น่าสนใจ, น่าเชื่อถือ",
+      "description": "The witness provided a **compelling** account of the event."
+    }
+  },
+  {
+    "id": "ielts-009-comprehensive",
+    "front": {
+      "icon": "",
+      "title": "comprehensive",
+      "description": "/ˌkɑːmprɪˈhensɪv/"
+    },
+    "back": {
+      "icon": "📋",
+      "title": "ครอบคลุม",
+      "description": "The report provides a **comprehensive** overview of the global market."
+    }
+  },
+  {
+    "id": "ielts-010-consistent",
+    "front": {
+      "icon": "",
+      "title": "consistent",
+      "description": "/kənˈsɪstənt/"
+    },
+    "back": {
+      "icon": "📈",
+      "title": "สอดคล้อง, คงที่",
+      "description": "Her performance has been **consistent** throughout the season."
+    }
+  },
+  {
+    "id": "ielts-011-controversial",
+    "front": {
+      "icon": "",
+      "title": "controversial",
+      "description": "/ˌkɑːntrəˈvɜːrʃl/"
+    },
+    "back": {
+      "icon": "🤔",
+      "title": "เป็นที่ถกเถียง",
+      "description": "The new law is highly **controversial** and has divided public opinion."
+    }
+  },
+  {
+    "id": "ielts-012-crucial",
+    "front": {
+      "icon": "",
+      "title": "crucial",
+      "description": "/ˈkruːʃl/"
+    },
+    "back": {
+      "icon": "🔑",
+      "title": "สำคัญมาก",
+      "description": "Communication is **crucial** for a healthy relationship."
+    }
+  },
+  {
+    "id": "ielts-013-deceptive",
+    "front": {
+      "icon": "",
+      "title": "deceptive",
+      "description": "/dɪˈseptɪv/"
+    },
+    "back": {
+      "icon": "🎭",
+      "title": "หลอกลวง",
+      "description": "The advertisement was **deceptive**, leading consumers to believe a false claim."
+    }
+  },
+  {
+    "id": "ielts-014-diverse",
+    "front": {
+      "icon": "",
+      "title": "diverse",
+      "description": "/daɪˈvɜːrs/"
+    },
+    "back": {
+      "icon": "🌍",
+      "title": "หลากหลาย",
+      "description": "The university has a **diverse** student body from all over the world."
+    }
+  },
+  {
+    "id": "ielts-015-dominant",
+    "front": {
+      "icon": "",
+      "title": "dominant",
+      "description": "/ˈdɑːmɪnənt/"
+    },
+    "back": {
+      "icon": "👑",
+      "title": "มีอิทธิพล, เหนือกว่า",
+      "description": "The company holds a **dominant** position in the market."
+    }
+  },
+  {
+    "id": "ielts-016-dynamic",
+    "front": {
+      "icon": "",
+      "title": "dynamic",
+      "description": "/daɪˈnæmɪk/"
+    },
+    "back": {
+      "icon": "⚡️",
+      "title": "มีพลัง, เปลี่ยนแปลงตลอด",
+      "description": "The business environment is very **dynamic** and constantly changing."
+    }
+  },
+  {
+    "id": "ielts-017-efficient",
+    "front": {
+      "icon": "",
+      "title": "efficient",
+      "description": "/ɪˈfɪʃnt/"
+    },
+    "back": {
+      "icon": "🚀",
+      "title": "มีประสิทธิภาพ",
+      "description": "The new system is more **efficient** and saves a lot of time."
+    }
+  },
+  {
+    "id": "ielts-018-elaborate",
+    "front": {
+      "icon": "",
+      "title": "elaborate",
+      "description": "/ɪˈlæbərət/"
+    },
+    "back": {
+      "icon": "🧐",
+      "title": "ซับซ้อน, ละเอียด",
+      "description": "She wore an **elaborate** dress with intricate patterns."
+    }
+  },
+  {
+    "id": "ielts-019-empirical",
+    "front": {
+      "icon": "",
+      "title": "empirical",
+      "description": "/ɪmˈpɪrɪkl/"
+    },
+    "back": {
+      "icon": "🔬",
+      "title": "เชิงประจักษ์",
+      "description": "The theory is based on **empirical** evidence from extensive experiments."
+    }
+  },
+  {
+    "id": "ielts-020-essential",
+    "front": {
+      "icon": "",
+      "title": "essential",
+      "description": "/ɪˈsenʃl/"
+    },
+    "back": {
+      "icon": "💡",
+      "title": "จำเป็น",
+      "description": "Water is **essential** for all living organisms."
+    }
+  },
+  {
+    "id": "ielts-021-exclusive",
+    "front": {
+      "icon": "",
+      "title": "exclusive",
+      "description": "/ɪkˈskluːsɪv/"
+    },
+    "back": {
+      "icon": "👑",
+      "title": "เฉพาะบุคคล, พิเศษ",
+      "description": "The brand launched an **exclusive** collection available only to members."
+    }
+  },
+  {
+    "id": "ielts-022-extensive",
+    "front": {
+      "icon": "",
+      "title": "extensive",
+      "description": "/ɪkˈstensɪv/"
+    },
+    "back": {
+      "icon": "🗺️",
+      "title": "กว้างขวาง",
+      "description": "The library has an **extensive** collection of rare books."
+    }
+  },
+  {
+    "id": "ielts-023-feasible",
+    "front": {
+      "icon": "",
+      "title": "feasible",
+      "description": "/ˈfiːzəbl/"
+    },
+    "back": {
+      "icon": "👍",
+      "title": "ที่สามารถทำได้",
+      "description": "Building a bridge here is not economically **feasible**."
+    }
+  },
+  {
+    "id": "ielts-024-fundamental",
+    "front": {
+      "icon": "",
+      "title": "fundamental",
+      "description": "/ˌfʌndəˈmentl/"
+    },
+    "back": {
+      "icon": "🧱",
+      "title": "พื้นฐาน",
+      "description": "A good education is **fundamental** to a child's success."
+    }
+  },
+  {
+    "id": "ielts-025-gradual",
+    "front": {
+      "icon": "",
+      "title": "gradual",
+      "description": "/ˈɡrædʒuəl/"
+    },
+    "back": {
+      "icon": "🐢",
+      "title": "ค่อยเป็นค่อยไป",
+      "description": "The patient showed a **gradual** improvement over several weeks."
+    }
+  },
+  {
+    "id": "ielts-026-imminent",
+    "front": {
+      "icon": "",
+      "title": "imminent",
+      "description": "/ˈɪmɪnənt/"
+    },
+    "back": {
+      "icon": "⚠️",
+      "title": "ที่ใกล้จะเกิดขึ้น",
+      "description": "The storm's arrival is **imminent**, so we should seek shelter."
+    }
+  },
+  {
+    "id": "ielts-027-impartial",
+    "front": {
+      "icon": "",
+      "title": "impartial",
+      "description": "/ɪmˈpɑːrʃl/"
+    },
+    "back": {
+      "icon": "⚖️",
+      "title": "เป็นกลาง",
+      "description": "The judge must remain **impartial** throughout the trial."
+    }
+  },
+  {
+    "id": "ielts-028-imperative",
+    "front": {
+      "icon": "",
+      "title": "imperative",
+      "description": "/ɪmˈperətɪv/"
+    },
+    "back": {
+      "icon": "❗",
+      "title": "จำเป็นอย่างยิ่ง",
+      "description": "It is **imperative** that we act now to address the crisis."
+    }
+  },
+  {
+    "id": "ielts-029-inadequate",
+    "front": {
+      "icon": "",
+      "title": "inadequate",
+      "description": "/ɪnˈædɪkwət/"
+    },
+    "back": {
+      "icon": "❌",
+      "title": "ไม่เพียงพอ",
+      "description": "The response was **inadequate** given the seriousness of the situation."
+    }
+  },
+  {
+    "id": "ielts-030-inclusive",
+    "front": {
+      "icon": "",
+      "title": "inclusive",
+      "description": "/ɪnˈkluːsɪv/"
+    },
+    "back": {
+      "icon": "🤝",
+      "title": "ที่ครอบคลุม",
+      "description": "The company's new policy is more **inclusive** of employees from diverse backgrounds."
+    }
+  },
+  {
+    "id": "ielts-031-inconsistent",
+    "front": {
+      "icon": "",
+      "title": "inconsistent",
+      "description": "/ˌɪnkənˈsɪstənt/"
+    },
+    "back": {
+      "icon": "📉",
+      "title": "ไม่สอดคล้อง",
+      "description": "His behavior was **inconsistent** with his usual character."
+    }
+  },
+  {
+    "id": "ielts-032-inevitable",
+    "front": {
+      "icon": "",
+      "title": "inevitable",
+      "description": "/ɪnˈevɪtəbl/"
+    },
+    "back": {
+      "icon": "🔮",
+      "title": "ที่หลีกเลี่ยงไม่ได้",
+      "description": "The decline of the old empire was **inevitable**."
+    }
+  },
+  {
+    "id": "ielts-033-innovative",
+    "front": {
+      "icon": "",
+      "title": "innovative",
+      "description": "/ˈɪnəveɪtɪv/"
+    },
+    "back": {
+      "icon": "💡",
+      "title": "เกี่ยวกับนวัตกรรม",
+      "description": "The company is known for its **innovative** approach to technology."
+    }
+  },
+  {
+    "id": "ielts-034-integral",
+    "front": {
+      "icon": "",
+      "title": "integral",
+      "description": "/ˈɪntɪɡrəl/"
+    },
+    "back": {
+      "icon": "🧩",
+      "title": "ที่เป็นส่วนสำคัญ",
+      "description": "Teamwork is an **integral** part of the company's culture."
+    }
+  },
+  {
+    "id": "ielts-035-legitimate",
+    "front": {
+      "icon": "",
+      "title": "legitimate",
+      "description": "/lɪˈdʒɪtɪmət/"
+    },
+    "back": {
+      "icon": "✅",
+      "title": "ถูกกฎหมาย, ชอบธรรม",
+      "description": "His claim to the throne was not considered **legitimate**."
+    }
+  },
+  {
+    "id": "ielts-036-marginal",
+    "front": {
+      "icon": "",
+      "title": "marginal",
+      "description": "/ˈmɑːrdʒɪnəl/"
+    },
+    "back": {
+      "icon": "🤏",
+      "title": "เล็กน้อย",
+      "description": "There was only a **marginal** improvement in sales this quarter."
+    }
+  },
+  {
+    "id": "ielts-037-measurable",
+    "front": {
+      "icon": "",
+      "title": "measurable",
+      "description": "/ˈmeʒərəbl/"
+    },
+    "back": {
+      "icon": "📏",
+      "title": "ที่สามารถวัดได้",
+      "description": "The success of the program has to be **measurable**."
+    }
+  },
+  {
+    "id": "ielts-038-notable",
+    "front": {
+      "icon": "",
+      "title": "notable",
+      "description": "/ˈnoʊtəbl/"
+    },
+    "back": {
+      "icon": "⭐",
+      "title": "ที่น่าสังเกต",
+      "description": "The museum has a **notable** collection of ancient sculptures."
+    }
+  },
+  {
+    "id": "ielts-039-obsolete",
+    "front": {
+      "icon": "",
+      "title": "obsolete",
+      "description": "/ˌɑːbsəˈliːt/"
+    },
+    "back": {
+      "icon": "🕰️",
+      "title": "ล้าสมัย",
+      "description": "Many old technologies have become **obsolete**."
+    }
+  },
+  {
+    "id": "ielts-040-pervasive",
+    "front": {
+      "icon": "",
+      "title": "pervasive",
+      "description": "/pərˈveɪsɪv/"
+    },
+    "back": {
+      "icon": "🌐",
+      "title": "ที่แพร่หลาย",
+      "description": "Social media has a **pervasive** influence on modern society."
+    }
+  },
+  {
+    "id": "ielts-041-plausible",
+    "front": {
+      "icon": "",
+      "title": "plausible",
+      "description": "/ˈplɔːzəbl/"
+    },
+    "back": {
+      "icon": "🤔",
+      "title": "ที่น่าเป็นไปได้, น่าเชื่อถือ",
+      "description": "His explanation for being late was not very **plausible**."
+    }
+  },
+  {
+    "id": "ielts-042-prevalent",
+    "front": {
+      "icon": "",
+      "title": "prevalent",
+      "description": "/ˈprevələnt/"
+    },
+    "back": {
+      "icon": "📈",
+      "title": "แพร่หลาย",
+      "description": "The disease is more **prevalent** in tropical regions."
+    }
+  },
+  {
+    "id": "ielts-043-profound",
+    "front": {
+      "icon": "",
+      "title": "profound",
+      "description": "/prəˈfaʊnd/"
+    },
+    "back": {
+      "icon": " profundity_face",
+      "title": "ลึกซึ้ง",
+      "description": "The book had a **profound** impact on my life."
+    }
+  },
+  {
+    "id": "ielts-044-prominent",
+    "front": {
+      "icon": "",
+      "title": "prominent",
+      "description": "/ˈprɑːmɪnənt/"
+    },
+    "back": {
+      "icon": "🏆",
+      "title": "โดดเด่น",
+      "description": "She is a **prominent** figure in the world of fashion."
+    }
+  },
+  {
+    "id": "ielts-045-rigorous",
+    "front": {
+      "icon": "",
+      "title": "rigorous",
+      "description": "/ˈrɪɡərəs/"
+    },
+    "back": {
+      "icon": "🏋️",
+      "title": "เข้มงวด",
+      "description": "The course requires a **rigorous** approach to academic study."
+    }
+  },
+  {
+    "id": "ielts-046-skeptical",
+    "front": {
+      "icon": "",
+      "title": "skeptical",
+      "description": "/ˈskeptɪkl/"
+    },
+    "back": {
+      "icon": "🧐",
+      "title": "ที่สงสัย",
+      "description": "I am **skeptical** about the claims made in the advertisement."
+    }
+  },
+  {
+    "id": "ielts-047-significant",
+    "front": {
+      "icon": "",
+      "title": "significant",
+      "description": "/sɪɡˈnɪfɪkənt/"
+    },
+    "back": {
+      "icon": "📈",
+      "title": "สำคัญ",
+      "description": "The discovery was a **significant** breakthrough in medical research."
+    }
+  },
+  {
+    "id": "ielts-048-sustainable",
+    "front": {
+      "icon": "",
+      "title": "sustainable",
+      "description": "/səˈsteɪnəbl/"
+    },
+    "back": {
+      "icon": "♻️",
+      "title": "ยั่งยืน",
+      "description": "The company is committed to **sustainable** development."
+    }
+  },
+  {
+    "id": "ielts-049-tangible",
+    "front": {
+      "icon": "",
+      "title": "tangible",
+      "description": "/ˈtændʒəbl/"
+    },
+    "back": {
+      "icon": "👐",
+      "title": "ที่จับต้องได้",
+      "description": "The project needs to produce some **tangible** results."
+    }
+  },
+  {
+    "id": "ielts-050-unprecedented",
+    "front": {
+      "icon": "",
+      "title": "unprecedented",
+      "description": "/ʌnˈpresɪdentɪd/"
+    },
+    "back": {
+      "icon": "🌟",
+      "title": "ที่ไม่เคยเกิดขึ้นมาก่อน",
+      "description": "The company's success was **unprecedented** in its industry."
+    }
+  },
+  {
+    "id": "ielts-051-viable",
+    "front": {
+      "icon": "",
+      "title": "viable",
+      "description": "/ˈvaɪəbl/"
+    },
+    "back": {
+      "icon": "🌱",
+      "title": "ที่ทำได้จริง",
+      "description": "The committee is looking for a **viable** alternative to the current plan."
+    }
+  },
+  {
+    "id": "ielts-052-volatile",
+    "front": {
+      "icon": "",
+      "title": "volatile",
+      "description": "/ˈvɑːlətl/"
+    },
+    "back": {
+      "icon": "💥",
+      "title": "ระเหยง่าย, ไม่แน่นอน",
+      "description": "The stock market has been very **volatile** recently."
+    }
+  },
+  {
+    "id": "ielts-053-vulnerable",
+    "front": {
+      "icon": "",
+      "title": "vulnerable",
+      "description": "/ˈvʌlnərəbl/"
+    },
+    "back": {
+      "icon": "🛡️",
+      "title": "เปราะบาง",
+      "description": "Elderly people are particularly **vulnerable** to the flu."
+    }
+  },
+  {
+    "id": "ielts-054-abstract",
+    "front": {
+      "icon": "",
+      "title": "abstract",
+      "description": "/ˈæbstrækt/"
+    },
+    "back": {
+      "icon": "🎨",
+      "title": "ที่เป็นนามธรรม",
+      "description": "Art can often express **abstract** concepts like emotion and spirituality."
+    }
+  },
+  {
+    "id": "ielts-055-accessible",
+    "front": {
+      "icon": "",
+      "title": "accessible",
+      "description": "/əkˈsesəbl/"
+    },
+    "back": {
+      "icon": "♿",
+      "title": "ที่เข้าถึงได้ง่าย",
+      "description": "The building has an entrance that is **accessible** to people in wheelchairs."
+    }
+  },
+  {
+    "id": "ielts-056-accountable",
+    "front": {
+      "icon": "",
+      "title": "accountable",
+      "description": "/əˈkaʊntəbl/"
+    },
+    "back": {
+      "icon": "⚖️",
+      "title": "ที่ต้องรับผิดชอบ",
+      "description": "Leaders should be held **accountable** for their actions."
+    }
+  },
+  {
+    "id": "ielts-057-acute",
+    "front": {
+      "icon": "",
+      "title": "acute",
+      "description": "/əˈkjuːt/"
+    },
+    "back": {
+      "icon": "🚨",
+      "title": "รุนแรง, ฉับพลัน",
+      "description": "The patient was suffering from **acute** chest pain."
+    }
+  },
+  {
+    "id": "ielts-058-adverse",
+    "front": {
+      "icon": "",
+      "title": "adverse",
+      "description": "/ˈædvɜːrs/"
+    },
+    "back": {
+      "icon": "👎",
+      "title": "ที่เป็นอันตราย, ไม่พึงประสงค์",
+      "description": "The drug can have **adverse** side effects on some people."
+    }
+  },
+  {
+    "id": "ielts-059-ambiguous",
+    "front": {
+      "icon": "",
+      "title": "ambiguous",
+      "description": "/æmˈbɪɡjuəs/"
+    },
+    "back": {
+      "icon": "❓",
+      "title": "กำกวม, คลุมเครือ",
+      "description": "His answer was too **ambiguous** for us to understand his true meaning."
+    }
+  },
+  {
+    "id": "ielts-060-analogous",
+    "front": {
+      "icon": "",
+      "title": "analogous",
+      "description": "/əˈnæləɡəs/"
+    },
+    "back": {
+      "icon": "🔄",
+      "title": "คล้ายคลึง, เหมือนกัน",
+      "description": "The human heart is **analogous** to a pump in a water system."
+    }
+  },
+  {
+    "id": "ielts-061-antagonistic",
+    "front": {
+      "icon": "",
+      "title": "antagonistic",
+      "description": "/ænˌtæɡəˈnɪstɪk/"
+    },
+    "back": {
+      "icon": "😡",
+      "title": "ที่เป็นศัตรู, ต่อต้าน",
+      "description": "The two sides have an **antagonistic** relationship."
+    }
+  },
+  {
+    "id": "ielts-062-articulate",
+    "front": {
+      "icon": "",
+      "title": "articulate",
+      "description": "/ɑːrˈtɪkjuleɪt/"
+    },
+    "back": {
+      "icon": "🗣️",
+      "title": "ที่สามารถพูดหรือแสดงออกได้ชัดเจน",
+      "description": "She is an **articulate** speaker and can explain complex ideas easily."
+    }
+  },
+  {
+    "id": "ielts-063-autonomous",
+    "front": {
+      "icon": "",
+      "title": "autonomous",
+      "description": "/ɔːˈtɑːnəməs/"
+    },
+    "back": {
+      "icon": "🤖",
+      "title": "ที่เป็นอิสระ",
+      "description": "The country became an **autonomous** state in 1960."
+    }
+  },
+  {
+    "id": "ielts-064-beneficial",
+    "front": {
+      "icon": "",
+      "title": "beneficial",
+      "description": "/ˌbenɪˈfɪʃl/"
+    },
+    "back": {
+      "icon": "👍",
+      "title": "มีประโยชน์",
+      "description": "The new policy is **beneficial** to both the company and its employees."
+    }
+  },
+  {
+    "id": "ielts-065-bias",
+    "front": {
+      "icon": "",
+      "title": "bias",
+      "description": "/ˈbaɪəs/"
+    },
+    "back": {
+      "icon": "⚖️",
+      "title": "อคติ",
+      "description": "The reporter was accused of showing a political **bias**."
+    }
+  },
+  {
+    "id": "ielts-066-chronic",
+    "front": {
+      "icon": "",
+      "title": "chronic",
+      "description": "/ˈkrɑːnɪk/"
+    },
+    "back": {
+      "icon": "🕰️",
+      "title": "เรื้อรัง",
+      "description": "She suffers from a **chronic** back pain."
+    }
+  },
+  {
+    "id": "ielts-067-cohesive",
+    "front": {
+      "icon": "",
+      "title": "cohesive",
+      "description": "/koʊˈhiːsɪv/"
+    },
+    "back": {
+      "icon": "🤝",
+      "title": "ที่เหนียวแน่น, ยึดติดกัน",
+      "description": "The team worked together in a **cohesive** manner to achieve the goal."
+    }
+  },
+  {
+    "id": "ielts-068-collaborative",
+    "front": {
+      "icon": "",
+      "title": "collaborative",
+      "description": "/kəˈlæbərətɪv/"
+    },
+    "back": {
+      "icon": "🤝",
+      "title": "เกี่ยวกับการทำงานร่วมกัน",
+      "description": "The project was a great example of a **collaborative** effort."
+    }
+  },
+  {
+    "id": "ielts-069-compatible",
+    "front": {
+      "icon": "",
+      "title": "compatible",
+      "description": "/kəmˈpætəbl/"
+    },
+    "back": {
+      "icon": "🧩",
+      "title": "ที่เข้ากันได้",
+      "description": "This new software is not **compatible** with my old computer."
+    }
+  },
+  {
+    "id": "ielts-070-complex",
+    "front": {
+      "icon": "",
+      "title": "complex",
+      "description": "/ˈkɑːmpleks/"
+    },
+    "back": {
+      "icon": " tangled_rope",
+      "title": "ซับซ้อน",
+      "description": "The topic of quantum physics is very **complex**."
+    }
+  },
+  {
+    "id": "ielts-071-consecutive",
+    "front": {
+      "icon": "",
+      "title": "consecutive",
+      "description": "/kənˈsekjətɪv/"
+    },
+    "back": {
+      "icon": "➡️",
+      "title": "ที่ต่อเนื่องกัน",
+      "description": "The team won five **consecutive** games."
+    }
+  },
+  {
+    "id": "ielts-072-constituent",
+    "front": {
+      "icon": "",
+      "title": "constituent",
+      "description": "/kənˈstɪtʃuənt/"
+    },
+    "back": {
+      "icon": "👥",
+      "title": "ที่เป็นองค์ประกอบ",
+      "description": "The factory uses several raw materials as **constituent** parts of its products."
+    }
+  },
+  {
+    "id": "ielts-073-crucial",
+    "front": {
+      "icon": "",
+      "title": "crucial",
+      "description": "/ˈkruːʃl/"
+    },
+    "back": {
+      "icon": "🔑",
+      "title": "สำคัญมาก",
+      "description": "Decision-making is a **crucial** skill for a manager."
+    }
+  },
+  {
+    "id": "ielts-074-cumulative",
+    "front": {
+      "icon": "",
+      "title": "cumulative",
+      "description": "/ˈkjuːmjəleɪtɪv/"
+    },
+    "back": {
+      "icon": "積み上げる",
+      "title": "ที่สะสม",
+      "description": "The **cumulative** effect of all these small changes is a significant improvement."
+    }
+  },
+  {
+    "id": "ielts-075-deficient",
+    "front": {
+      "icon": "",
+      "title": "deficient",
+      "description": "/dɪˈfɪʃnt/"
+    },
+    "back": {
+      "icon": "📉",
+      "title": "ขาดแคลน",
+      "description": "The soil is **deficient** in several key minerals."
+    }
+  },
+  {
+    "id": "ielts-076-deliberate",
+    "front": {
+      "icon": "",
+      "title": "deliberate",
+      "description": "/dɪˈlɪbərət/"
+    },
+    "back": {
+      "icon": "🎯",
+      "title": "ที่เจตนา",
+      "description": "The fire was a result of a **deliberate** act of arson."
+    }
+  },
+  {
+    "id": "ielts-077-depleted",
+    "front": {
+      "icon": "",
+      "title": "depleted",
+      "description": "/dɪˈpliːtɪd/"
+    },
+    "back": {
+      "icon": "💧",
+      "title": "ที่พร่องไป, หมดสิ้น",
+      "description": "Our natural resources are being rapidly **depleted**."
+    }
+  },
+  {
+    "id": "ielts-078-detrimental",
+    "front": {
+      "icon": "",
+      "title": "detrimental",
+      "description": "/ˌdetrɪˈmentl/"
+    },
+    "back": {
+      "icon": "⚠️",
+      "title": "เป็นอันตราย",
+      "description": "Smoking is **detrimental** to your health."
+    }
+  },
+  {
+    "id": "ielts-079-disparate",
+    "front": {
+      "icon": "",
+      "title": "disparate",
+      "description": "/ˈdɪspərət/"
+    },
+    "back": {
+      "icon": "🧩",
+      "title": "ที่แตกต่างกันอย่างสิ้นเชิง",
+      "description": "The book examines several **disparate** historical events and their connections."
+    }
+  },
+  {
+    "id": "ielts-080-durable",
+    "front": {
+      "icon": "",
+      "title": "durable",
+      "description": "/ˈdʊrəbl/"
+    },
+    "back": {
+      "icon": "💪",
+      "title": "ทนทาน",
+      "description": "This furniture is made from **durable** materials that will last for years."
+    }
+  },
+  {
+    "id": "ielts-081-dynamic",
+    "front": {
+      "icon": "",
+      "title": "dynamic",
+      "description": "/daɪˈnæmɪk/"
+    },
+    "back": {
+      "icon": "⚡️",
+      "title": "มีพลัง, เคลื่อนไหว",
+      "description": "The company has a very **dynamic** approach to business."
+    }
+  },
+  {
+    "id": "ielts-082-efficient",
+    "front": {
+      "icon": "",
+      "title": "efficient",
+      "description": "/ɪˈfɪʃnt/"
+    },
+    "back": {
+      "icon": "⚙️",
+      "title": "มีประสิทธิภาพ",
+      "description": "An **efficient** system is crucial for a smooth operation."
+    }
+  },
+  {
+    "id": "ielts-083-empirical",
+    "front": {
+      "icon": "",
+      "title": "empirical",
+      "description": "/ɪmˈpɪrɪkl/"
+    },
+    "back": {
+      "icon": "🔬",
+      "title": "จากประสบการณ์, เชิงประจักษ์",
+      "description": "The research is based on **empirical** data collected from various experiments."
+    }
+  },
+  {
+    "id": "ielts-084-equivalent",
+    "front": {
+      "icon": "",
+      "title": "equivalent",
+      "description": "/ɪˈkwɪvələnt/"
+    },
+    "back": {
+      "icon": "⚖️",
+      "title": "เท่ากัน",
+      "description": "One meter is **equivalent** to 3.28 feet."
+    }
+  },
+  {
+    "id": "ielts-085-ethical",
+    "front": {
+      "icon": "",
+      "title": "ethical",
+      "description": "/ˈeθɪkl/"
+    },
+    "back": {
+      "icon": "⚖️",
+      "title": "จริยธรรม",
+      "description": "The company maintains high **ethical** standards in all its business practices."
+    }
+  },
+  {
+    "id": "ielts-086-explicit",
+    "front": {
+      "icon": "",
+      "title": "explicit",
+      "description": "/ɪkˈsplɪsɪt/"
+    },
+    "back": {
+      "icon": "💬",
+      "title": "ชัดเจน",
+      "description": "The instructions were very **explicit**, leaving no room for confusion."
+    }
+  },
+  {
+    "id": "ielts-087-extensive",
+    "front": {
+      "icon": "",
+      "title": "extensive",
+      "description": "/ɪkˈstensɪv/"
+    },
+    "back": {
+      "icon": "🗺️",
+      "title": "กว้างขวาง",
+      "description": "The house has an **extensive** garden with a swimming pool."
+    }
+  },
+  {
+    "id": "ielts-088-finite",
+    "front": {
+      "icon": "",
+      "title": "finite",
+      "description": "/ˈfaɪnaɪt/"
+    },
+    "back": {
+      "icon": "🔚",
+      "title": "จำกัด",
+      "description": "The Earth's resources are **finite**, so we must use them wisely."
+    }
+  },
+  {
+    "id": "ielts-089-formidable",
+    "front": {
+      "icon": "",
+      "title": "formidable",
+      "description": "/ˈfɔːrmɪdəbl/"
+    },
+    "back": {
+      "icon": "💪",
+      "title": "น่าเกรงขาม",
+      "description": "The team faced a **formidable** opponent in the championship final."
+    }
+  },
+  {
+    "id": "ielts-090-fragile",
+    "front": {
+      "icon": "",
+      "title": "fragile",
+      "description": "/ˈfrædʒl/"
+    },
+    "back": {
+      "icon": "💔",
+      "title": "เปราะบาง",
+      "description": "The vase is very old and extremely **fragile**."
+    }
+  },
+  {
+    "id": "ielts-091-genuine",
+    "front": {
+      "icon": "",
+      "title": "genuine",
+      "description": "/ˈdʒenjuɪn/"
+    },
+    "back": {
+      "icon": "💯",
+      "title": "แท้จริง",
+      "description": "The painting is a **genuine** Picasso."
+    }
+  },
+  {
+    "id": "ielts-092-haphazard",
+    "front": {
+      "icon": "",
+      "title": "haphazard",
+      "description": "/hæpˈhæzərd/"
+    },
+    "back": {
+      "icon": "🤷‍♀️",
+      "title": "สุ่ม, ไม่เป็นระเบียบ",
+      "description": "The books were arranged in a **haphazard** way on the shelves."
+    }
+  },
+  {
+    "id": "ielts-093-homogeneous",
+    "front": {
+      "icon": "",
+      "title": "homogeneous",
+      "description": "/ˌhoʊməˈdʒiːniəs/"
+    },
+    "back": {
+      "icon": "🤝",
+      "title": "เป็นเนื้อเดียวกัน",
+      "description": "The population of the town is quite **homogeneous** in terms of ethnicity."
+    }
+  },
+  {
+    "id": "ielts-094-hypothetical",
+    "front": {
+      "icon": "",
+      "title": "hypothetical",
+      "description": "/ˌhaɪpəˈθetɪkl/"
+    },
+    "back": {
+      "icon": "💭",
+      "title": "ที่เป็นสมมติฐาน",
+      "description": "The professor presented a **hypothetical** scenario to the students."
+    }
+  },
+  {
+    "id": "ielts-095-imperceptible",
+    "front": {
+      "icon": "",
+      "title": "imperceptible",
+      "description": "/ˌɪmpərˈseptəbl/"
+    },
+    "back": {
+      "icon": "🤏",
+      "title": "ที่สังเกตไม่ได้",
+      "description": "There was an **imperceptible** change in the temperature."
+    }
+  },
+  {
+    "id": "ielts-096-implicit",
+    "front": {
+      "icon": "",
+      "title": "implicit",
+      "description": "/ɪmˈplɪsɪt/"
+    },
+    "back": {
+      "icon": "🤫",
+      "title": "ที่บอกเป็นนัย",
+      "description": "Her silence was an **implicit** agreement to the plan."
+    }
+  },
+  {
+    "id": "ielts-097-inadvertent",
+    "front": {
+      "icon": "",
+      "title": "inadvertent",
+      "description": "/ˌɪnədˈvɜːrtənt/"
+    },
+    "back": {
+      "icon": "Oops",
+      "title": "ไม่ได้ตั้งใจ",
+      "description": "The error was caused by an **inadvertent** mistake."
+    }
+  },
+  {
+    "id": "ielts-098-inconclusive",
+    "front": {
+      "icon": "",
+      "title": "inconclusive",
+      "description": "/ˌɪnkənˈkluːsɪv/"
+    },
+    "back": {
+      "icon": "❓",
+      "title": "ไม่สรุปผล",
+      "description": "The evidence was **inconclusive**, so the case was dropped."
+    }
+  },
+  {
+    "id": "ielts-099-indispensable",
+    "front": {
+      "icon": "",
+      "title": "indispensable",
+      "description": "/ˌɪndɪˈspensəbl/"
+    },
+    "back": {
+      "icon": "💎",
+      "title": "จำเป็นอย่างยิ่ง",
+      "description": "A good editor is **indispensable** for a writer."
+    }
+  },
+  {
+    "id": "ielts-100-inefficient",
+    "front": {
+      "icon": "",
+      "title": "inefficient",
+      "description": "/ˌɪnɪˈfɪʃnt/"
+    },
+    "back": {
+      "icon": "🐌",
+      "title": "ไม่มีประสิทธิภาพ",
+      "description": "The old factory was highly **inefficient** and wasteful."
+    }
+  },
+  {
+    "id": "ielts-101-inferior",
+    "front": {
+      "icon": "",
+      "title": "inferior",
+      "description": "/ɪnˈfɪriər/"
+    },
+    "back": {
+      "icon": "⬇️",
+      "title": "ด้อยกว่า",
+      "description": "This product is **inferior** to the one we bought before."
+    }
+  },
+  {
+    "id": "ielts-102-inherent",
+    "front": {
+      "icon": "",
+      "title": "inherent",
+      "description": "/ɪnˈherənt/"
+    },
+    "back": {
+      "icon": "🧬",
+      "title": "ที่มีอยู่โดยธรรมชาติ",
+      "description": "There is an **inherent** risk in all financial investments."
+    }
+  },
+  {
+    "id": "ielts-103-innumerable",
+    "front": {
+      "icon": "",
+      "title": "innumerable",
+      "description": "/ɪˈnuːmərəbl/"
+    },
+    "back": {
+      "icon": "♾️",
+      "title": "นับไม่ถ้วน",
+      "description": "He received **innumerable** awards throughout his career."
+    }
+  },
+  {
+    "id": "ielts-104-intricate",
+    "front": {
+      "icon": "",
+      "title": "intricate",
+      "description": "/ˈɪntrɪkət/"
+    },
+    "back": {
+      "icon": "🧵",
+      "title": "ซับซ้อน, ยุ่งยาก",
+      "description": "The design of the clock was extremely **intricate**."
+    }
+  },
+  {
+    "id": "ielts-105-irrelevant",
+    "front": {
+      "icon": "",
+      "title": "irrelevant",
+      "description": "/ɪˈreləvənt/"
+    },
+    "back": {
+      "icon": "❌",
+      "title": "ไม่เกี่ยวข้อง",
+      "description": "The information you provided is completely **irrelevant** to the case."
+    }
+  },
+  {
+    "id": "ielts-106-justifiable",
+    "front": {
+      "icon": "",
+      "title": "justifiable",
+      "description": "/ˈdʒʌstɪfaɪəbl/"
+    },
+    "back": {
+      "icon": "⚖️",
+      "title": "ที่สมเหตุสมผล",
+      "description": "His decision was completely **justifiable** under the circumstances."
+    }
+  },
+  {
+    "id": "ielts-107-latent",
+    "front": {
+      "icon": "",
+      "title": "latent",
+      "description": "/ˈleɪtnt/"
+    },
+    "back": {
+      "icon": "💡",
+      "title": "ที่ซ่อนเร้น",
+      "description": "The virus can remain **latent** in the body for many years."
+    }
+  },
+  {
+    "id": "ielts-108-lucrative",
+    "front": {
+      "icon": "",
+      "title": "lucrative",
+      "description": "/ˈluːkrətɪv/"
+    },
+    "back": {
+      "icon": "💰",
+      "title": "ที่ทำกำไรได้ดี",
+      "description": "He started a highly **lucrative** business venture."
+    }
+  },
+  {
+    "id": "ielts-109-meticulous",
+    "front": {
+      "icon": "",
+      "title": "meticulous",
+      "description": "/məˈtɪkjələs/"
+    },
+    "back": {
+      "icon": "🔎",
+      "title": "ละเอียดถี่ถ้วน",
+      "description": "She is a **meticulous** researcher who pays attention to every detail."
+    }
+  },
+  {
+    "id": "ielts-110-monolithic",
+    "front": {
+      "icon": "",
+      "title": "monolithic",
+      "description": "/ˌmɑːnəˈlɪθɪk/"
+    },
+    "back": {
+      "icon": "🗿",
+      "title": "ที่เป็นหินก้อนเดียว, ใหญ่โต",
+      "description": "The company's **monolithic** structure made it difficult to adapt to change."
+    }
+  },
+  {
+    "id": "ielts-111-monotonous",
+    "front": {
+      "icon": "",
+      "title": "monotonous",
+      "description": "/məˈnɑːtənəs/"
+    },
+    "back": {
+      "icon": "😴",
+      "title": "น่าเบื่อ, ซ้ำซาก",
+      "description": "He was tired of his **monotonous** job and decided to quit."
+    }
+  },
+  {
+    "id": "ielts-112-multilateral",
+    "front": {
+      "icon": "",
+      "title": "multilateral",
+      "description": "/ˌmʌltiˈlætərəl/"
+    },
+    "back": {
+      "icon": "🤝",
+      "title": "ที่มีหลายฝ่าย",
+      "description": "The agreement was a result of **multilateral** negotiations."
+    }
+  },
+  {
+    "id": "ielts-113-negligible",
+    "front": {
+      "icon": "",
+      "title": "negligible",
+      "description": "/ˈneɡlɪdʒəbl/"
+    },
+    "back": {
+      "icon": "🤏",
+      "title": "เล็กน้อยมากจนมองข้ามได้",
+      "description": "The cost of the repair was **negligible** compared to the value of the car."
+    }
+  },
+  {
+    "id": "ielts-114-objective",
+    "front": {
+      "icon": "",
+      "title": "objective",
+      "description": "/əbˈdʒektɪv/"
+    },
+    "back": {
+      "icon": "🎯",
+      "title": "ที่เป็นกลาง, มีเป้าหมาย",
+      "description": "The report was written from an **objective** point of view."
+    }
+  },
+  {
+    "id": "ielts-115-obnoxious",
+    "front": {
+      "icon": "",
+      "title": "obnoxious",
+      "description": "/əbˈnɑːkʃəs/"
+    },
+    "back": {
+      "icon": "🤢",
+      "title": "น่ารังเกียจ",
+      "description": "He was an **obnoxious** person who always made rude comments."
+    }
+  },
+  {
+    "id": "ielts-116-paradoxical",
+    "front": {
+      "icon": "",
+      "title": "paradoxical",
+      "description": "/ˌpærəˈdɑːksɪkl/"
+    },
+    "back": {
+      "icon": "🔄",
+      "title": "ที่ขัดแย้งกันเอง",
+      "description": "It's a **paradoxical** situation where saving money by spending less is difficult."
+    }
+  },
+  {
+    "id": "ielts-117-paramount",
+    "front": {
+      "icon": "",
+      "title": "paramount",
+      "description": "/ˈpærəmaʊnt/"
+    },
+    "back": {
+      "icon": "👑",
+      "title": "สำคัญที่สุด",
+      "description": "Customer satisfaction is of **paramount** importance to our company."
+    }
+  },
+  {
+    "id": "ielts-118-perilous",
+    "front": {
+      "icon": "",
+      "title": "perilous",
+      "description": "/ˈperələs/"
+    },
+    "back": {
+      "icon": "⚠️",
+      "title": "อันตราย",
+      "description": "The climbers embarked on a **perilous** journey up the mountain."
+    }
+  },
+  {
+    "id": "ielts-119-pertinent",
+    "front": {
+      "icon": "",
+      "title": "pertinent",
+      "description": "/ˈpɜːrtnənt/"
+    },
+    "back": {
+      "icon": "🎯",
+      "title": "ที่เกี่ยวข้อง",
+      "description": "Please stick to the facts and provide only **pertinent** information."
+    }
+  },
+  {
+    "id": "ielts-120-plausible",
+    "front": {
+      "icon": "",
+      "title": "plausible",
+      "description": "/ˈplɔːzəbl/"
+    },
+    "back": {
+      "icon": "👍",
+      "title": "ที่น่าเชื่อถือ",
+      "description": "The scientist's hypothesis seemed **plausible**."
+    }
+  },
+  {
+    "id": "ielts-121-precarious",
+    "front": {
+      "icon": "",
+      "title": "precarious",
+      "description": "/prɪˈkeriəs/"
+    },
+    "back": {
+      "icon": "😱",
+      "title": "ไม่มั่นคง",
+      "description": "He was in a **precarious** position on the edge of the cliff."
+    }
+  },
+  {
+    "id": "ielts-122-profound",
+    "front": {
+      "icon": "",
+      "title": "profound",
+      "description": "/prəˈfaʊnd/"
+    },
+    "back": {
+      "icon": " profundity_face",
+      "title": "ลึกซึ้ง",
+      "description": "The book's ideas had a **profound** influence on his thinking."
+    }
+  },
+  {
+    "id": "ielts-123-prolific",
+    "front": {
+      "icon": "",
+      "title": "prolific",
+      "description": "/prəˈlɪfɪk/"
+    },
+    "back": {
+      "icon": "✍️",
+      "title": "อุดมสมบูรณ์, มีผลงานมาก",
+      "description": "He was a **prolific** writer, publishing three novels a year."
+    }
+  },
+  {
+    "id": "ielts-124-resilient",
+    "front": {
+      "icon": "",
+      "title": "resilient",
+      "description": "/rɪˈzɪliənt/"
+    },
+    "back": {
+      "icon": "💪",
+      "title": "ยืดหยุ่น, ฟื้นตัวได้เร็ว",
+      "description": "Children are often more **resilient** than adults in the face of change."
+    }
+  },
+  {
+    "id": "ielts-125-rigorous",
+    "front": {
+      "icon": "",
+      "title": "rigorous",
+      "description": "/ˈrɪɡərəs/"
+    },
+    "back": {
+      "icon": "🏋️",
+      "title": "เข้มงวด",
+      "description": "The training program was extremely **rigorous**."
+    }
+  },
+  {
+    "id": "ielts-126-robust",
+    "front": {
+      "icon": "",
+      "title": "robust",
+      "description": "/roʊˈbʌst/"
+    },
+    "back": {
+      "icon": "💪",
+      "title": "แข็งแรง",
+      "description": "The company needs a **robust** system to handle the increased traffic."
+    }
+  },
+  {
+    "id": "ielts-127-scrupulous",
+    "front": {
+      "icon": "",
+      "title": "scrupulous",
+      "description": "/ˈskruːpjələs/"
+    },
+    "back": {
+      "icon": "🔎",
+      "title": "ซื่อสัตย์, ละเอียด",
+      "description": "He was **scrupulous** in his business dealings and never cheated anyone."
+    }
+  },
+  {
+    "id": "ielts-128-significant",
+    "front": {
+      "icon": "",
+      "title": "significant",
+      "description": "/sɪɡˈnɪfɪkənt/"
+    },
+    "back": {
+      "icon": "📈",
+      "title": "สำคัญ, มีความหมาย",
+      "description": "The discovery was a **significant** milestone in the history of science."
+    }
+  },
+  {
+    "id": "ielts-129-skeptical",
+    "front": {
+      "icon": "",
+      "title": "skeptical",
+      "description": "/ˈskeptɪkl/"
+    },
+    "back": {
+      "icon": "🧐",
+      "title": "สงสัย, ไม่เชื่ออะไรง่าย ๆ",
+      "description": "The audience was **skeptical** of his claims."
+    }
+  },
+  {
+    "id": "ielts-130-subsequent",
+    "front": {
+      "icon": "",
+      "title": "subsequent",
+      "description": "/ˈsʌbsɪkwənt/"
+    },
+    "back": {
+      "icon": "➡️",
+      "title": "ที่ตามมา",
+      "description": "The first book was a success, and all **subsequent** ones were also bestsellers."
+    }
+  },
+  {
+    "id": "ielts-131-subtle",
+    "front": {
+      "icon": "",
+      "title": "subtle",
+      "description": "/ˈsʌtl/"
+    },
+    "back": {
+      "icon": "🤫",
+      "title": "ที่ละเอียดอ่อน",
+      "description": "He made a **subtle** change to the design that only a few people noticed."
+    }
+  },
+  {
+    "id": "ielts-132-sufficient",
+    "front": {
+      "icon": "",
+      "title": "sufficient",
+      "description": "/səˈfɪʃnt/"
+    },
+    "back": {
+      "icon": "✅",
+      "title": "เพียงพอ",
+      "description": "We have **sufficient** food for everyone."
+    }
+  },
+  {
+    "id": "ielts-133-superficial",
+    "front": {
+      "icon": "",
+      "title": "superficial",
+      "description": "/ˌsuːpərˈfɪʃl/"
+    },
+    "back": {
+      "icon": "🎭",
+      "title": "ผิวเผิน",
+      "description": "The report only provides a **superficial** analysis of the problem."
+    }
+  },
+  {
+    "id": "ielts-134-sustainable",
+    "front": {
+      "icon": "",
+      "title": "sustainable",
+      "description": "/səˈsteɪnəbl/"
+    },
+    "back": {
+      "icon": "♻️",
+      "title": "ยั่งยืน",
+      "description": "The company is committed to **sustainable** practices to protect the environment."
+    }
+  },
+  {
+    "id": "ielts-135-tangible",
+    "front": {
+      "icon": "",
+      "title": "tangible",
+      "description": "/ˈtændʒəbl/"
+    },
+    "back": {
+      "icon": "👐",
+      "title": "ที่จับต้องได้",
+      "description": "The company provides **tangible** benefits, such as health insurance."
+    }
+  },
+  {
+    "id": "ielts-136-unanimous",
+    "front": {
+      "icon": "",
+      "title": "unanimous",
+      "description": "/juˈnænɪməs/"
+    },
+    "back": {
+      "icon": "💯",
+      "title": "เป็นเอกฉันท์",
+      "description": "The jury reached a **unanimous** verdict after a long deliberation."
+    }
+  },
+  {
+    "id": "ielts-137-unbiased",
+    "front": {
+      "icon": "",
+      "title": "unbiased",
+      "description": "/ʌnˈbaɪəst/"
+    },
+    "back": {
+      "icon": "⚖️",
+      "title": "ที่ไม่มีอคติ",
+      "description": "The journalist provided an **unbiased** report on the election."
+    }
+  },
+  {
+    "id": "ielts-138-undermining",
+    "front": {
+      "icon": "",
+      "title": "undermining",
+      "description": "/ˌʌndərˈmaɪnɪŋ/"
+    },
+    "back": {
+      "icon": "👎",
+      "title": "ที่บ่อนทำลาย",
+      "description": "His constant criticism was **undermining** the team's morale."
+    }
+  },
+  {
+    "id": "ielts-139-unprecedented",
+    "front": {
+      "icon": "",
+      "title": "unprecedented",
+      "description": "/ʌnˈpresɪdentɪd/"
+    },
+    "back": {
+      "icon": "🌟",
+      "title": "ที่ไม่เคยมีมาก่อน",
+      "description": "The storm caused an **unprecedented** level of damage."
+    }
+  },
+  {
+    "id": "ielts-140-unwarranted",
+    "front": {
+      "icon": "",
+      "title": "unwarranted",
+      "description": "/ʌnˈwɔːrəntɪd/"
+    },
+    "back": {
+      "icon": "❌",
+      "title": "ไม่มีเหตุผล",
+      "description": "His criticism of the project was completely **unwarranted**."
+    }
+  },
+  {
+    "id": "ielts-141-valid",
+    "front": {
+      "icon": "",
+      "title": "valid",
+      "description": "/ˈvælɪd/"
+    },
+    "back": {
+      "icon": "✅",
+      "title": "ที่ถูกต้อง, มีเหตุผล",
+      "description": "The passport is no longer **valid**."
+    }
+  },
+  {
+    "id": "ielts-142-versatile",
+    "front": {
+      "icon": "",
+      "title": "versatile",
+      "description": "/ˈvɜːrsətl/"
+    },
+    "back": {
+      "icon": "🧩",
+      "title": "อเนกประสงค์",
+      "description": "She is a **versatile** actress who can play a variety of roles."
+    }
+  },
+  {
+    "id": "ielts-143-viable",
+    "front": {
+      "icon": "",
+      "title": "viable",
+      "description": "/ˈvaɪəbl/"
+    },
+    "back": {
+      "icon": "🌱",
+      "title": "ที่สามารถทำได้จริง",
+      "description": "The business plan is not financially **viable**."
+    }
+  },
+  {
+    "id": "ielts-144-vulnerable",
+    "front": {
+      "icon": "",
+      "title": "vulnerable",
+      "description": "/ˈvʌlnərəbl/"
+    },
+    "back": {
+      "icon": "🛡️",
+      "title": "เปราะบาง",
+      "description": "Children are the most **vulnerable** members of society."
+    }
+  },
+  {
+    "id": "ielts-145-widespread",
+    "front": {
+      "icon": "",
+      "title": "widespread",
+      "description": "/ˈwaɪdspred/"
+    },
+    "back": {
+      "icon": "🌐",
+      "title": "แพร่หลาย",
+      "description": "There is a **widespread** belief that the economy will improve."
+    }
+  },
+  {
+    "id": "ielts-146-abstract",
+    "front": {
+      "icon": "",
+      "title": "abstract",
+      "description": "/ˈæbstrækt/"
+    },
+    "back": {
+      "icon": "🎨",
+      "title": "ที่เป็นนามธรรม",
+      "description": "The painting was too **abstract** for me to understand."
+    }
+  },
+  {
+    "id": "ielts-147-accessible",
+    "front": {
+      "icon": "",
+      "title": "accessible",
+      "description": "/əkˈsesəbl/"
+    },
+    "back": {
+      "icon": "♿",
+      "title": "ที่เข้าถึงได้",
+      "description": "The information is easily **accessible** online."
+    }
+  },
+  {
+    "id": "ielts-148-adverse",
+    "front": {
+      "icon": "",
+      "title": "adverse",
+      "description": "/ˈædvɜːrs/"
+    },
+    "back": {
+      "icon": "👎",
+      "title": "ที่ไม่พึงประสงค์",
+      "description": "The project was delayed due to **adverse** weather conditions."
+    }
+  },
+  {
+    "id": "ielts-149-ambiguous",
+    "front": {
+      "icon": "",
+      "title": "ambiguous",
+      "description": "/æmˈbɪɡjuəs/"
+    },
+    "back": {
+      "icon": "❓",
+      "title": "กำกวม",
+      "description": "The instructions were too **ambiguous**."
+    }
+  },
+  {
+    "id": "ielts-150-apparent",
+    "front": {
+      "icon": "",
+      "title": "apparent",
+      "description": "/əˈpærənt/"
+    },
+    "back": {
+      "icon": "💡",
+      "title": "ที่ชัดเจน",
+      "description": "It was **apparent** that he was trying to hide something."
+    }
+  },
+  {
+    "id": "ielts-151-arbitrary",
+    "front": {
+      "icon": "",
+      "title": "arbitrary",
+      "description": "/ˈɑːrbɪtreri/"
+    },
+    "back": {
+      "icon": "🤷‍♀️",
+      "title": "ตามอำเภอใจ, ไม่มีเหตุผล",
+      "description": "The judge's decision seemed **arbitrary** and unfair."
+    }
+  },
+  {
+    "id": "ielts-152-assorted",
+    "front": {
+      "icon": "",
+      "title": "assorted",
+      "description": "/əˈsɔːrtɪd/"
+    },
+    "back": {
+      "icon": "🍬",
+      "title": "หลากหลาย, คละกัน",
+      "description": "The box contained **assorted** chocolates."
+    }
+  },
+  {
+    "id": "ielts-153-authentic",
+    "front": {
+      "icon": "",
+      "title": "authentic",
+      "description": "/ɔːˈθentɪk/"
+    },
+    "back": {
+      "icon": "💯",
+      "title": "แท้จริง",
+      "description": "The restaurant serves **authentic** Italian pizza."
+    }
+  },
+  {
+    "id": "ielts-154-brittle",
+    "front": {
+      "icon": "",
+      "title": "brittle",
+      "description": "/ˈbrɪtl/"
+    },
+    "back": {
+      "icon": "🧊",
+      "title": "เปราะ, แตกง่าย",
+      "description": "The old paper was so **brittle** it crumbled in my hands."
+    }
+  },
+  {
+    "id": "ielts-155-catastrophic",
+    "front": {
+      "icon": "",
+      "title": "catastrophic",
+      "description": "/ˌkætəˈstrɑːfɪk/"
+    },
+    "back": {
+      "icon": "🌪️",
+      "title": "หายนะ",
+      "description": "The earthquake caused **catastrophic** damage to the city."
+    }
+  },
+  {
+    "id": "ielts-156-cohesive",
+    "front": {
+      "icon": "",
+      "title": "cohesive",
+      "description": "/koʊˈhiːsɪv/"
+    },
+    "back": {
+      "icon": "🤝",
+      "title": "ที่เหนียวแน่น",
+      "description": "The team worked as a **cohesive** unit."
+    }
+  },
+  {
+    "id": "ielts-157-compelling",
+    "front": {
+      "icon": "",
+      "title": "compelling",
+      "description": "/kəmˈpelɪŋ/"
+    },
+    "back": {
+      "icon": "😲",
+      "title": "น่าสนใจ, บังคับให้เชื่อ",
+      "description": "The novel has a **compelling** plot that keeps you reading."
+    }
+  },
+  {
+    "id": "ielts-158-conclusive",
+    "front": {
+      "icon": "",
+      "title": "conclusive",
+      "description": "/kənˈkluːsɪv/"
+    },
+    "back": {
+      "icon": "✅",
+      "title": "ที่สรุปผลได้",
+      "description": "The evidence was not **conclusive** enough to convict him."
+    }
+  },
+  {
+    "id": "ielts-159-congenial",
+    "front": {
+      "icon": "",
+      "title": "congenial",
+      "description": "/kənˈdʒiːniəl/"
+    },
+    "back": {
+      "icon": "😊",
+      "title": "ที่เข้ากันได้, ถูกคอ",
+      "description": "He had a **congenial** personality that everyone liked."
+    }
+  },
+  {
+    "id": "ielts-160-conspicuous",
+    "front": {
+      "icon": "",
+      "title": "conspicuous",
+      "description": "/kənˈspɪkjuəs/"
+    },
+    "back": {
+      "icon": "👁️",
+      "title": "ที่เห็นได้ชัดเจน",
+      "description": "The large red sign was very **conspicuous**."
+    }
+  },
+  {
+    "id": "ielts-161-crucial",
+    "front": {
+      "icon": "",
+      "title": "crucial",
+      "description": "/ˈkruːʃl/"
+    },
+    "back": {
+      "icon": "🔑",
+      "title": "สำคัญยิ่ง",
+      "description": "This is a **crucial** step in the negotiation process."
+    }
+  },
+  {
+    "id": "ielts-162-cumulative",
+    "front": {
+      "icon": "",
+      "title": "cumulative",
+      "description": "/ˈkjuːmjəleɪtɪv/"
+    },
+    "back": {
+      "icon": "積み上げる",
+      "title": "ที่สะสม",
+      "description": "The **cumulative** effect of all the changes was enormous."
+    }
+  },
+  {
+    "id": "ielts-163-decent",
+    "front": {
+      "icon": "",
+      "title": "decent",
+      "description": "/ˈdiːsnt/"
+    },
+    "back": {
+      "icon": "👍",
+      "title": "พอใช้ได้, เหมาะสม",
+      "description": "We found a **decent** hotel to stay in for the night."
+    }
+  },
+  {
+    "id": "ielts-164-deliberate",
+    "front": {
+      "icon": "",
+      "title": "deliberate",
+      "description": "/dɪˈlɪbərət/"
+    },
+    "back": {
+      "icon": "🎯",
+      "title": "ที่เจตนา, รอบคอบ",
+      "description": "His movements were slow and **deliberate**."
+    }
+  },
+  {
+    "id": "ielts-165-diligent",
+    "front": {
+      "icon": "",
+      "title": "diligent",
+      "description": "/ˈdɪlɪdʒənt/"
+    },
+    "back": {
+      "icon": " industrious",
+      "title": "ขยัน, อุตสาหะ",
+      "description": "She is a very **diligent** worker who always meets deadlines."
+    }
+  },
+  {
+    "id": "ielts-166-discreet",
+    "front": {
+      "icon": "",
+      "title": "discreet",
+      "description": "/dɪˈskriːt/"
+    },
+    "back": {
+      "icon": "🤫",
+      "title": "รอบคอบ, สุขุม",
+      "description": "He made a few **discreet** inquiries about the company."
+    }
+  },
+  {
+    "id": "ielts-167-disparate",
+    "front": {
+      "icon": "",
+      "title": "disparate",
+      "description": "/ˈdɪspərət/"
+    },
+    "back": {
+      "icon": "🧩",
+      "title": "ที่แตกต่างกันอย่างสิ้นเชิง",
+      "description": "The group consisted of people from **disparate** cultures and backgrounds."
+    }
+  },
+  {
+    "id": "ielts-168-durable",
+    "front": {
+      "icon": "",
+      "title": "durable",
+      "description": "/ˈdʊrəbl/"
+    },
+    "back": {
+      "icon": "💪",
+      "title": "ทนทาน",
+      "description": "This bag is made of **durable** material."
+    }
+  },
+  {
+    "id": "ielts-169-efficacious",
+    "front": {
+      "icon": "",
+      "title": "efficacious",
+      "description": "/ˌefɪˈkeɪʃəs/"
+    },
+    "back": {
+      "icon": "✅",
+      "title": "ที่มีประสิทธิภาพ",
+      "description": "The medicine proved to be **efficacious** in treating the disease."
+    }
+  },
+  {
+    "id": "ielts-170-eligible",
+    "front": {
+      "icon": "",
+      "title": "eligible",
+      "description": "/ˈelɪdʒəbl/"
+    },
+    "back": {
+      "icon": "✅",
+      "title": "มีคุณสมบัติเหมาะสม",
+      "description": "You must be over 18 to be **eligible** to vote."
+    }
+  },
+  {
+    "id": "ielts-171-eminent",
+    "front": {
+      "icon": "",
+      "title": "eminent",
+      "description": "/ˈemɪnənt/"
+    },
+    "back": {
+      "icon": "👑",
+      "title": "มีชื่อเสียง, โดดเด่น",
+      "description": "He is an **eminent** scholar in his field."
+    }
+  },
+  {
+    "id": "ielts-172-equitable",
+    "front": {
+      "icon": "",
+      "title": "equitable",
+      "description": "/ˈekwɪtəbl/"
+    },
+    "back": {
+      "icon": "⚖️",
+      "title": "ที่เป็นธรรม",
+      "description": "The company's policy ensures **equitable** treatment for all employees."
+    }
+  },
+  {
+    "id": "ielts-173-erroneous",
+    "front": {
+      "icon": "",
+      "title": "erroneous",
+      "description": "/ɪˈroʊniəs/"
+    },
+    "back": {
+      "icon": "❌",
+      "title": "ที่ผิดพลาด",
+      "description": "The report contained several **erroneous** facts."
+    }
+  },
+  {
+    "id": "ielts-174-evident",
+    "front": {
+      "icon": "",
+      "title": "evident",
+      "description": "/ˈevɪdənt/"
+    },
+    "back": {
+      "icon": "💡",
+      "title": "ที่ชัดเจน",
+      "description": "It was **evident** that he was not happy with the decision."
+    }
+  },
+  {
+    "id": "ielts-175-feasible",
+    "front": {
+      "icon": "",
+      "title": "feasible",
+      "description": "/ˈfiːzəbl/"
+    },
+    "back": {
+      "icon": "👍",
+      "title": "ที่สามารถทำได้",
+      "description": "The proposed solution is not economically **feasible**."
+    }
+  },
+  {
+    "id": "ielts-176-fleeting",
+    "front": {
+      "icon": "",
+      "title": "fleeting",
+      "description": "/ˈfliːtɪŋ/"
+    },
+    "back": {
+      "icon": "💨",
+      "title": "ชั่วขณะ, สั้น",
+      "description": "She caught a **fleeting** glimpse of the celebrity."
+    }
+  },
+  {
+    "id": "ielts-177-fragile",
+    "front": {
+      "icon": "",
+      "title": "fragile",
+      "description": "/ˈfrædʒl/"
+    },
+    "back": {
+      "icon": "💔",
+      "title": "เปราะบาง",
+      "description": "The glass ornaments are extremely **fragile**."
+    }
+  },
+  {
+    "id": "ielts-178-fundamental",
+    "front": {
+      "icon": "",
+      "title": "fundamental",
+      "description": "/ˌfʌndəˈmentl/"
+    },
+    "back": {
+      "icon": "🧱",
+      "title": "พื้นฐาน, สำคัญ",
+      "description": "Honesty is a **fundamental** principle of our business."
+    }
+  },
+  {
+    "id": "ielts-179-genuine",
+    "front": {
+      "icon": "",
+      "title": "genuine",
+      "description": "/ˈdʒenjuɪn/"
+    },
+    "back": {
+      "icon": "💯",
+      "title": "แท้จริง",
+      "description": "He showed **genuine** concern for her well-being."
+    }
+  },
+  {
+    "id": "ielts-180-gradual",
+    "front": {
+      "icon": "",
+      "title": "gradual",
+      "description": "/ˈɡrædʒuəl/"
+    },
+    "back": {
+      "icon": "🐢",
+      "title": "ค่อยเป็นค่อยไป",
+      "description": "The temperature change was very **gradual**."
+    }
+  },
+  {
+    "id": "ielts-181-haphazard",
+    "front": {
+      "icon": "",
+      "title": "haphazard",
+      "description": "/hæpˈhæzərd/"
+    },
+    "back": {
+      "icon": "🤷‍♀️",
+      "title": "สุ่ม, ไม่เป็นระเบียบ",
+      "description": "The books were placed on the shelf in a **haphazard** way."
+    }
+  },
+  {
+    "id": "ielts-182-hypothetical",
+    "front": {
+      "icon": "",
+      "title": "hypothetical",
+      "description": "/ˌhaɪpəˈθetɪkl/"
+    },
+    "back": {
+      "icon": "💭",
+      "title": "ที่เป็นสมมติฐาน",
+      "description": "We discussed the **hypothetical** consequences of his actions."
+    }
+  },
+  {
+    "id": "ielts-183-imminent",
+    "front": {
+      "icon": "",
+      "title": "imminent",
+      "description": "/ˈɪmɪnənt/"
+    },
+    "back": {
+      "icon": "⚠️",
+      "title": "ที่ใกล้จะเกิดขึ้น",
+      "description": "A storm is **imminent**."
+    }
+  },
+  {
+    "id": "ielts-184-inconclusive",
+    "front": {
+      "icon": "",
+      "title": "inconclusive",
+      "description": "/ˌɪnkənˈkluːsɪv/"
+    },
+    "back": {
+      "icon": "❓",
+      "title": "ไม่สรุปผล",
+      "description": "The results of the experiment were **inconclusive**."
+    }
+  },
+  {
+    "id": "ielts-185-indispensable",
+    "front": {
+      "icon": "",
+      "title": "indispensable",
+      "description": "/ˌɪndɪˈspensəbl/"
+    },
+    "back": {
+      "icon": "💎",
+      "title": "จำเป็นอย่างยิ่ง",
+      "description": "He is an **indispensable** member of the team."
+    }
+  },
+  {
+    "id": "ielts-186-inevitable",
+    "front": {
+      "icon": "",
+      "title": "inevitable",
+      "description": "/ɪnˈevɪtəbl/"
+    },
+    "back": {
+      "icon": "🔮",
+      "title": "ที่หลีกเลี่ยงไม่ได้",
+      "description": "Change is an **inevitable** part of life."
+    }
+  },
+  {
+    "id": "ielts-187-ingenuous",
+    "front": {
+      "icon": "",
+      "title": "ingenuous",
+      "description": "/ɪnˈdʒenjuəs/"
+    },
+    "back": {
+      "icon": "😊",
+      "title": "ไร้เดียงสา, ซื่อตรง",
+      "description": "Her **ingenuous** smile made us feel comfortable."
+    }
+  },
+  {
+    "id": "ielts-188-intrinsic",
+    "front": {
+      "icon": "",
+      "title": "intrinsic",
+      "description": "/ɪnˈtrɪnsɪk/"
+    },
+    "back": {
+      "icon": "🧬",
+      "title": "ที่อยู่ภายใน, โดยเนื้อแท้",
+      "description": "The value of the painting is **intrinsic** to its history."
+    }
+  },
+  {
+    "id": "ielts-189-irrelevant",
+    "front": {
+      "icon": "",
+      "title": "irrelevant",
+      "description": "/ɪˈreləvənt/"
+    },
+    "back": {
+      "icon": "❌",
+      "title": "ไม่เกี่ยวข้อง",
+      "description": "Your argument is **irrelevant** to the topic we are discussing."
+    }
+  },
+  {
+    "id": "ielts-190-legitimate",
+    "front": {
+      "icon": "",
+      "title": "legitimate",
+      "description": "/lɪˈdʒɪtɪmət/"
+    },
+    "back": {
+      "icon": "✅",
+      "title": "ถูกกฎหมาย, สมเหตุสมผล",
+      "description": "The police confirmed that the document was **legitimate**."
+    }
+  },
+  {
+    "id": "ielts-191-lucrative",
+    "front": {
+      "icon": "",
+      "title": "lucrative",
+      "description": "/ˈluːkrətɪv/"
+    },
+    "back": {
+      "icon": "💰",
+      "title": "ที่ทำกำไรได้ดี",
+      "description": "The new business venture proved to be very **lucrative**."
+    }
+  },
+  {
+    "id": "ielts-192-monotonous",
+    "front": {
+      "icon": "",
+      "title": "monotonous",
+      "description": "/məˈnɑːtənəs/"
+    },
+    "back": {
+      "icon": "😴",
+      "title": "ซ้ำซาก, น่าเบื่อ",
+      "description": "He found his job to be **monotonous** and unfulfilling."
+    }
+  },
+  {
+    "id": "ielts-193-negligible",
+    "front": {
+      "icon": "",
+      "title": "negligible",
+      "description": "/ˈneɡlɪdʒəbl/"
+    },
+    "back": {
+      "icon": "🤏",
+      "title": "เล็กน้อยมาก",
+      "description": "The damage to the car was **negligible**."
+    }
+  },
+  {
+    "id": "ielts-194-obsolete",
+    "front": {
+      "icon": "",
+      "title": "obsolete",
+      "description": "/ˌɑːbsəˈliːt/"
+    },
+    "back": {
+      "icon": "🕰️",
+      "title": "ล้าสมัย",
+      "description": "Old cassette tapes are now considered **obsolete** technology."
+    }
+  },
+  {
+    "id": "ielts-195-paradoxical",
+    "front": {
+      "icon": "",
+      "title": "paradoxical",
+      "description": "/ˌpærəˈdɑːksɪkl/"
+    },
+    "back": {
+      "icon": "🔄",
+      "title": "ที่ขัดแย้งกันเอง",
+      "description": "The city's growth has a **paradoxical** effect on its infrastructure."
+    }
+  },
+  {
+    "id": "ielts-196-perilous",
+    "front": {
+      "icon": "",
+      "title": "perilous",
+      "description": "/ˈperələs/"
+    },
+    "back": {
+      "icon": "⚠️",
+      "title": "อันตราย",
+      "description": "The journey through the jungle was **perilous**."
+    }
+  },
+  {
+    "id": "ielts-197-plausible",
+    "front": {
+      "icon": "",
+      "title": "plausible",
+      "description": "/ˈplɔːzəbl/"
+    },
+    "back": {
+      "icon": "👍",
+      "title": "ที่น่าเชื่อถือ",
+      "description": "His story was **plausible** enough to be true."
+    }
+  },
+  {
+    "id": "ielts-198-pragmatic",
+    "front": {
+      "icon": "",
+      "title": "pragmatic",
+      "description": "/præɡˈmætɪk/"
+    },
+    "back": {
+      "icon": "🔨",
+      "title": "ที่เน้นการปฏิบัติ",
+      "description": "She takes a very **pragmatic** approach to problem-solving."
+    }
+  },
+  {
+    "id": "ielts-199-prevalent",
+    "front": {
+      "icon": "",
+      "title": "prevalent",
+      "description": "/ˈprevələnt/"
+    },
+    "back": {
+      "icon": "📈",
+      "title": "ที่แพร่หลาย",
+      "description": "The use of social media is **prevalent** among teenagers."
+    }
+  },
+  {
+    "id": "ielts-200-profound",
+    "front": {
+      "icon": "",
+      "title": "profound",
+      "description": "/prəˈfaʊnd/"
+    },
+    "back": {
+      "icon": "🥹",
+      "title": "ลึกซึ้ง",
+      "description": "The experience had a **profound** effect on her."
+    }
+  }
+]

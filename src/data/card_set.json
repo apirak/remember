@@ -30,6 +30,21 @@
     "updatedAt": "2024-09-22T00:00:00Z"
   },
   {
+    "id": "ielts-adjective-thai",
+    "name": "IELTS Adjectives (Thai)",
+    "description": "IELTS vocabulary set focusing on adjectives with Thai translations",
+    "cover": "🇬🇧",
+    "cardCount": 200,
+    "difficulty": "intermediate",
+    "category": "language_basics",
+    "tags": ["ielts", "adjectives", "intermediate", "vocabulary", "thai"],
+    "dataFile": "ielts-adjective-thai.json",
+    "author": "IELTS Learning Team",
+    "isActive": true,
+    "createdAt": "2024-09-22T00:00:00Z",
+    "updatedAt": "2024-09-22T00:00:00Z"
+  },
+  {
     "id": "chinese_essentials_1",
     "name": "Chinese Essentials 1",
     "description": "Basic everyday communication",
