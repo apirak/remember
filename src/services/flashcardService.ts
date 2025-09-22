@@ -6,6 +6,7 @@ import type {
   Flashcard,
   FlashcardData,
   PendingOperation,
+  CardSetProgress,
 } from "../types/flashcard";
 import {
   getUserFlashcards,
@@ -14,6 +15,15 @@ import {
   migrateGuestDataToUser,
   saveFlashcardsBatch,
 } from "../utils/firestore";
+import {
+  doc,
+  getDoc,
+  getDocs,
+  setDoc,
+  collection,
+  serverTimestamp,
+} from "firebase/firestore";
+import { firestore } from "../utils/firebase";
 import { getCurrentUser } from "../utils/auth";
 import { transformFlashcardData } from "../utils/seedData";
 import flashcardsData from "../data/flashcards.json";
@@ -670,6 +680,212 @@ export class FlashcardService {
         success: false,
         error:
           error instanceof Error ? error.message : "Failed to retry operation",
+      };
+    }
+  }
+
+  /**
+   * Load card set progress from Firestore for a specific card set
+   * @param cardSetId - The card set identifier
+   * @returns Service result with CardSetProgress data
+   */
+  static async loadCardSetProgress(
+    cardSetId: string
+  ): Promise<ServiceResult<CardSetProgress | null>> {
+    try {
+      const currentUser = getCurrentUser();
+      if (!currentUser) {
+        return {
+          success: false,
+          error: "User must be authenticated to load progress from Firestore.",
+        };
+      }
+
+      console.log(`Loading card set progress for: ${cardSetId}`);
+
+      // Get progress document from Firestore
+      const progressDoc = doc(
+        firestore,
+        "users",
+        currentUser.uid,
+        "cardSetProgress",
+        cardSetId
+      );
+
+      const docSnapshot = await getDoc(progressDoc);
+
+      if (!docSnapshot.exists()) {
+        console.log(`No progress found for card set: ${cardSetId}`);
+        return {
+          success: true,
+          data: null, // No progress data exists yet
+        };
+      }
+
+      const data = docSnapshot.data();
+
+      // Convert Firestore timestamps back to Date objects
+      const progress: CardSetProgress = {
+        cardSetId: data.cardSetId,
+        totalCards: data.totalCards,
+        reviewedCards: data.reviewedCards,
+        progressPercentage: data.progressPercentage,
+        lastReviewDate: data.lastReviewDate
+          ? data.lastReviewDate.toDate()
+          : null,
+        createdAt: data.createdAt ? data.createdAt.toDate() : new Date(),
+        updatedAt: data.updatedAt ? data.updatedAt.toDate() : new Date(),
+      };
+
+      console.log(
+        `Loaded progress for ${cardSetId}: ${progress.progressPercentage}% (${progress.reviewedCards}/${progress.totalCards})`
+      );
+
+      return {
+        success: true,
+        data: progress,
+      };
+    } catch (error) {
+      console.error("Error loading card set progress:", error);
+      return {
+        success: false,
+        error:
+          error instanceof Error
+            ? error.message
+            : "Failed to load card set progress",
+      };
+    }
+  }
+
+  /**
+   * Save card set progress to Firestore
+   * @param progress - CardSetProgress object to save
+   * @returns Service result indicating success/failure
+   */
+  static async saveCardSetProgress(
+    progress: CardSetProgress
+  ): Promise<ServiceResult> {
+    try {
+      const currentUser = getCurrentUser();
+      if (!currentUser) {
+        return {
+          success: false,
+          error: "User must be authenticated to save progress to Firestore.",
+        };
+      }
+
+      console.log(
+        `Saving card set progress for: ${progress.cardSetId} (${progress.progressPercentage}%)`
+      );
+      console.log("User UID:", currentUser.uid);
+      console.log("Progress data:", {
+        cardSetId: progress.cardSetId,
+        totalCards: progress.totalCards,
+        reviewedCards: progress.reviewedCards,
+        progressPercentage: progress.progressPercentage,
+      });
+
+      // Prepare Firestore document data
+      const progressDoc = doc(
+        firestore,
+        "users",
+        currentUser.uid,
+        "cardSetProgress",
+        progress.cardSetId
+      );
+
+      // Convert dates to Firestore timestamps
+      const documentData = {
+        cardSetId: progress.cardSetId,
+        totalCards: progress.totalCards,
+        reviewedCards: progress.reviewedCards,
+        progressPercentage: progress.progressPercentage,
+        lastReviewDate: progress.lastReviewDate,
+        createdAt: progress.createdAt,
+        updatedAt: serverTimestamp(), // Use server timestamp for consistency
+      };
+
+      await setDoc(progressDoc, documentData);
+
+      console.log(
+        `Successfully saved progress for ${progress.cardSetId}: ${progress.reviewedCards}/${progress.totalCards} cards (${progress.progressPercentage}%)`
+      );
+
+      return {
+        success: true,
+      };
+    } catch (error) {
+      console.error("Error saving card set progress:", error);
+      return {
+        success: false,
+        error:
+          error instanceof Error
+            ? error.message
+            : "Failed to save card set progress",
+      };
+    }
+  }
+
+  /**
+   * Load progress for all card sets for the current user
+   * @returns Service result with array of CardSetProgress
+   */
+  static async loadAllCardSetProgress(): Promise<
+    ServiceResult<CardSetProgress[]>
+  > {
+    try {
+      const currentUser = getCurrentUser();
+      if (!currentUser) {
+        return {
+          success: false,
+          error: "User must be authenticated to load progress from Firestore.",
+        };
+      }
+
+      console.log("Loading all card set progress for user");
+
+      // Query all progress documents for the user
+      const progressCollection = collection(
+        firestore,
+        "users",
+        currentUser.uid,
+        "cardSetProgress"
+      );
+
+      const querySnapshot = await getDocs(progressCollection);
+
+      const allProgress: CardSetProgress[] = [];
+
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const progress: CardSetProgress = {
+          cardSetId: data.cardSetId,
+          totalCards: data.totalCards,
+          reviewedCards: data.reviewedCards,
+          progressPercentage: data.progressPercentage,
+          lastReviewDate: data.lastReviewDate
+            ? data.lastReviewDate.toDate()
+            : null,
+          createdAt: data.createdAt ? data.createdAt.toDate() : new Date(),
+          updatedAt: data.updatedAt ? data.updatedAt.toDate() : new Date(),
+        };
+        allProgress.push(progress);
+      });
+
+      console.log(`Loaded progress for ${allProgress.length} card sets`);
+
+      return {
+        success: true,
+        data: allProgress,
+      };
+    } catch (error) {
+      console.error("Error loading all card set progress:", error);
+      return {
+        success: false,
+        error:
+          error instanceof Error
+            ? error.message
+            : "Failed to load card set progress",
       };
     }
   }

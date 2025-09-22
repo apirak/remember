@@ -13,6 +13,7 @@ import type {
   FlashcardAction,
   Flashcard,
   FlashcardData,
+  CardSetProgress,
 } from "../types/flashcard";
 import flashcardsData from "../data/flashcards.json";
 import { transformFlashcardData } from "../utils/seedData";
@@ -172,6 +173,11 @@ const FlashcardContext = createContext<{
   saveCardToFirestore: (card: Flashcard) => Promise<void>;
   saveProgressToFirestore: (cardId: string, progressData: any) => Promise<void>;
   migrateGuestDataToFirestore: (guestData: any) => Promise<void>;
+
+  // Card set progress methods
+  loadCardSetProgress: (cardSetId: string) => Promise<CardSetProgress | null>;
+  saveCardSetProgress: (progress: CardSetProgress) => Promise<void>;
+  updateCurrentCardSetProgress: () => Promise<void>;
 } | null>(null);
 
 /**
@@ -489,6 +495,9 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
     saveCardToFirestore,
     saveProgressToFirestore,
     migrateGuestDataToFirestore,
+    loadCardSetProgress,
+    saveCardSetProgress,
+    updateCurrentCardSetProgress,
   } = firestoreOperations;
 
   /**
@@ -558,6 +567,10 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
     saveCardToFirestore,
     saveProgressToFirestore,
     migrateGuestDataToFirestore,
+    // Card set progress methods
+    loadCardSetProgress,
+    saveCardSetProgress,
+    updateCurrentCardSetProgress,
   };
 
   return (

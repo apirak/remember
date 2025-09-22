@@ -2,8 +2,13 @@
 // Handles all Firestore integration methods for the FlashcardContext
 // These methods are created as factory functions and used within the context
 
-import type { Flashcard, FlashcardContextState } from "../types/flashcard";
+import type {
+  Flashcard,
+  FlashcardContextState,
+  CardSetProgress,
+} from "../types/flashcard";
 import { FlashcardService } from "../services/flashcardService";
+import { calculateCardSetProgress } from "../utils/flashcardHelpers";
 
 /**
  * Dependencies required by Firestore operations
@@ -241,10 +246,122 @@ export const createFirestoreOperations = (deps: FirestoreOperationsDeps) => {
     }
   };
 
+  /**
+   * Load card set progress from Firestore for a specific card set
+   * @param cardSetId - The card set identifier
+   * @returns CardSetProgress object or null if not found
+   */
+  const loadCardSetProgress = async (
+    cardSetId: string
+  ): Promise<CardSetProgress | null> => {
+    try {
+      if (state.isGuest) {
+        console.log("Guest mode: Cannot load card set progress from Firestore");
+        return null;
+      }
+
+      const result = await FlashcardService.loadCardSetProgress(cardSetId);
+
+      if (result.success && result.data !== undefined) {
+        return result.data;
+      } else {
+        console.warn("Failed to load card set progress:", result.error);
+        return null;
+      }
+    } catch (error) {
+      console.error("Error loading card set progress:", error);
+      return null;
+    }
+  };
+
+  /**
+   * Save card set progress to Firestore
+   * @param progress - CardSetProgress object to save
+   */
+  const saveCardSetProgress = async (
+    progress: CardSetProgress
+  ): Promise<void> => {
+    try {
+      if (state.isGuest) {
+        console.log("Guest mode: Cannot save card set progress to Firestore");
+        return;
+      }
+
+      setLoadingState("savingProgress", true);
+      setSyncStatus("syncing");
+      clearError();
+
+      const result = await FlashcardService.saveCardSetProgress(progress);
+
+      if (result.success) {
+        console.log(
+          `Successfully saved progress for card set: ${progress.cardSetId}`
+        );
+        setSyncStatus("idle");
+      } else {
+        throw new Error(result.error || "Failed to save card set progress");
+      }
+    } catch (error) {
+      console.error("Error saving card set progress:", error);
+      setError(
+        error instanceof Error ? error.message : "Failed to save progress"
+      );
+      setSyncStatus("error");
+    } finally {
+      setLoadingState("savingProgress", false);
+    }
+  };
+
+  /**
+   * Calculate and update progress for the current card set
+   * Uses the current allCards in state to calculate progress
+   */
+  const updateCurrentCardSetProgress = async (): Promise<void> => {
+    try {
+      console.log("updateCurrentCardSetProgress called:", {
+        isGuest: state.isGuest,
+        user: state.user?.uid || "none",
+        currentCardSet: state.currentCardSet?.id || "none",
+        allCardsCount: state.allCards.length,
+      });
+
+      if (state.isGuest || !state.currentCardSet) {
+        console.log("Guest mode or no card set: Cannot update progress");
+        return;
+      }
+
+      if (!state.user) {
+        console.log("No authenticated user found: Cannot update progress");
+        return;
+      }
+
+      // Calculate progress from current cards in state
+      const progress = calculateCardSetProgress(
+        state.allCards,
+        state.currentCardSet.id
+      );
+
+      console.log(
+        `Updating progress for ${state.currentCardSet.name}: ${progress.progressPercentage}% (${progress.reviewedCards}/${progress.totalCards})`
+      );
+
+      // Save to Firestore
+      await saveCardSetProgress(progress);
+    } catch (error) {
+      console.error("Error updating current card set progress:", error);
+      setError(
+        error instanceof Error ? error.message : "Failed to update progress"
+      );
+    }
+  };
+
   return {
     loadCardsFromFirestore,
     saveCardToFirestore,
     saveProgressToFirestore,
     migrateGuestDataToFirestore,
+    loadCardSetProgress,
+    saveCardSetProgress,
+    updateCurrentCardSetProgress,
   };
 };

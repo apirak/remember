@@ -12,8 +12,14 @@ interface ReviewProps {
 }
 
 const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
-  const { state, showCardBack, rateCard, knowCard, resetSession } =
-    useFlashcard();
+  const {
+    state,
+    showCardBack,
+    rateCard,
+    knowCard,
+    resetSession,
+    updateCurrentCardSetProgress,
+  } = useFlashcard();
   const [isFlipping, setIsFlipping] = useState(false);
 
   // All hooks must be called before any conditional returns
@@ -30,8 +36,20 @@ const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
     setIsFlipping(false); // Reset flip state for next card
   };
 
-  // Handle back to dashboard - reset session first
-  const handleBackToDashboard = () => {
+  // Handle back to dashboard - reset session first and update progress
+  const handleBackToDashboard = async () => {
+    // Update progress before leaving review
+    if (!state.isGuest && state.currentSession) {
+      console.log(
+        "Review: Updating card set progress before returning to dashboard"
+      );
+      try {
+        await updateCurrentCardSetProgress();
+      } catch (error) {
+        console.error("Review: Failed to update progress:", error);
+      }
+    }
+
     resetSession();
     onNavigate("dashboard");
   };

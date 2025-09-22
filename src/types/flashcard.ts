@@ -17,16 +17,10 @@ export interface CardSet {
   updatedAt: string;
 }
 
-// Card set with user progress information
+// Card set with user progress information (simplified)
 export interface CardSetWithProgress extends CardSet {
-  userProgress?: {
-    totalCards: number;
-    dueCards: number;
-    masteredCards: number;
-    reviewsToday: number;
-    lastReviewDate: Date | null;
-    hasStarted: boolean;
-  };
+  progress: number; // 0-100 percentage based on cards reviewed at least once
+  userProgress?: CardSetProgress; // Detailed progress data from Firestore
 }
 
 // Core flashcard data structure
@@ -78,18 +72,15 @@ export interface ReviewSession {
   reviewedCardIds: Set<string>; // Track which unique cards have been completed
 }
 
-// Card set specific progress tracking
+// Card set specific progress tracking (simplified)
 // This interface tracks progress independently for each card set
+// Progress is calculated as simple percentage: (reviewedCards / totalCards) * 100
 export interface CardSetProgress {
-  cardSetId: string; // Unique identifier for the card set
+  cardSetId: string; // Unique identifier for the card set (matches card_set.json id)
   totalCards: number; // Total number of cards in this set
-  dueCards: number; // Cards that are due for review today
-  masteredCards: number; // Cards that have been mastered (high ease factor)
-  difficultCards: number; // Cards that are marked as difficult (low ease factor)
-  reviewsToday: number; // Number of cards reviewed today in this set
+  reviewedCards: number; // Number of cards reviewed at least once (totalReviews > 0)
+  progressPercentage: number; // Calculated percentage: (reviewedCards / totalCards) * 100
   lastReviewDate: Date | null; // When this card set was last reviewed
-  dailyGoal: number; // Daily review goal for this card set (default: 10)
-  currentStreak: number; // Consecutive days of meeting daily goal
   createdAt: Date; // When progress tracking started for this set
   updatedAt: Date; // Last time progress was updated
 }

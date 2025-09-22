@@ -1,7 +1,7 @@
 // Completion component - shown when review session is finished
 // Displays session results and provides options to continue or return to dashboard
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { useFlashcard } from "../../contexts/FlashcardContext";
 
 type AppRoute = "dashboard" | "review" | "complete";
@@ -11,7 +11,36 @@ interface CompletionProps {
 }
 
 const Completion: React.FC<CompletionProps> = ({ onNavigate }) => {
-  const { state, resetSession, startReviewSession } = useFlashcard();
+  const {
+    state,
+    resetSession,
+    startReviewSession,
+    updateCurrentCardSetProgress,
+  } = useFlashcard();
+  const progressUpdatedRef = useRef(false);
+
+  // Update card set progress when session completes (only once)
+  useEffect(() => {
+    const updateProgress = async () => {
+      if (
+        state.currentSession?.isComplete &&
+        !state.isGuest &&
+        !progressUpdatedRef.current
+      ) {
+        console.log(
+          "Completion: Updating card set progress after session completion"
+        );
+        progressUpdatedRef.current = true;
+        try {
+          await updateCurrentCardSetProgress();
+        } catch (error) {
+          console.error("Completion: Failed to update progress:", error);
+        }
+      }
+    };
+
+    updateProgress();
+  }, [state.currentSession?.isComplete, state.isGuest]);
 
   // Show loading while we wait for session state to stabilize
   if (!state.currentSession) {
@@ -45,12 +74,14 @@ const Completion: React.FC<CompletionProps> = ({ onNavigate }) => {
       : 0;
 
   const handleReturnToDashboard = () => {
+    progressUpdatedRef.current = false; // Reset for next session
     resetSession();
     onNavigate("dashboard");
   };
 
   const handleReviewAgain = () => {
     if (state.stats.dueCards > 0) {
+      progressUpdatedRef.current = false; // Reset for next session
       resetSession();
       startReviewSession();
       onNavigate("review");

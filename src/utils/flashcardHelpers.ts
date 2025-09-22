@@ -180,3 +180,63 @@ export const getStudySessionStats = (
         : 0,
   };
 };
+
+/**
+ * Calculate card set progress for a collection of flashcards
+ * Progress is based on simple percentage: cards reviewed at least once / total cards
+ * @param cards - Array of flashcards for a specific card set
+ * @param cardSetId - The card set identifier
+ * @returns CardSetProgress object with calculated percentage
+ */
+export const calculateCardSetProgress = (
+  cards: Flashcard[],
+  cardSetId: string
+): import("../types/flashcard").CardSetProgress => {
+  const totalCards = cards.length;
+
+  // Count cards that have been reviewed at least once (totalReviews > 0)
+  const reviewedCards = cards.filter((card) => card.totalReviews > 0).length;
+
+  // Calculate percentage (0-100)
+  const progressPercentage =
+    totalCards > 0 ? Math.round((reviewedCards / totalCards) * 100) : 0;
+
+  // Find the most recent review date
+  const reviewDates = cards
+    .filter((card) => card.lastReviewDate)
+    .map((card) => card.lastReviewDate)
+    .sort((a, b) => b.getTime() - a.getTime());
+
+  const lastReviewDate = reviewDates.length > 0 ? reviewDates[0] : null;
+  const now = new Date();
+
+  return {
+    cardSetId,
+    totalCards,
+    reviewedCards,
+    progressPercentage,
+    lastReviewDate,
+    createdAt: now, // Will be overridden when loading from Firestore
+    updatedAt: now,
+  };
+};
+
+/**
+ * Create a Firestore-ready document from CardSetProgress
+ * Converts Date objects to Firestore Timestamps for storage
+ * @param progress - CardSetProgress object
+ * @returns Plain object ready for Firestore storage
+ */
+export const createFirestoreProgressDocument = (
+  progress: import("../types/flashcard").CardSetProgress
+) => {
+  return {
+    cardSetId: progress.cardSetId,
+    totalCards: progress.totalCards,
+    reviewedCards: progress.reviewedCards,
+    progressPercentage: progress.progressPercentage,
+    lastReviewDate: progress.lastReviewDate,
+    createdAt: progress.createdAt,
+    updatedAt: progress.updatedAt,
+  };
+};
