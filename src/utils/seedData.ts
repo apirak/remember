@@ -3,7 +3,7 @@
 
 import type { Flashcard, FlashcardData } from "../types/flashcard";
 import { initializeSM2Params } from "./sm2";
-import flashcardsData from "../data/flashcards.json";
+import { loadCardSetDataWithFetch } from "./cardSetLoader";
 
 // Test user email for seeding
 export const TEST_USER_EMAIL = "apriakb@gmail.com";
@@ -27,17 +27,18 @@ export const transformFlashcardData = (
 };
 
 // Get default seed flashcards (transformed with SM-2 params)
-export const getDefaultSeedCards = (
+export const getDefaultSeedCards = async (
   cardSetId: string = "default"
-): Flashcard[] => {
-  return (flashcardsData as FlashcardData[]).map((data) =>
+): Promise<Flashcard[]> => {
+  const defaultCardsData = await loadCardSetDataWithFetch("flashcards.json");
+  return defaultCardsData.map((data) =>
     transformFlashcardData(data, cardSetId)
   );
 };
 
 // Create sample progress cards with various states for testing
-export const createProgressSampleCards = (): Flashcard[] => {
-  const baseCards = getDefaultSeedCards();
+export const createProgressSampleCards = async (): Promise<Flashcard[]> => {
+  const baseCards = await getDefaultSeedCards();
   const now = new Date();
 
   // Take first 10 cards and modify their progress states
@@ -101,20 +102,22 @@ export const shouldSeedUser = (userEmail: string): boolean => {
 };
 
 // Generate seed data based on user type
-export const generateSeedData = (userEmail: string): Flashcard[] => {
+export const generateSeedData = async (
+  userEmail: string
+): Promise<Flashcard[]> => {
   if (userEmail === TEST_USER_EMAIL) {
     // Test user gets sample progress cards for testing
-    return createProgressSampleCards();
+    return await createProgressSampleCards();
   } else {
     // Other users get default cards
-    return getDefaultSeedCards();
+    return await getDefaultSeedCards();
   }
 };
 
 // Seed data configuration
 export const SEED_CONFIG = {
   TEST_USER_EMAIL,
-  DEFAULT_CARD_COUNT: flashcardsData.length,
+  DEFAULT_CARD_COUNT: 0, // Will be loaded dynamically
   PROGRESS_SAMPLE_COUNT: 10,
   SEED_TIMESTAMP: new Date().toISOString(),
 } as const;

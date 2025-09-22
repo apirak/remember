@@ -40,9 +40,14 @@ const CardSetSelection: React.FC<CardSetSelectionProps> = ({ onNavigate }) => {
   useEffect(() => {
     const loadCardSets = async () => {
       try {
-        // Import the card set JSON data
-        const cardSetModule = await import("../../data/card_set.json");
-        const jsonData = cardSetModule.default || cardSetModule;
+        // Fetch the card set JSON data using the same method as card sets
+        const response = await fetch("/data/card_set.json");
+        if (!response.ok) {
+          throw new Error(
+            `Failed to load card sets: ${response.status} ${response.statusText}`
+          );
+        }
+        const jsonData = await response.json();
 
         // Transform JSON data to match our CardSet interface
         const transformedCardSets: CardSet[] = jsonData.map((item: any) => ({

@@ -87,7 +87,7 @@ export class EnhancedFirestoreService {
         console.log(`Seeding user: ${currentUser.email}`);
 
         // Generate seed data
-        const seedCards = generateSeedData(currentUser.email || "");
+        const seedCards = await generateSeedData(currentUser.email || "");
 
         // Create user profile if it doesn't exist
         await createUserProfile(currentUser.uid, {

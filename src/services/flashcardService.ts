@@ -23,10 +23,11 @@ import {
   collection,
   serverTimestamp,
 } from "firebase/firestore";
+// Fetch-based card set loader for reliable loading
+import { loadCardSetDataWithFetch } from "../utils/cardSetLoader";
 import { firestore } from "../utils/firebase";
 import { getCurrentUser } from "../utils/auth";
 import { transformFlashcardData } from "../utils/seedData";
-import flashcardsData from "../data/flashcards.json";
 
 // Service result type with standardized error handling
 export interface ServiceResult<T = any> {
@@ -127,15 +128,12 @@ export class FlashcardService {
     cardSetDataFile: string
   ): Promise<ServiceResult<Flashcard[]>> {
     try {
-      // Dynamically import the card set data
-      // Add .json extension if not present
+      // Use fetch-based loader for reliable dev and production loading
       const fileName = cardSetDataFile.endsWith(".json")
         ? cardSetDataFile
         : `${cardSetDataFile}.json`;
-      const cardSetData = await import(
-        /* @vite-ignore */ `../data/${fileName}`
-      );
-      const cardsData = cardSetData.default as FlashcardData[];
+
+      const cardsData = await loadCardSetDataWithFetch(fileName);
 
       // Transform to include SM-2 parameters
       const cards = cardsData.map((data) =>
@@ -306,7 +304,10 @@ export class FlashcardService {
         );
 
         // Transform default cards to include SM-2 parameters
-        const defaultCards = (flashcardsData as FlashcardData[]).map((data) =>
+        const defaultCardsData = await loadCardSetDataWithFetch(
+          "flashcards.json"
+        );
+        const defaultCards = defaultCardsData.map((data) =>
           transformFlashcardData(data, "default")
         );
 
@@ -612,15 +613,15 @@ export class FlashcardService {
   }
 
   /**
-   * Get default flashcards (used for fallback or new users)
-   * @returns Array of default flashcards with SM-2 parameters
+   * Get default flashcards for fallback or testing purposes
+   * @returns Default flashcard array
    */
-  static getDefaultFlashcards(): Flashcard[] {
-    return (flashcardsData as FlashcardData[]).map((data) =>
+  static async getDefaultFlashcards(): Promise<Flashcard[]> {
+    const defaultCardsData = await loadCardSetDataWithFetch("flashcards.json");
+    return defaultCardsData.map((data) =>
       transformFlashcardData(data, "default")
     );
   }
-
   /**
    * Create a pending operation for offline support
    * @param type - Type of operation

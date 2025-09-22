@@ -15,7 +15,6 @@ import type {
   FlashcardData,
   CardSetProgress,
 } from "../types/flashcard";
-import flashcardsData from "../data/flashcards.json";
 import { transformFlashcardData } from "../utils/seedData";
 // Enhanced error handling for card set operations
 import {
@@ -37,6 +36,8 @@ import {
   loadLastCardSet,
   isStorageAvailable,
 } from "../utils/cardSetPersistence";
+// Fetch-based card set loader for reliable production loading
+import { loadCardSetDataWithFetch } from "../utils/cardSetLoader";
 
 export const MAX_REVIEW_CARDS = 10;
 
@@ -199,11 +200,8 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
       console.log(`FlashcardContext: Loading card set data from ${dataFile}`);
       dispatch({ type: "SET_LOADING", payload: true });
 
-      // Dynamically import the card set data file
-      const cardSetModule = await import(
-        /* @vite-ignore */ `../data/${dataFile}`
-      );
-      const cardSetData = cardSetModule.default || cardSetModule;
+      // Use fetch-based loader for reliable dev and production loading
+      const cardSetData = await loadCardSetDataWithFetch(dataFile);
 
       // Validate the loaded data structure
       try {
@@ -310,10 +308,22 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
 
       // Final fallback to default data if all else fails
       console.log("FlashcardContext: Falling back to default flashcard data");
-      const transformedCards = (flashcardsData as FlashcardData[]).map((data) =>
-        transformFlashcardData(data, "default")
-      );
-      dispatch({ type: "LOAD_CARDS", payload: transformedCards });
+      try {
+        const defaultCardsData = await loadCardSetDataWithFetch(
+          "flashcards.json"
+        );
+        const transformedCards = defaultCardsData.map((data) =>
+          transformFlashcardData(data, "default")
+        );
+        dispatch({ type: "LOAD_CARDS", payload: transformedCards });
+      } catch (defaultLoadError) {
+        console.error(
+          "Failed to load default flashcard data:",
+          defaultLoadError
+        );
+        // Set empty array as final fallback
+        dispatch({ type: "LOAD_CARDS", payload: [] });
+      }
     } finally {
       dispatch({ type: "SET_LOADING", payload: false });
     }
@@ -395,11 +405,24 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
       }
     } else if (!state.currentCardSet?.dataFile) {
       // Fallback to default data if no dataFile
-      dispatch({ type: "SET_LOADING", payload: true });
-      const transformedCards = (flashcardsData as FlashcardData[]).map((data) =>
-        transformFlashcardData(data, "default")
-      );
-      dispatch({ type: "LOAD_CARDS", payload: transformedCards });
+      const loadDefaultData = async () => {
+        dispatch({ type: "SET_LOADING", payload: true });
+        try {
+          const defaultCardsData = await loadCardSetDataWithFetch(
+            "flashcards.json"
+          );
+          const transformedCards = defaultCardsData.map((data) =>
+            transformFlashcardData(data, "default")
+          );
+          dispatch({ type: "LOAD_CARDS", payload: transformedCards });
+        } catch (error) {
+          console.error("Failed to load default data:", error);
+          dispatch({ type: "LOAD_CARDS", payload: [] });
+        } finally {
+          dispatch({ type: "SET_LOADING", payload: false });
+        }
+      };
+      loadDefaultData();
     }
   }, [state.currentCardSet, state.isGuest, state.user]); // Depends on auth state too
 
