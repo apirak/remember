@@ -195,7 +195,9 @@
 
       function getUserCardsCollection() {
         if (!currentUser) throw new Error('User not authenticated');
-        return collection(db, 'users', currentUser.uid, 'cards');
+        // Use the same structure as the main app: /users/{uid}/cardSets/{cardSetId}/cards
+        const cardSetId = 'chinese_essentials_1'; // Default card set
+        return collection(db, 'users', currentUser.uid, 'cardSets', cardSetId, 'cards');
       }
 
       function getUserDocRef() {

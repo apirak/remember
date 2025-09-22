@@ -1,0 +1,38 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ⚠️ TEMPORARY: Allow all read/write for debugging
+    match /{document=**} {
+      allow read, write: if true;
+    }
+    
+    // User profile และ flashcards
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      
+      // User's card sets subcollection
+      match /cardSets/{cardSetId} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+        
+        // Cards within a specific card set
+        match /cards/{cardId} {
+          allow read, write: if request.auth != null && request.auth.uid == userId;
+        }
+      }
+      
+      // Legacy: User's flashcards subcollection (for backward compatibility)
+      match /cards/{cardId} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+    
+    // Guest mode (session-based)
+    match /guests/{sessionId} {
+      allow read, write: if true; // อาจจะต้องปรับปรุงให้ปลอดภัยกว่านี้
+      
+      match /cards/{cardId} {
+        allow read, write: if true;
+      }
+    }
+  }
+}

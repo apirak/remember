@@ -43,6 +43,9 @@ export const COLLECTIONS = {
 
 // Helper function to get user's cards collection reference for a specific card set
 const getUserCardSetCardsCollection = (userId: string, cardSetId: string) => {
+  const path = `${COLLECTIONS.USERS}/${userId}/${COLLECTIONS.CARD_SETS}/${cardSetId}/${COLLECTIONS.CARDS}`;
+  console.log(`Firestore: Accessing collection path: ${path}`);
+
   return collection(
     firestore,
     COLLECTIONS.USERS,
@@ -189,6 +192,10 @@ export const saveFlashcardsBatch = async (
         error: "User must be authenticated to save cards.",
       };
     }
+
+    console.log(
+      `Firestore: Saving batch of ${cards.length} cards for user ${currentUser.uid} in cardSet ${cardSetId}`
+    );
 
     const batch: WriteBatch = writeBatch(firestore);
     const cardsCollection = getUserCardSetCardsCollection(

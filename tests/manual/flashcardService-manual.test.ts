@@ -7,7 +7,9 @@ import { FlashcardService } from "../../src/services/flashcardService";
 import { getCurrentUser } from "../../src/utils/auth";
 
 describe("FlashcardService - Manual Firebase Test", () => {
-  it("should demonstrate card creation workflow", async () => {
+  // Skip manual test - requires real Firebase authentication
+  // To run manually: sign in at http://localhost:4322/db-test then run this test
+  it.skip("should demonstrate card creation workflow", async () => {
     const TEST_CARD_SET_ID = "manual_test_business";
     const TEST_CARD_SET_FILE = "business_chinese.json";
 

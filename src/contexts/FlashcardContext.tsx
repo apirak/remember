@@ -324,38 +324,8 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
   }, []);
 
   /**
-   * Load initial flashcard data on component mount
-   * Transforms raw JSON data to include SM-2 algorithm parameters
-   */
-  useEffect(() => {
-    // Load data for the initial card set
-    if (state.currentCardSet?.dataFile) {
-      loadCardSetData(state.currentCardSet.dataFile);
-    } else {
-      // Fallback to default data
-      dispatch({ type: "SET_LOADING", payload: true });
-      const transformedCards = (flashcardsData as FlashcardData[]).map((data) =>
-        transformFlashcardData(data, "default")
-      );
-      dispatch({ type: "LOAD_CARDS", payload: transformedCards });
-    }
-  }, [state.currentCardSet]); // Now depends on currentCardSet
-
-  /**
-   * Load new card set data when currentCardSet changes
-   */
-  useEffect(() => {
-    if (state.currentCardSet?.dataFile) {
-      console.log(
-        `FlashcardContext: Card set changed to ${state.currentCardSet.name}, loading new data`
-      );
-      loadCardSetData(state.currentCardSet.dataFile);
-    }
-  }, [state.currentCardSet?.dataFile]);
-
-  /**
-   * Monitor authentication state changes and load appropriate data
-   * Handles sign-in/sign-out flow and data source switching
+   * Monitor authentication state changes and update user state
+   * This must run before data loading to establish auth state first
    */
   useEffect(() => {
     const unsubscribe = onAuthStateChange((firebaseUser) => {
@@ -369,32 +339,62 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
           isGuest: false,
         };
 
+        console.log("FlashcardContext: User signed in, updating auth state");
         setUser(userProfile, false);
-
-        // Load user's cards from Firestore
-        loadCardsFromFirestore().catch((error) => {
-          console.error(
-            "Failed to load cards from Firestore after sign-in:",
-            error
-          );
-          // If Firestore loading fails, keep using default cards as fallback
-        });
+        // Note: Card loading is now handled by the unified useEffect below
       } else {
-        // User signed out or is guest - use session storage and default cards
+        // User signed out or is guest - update state only
+        console.log(
+          "FlashcardContext: User signed out, switching to guest mode"
+        );
         setUser(null, true);
         setDataSource("session");
-
-        // Load default cards
-        const transformedCards = (flashcardsData as FlashcardData[]).map(
-          (data) => transformFlashcardData(data, "default")
-        );
-        dispatch({ type: "LOAD_CARDS", payload: transformedCards });
+        // Note: Card loading is now handled by the unified useEffect below
       }
     });
 
     // Cleanup subscription on unmount
     return () => unsubscribe();
   }, []); // Empty dependency array since we want this to run once on mount
+
+  /**
+   * Load card data when currentCardSet changes, considering authentication state
+   * - For authenticated users: load from Firestore
+   * - For guest users: load from JSON
+   */
+  useEffect(() => {
+    if (state.currentCardSet?.dataFile) {
+      console.log(
+        `FlashcardContext: Card set changed to ${
+          state.currentCardSet.name
+        }, loading data for ${state.isGuest ? "guest" : "authenticated"} user`
+      );
+
+      if (!state.isGuest && state.user) {
+        // Authenticated user - load from Firestore
+        loadCardsFromFirestore().catch((error) => {
+          console.error(
+            "Failed to load cards from Firestore, falling back to JSON:",
+            error
+          );
+          // Fallback to JSON if Firestore fails
+          if (state.currentCardSet?.dataFile) {
+            loadCardSetData(state.currentCardSet.dataFile);
+          }
+        });
+      } else {
+        // Guest user - load from JSON
+        loadCardSetData(state.currentCardSet.dataFile);
+      }
+    } else if (!state.currentCardSet?.dataFile) {
+      // Fallback to default data if no dataFile
+      dispatch({ type: "SET_LOADING", payload: true });
+      const transformedCards = (flashcardsData as FlashcardData[]).map((data) =>
+        transformFlashcardData(data, "default")
+      );
+      dispatch({ type: "LOAD_CARDS", payload: transformedCards });
+    }
+  }, [state.currentCardSet, state.isGuest, state.user]); // Depends on auth state too
 
   /**
    * Basic action helper functions for core flashcard operations

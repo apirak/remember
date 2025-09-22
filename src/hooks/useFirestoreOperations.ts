@@ -218,9 +218,7 @@ export const createFirestoreOperations = (deps: FirestoreOperationsDeps) => {
       const result = await FlashcardService.migrateGuestData(guestData);
 
       if (result.success) {
-        // After successful migration, load the migrated cards
-        await loadCardsFromFirestore();
-
+        // Migration successful - the useEffect in FlashcardContext will handle reloading
         dispatch({ type: "SET_MIGRATION_STATUS", payload: "completed" });
         setSyncStatus("idle");
         setDataSource("firestore");
