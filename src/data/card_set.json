@@ -41,5 +41,35 @@
     "isActive": true,
     "createdAt": "2024-03-15T00:00:00Z",
     "updatedAt": "2024-09-20T00:00:00Z"
+  },
+  {
+    "id": "hsk_1_set_1_english",
+    "name": "Chinese HSK-1 (English)",
+    "description": "HSK Level 1 vocabulary set 1 with English translations",
+    "cover": "🇨🇳",
+    "cardCount": 210,
+    "difficulty": "beginner",
+    "category": "language_basics",
+    "tags": ["chinese", "hsk", "beginner", "vocabulary", "english"],
+    "dataFile": "hsk-1-set-1-english.json",
+    "author": "HSK Learning Team",
+    "isActive": true,
+    "createdAt": "2024-09-22T00:00:00Z",
+    "updatedAt": "2024-09-22T00:00:00Z"
+  },
+  {
+    "id": "hsk_1_set_1_thai",
+    "name": "Chinese HSK-1 (Thai)",
+    "description": "HSK Level 1 vocabulary set 1 with Thai translations",
+    "cover": "🇨🇳",
+    "cardCount": 210,
+    "difficulty": "beginner",
+    "category": "language_basics",
+    "tags": ["chinese", "hsk", "beginner", "vocabulary", "thai"],
+    "dataFile": "hsk-1-set-1-thai.json",
+    "author": "HSK Learning Team",
+    "isActive": true,
+    "createdAt": "2024-09-22T00:00:00Z",
+    "updatedAt": "2024-09-22T00:00:00Z"
   }
 ]

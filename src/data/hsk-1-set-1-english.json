@@ -1,0 +1,2732 @@
+[
+  {
+    "id": "hsk-1-set-1-ai",
+    "front": {
+      "icon": "",
+      "title": "爱",
+      "description": "ài"
+    },
+    "back": {
+      "icon": "❤️",
+      "title": "love",
+      "description": "我爱你。 (Wǒ ài nǐ.) - I love you."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-aihao",
+    "front": {
+      "icon": "",
+      "title": "爱好",
+      "description": "ài hào"
+    },
+    "back": {
+      "icon": "🎨",
+      "title": "hobby",
+      "description": "你的爱好是什么？ (Nǐ de ài hào shì shén me?) - What is your hobby?"
+    }
+  },
+  {
+    "id": "hsk-1-set-1-ba",
+    "front": {
+      "icon": "",
+      "title": "八",
+      "description": "bā"
+    },
+    "back": {
+      "icon": "8️⃣",
+      "title": "eight",
+      "description": "我有八本书。 (Wǒ yǒu bā běn shū.) - I have eight books."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-baba",
+    "front": {
+      "icon": "",
+      "title": "爸爸/爸",
+      "description": "bàba / bà"
+    },
+    "back": {
+      "icon": "👨‍👦",
+      "title": "dad, father",
+      "description": "我爸爸是老师。 (Wǒ bàba shì lǎo shī.) - My dad is a teacher."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-ba_particle",
+    "front": {
+      "icon": "",
+      "title": "吧",
+      "description": "ba"
+    },
+    "back": {
+      "icon": "🗣️",
+      "title": "particle",
+      "description": "我们走吧。 (Wǒmen zǒu ba.) - Let's go."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-bai",
+    "front": {
+      "icon": "",
+      "title": "白",
+      "description": "bái"
+    },
+    "back": {
+      "icon": "⬜",
+      "title": "white",
+      "description": "她喜欢白色的衣服。 (Tā xǐhuān bái sè de yīfu.) - She likes white clothes."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-baitian",
+    "front": {
+      "icon": "",
+      "title": "白天",
+      "description": "bái tiān"
+    },
+    "back": {
+      "icon": "☀️",
+      "title": "daytime",
+      "description": "这里白天很热。 (Zhè lǐ bái tiān hěn rè.) - It's very hot here during the day."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-bai_hundred",
+    "front": {
+      "icon": "",
+      "title": "百",
+      "description": "bǎi"
+    },
+    "back": {
+      "icon": "💯",
+      "title": "hundred",
+      "description": "这个本子一百块。 (Zhè ge běn zi yì bǎi kuài.) - This notebook costs 100 yuan."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-ban",
+    "front": {
+      "icon": "",
+      "title": "班",
+      "description": "bān"
+    },
+    "back": {
+      "icon": "🏫",
+      "title": "class, shift",
+      "description": "他在三班学习。 (Tā zài sān bān xué xí.) - He studies in class 3."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-ban_half",
+    "front": {
+      "icon": "",
+      "title": "半",
+      "description": "bàn"
+    },
+    "back": {
+      "icon": "🌗",
+      "title": "half",
+      "description": "我吃了半个面包。 (Wǒ chī le bàn ge miàn bāo.) - I ate half a bread."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-bannian",
+    "front": {
+      "icon": "",
+      "title": "半年",
+      "description": "bàn nián"
+    },
+    "back": {
+      "icon": "📅",
+      "title": "half a year",
+      "description": "他在这里学习了半年。 (Tā zài zhè lǐ xué xí le bàn nián.) - He has been studying here for half a year."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-bantian",
+    "front": {
+      "icon": "",
+      "title": "半天",
+      "description": "bàn tiān"
+    },
+    "back": {
+      "icon": "⏳",
+      "title": "half a day",
+      "description": "我在家休息了半天。 (Wǒ zài jiā xiūxi le bàn tiān.) - I rested at home for half a day."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-bang",
+    "front": {
+      "icon": "",
+      "title": "帮",
+      "description": "bāng"
+    },
+    "back": {
+      "icon": "🤝",
+      "title": "to help",
+      "description": "我可以帮你吗？ (Wǒ kě yǐ bāng nǐ ma?) - Can I help you?"
+    }
+  },
+  {
+    "id": "hsk-1-set-1-bangmang",
+    "front": {
+      "icon": "",
+      "title": "帮忙",
+      "description": "bāng máng"
+    },
+    "back": {
+      "icon": "🤝",
+      "title": "to help",
+      "description": "谢谢你来帮忙。 (Xiè xie nǐ lái bāng máng.) - Thanks for coming to help."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-bao",
+    "front": {
+      "icon": "",
+      "title": "包",
+      "description": "bāo"
+    },
+    "back": {
+      "icon": "👜",
+      "title": "bag",
+      "description": "我的包很漂亮。 (Wǒ de bāo hěn piào liang.) - My bag is very beautiful."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-baozi",
+    "front": {
+      "icon": "",
+      "title": "包子",
+      "description": "bāo zi"
+    },
+    "back": {
+      "icon": "🥟",
+      "title": "steamed bun",
+      "description": "我喜欢吃包子。 (Wǒ xǐhuān chī bāo zi.) - I like to eat steamed buns."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-bei_cup",
+    "front": {
+      "icon": "",
+      "title": "杯",
+      "description": "bēi"
+    },
+    "back": {
+      "icon": "☕",
+      "title": "cup (measure word)",
+      "description": "我要一杯咖啡。 (Wǒ yào yī bēi kāfēi.) - I want one cup of coffee."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-beizi",
+    "front": {
+      "icon": "",
+      "title": "杯子",
+      "description": "bēi zi"
+    },
+    "back": {
+      "icon": "🥤",
+      "title": "cup",
+      "description": "这个杯子很漂亮。 (Zhè ge bēi zi hěn piào liang.) - This cup is very beautiful."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-bei",
+    "front": {
+      "icon": "",
+      "title": "北",
+      "description": "běi"
+    },
+    "back": {
+      "icon": "⬆️",
+      "title": "north",
+      "description": "我家在学校北边。 (Wǒ jiā zài xué xiào běi biān.) - My home is north of the school."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-beibian",
+    "front": {
+      "icon": "",
+      "title": "北边",
+      "description": "běi biān"
+    },
+    "back": {
+      "icon": "↖️",
+      "title": "north side",
+      "description": "图书馆在学校的北边。 (Túshūguǎn zài xuéxiào de běibiān.) - The library is on the north side of the school."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-beijing",
+    "front": {
+      "icon": "",
+      "title": "北京",
+      "description": "Běi jīng"
+    },
+    "back": {
+      "icon": "🇨🇳",
+      "title": "Beijing",
+      "description": "北京是中国的首都。 (Běi jīng shì zhōng guó de shǒu dū.) - Beijing is the capital of China."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-ben_book",
+    "front": {
+      "icon": "",
+      "title": "本",
+      "description": "běn"
+    },
+    "back": {
+      "icon": "📚",
+      "title": "measure word for books",
+      "description": "这是一本书。 (Zhè shì yī běn shū.) - This is a book."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-benzi",
+    "front": {
+      "icon": "",
+      "title": "本子",
+      "description": "běn zi"
+    },
+    "back": {
+      "icon": "📝",
+      "title": "notebook",
+      "description": "这个本子是我的。 (Zhè ge běn zi shì wǒ de.) - This notebook is mine."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-bi",
+    "front": {
+      "icon": "",
+      "title": "比",
+      "description": "bǐ"
+    },
+    "back": {
+      "icon": "⚖️",
+      "title": "to compare, than",
+      "description": "她比我高。 (Tā bǐ wǒ gāo.) - She is taller than me."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-bie",
+    "front": {
+      "icon": "",
+      "title": "别",
+      "description": "bié"
+    },
+    "back": {
+      "icon": "🚫",
+      "title": "don't, must not",
+      "description": "别说话。 (Bié shuō huà.) - Don't talk."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-biede",
+    "front": {
+      "icon": "",
+      "title": "别的",
+      "description": "bié de"
+    },
+    "back": {
+      "icon": "➡️",
+      "title": "other",
+      "description": "你还有别的吗？ (Nǐ hái yǒu bié de ma?) - Do you have anything else?"
+    }
+  },
+  {
+    "id": "hsk-1-set-1-bieren",
+    "front": {
+      "icon": "",
+      "title": "别人",
+      "description": "bié rén"
+    },
+    "back": {
+      "icon": "👥",
+      "title": "other people",
+      "description": "不要去打扰别人。 (Bú yào qù dǎ rǎo bié rén.) - Don't go disturb others."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-bing",
+    "front": {
+      "icon": "",
+      "title": "病",
+      "description": "bìng"
+    },
+    "back": {
+      "icon": "🤒",
+      "title": "illness, to be sick",
+      "description": "他病了。 (Tā bìng le.) - He is sick."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-bingren",
+    "front": {
+      "icon": "",
+      "title": "病人",
+      "description": "bìng rén"
+    },
+    "back": {
+      "icon": "🤕",
+      "title": "patient",
+      "description": "医生在看病人。 (Yī shēng zài kàn bìng rén.) - The doctor is seeing the patient."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-buda",
+    "front": {
+      "icon": "",
+      "title": "不大",
+      "description": "bú dà"
+    },
+    "back": {
+      "icon": "🤏",
+      "title": "not big",
+      "description": "这个房间不大。 (Zhè ge fáng jiān bú dà.) - This room is not big."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-budui",
+    "front": {
+      "icon": "",
+      "title": "不对",
+      "description": "bú duì"
+    },
+    "back": {
+      "icon": "❌",
+      "title": "wrong, incorrect",
+      "description": "你说的这个不对。 (Nǐ shuō de zhè ge bú duì.) - What you said is wrong."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-bukeqi",
+    "front": {
+      "icon": "",
+      "title": "不客气",
+      "description": "bú kè qì"
+    },
+    "back": {
+      "icon": "😊",
+      "title": "you're welcome",
+      "description": "A: 谢谢你！(Xiè xie nǐ!) - Thank you! B: 不客气！(Bú kè qì!) - You're welcome!"
+    }
+  },
+  {
+    "id": "hsk-1-set-1-buyong",
+    "front": {
+      "icon": "",
+      "title": "不用",
+      "description": "bú yòng"
+    },
+    "back": {
+      "icon": "😌",
+      "title": "no need",
+      "description": "不用麻烦了。 (Bú yòng má fan le.) - No need to bother."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-bu",
+    "front": {
+      "icon": "",
+      "title": "不",
+      "description": "bù"
+    },
+    "back": {
+      "icon": "✋",
+      "title": "no, not",
+      "description": "我不是学生。 (Wǒ bú shì xué sheng.) - I am not a student."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-cai",
+    "front": {
+      "icon": "",
+      "title": "菜",
+      "description": "cài"
+    },
+    "back": {
+      "icon": "🥬",
+      "title": "vegetables, dish",
+      "description": "这道菜很好吃。 (Zhè dào cài hěn hǎo chī.) - This dish is very delicious."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-cha",
+    "front": {
+      "icon": "",
+      "title": "茶",
+      "description": "chá"
+    },
+    "back": {
+      "icon": "🍵",
+      "title": "tea",
+      "description": "我喜欢喝茶。 (Wǒ xǐ huān hē chá.) - I like to drink tea."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-cha_bad",
+    "front": {
+      "icon": "",
+      "title": "差",
+      "description": "chà"
+    },
+    "back": {
+      "icon": "📉",
+      "title": "to lack, bad",
+      "description": "他的汉语很差。 (Tā de hàn yǔ hěn chà.) - His Chinese is very bad."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-chang",
+    "front": {
+      "icon": "",
+      "title": "常",
+      "description": "cháng"
+    },
+    "back": {
+      "icon": "🔁",
+      "title": "often",
+      "description": "我常去那家饭店。 (Wǒ cháng qù nà jiā fàn diàn.) - I often go to that restaurant."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-changchang",
+    "front": {
+      "icon": "",
+      "title": "常常",
+      "description": "cháng cháng"
+    },
+    "back": {
+      "icon": "🔄",
+      "title": "often, frequently",
+      "description": "她常常看电影。 (Tā cháng cháng kàn diàn yǐng.) - She often watches movies."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-chang_sing",
+    "front": {
+      "icon": "",
+      "title": "唱",
+      "description": "chàng"
+    },
+    "back": {
+      "icon": "🎤",
+      "title": "to sing",
+      "description": "他喜欢唱歌。 (Tā xǐ huān chàng gē.) - He likes to sing."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-changge",
+    "front": {
+      "icon": "",
+      "title": "唱歌",
+      "description": "chàng gē"
+    },
+    "back": {
+      "icon": "🎶",
+      "title": "to sing a song",
+      "description": "我喜欢唱歌。 (Wǒ xǐ huān chàng gē.) - I like singing."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-che",
+    "front": {
+      "icon": "",
+      "title": "车",
+      "description": "chē"
+    },
+    "back": {
+      "icon": "🚗",
+      "title": "car, vehicle",
+      "description": "我买了一辆新车。 (Wǒ mǎi le yī liàng xīn chē.) - I bought a new car."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-chepiao",
+    "front": {
+      "icon": "",
+      "title": "车票",
+      "description": "chē piào"
+    },
+    "back": {
+      "icon": "🎟️",
+      "title": "ticket",
+      "description": "我有两张车票。 (Wǒ yǒu liǎng zhāng chē piào.) - I have two tickets."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-cheshang",
+    "front": {
+      "icon": "",
+      "title": "车上",
+      "description": "chē shàng"
+    },
+    "back": {
+      "icon": "🚌",
+      "title": "on the bus/in the car",
+      "description": "我在车上等你。 (Wǒ zài chē shàng děng nǐ.) - I am waiting for you on the bus."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-chezhan",
+    "front": {
+      "icon": "",
+      "title": "车站",
+      "description": "chē zhàn"
+    },
+    "back": {
+      "icon": "🚉",
+      "title": "station, stop",
+      "description": "火车站很远。 (Huǒ chē zhàn hěn yuǎn.) - The train station is very far."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-chi",
+    "front": {
+      "icon": "",
+      "title": "吃",
+      "description": "chī"
+    },
+    "back": {
+      "icon": "😋",
+      "title": "to eat",
+      "description": "我喜欢吃米饭。 (Wǒ xǐ huān chī mǐ fàn.) - I like to eat rice."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-chifan",
+    "front": {
+      "icon": "",
+      "title": "吃饭",
+      "description": "chī fàn"
+    },
+    "back": {
+      "icon": "🍽️",
+      "title": "to eat a meal",
+      "description": "我们一起去吃饭吧。 (Wǒmen yì qǐ qù chī fàn ba.) - Let's go eat a meal together."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-chu",
+    "front": {
+      "icon": "",
+      "title": "出",
+      "description": "chū"
+    },
+    "back": {
+      "icon": "🚪",
+      "title": "to go out",
+      "description": "太阳出来了。 (Tài yáng chū lái le.) - The sun has come out."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-chulai",
+    "front": {
+      "icon": "",
+      "title": "出来",
+      "description": "chū lái"
+    },
+    "back": {
+      "icon": "🚶‍♂️",
+      "title": "to come out",
+      "description": "他从房间里出来了。 (Tā cóng fáng jiān lǐ chū lái le.) - He came out of the room."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-chuqu",
+    "front": {
+      "icon": "",
+      "title": "出去",
+      "description": "chū qù"
+    },
+    "back": {
+      "icon": "🚶‍♀️",
+      "title": "to go out",
+      "description": "我想出去走走。 (Wǒ xiǎng chū qù zǒu zǒu.) - I want to go out for a walk."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-chuan",
+    "front": {
+      "icon": "",
+      "title": "穿",
+      "description": "chuān"
+    },
+    "back": {
+      "icon": "👕",
+      "title": "to wear, to put on",
+      "description": "她喜欢穿裙子。 (Tā xǐ huān chuān qún zi.) - She likes to wear skirts."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-chuang",
+    "front": {
+      "icon": "",
+      "title": "床",
+      "description": "chuáng"
+    },
+    "back": {
+      "icon": "🛏️",
+      "title": "bed",
+      "description": "他躺在床上。 (Tā tǎng zài chuáng shàng.) - He is lying on the bed."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-ci",
+    "front": {
+      "icon": "",
+      "title": "次",
+      "description": "cì"
+    },
+    "back": {
+      "icon": "🔂",
+      "title": "time (measure word)",
+      "description": "我来过这里一次。 (Wǒ lái guò zhè lǐ yī cì.) - I have been here once."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-cong",
+    "front": {
+      "icon": "",
+      "title": "从",
+      "description": "cóng"
+    },
+    "back": {
+      "icon": "➡️",
+      "title": "from",
+      "description": "我从中国来。 (Wǒ cóng zhōng guó lái.) - I am from China."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-cuo",
+    "front": {
+      "icon": "",
+      "title": "错",
+      "description": "cuò"
+    },
+    "back": {
+      "icon": "❌",
+      "title": "wrong",
+      "description": "你错了。 (Nǐ cuò le.) - You are wrong."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-da",
+    "front": {
+      "icon": "",
+      "title": "打",
+      "description": "dǎ"
+    },
+    "back": {
+      "icon": "👊",
+      "title": "to hit, to play (ball)",
+      "description": "他打我。 (Tā dǎ wǒ.) - He hit me."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-dache",
+    "front": {
+      "icon": "",
+      "title": "打车",
+      "description": "dǎ chē"
+    },
+    "back": {
+      "icon": "🚕",
+      "title": "to take a taxi",
+      "description": "我们打车去吧。 (Wǒmen dǎ chē qù ba.) - Let's take a taxi."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-dadianhua",
+    "front": {
+      "icon": "",
+      "title": "打电话",
+      "description": "dǎ diàn huà"
+    },
+    "back": {
+      "icon": "📞",
+      "title": "to make a phone call",
+      "description": "妈妈在打电话。 (Māma zài dǎ diàn huà.) - Mom is on the phone."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-dakui",
+    "front": {
+      "icon": "",
+      "title": "打开",
+      "description": "dǎ kāi"
+    },
+    "back": {
+      "icon": "🔓",
+      "title": "to open",
+      "description": "请打开门。 (Qǐng dǎ kāi mén.) - Please open the door."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-daqiu",
+    "front": {
+      "icon": "",
+      "title": "打球",
+      "description": "dǎ qiú"
+    },
+    "back": {
+      "icon": "🏀",
+      "title": "to play ball",
+      "description": "他们喜欢打球。 (Tā men xǐ huān dǎ qiú.) - They like playing ball."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-da",
+    "front": {
+      "icon": "",
+      "title": "大",
+      "description": "dà"
+    },
+    "back": {
+      "icon": "🐘",
+      "title": "big, large",
+      "description": "这个苹果很大。 (Zhè ge píng guǒ hěn dà.) - This apple is very big."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-daxue",
+    "front": {
+      "icon": "",
+      "title": "大学",
+      "description": "dà xué"
+    },
+    "back": {
+      "icon": "🎓",
+      "title": "university",
+      "description": "他在北京的大学学习。 (Tā zài běi jīng de dà xué xué xí.) - He studies at a university in Beijing."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-daxuesheng",
+    "front": {
+      "icon": "",
+      "title": "大学生",
+      "description": "dà xué shēng"
+    },
+    "back": {
+      "icon": "🧑‍🎓",
+      "title": "university student",
+      "description": "他是一个大学生。 (Tā shì yī ge dà xué shēng.) - He is a university student."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-dao",
+    "front": {
+      "icon": "",
+      "title": "到",
+      "description": "dào"
+    },
+    "back": {
+      "icon": "🏁",
+      "title": "to arrive",
+      "description": "你到家了吗？ (Nǐ dào jiā le ma?) - Have you arrived home?"
+    }
+  },
+  {
+    "id": "hsk-1-set-1-dedao",
+    "front": {
+      "icon": "",
+      "title": "得到",
+      "description": "dé dào"
+    },
+    "back": {
+      "icon": "🎁",
+      "title": "to get, to obtain",
+      "description": "我得到了一个礼物。 (Wǒ dé dào le yī ge lǐwù.) - I received a gift."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-de_adverbial",
+    "front": {
+      "icon": "",
+      "title": "地",
+      "description": "de"
+    },
+    "back": {
+      "icon": "➡️",
+      "title": "adverbial particle",
+      "description": "他高兴地笑了。 (Tā gāo xìng de xiào le.) - He smiled happily."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-de_possessive",
+    "front": {
+      "icon": "",
+      "title": "的",
+      "description": "de"
+    },
+    "back": {
+      "icon": "➡️",
+      "title": "possessive particle",
+      "description": "这是我的书。 (Zhè shì wǒ de shū.) - This is my book."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-deng",
+    "front": {
+      "icon": "",
+      "title": "等",
+      "description": "děng"
+    },
+    "back": {
+      "icon": "⏰",
+      "title": "to wait",
+      "description": "请等我一下。 (Qǐng děng wǒ yī xià.) - Please wait for me for a moment."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-di_ground",
+    "front": {
+      "icon": "",
+      "title": "地",
+      "description": "dì"
+    },
+    "back": {
+      "icon": "🗺️",
+      "title": "ground, earth",
+      "description": "地上有很多水。 (Dì shàng yǒu hěn duō shuǐ.) - There is a lot of water on the ground."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-didian",
+    "front": {
+      "icon": "",
+      "title": "地点",
+      "description": "dì diǎn"
+    },
+    "back": {
+      "icon": "📍",
+      "title": "location",
+      "description": "开会的地点在哪里？ (Kāi huì de dì diǎn zài nǎ lǐ?) - Where is the location of the meeting?"
+    }
+  },
+  {
+    "id": "hsk-1-set-1-difang",
+    "front": {
+      "icon": "",
+      "title": "地方",
+      "description": "dì fang"
+    },
+    "back": {
+      "icon": "🗺️",
+      "title": "place, space",
+      "description": "这个地方很漂亮。 (Zhè ge dì fang hěn piào liang.) - This place is very beautiful."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-dishang",
+    "front": {
+      "icon": "",
+      "title": "地上",
+      "description": "dì shàng"
+    },
+    "back": {
+      "icon": "👣",
+      "title": "on the ground",
+      "description": "地上有一只笔。 (Dì shàng yǒu yī zhī bǐ.) - There is a pen on the ground."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-ditu",
+    "front": {
+      "icon": "",
+      "title": "地图",
+      "description": "dì tú"
+    },
+    "back": {
+      "icon": "🗺️",
+      "title": "map",
+      "description": "你有没有地图？ (Nǐ yǒu méi yǒu dì tú?) - Do you have a map?"
+    }
+  },
+  {
+    "id": "hsk-1-set-1-didi",
+    "front": {
+      "icon": "",
+      "title": "弟弟/弟",
+      "description": "dìdi / dì"
+    },
+    "back": {
+      "icon": "🧒",
+      "title": "younger brother",
+      "description": "我弟弟是学生。 (Wǒ dìdi shì xué sheng.) - My younger brother is a student."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-di_ordinal",
+    "front": {
+      "icon": "",
+      "title": "第",
+      "description": "dì"
+    },
+    "back": {
+      "icon": "🥇",
+      "title": "ordinal prefix",
+      "description": "这是第一次。 (Zhè shì dì yī cì.) - This is the first time."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-dian_point",
+    "front": {
+      "icon": "",
+      "title": "点",
+      "description": "diǎn"
+    },
+    "back": {
+      "icon": "📍",
+      "title": "point, dot",
+      "description": "现在几点了？ (Xiàn zài jǐ diǎn le?) - What time is it now?"
+    }
+  },
+  {
+    "id": "hsk-1-set-1-dian_electricity",
+    "front": {
+      "icon": "",
+      "title": "电",
+      "description": "diàn"
+    },
+    "back": {
+      "icon": "⚡",
+      "title": "electricity",
+      "description": "这个地方没有电。 (Zhè ge dìfang méiyǒu diàn.) - This place has no electricity."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-dianhua",
+    "front": {
+      "icon": "",
+      "title": "电话",
+      "description": "diàn huà"
+    },
+    "back": {
+      "icon": "☎️",
+      "title": "telephone",
+      "description": "你的电话号码是多少？ (Nǐ de diàn huà hào mǎ shì duō shǎo?) - What is your phone number?"
+    }
+  },
+  {
+    "id": "hsk-1-set-1-diannao",
+    "front": {
+      "icon": "",
+      "title": "电脑",
+      "description": "diàn nǎo"
+    },
+    "back": {
+      "icon": "💻",
+      "title": "computer",
+      "description": "我买了一个电脑。 (Wǒ mǎi le yī ge diàn nǎo.) - I bought a computer."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-dianshi",
+    "front": {
+      "icon": "",
+      "title": "电视",
+      "description": "diàn shì"
+    },
+    "back": {
+      "icon": "📺",
+      "title": "television",
+      "description": "他正在看电视。 (Tā zhèng zài kàn diàn shì.) - He is watching TV."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-dianshiji",
+    "front": {
+      "icon": "",
+      "title": "电视机",
+      "description": "diàn shì jī"
+    },
+    "back": {
+      "icon": "📺",
+      "title": "television set",
+      "description": "这个电视机坏了。 (Zhè ge diàn shì jī huài le.) - This TV set is broken."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-dianying",
+    "front": {
+      "icon": "",
+      "title": "电影",
+      "description": "diàn yǐng"
+    },
+    "back": {
+      "icon": "🎬",
+      "title": "movie, film",
+      "description": "我们一起去看电影吧。 (Wǒmen yì qǐ qù kàn diàn yǐng ba.) - Let's go watch a movie together."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-dianyingyuan",
+    "front": {
+      "icon": "",
+      "title": "电影院",
+      "description": "diàn yǐng yuàn"
+    },
+    "back": {
+      "icon": "🍿",
+      "title": "movie theater",
+      "description": "这家电影院很新。 (Zhè jiā diàn yǐng yuàn hěn xīn.) - This movie theater is very new."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-dong",
+    "front": {
+      "icon": "",
+      "title": "东",
+      "description": "dōng"
+    },
+    "back": {
+      "icon": "➡️",
+      "title": "east",
+      "description": "太阳从东边出来。 (Tài yáng cóng dōng biān chū lái.) - The sun comes out from the east."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-dongbian",
+    "front": {
+      "icon": "",
+      "title": "东边",
+      "description": "dōng biān"
+    },
+    "back": {
+      "icon": "↗️",
+      "title": "east side",
+      "description": "他在东边工作。 (Tā zài dōng biān gōng zuò.) - He works on the east side."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-dongxi",
+    "front": {
+      "icon": "",
+      "title": "东西",
+      "description": "dōng xi"
+    },
+    "back": {
+      "icon": "📦",
+      "title": "thing, stuff",
+      "description": "我想买点东西。 (Wǒ xiǎng mǎi diǎn dōng xi.) - I want to buy some things."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-dong_move",
+    "front": {
+      "icon": "",
+      "title": "动",
+      "description": "dòng"
+    },
+    "back": {
+      "icon": "🏃",
+      "title": "to move",
+      "description": "你的手可以动吗？ (Nǐ de shǒu kě yǐ dòng ma?) - Can your hand move?"
+    }
+  },
+  {
+    "id": "hsk-1-set-1-dongzuo",
+    "front": {
+      "icon": "",
+      "title": "动作",
+      "description": "dòng zuò"
+    },
+    "back": {
+      "icon": "🤸",
+      "title": "action, movement",
+      "description": "他的动作很快。 (Tā de dòng zuò hěn kuài.) - His movements are very fast."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-dou",
+    "front": {
+      "icon": "",
+      "title": "都",
+      "description": "dōu"
+    },
+    "back": {
+      "icon": "✅",
+      "title": "all, both",
+      "description": "我们都是中国人。 (Wǒmen dōu shì zhōng guó rén.) - We are all Chinese."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-du",
+    "front": {
+      "icon": "",
+      "title": "读",
+      "description": "dú"
+    },
+    "back": {
+      "icon": "📖",
+      "title": "to read",
+      "description": "我喜欢读这本书。 (Wǒ xǐ huān dú zhè běn shū.) - I like to read this book."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-dushu",
+    "front": {
+      "icon": "",
+      "title": "读书",
+      "description": "dú shū"
+    },
+    "back": {
+      "icon": "📚",
+      "title": "to read, to study",
+      "description": "我每天都读书。 (Wǒ měi tiān dōu dú shū.) - I read books every day."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-dui",
+    "front": {
+      "icon": "",
+      "title": "对",
+      "description": "duì"
+    },
+    "back": {
+      "icon": "✅",
+      "title": "right, correct",
+      "description": "你说得对。 (Nǐ shuō de duì.) - What you said is correct."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-duibuqi",
+    "front": {
+      "icon": "",
+      "title": "对不起",
+      "description": "duì bù qǐ"
+    },
+    "back": {
+      "icon": "😔",
+      "title": "I'm sorry",
+      "description": "A: 对不起！(Duì bù qǐ!) - I'm sorry! B: 没关系。 (Méi guān xi.) - It's okay."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-duo",
+    "front": {
+      "icon": "",
+      "title": "多",
+      "description": "duō"
+    },
+    "back": {
+      "icon": "➕",
+      "title": "many, much",
+      "description": "这里有很多学生。 (Zhè lǐ yǒu hěn duō xué sheng.) - There are many students here."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-duoshao",
+    "front": {
+      "icon": "",
+      "title": "多少",
+      "description": "duō shǎo"
+    },
+    "back": {
+      "icon": "❓",
+      "title": "how many, how much",
+      "description": "这件衣服多少钱？ (Zhè jiàn yī fu duō shǎo qián?) - How much does this clothing cost?"
+    }
+  },
+  {
+    "id": "hsk-1-set-1-e",
+    "front": {
+      "icon": "",
+      "title": "饿",
+      "description": "è"
+    },
+    "back": {
+      "icon": "😫",
+      "title": "hungry",
+      "description": "我肚子饿了。 (Wǒ dù zi è le.) - I'm hungry."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-erzi",
+    "front": {
+      "icon": "",
+      "title": "儿子",
+      "description": "ér zi"
+    },
+    "back": {
+      "icon": "👦",
+      "title": "son",
+      "description": "我有一个儿子。 (Wǒ yǒu yī ge ér zi.) - I have one son."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-er",
+    "front": {
+      "icon": "",
+      "title": "二",
+      "description": "èr"
+    },
+    "back": {
+      "icon": "2️⃣",
+      "title": "two",
+      "description": "我有两本书。 (Wǒ yǒu liǎng běn shū.) - I have two books."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-fan",
+    "front": {
+      "icon": "",
+      "title": "饭",
+      "description": "fàn"
+    },
+    "back": {
+      "icon": "🍚",
+      "title": "meal, rice",
+      "description": "今天的饭很好吃。 (Jīn tiān de fàn hěn hǎo chī.) - Today's meal is very delicious."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-fandian",
+    "front": {
+      "icon": "",
+      "title": "饭店",
+      "description": "fàn diàn"
+    },
+    "back": {
+      "icon": "🏨",
+      "title": "restaurant, hotel",
+      "description": "我们去饭店吃饭吧。 (Wǒmen qù fàn diàn chī fàn ba.) - Let's go eat at the restaurant."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-fangjian",
+    "front": {
+      "icon": "",
+      "title": "房间",
+      "description": "fáng jiān"
+    },
+    "back": {
+      "icon": "🚪",
+      "title": "room",
+      "description": "这个房间很干净。 (Zhè ge fáng jiān hěn gān jìng.) - This room is very clean."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-fangzi",
+    "front": {
+      "icon": "",
+      "title": "房子",
+      "description": "fáng zi"
+    },
+    "back": {
+      "icon": "🏡",
+      "title": "house",
+      "description": "他买了一套新房子。 (Tā mǎi le yī tào xīn fáng zi.) - He bought a new house."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-fang",
+    "front": {
+      "icon": "",
+      "title": "放",
+      "description": "fàng"
+    },
+    "back": {
+      "icon": "⬇️",
+      "title": "to put, to let go",
+      "description": "请把书放在桌子上。 (Qǐng bǎ shū fàng zài zhuōzi shàng.) - Please put the book on the table."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-fangjia",
+    "front": {
+      "icon": "",
+      "title": "放假",
+      "description": "fàng jià"
+    },
+    "back": {
+      "icon": "🎉",
+      "title": "to have a holiday",
+      "description": "我们放假了。 (Wǒmen fàng jià le.) - We are on holiday."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-fangxue",
+    "front": {
+      "icon": "",
+      "title": "放学",
+      "description": "fàng xué"
+    },
+    "back": {
+      "icon": "🔔",
+      "title": "to finish school",
+      "description": "我们放学了。 (Wǒmen fàng xué le.) - We have finished school."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-fei",
+    "front": {
+      "icon": "",
+      "title": "飞",
+      "description": "fēi"
+    },
+    "back": {
+      "icon": "🦅",
+      "title": "to fly",
+      "description": "这只鸟会飞。 (Zhè zhǐ niǎo huì fēi.) - This bird can fly."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-feiji",
+    "front": {
+      "icon": "",
+      "title": "飞机",
+      "description": "fēi jī"
+    },
+    "back": {
+      "icon": "✈️",
+      "title": "airplane",
+      "description": "我喜欢坐飞机。 (Wǒ xǐ huān zuò fēi jī.) - I like to travel by airplane."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-feichang",
+    "front": {
+      "icon": "",
+      "title": "非常",
+      "description": "fēi cháng"
+    },
+    "back": {
+      "icon": "❗",
+      "title": "very, extremely",
+      "description": "这个电影非常好看。 (Zhè ge diàn yǐng fēi cháng hǎo kàn.) - This movie is very good."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-fen",
+    "front": {
+      "icon": "",
+      "title": "分",
+      "description": "fēn"
+    },
+    "back": {
+      "icon": "⏱️",
+      "title": "minute, point (score)",
+      "description": "现在三点十分。 (Xiàn zài sān diǎn shí fēn.) - It's 3:10 now."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-feng",
+    "front": {
+      "icon": "",
+      "title": "风",
+      "description": "fēng"
+    },
+    "back": {
+      "icon": "💨",
+      "title": "wind",
+      "description": "今天风很大。 (Jīn tiān fēng hěn dà.) - The wind is very strong today."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-gan",
+    "front": {
+      "icon": "",
+      "title": "干",
+      "description": "gān"
+    },
+    "back": {
+      "icon": "☀️",
+      "title": "dry",
+      "description": "我的衣服干了。 (Wǒ de yī fu gān le.) - My clothes are dry."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-ganjing",
+    "front": {
+      "icon": "",
+      "title": "干净",
+      "description": "gān jìng"
+    },
+    "back": {
+      "icon": "🧼",
+      "title": "clean",
+      "description": "我的房间很干净。 (Wǒ de fáng jiān hěn gān jìng.) - My room is very clean."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-gan_do",
+    "front": {
+      "icon": "",
+      "title": "干",
+      "description": "gàn"
+    },
+    "back": {
+      "icon": "👷",
+      "title": "to do, to work",
+      "description": "你干什么呢？ (Nǐ gàn shén me ne?) - What are you doing?"
+    }
+  },
+  {
+    "id": "hsk-1-set-1-ganshenme",
+    "front": {
+      "icon": "",
+      "title": "干什么",
+      "description": "gàn shén me"
+    },
+    "back": {
+      "icon": "🤔",
+      "title": "what are you doing?",
+      "description": "你干什么呢？ (Nǐ gàn shén me ne?) - What are you doing?"
+    }
+  },
+  {
+    "id": "hsk-1-set-1-gao",
+    "front": {
+      "icon": "",
+      "title": "高",
+      "description": "gāo"
+    },
+    "back": {
+      "icon": "⬆️",
+      "title": "high, tall",
+      "description": "我哥哥很高。 (Wǒ gēge hěn gāo.) - My older brother is very tall."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-gaoxing",
+    "front": {
+      "icon": "",
+      "title": "高兴",
+      "description": "gāo xìng"
+    },
+    "back": {
+      "icon": "😄",
+      "title": "happy, glad",
+      "description": "我今天很高兴。 (Wǒ jīn tiān hěn gāo xìng.) - I am very happy today."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-gaosu",
+    "front": {
+      "icon": "",
+      "title": "告诉",
+      "description": "gào su"
+    },
+    "back": {
+      "icon": "📣",
+      "title": "to tell",
+      "description": "请告诉我。 (Qǐng gào su wǒ.) - Please tell me."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-gege",
+    "front": {
+      "icon": "",
+      "title": "哥哥/哥",
+      "description": "gēge / gē"
+    },
+    "back": {
+      "icon": "👨‍🦱",
+      "title": "elder brother",
+      "description": "我有一个哥哥。 (Wǒ yǒu yī ge gēge.) - I have an elder brother."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-ge_song",
+    "front": {
+      "icon": "",
+      "title": "歌",
+      "description": "gē"
+    },
+    "back": {
+      "icon": "🎵",
+      "title": "song",
+      "description": "这首歌很好听。 (Zhè shǒu gē hěn hǎo tīng.) - This song is very pleasant to listen to."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-ge",
+    "front": {
+      "icon": "",
+      "title": "个",
+      "description": "gè"
+    },
+    "back": {
+      "icon": "📦",
+      "title": "measure word",
+      "description": "我有一个朋友。 (Wǒ yǒu yī ge péng you.) - I have one friend."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-gei",
+    "front": {
+      "icon": "",
+      "title": "给",
+      "description": "gěi"
+    },
+    "back": {
+      "icon": "🤲",
+      "title": "to give",
+      "description": "我给你买了一件衣服。 (Wǒ gěi nǐ mǎi le yī jiàn yī fu.) - I bought a piece of clothing for you."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-gen",
+    "front": {
+      "icon": "",
+      "title": "跟",
+      "description": "gēn"
+    },
+    "back": {
+      "icon": "👫",
+      "title": "with",
+      "description": "我跟他一起吃饭。 (Wǒ gēn tā yì qǐ chī fàn.) - I ate with him."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-gongren",
+    "front": {
+      "icon": "",
+      "title": "工人",
+      "description": "gōng rén"
+    },
+    "back": {
+      "icon": "👷",
+      "title": "worker",
+      "description": "他是一个工人。 (Tā shì yī ge gōng rén.) - He is a worker."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-gongzuo",
+    "front": {
+      "icon": "",
+      "title": "工作",
+      "description": "gōng zuò"
+    },
+    "back": {
+      "icon": "💼",
+      "title": "to work, job",
+      "description": "我爸爸工作很忙。 (Wǒ bàba gōng zuò hěn máng.) - My dad's job is very busy."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-guan",
+    "front": {
+      "icon": "",
+      "title": "关",
+      "description": "guān"
+    },
+    "back": {
+      "icon": "🔒",
+      "title": "to close, to shut",
+      "description": "请关门。 (Qǐng guān mén.) - Please close the door."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-guanshang",
+    "front": {
+      "icon": "",
+      "title": "关上",
+      "description": "guān shàng"
+    },
+    "back": {
+      "icon": "🚪",
+      "title": "to close",
+      "description": "请把窗户关上。 (Qǐng bǎ chuāng hu guān shàng.) - Please close the window."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-gui",
+    "front": {
+      "icon": "",
+      "title": "贵",
+      "description": "guì"
+    },
+    "back": {
+      "icon": "💰",
+      "title": "expensive",
+      "description": "这个手机很贵。 (Zhè ge shǒu jī hěn guì.) - This phone is very expensive."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-guo",
+    "front": {
+      "icon": "",
+      "title": "国",
+      "description": "guó"
+    },
+    "back": {
+      "icon": "🌍",
+      "title": "country",
+      "description": "中国是一个很大的国。 (Zhōng guó shì yī ge hěn dà de guó.) - China is a very large country."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-guojia",
+    "front": {
+      "icon": "",
+      "title": "国家",
+      "description": "guó jiā"
+    },
+    "back": {
+      "icon": "🗺️",
+      "title": "country, nation",
+      "description": "你喜欢哪个国家？ (Nǐ xǐ huān nǎ ge guó jiā?) - Which country do you like?"
+    }
+  },
+  {
+    "id": "hsk-1-set-1-guowai",
+    "front": {
+      "icon": "",
+      "title": "国外",
+      "description": "guó wài"
+    },
+    "back": {
+      "icon": "✈️",
+      "title": "abroad",
+      "description": "他住在国外。 (Tā zhù zài guó wài.) - He lives abroad."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-guo_experience",
+    "front": {
+      "icon": "",
+      "title": "过",
+      "description": "guò"
+    },
+    "back": {
+      "icon": "⏪",
+      "title": "past experience particle",
+      "description": "我没去过北京。 (Wǒ méi qù guò běi jīng.) - I have not been to Beijing."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-hai",
+    "front": {
+      "icon": "",
+      "title": "还",
+      "description": "hái"
+    },
+    "back": {
+      "icon": "⏳",
+      "title": "still, yet",
+      "description": "我还在吃饭。 (Wǒ hái zài chī fàn.) - I am still eating."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-haishi",
+    "front": {
+      "icon": "",
+      "title": "还是",
+      "description": "hái shì"
+    },
+    "back": {
+      "icon": "🤔",
+      "title": "or (in a question)",
+      "description": "你喝茶还是喝咖啡？ (Nǐ hē chá hái shì hē kāfēi?) - Do you drink tea or coffee?"
+    }
+  },
+  {
+    "id": "hsk-1-set-1-haiyou",
+    "front": {
+      "icon": "",
+      "title": "还有",
+      "description": "hái yǒu"
+    },
+    "back": {
+      "icon": "➕",
+      "title": "also, in addition",
+      "description": "我买了苹果，还有香蕉。 (Wǒ mǎi le píngguǒ, hái yǒu xiāng jiāo.) - I bought apples, and also bananas."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-haizi",
+    "front": {
+      "icon": "",
+      "title": "孩子",
+      "description": "hái zi"
+    },
+    "back": {
+      "icon": "👶",
+      "title": "child, children",
+      "description": "她有两个孩子。 (Tā yǒu liǎng ge hái zi.) - She has two children."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-hanyu",
+    "front": {
+      "icon": "",
+      "title": "汉语",
+      "description": "hàn yǔ"
+    },
+    "back": {
+      "icon": "🗣️",
+      "title": "Chinese language",
+      "description": "我喜欢学习汉语。 (Wǒ xǐ huān xué xí hàn yǔ.) - I like learning Chinese."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-hanzi",
+    "front": {
+      "icon": "",
+      "title": "汉字",
+      "description": "hàn zì"
+    },
+    "back": {
+      "icon": "✍️",
+      "title": "Chinese character",
+      "description": "我不会写汉字。 (Wǒ bú huì xiě hàn zì.) - I can't write Chinese characters."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-hao",
+    "front": {
+      "icon": "",
+      "title": "好",
+      "description": "hǎo"
+    },
+    "back": {
+      "icon": "👍",
+      "title": "good, well",
+      "description": "他是一个好人。 (Tā shì yī ge hǎo rén.) - He is a good person."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-haochi",
+    "front": {
+      "icon": "",
+      "title": "好吃",
+      "description": "hǎo chī"
+    },
+    "back": {
+      "icon": "🤤",
+      "title": "delicious, tasty",
+      "description": "这个菜真好吃。 (Zhè ge cài zhēn hǎo chī.) - This dish is really delicious."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-haokan",
+    "front": {
+      "icon": "",
+      "title": "好看",
+      "description": "hǎo kàn"
+    },
+    "back": {
+      "icon": "🤩",
+      "title": "good-looking, beautiful",
+      "description": "这个电影很好看。 (Zhè ge diàn yǐng hěn hǎo kàn.) - This movie is very good to watch."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-haoting",
+    "front": {
+      "icon": "",
+      "title": "好听",
+      "description": "hǎo tīng"
+    },
+    "back": {
+      "icon": "👂",
+      "title": "pleasant to hear",
+      "description": "这首歌很好听。 (Zhè shǒu gē hěn hǎo tīng.) - This song is very pleasant to listen to."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-haowanr",
+    "front": {
+      "icon": "",
+      "title": "好玩儿",
+      "description": "hǎo wánr"
+    },
+    "back": {
+      "icon": "😃",
+      "title": "fun, amusing",
+      "description": "这个游戏很好玩儿。 (Zhè ge yóu xì hěn hǎo wánr.) - This game is very fun."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-hao_number",
+    "front": {
+      "icon": "",
+      "title": "号",
+      "description": "hào"
+    },
+    "back": {
+      "icon": "🔢",
+      "title": "number, date",
+      "description": "今天是八号。 (Jīn tiān shì bā hào.) - Today is the 8th."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-he",
+    "front": {
+      "icon": "",
+      "title": "喝",
+      "description": "hē"
+    },
+    "back": {
+      "icon": "🥤",
+      "title": "to drink",
+      "description": "你想喝什么？ (Nǐ xiǎng hē shén me?) - What do you want to drink?"
+    }
+  },
+  {
+    "id": "hsk-1-set-1-he_and",
+    "front": {
+      "icon": "",
+      "title": "和",
+      "description": "hé"
+    },
+    "back": {
+      "icon": "➕",
+      "title": "and",
+      "description": "我喜欢你和我。 (Wǒ xǐ huān nǐ hé wǒ.) - I like you and me."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-hen",
+    "front": {
+      "icon": "",
+      "title": "很",
+      "description": "hěn"
+    },
+    "back": {
+      "icon": "➡️",
+      "title": "very",
+      "description": "我很好。 (Wǒ hěn hǎo.) - I am very well."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-hou",
+    "front": {
+      "icon": "",
+      "title": "后",
+      "description": "hòu"
+    },
+    "back": {
+      "icon": "🔙",
+      "title": "back, behind, after",
+      "description": "我在你后面。 (Wǒ zài nǐ hòu mian.) - I am behind you."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-houbian",
+    "front": {
+      "icon": "",
+      "title": "后边",
+      "description": "hòu biān"
+    },
+    "back": {
+      "icon": "⬅️",
+      "title": "behind",
+      "description": "他坐在我后边。 (Tā zuò zài wǒ hòu biān.) - He is sitting behind me."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-houtian",
+    "front": {
+      "icon": "",
+      "title": "后天",
+      "description": "hòu tiān"
+    },
+    "back": {
+      "icon": "🗓️",
+      "title": "the day after tomorrow",
+      "description": "我后天去北京。 (Wǒ hòu tiān qù běi jīng.) - I will go to Beijing the day after tomorrow."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-hua",
+    "front": {
+      "icon": "",
+      "title": "花",
+      "description": "huā"
+    },
+    "back": {
+      "icon": "🌸",
+      "title": "flower",
+      "description": "这束花很漂亮。 (Zhè shù huā hěn piào liang.) - This bouquet of flowers is very beautiful."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-hua_word",
+    "front": {
+      "icon": "",
+      "title": "话",
+      "description": "huà"
+    },
+    "back": {
+      "icon": "💬",
+      "title": "word, talk",
+      "description": "他的话很有道理。 (Tā de huà hěn yǒu dàolǐ.) - What he said makes a lot of sense."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-huai",
+    "front": {
+      "icon": "",
+      "title": "坏",
+      "description": "huài"
+    },
+    "back": {
+      "icon": "🪦",
+      "title": "bad, broken",
+      "description": "我的电脑坏了。 (Wǒ de diàn nǎo huài le.) - My computer is broken."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-huan",
+    "front": {
+      "icon": "",
+      "title": "还",
+      "description": "huán"
+    },
+    "back": {
+      "icon": "🔄",
+      "title": "to return, to give back",
+      "description": "请把书还给我。 (Qǐng bǎ shū huán gěi wǒ.) - Please return the book to me."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-hui",
+    "front": {
+      "icon": "",
+      "title": "回",
+      "description": "huí"
+    },
+    "back": {
+      "icon": "↩️",
+      "title": "to return, to go back",
+      "description": "我回家了。 (Wǒ huí jiā le.) - I went back home."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-huida",
+    "front": {
+      "icon": "",
+      "title": "回答",
+      "description": "huí dá"
+    },
+    "back": {
+      "icon": "🗣️",
+      "title": "to answer",
+      "description": "请回答我的问题。 (Qǐng huí dá wǒ de wèn tí.) - Please answer my question."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-huidao",
+    "front": {
+      "icon": "",
+      "title": "回到",
+      "description": "huí dào"
+    },
+    "back": {
+      "icon": "🏡",
+      "title": "to return to",
+      "description": "他回到家了。 (Tā huí dào jiā le.) - He returned home."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-huijia",
+    "front": {
+      "icon": "",
+      "title": "回家",
+      "description": "huí jiā"
+    },
+    "back": {
+      "icon": "🏠",
+      "title": "to go home",
+      "description": "你什么时候回家？ (Nǐ shén me shí hou huí jiā?) - When are you going home?"
+    }
+  },
+  {
+    "id": "hsk-1-set-1-huilai",
+    "front": {
+      "icon": "",
+      "title": "回来",
+      "description": "huí lái"
+    },
+    "back": {
+      "icon": "🚶‍♂️",
+      "title": "to come back",
+      "description": "他什么时候回来？ (Tā shén me shí hou huí lái?) - When will he come back?"
+    }
+  },
+  {
+    "id": "hsk-1-set-1-huiqu",
+    "front": {
+      "icon": "",
+      "title": "回去",
+      "description": "huí qù"
+    },
+    "back": {
+      "icon": "🚶‍♀️",
+      "title": "to go back",
+      "description": "我明天要回去。 (Wǒ míng tiān yào huí qù.) - I need to go back tomorrow."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-hui_can",
+    "front": {
+      "icon": "",
+      "title": "会",
+      "description": "huì"
+    },
+    "back": {
+      "icon": "🧠",
+      "title": "can, to be able to",
+      "description": "我会说汉语。 (Wǒ huì shuō hàn yǔ.) - I can speak Chinese."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-huoche",
+    "front": {
+      "icon": "",
+      "title": "火车",
+      "description": "huǒ chē"
+    },
+    "back": {
+      "icon": "🚆",
+      "title": "train",
+      "description": "我坐火车去北京。 (Wǒ zuò huǒ chē qù běi jīng.) - I will take the train to Beijing."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-jichang",
+    "front": {
+      "icon": "",
+      "title": "机场",
+      "description": "jī chǎng"
+    },
+    "back": {
+      "icon": "🛫",
+      "title": "airport",
+      "description": "我明天去机场。 (Wǒ míng tiān qù jī chǎng.) - I will go to the airport tomorrow."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-jipiao",
+    "front": {
+      "icon": "",
+      "title": "机票",
+      "description": "jī piào"
+    },
+    "back": {
+      "icon": "🎫",
+      "title": "airplane ticket",
+      "description": "你有机票吗？ (Nǐ yǒu jī piào ma?) - Do you have an airplane ticket?"
+    }
+  },
+  {
+    "id": "hsk-1-set-1-jidan",
+    "front": {
+      "icon": "",
+      "title": "鸡蛋",
+      "description": "jī dàn"
+    },
+    "back": {
+      "icon": "🥚",
+      "title": "egg",
+      "description": "我早上吃了一个鸡蛋。 (Wǒ zǎo shang chī le yī ge jī dàn.) - I ate one egg this morning."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-ji",
+    "front": {
+      "icon": "",
+      "title": "几",
+      "description": "jǐ"
+    },
+    "back": {
+      "icon": "❓",
+      "title": "how many",
+      "description": "你家有几个人？ (Nǐ jiā yǒu jǐ ge rén?) - How many people are in your family?"
+    }
+  },
+  {
+    "id": "hsk-1-set-1-ji_remember",
+    "front": {
+      "icon": "",
+      "title": "记",
+      "description": "jì"
+    },
+    "back": {
+      "icon": "🧠",
+      "title": "to remember, to record",
+      "description": "我记不住。 (Wǒ jì bú zhù.) - I can't remember it."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-jide",
+    "front": {
+      "icon": "",
+      "title": "记得",
+      "description": "jì de"
+    },
+    "back": {
+      "icon": "💡",
+      "title": "to remember",
+      "description": "我记得他。 (Wǒ jì de tā.) - I remember him."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-jizhu",
+    "front": {
+      "icon": "",
+      "title": "记住",
+      "description": "jì zhù"
+    },
+    "back": {
+      "icon": "✍️",
+      "title": "to memorize",
+      "description": "请记住我的话。 (Qǐng jì zhù wǒ de huà.) - Please remember my words."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-jia",
+    "front": {
+      "icon": "",
+      "title": "家",
+      "description": "jiā"
+    },
+    "back": {
+      "icon": "🏠",
+      "title": "home, family",
+      "description": "我们回家吧。 (Wǒ men huí jiā ba.) - Let's go home."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-jiali",
+    "front": {
+      "icon": "",
+      "title": "家里",
+      "description": "jiā lǐ"
+    },
+    "back": {
+      "icon": "🏡",
+      "title": "at home, inside the house",
+      "description": "家里有人吗？ (Jiā lǐ yǒu rén ma?) - Is there anyone at home?"
+    }
+  },
+  {
+    "id": "hsk-1-set-1-jiaren",
+    "front": {
+      "icon": "",
+      "title": "家人",
+      "description": "jiā rén"
+    },
+    "back": {
+      "icon": "👨‍👩‍👧‍👦",
+      "title": "family members",
+      "description": "我们是一家人。 (Wǒmen shì yī jiā rén.) - We are a family."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-jian",
+    "front": {
+      "icon": "",
+      "title": "间",
+      "description": "jiān"
+    },
+    "back": {
+      "icon": "➡️",
+      "title": "between, among",
+      "description": "他们两个人之间有问题。 (Tā men liǎng ge rén zhī jiān yǒu wèn tí.) - There is a problem between the two of them."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-jian_see",
+    "front": {
+      "icon": "",
+      "title": "见",
+      "description": "jiàn"
+    },
+    "back": {
+      "icon": "👀",
+      "title": "to see, to meet",
+      "description": "你见过他吗？ (Nǐ jiàn guò tā ma?) - Have you met him?"
+    }
+  },
+  {
+    "id": "hsk-1-set-1-jianmian",
+    "front": {
+      "icon": "",
+      "title": "见面",
+      "description": "jiàn miàn"
+    },
+    "back": {
+      "icon": "🤝",
+      "title": "to meet",
+      "description": "很高兴见到你。 (Hěn gāo xìng jiàn dào nǐ.) - It's nice to meet you."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-jiao_teach",
+    "front": {
+      "icon": "",
+      "title": "教",
+      "description": "jiāo"
+    },
+    "back": {
+      "icon": "🧑‍🏫",
+      "title": "to teach",
+      "description": "老师教我们中文。 (Lǎo shī jiāo wǒmen zhōng wén.) - The teacher teaches us Chinese."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-jiao_call",
+    "front": {
+      "icon": "",
+      "title": "叫",
+      "description": "jiào"
+    },
+    "back": {
+      "icon": "🗣️",
+      "title": "to be called, to call",
+      "description": "你叫什么名字？ (Nǐ jiào shén me míng zi?) - What is your name?"
+    }
+  },
+  {
+    "id": "hsk-1-set-1-jiaoxuelou",
+    "front": {
+      "icon": "",
+      "title": "教学楼",
+      "description": "jiāo xué lóu"
+    },
+    "back": {
+      "icon": "🏫",
+      "title": "teaching building",
+      "description": "我们的教学楼很大。 (Wǒmen de jiāo xué lóu hěn dà.) - Our teaching building is very big."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-jiejie",
+    "front": {
+      "icon": "",
+      "title": "姐姐/姐",
+      "description": "jiějie / jiě"
+    },
+    "back": {
+      "icon": "👩‍🦱",
+      "title": "elder sister",
+      "description": "我姐姐很漂亮。 (Wǒ jiějie hěn piào liang.) - My older sister is very beautiful."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-jieshao",
+    "front": {
+      "icon": "",
+      "title": "介绍",
+      "description": "jiè shào"
+    },
+    "back": {
+      "icon": "➡️",
+      "title": "to introduce",
+      "description": "请你介绍一下。 (Qǐng nǐ jiè shào yī xià.) - Please introduce yourself."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-jinnian",
+    "front": {
+      "icon": "",
+      "title": "今年",
+      "description": "jīn nián"
+    },
+    "back": {
+      "icon": "🗓️",
+      "title": "this year",
+      "description": "我今年十六岁。 (Wǒ jīn nián shí liù suì.) - I am sixteen years old this year."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-jintian",
+    "front": {
+      "icon": "",
+      "title": "今天",
+      "description": "jīn tiān"
+    },
+    "back": {
+      "icon": "☀️",
+      "title": "today",
+      "description": "我今天很忙。 (Wǒ jīn tiān hěn máng.) - I am very busy today."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-jin",
+    "front": {
+      "icon": "",
+      "title": "进",
+      "description": "jìn"
+    },
+    "back": {
+      "icon": "🚶",
+      "title": "to enter",
+      "description": "请进。 (Qǐng jìn.) - Please come in."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-jinlai",
+    "front": {
+      "icon": "",
+      "title": "进来",
+      "description": "jìn lái"
+    },
+    "back": {
+      "icon": "🚶‍♂️",
+      "title": "to come in",
+      "description": "请你进来。 (Qǐng nǐ jìn lái.) - Please come in."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-jinqu",
+    "front": {
+      "icon": "",
+      "title": "进去",
+      "description": "jìn qù"
+    },
+    "back": {
+      "icon": "🚶‍♀️",
+      "title": "to go in",
+      "description": "他进去了。 (Tā jìn qù le.) - He went inside."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-jiu",
+    "front": {
+      "icon": "",
+      "title": "九",
+      "description": "jiǔ"
+    },
+    "back": {
+      "icon": "9️⃣",
+      "title": "nine",
+      "description": "他九点来。 (Tā jiǔ diǎn lái.) - He will come at nine o'clock."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-jiu_then",
+    "front": {
+      "icon": "",
+      "title": "就",
+      "description": "jiù"
+    },
+    "back": {
+      "icon": "➡️",
+      "title": "then, just",
+      "description": "你来了，我就走。 (Nǐ lái le, wǒ jiù zǒu.) - Once you arrive, I will leave."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-juede",
+    "front": {
+      "icon": "",
+      "title": "觉得",
+      "description": "jué de"
+    },
+    "back": {
+      "icon": "💭",
+      "title": "to feel, to think",
+      "description": "我觉得他很好。 (Wǒ jué de tā hěn hǎo.) - I think he is very good."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-kai",
+    "front": {
+      "icon": "",
+      "title": "开",
+      "description": "kāi"
+    },
+    "back": {
+      "icon": "🔓",
+      "title": "to open, to drive",
+      "description": "请开门。 (Qǐng kāi mén.) - Please open the door."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-kaiche",
+    "front": {
+      "icon": "",
+      "title": "开车",
+      "description": "kāi chē"
+    },
+    "back": {
+      "icon": "🚗",
+      "title": "to drive a car",
+      "description": "他会开车。 (Tā huì kāi chē.) - He knows how to drive."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-kaihui",
+    "front": {
+      "icon": "",
+      "title": "开会",
+      "description": "kāi huì"
+    },
+    "back": {
+      "icon": "🗣️",
+      "title": "to have a meeting",
+      "description": "我们明天开会。 (Wǒmen míng tiān kāi huì.) - We have a meeting tomorrow."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-kaiwanxiao",
+    "front": {
+      "icon": "",
+      "title": "开玩笑",
+      "description": "kāi wán xiào"
+    },
+    "back": {
+      "icon": "🤣",
+      "title": "to joke, to kid",
+      "description": "别开玩笑了。 (Bié kāi wán xiào le.) - Stop joking."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-kan",
+    "front": {
+      "icon": "",
+      "title": "看",
+      "description": "kàn"
+    },
+    "back": {
+      "icon": "👀",
+      "title": "to see, to look at",
+      "description": "我想看这本书。 (Wǒ xiǎng kàn zhè běn shū.) - I want to read this book."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-kanbing",
+    "front": {
+      "icon": "",
+      "title": "看病",
+      "description": "kàn bìng"
+    },
+    "back": {
+      "icon": "🏥",
+      "title": "to see a doctor",
+      "description": "我生病了，要去看病。 (Wǒ shēng bìng le, yào qù kàn bìng.) - I'm sick and need to see a doctor."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-kandao",
+    "front": {
+      "icon": "",
+      "title": "看到",
+      "description": "kàn dào"
+    },
+    "back": {
+      "icon": "💡",
+      "title": "to see, to catch sight of",
+      "description": "你看到他了吗？ (Nǐ kàn dào tā le ma?) - Did you see him?"
+    }
+  },
+  {
+    "id": "hsk-1-set-1-kanjian",
+    "front": {
+      "icon": "",
+      "title": "看见",
+      "description": "kàn jiàn"
+    },
+    "back": {
+      "icon": "👁️",
+      "title": "to see, to notice",
+      "description": "我看见你了。 (Wǒ kàn jiàn nǐ le.) - I saw you."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-kao",
+    "front": {
+      "icon": "",
+      "title": "考",
+      "description": "kǎo"
+    },
+    "back": {
+      "icon": "📝",
+      "title": "to test, to examine",
+      "description": "老师要考我们。 (Lǎo shī yào kǎo wǒ men.) - The teacher is going to test us."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-kaoshi",
+    "front": {
+      "icon": "",
+      "title": "考试",
+      "description": "kǎo shì"
+    },
+    "back": {
+      "icon": "✍️",
+      "title": "exam, test",
+      "description": "明天有考试。 (Míng tiān yǒu kǎo shì.) - There is an exam tomorrow."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-ke",
+    "front": {
+      "icon": "",
+      "title": "渴",
+      "description": "kě"
+    },
+    "back": {
+      "icon": "💧",
+      "title": "thirsty",
+      "description": "我渴了，想喝水。 (Wǒ kě le, xiǎng hē shuǐ.) - I'm thirsty, I want to drink water."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-ke_class",
+    "front": {
+      "icon": "",
+      "title": "课",
+      "description": "kè"
+    },
+    "back": {
+      "icon": "👨‍🏫",
+      "title": "class, lesson",
+      "description": "我今天有汉语课。 (Wǒ jīn tiān yǒu hàn yǔ kè.) - I have a Chinese class today."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-keben",
+    "front": {
+      "icon": "",
+      "title": "课本",
+      "description": "kè běn"
+    },
+    "back": {
+      "icon": "📖",
+      "title": "textbook",
+      "description": "我的课本在书包里。 (Wǒ de kè běn zài shū bāo lǐ.) - My textbook is in my backpack."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-kewen",
+    "front": {
+      "icon": "",
+      "title": "课文",
+      "description": "kè wén"
+    },
+    "back": {
+      "icon": "📜",
+      "title": "text of a lesson",
+      "description": "我们学习这篇课文。 (Wǒmen xué xí zhè piān kè wén.) - We are studying this lesson text."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-kou",
+    "front": {
+      "icon": "",
+      "title": "口",
+      "description": "kǒu"
+    },
+    "back": {
+      "icon": "👄",
+      "title": "mouth",
+      "description": "请张开你的口。 (Qǐng zhāng kāi nǐ de kǒu.) - Please open your mouth."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-kuai",
+    "front": {
+      "icon": "",
+      "title": "块",
+      "description": "kuài"
+    },
+    "back": {
+      "icon": "🪙",
+      "title": "piece, lump (measure word)",
+      "description": "一块钱。 (Yī kuài qián.) - One yuan."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-kuai_fast",
+    "front": {
+      "icon": "",
+      "title": "快",
+      "description": "kuài"
+    },
+    "back": {
+      "icon": "💨",
+      "title": "fast, quick",
+      "description": "你走得太快了。 (Nǐ zǒu de tài kuài le.) - You are walking too fast."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-lai",
+    "front": {
+      "icon": "",
+      "title": "来",
+      "description": "lái"
+    },
+    "back": {
+      "icon": "🚶‍♂️",
+      "title": "to come",
+      "description": "我来中国了。 (Wǒ lái zhōng guó le.) - I have come to China."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-laidao",
+    "front": {
+      "icon": "",
+      "title": "来到",
+      "description": "lái dào"
+    },
+    "back": {
+      "icon": "📍",
+      "title": "to arrive at",
+      "description": "他来到我的家。 (Tā lái dào wǒ de jiā.) - He arrived at my house."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-lao",
+    "front": {
+      "icon": "",
+      "title": "老",
+      "description": "lǎo"
+    },
+    "back": {
+      "icon": "👴",
+      "title": "old",
+      "description": "他很老了。 (Tā hěn lǎo le.) - He is very old."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-laoren",
+    "front": {
+      "icon": "",
+      "title": "老人",
+      "description": "lǎo rén"
+    },
+    "back": {
+      "icon": "👵",
+      "title": "elderly person",
+      "description": "她是一个老人。 (Tā shì yī ge lǎo rén.) - She is an elderly person."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-laoshi",
+    "front": {
+      "icon": "",
+      "title": "老师",
+      "description": "lǎo shī"
+    },
+    "back": {
+      "icon": "🧑‍🏫",
+      "title": "teacher",
+      "description": "老师，您好。 (Lǎo shī, nín hǎo.) - Hello, teacher."
+    }
+  },
+  {
+    "id": "hsk-1-set-1-le",
+    "front": {
+      "icon": "",
+      "title": "了",
+      "description": "le"
+    },
+    "back": {
+      "icon": "✅",
+      "title": "completion particle",
+      "description": "我吃了。 (Wǒ chī le.) - I have eaten."
+    }
+  }
+]
