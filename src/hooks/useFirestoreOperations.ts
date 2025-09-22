@@ -355,6 +355,51 @@ export const createFirestoreOperations = (deps: FirestoreOperationsDeps) => {
     }
   };
 
+  /**
+   * Load all card set progress data for the current user
+   * Returns a map of cardSetId to progress percentage
+   */
+  const loadAllCardSetProgress = async (): Promise<Record<string, number>> => {
+    try {
+      if (state.isGuest) {
+        console.log("Guest mode: Cannot load card set progress from Firestore");
+        return {};
+      }
+
+      if (!state.user) {
+        console.log("No authenticated user: Cannot load card set progress");
+        return {};
+      }
+
+      setLoadingState("fetchingCards", true);
+      clearError();
+
+      const result = await FlashcardService.loadAllCardSetProgress();
+
+      if (result.success && result.data) {
+        const progressMap: Record<string, number> = {};
+        result.data.forEach((progress) => {
+          progressMap[progress.cardSetId] = progress.progressPercentage;
+        });
+        console.log(
+          `Loaded progress for ${Object.keys(progressMap).length} card sets`
+        );
+        return progressMap;
+      } else {
+        console.warn("No card set progress found:", result.error);
+        return {};
+      }
+    } catch (error) {
+      console.error("Error loading all card set progress:", error);
+      setError(
+        error instanceof Error ? error.message : "Failed to load progress"
+      );
+      return {};
+    } finally {
+      setLoadingState("fetchingCards", false);
+    }
+  };
+
   return {
     loadCardsFromFirestore,
     saveCardToFirestore,
@@ -363,5 +408,6 @@ export const createFirestoreOperations = (deps: FirestoreOperationsDeps) => {
     loadCardSetProgress,
     saveCardSetProgress,
     updateCurrentCardSetProgress,
+    loadAllCardSetProgress,
   };
 };

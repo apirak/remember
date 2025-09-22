@@ -178,6 +178,7 @@ const FlashcardContext = createContext<{
   loadCardSetProgress: (cardSetId: string) => Promise<CardSetProgress | null>;
   saveCardSetProgress: (progress: CardSetProgress) => Promise<void>;
   updateCurrentCardSetProgress: () => Promise<void>;
+  loadAllCardSetProgress: () => Promise<Record<string, number>>;
 } | null>(null);
 
 /**
@@ -498,6 +499,7 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
     loadCardSetProgress,
     saveCardSetProgress,
     updateCurrentCardSetProgress,
+    loadAllCardSetProgress,
   } = firestoreOperations;
 
   /**
@@ -571,6 +573,7 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
     loadCardSetProgress,
     saveCardSetProgress,
     updateCurrentCardSetProgress,
+    loadAllCardSetProgress,
   };
 
   return (

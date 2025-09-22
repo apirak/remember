@@ -24,11 +24,14 @@ interface CardSetSelectionProps {
 }
 
 const CardSetSelection: React.FC<CardSetSelectionProps> = ({ onNavigate }) => {
-  // Access FlashcardContext to set the current card set
-  const { setCurrentCardSet } = useFlashcard();
+  // Access FlashcardContext to set the current card set and load progress
+  const { setCurrentCardSet, loadAllCardSetProgress, state } = useFlashcard();
 
   // State for loading card sets from JSON
   const [cardSets, setCardSets] = useState<CardSet[]>([]);
+
+  // State for loading progress data
+  const [progressData, setProgressData] = useState<Record<string, number>>({});
 
   // State for scroll shadow effect
   const [isScrolled, setIsScrolled] = useState(false);
@@ -48,7 +51,7 @@ const CardSetSelection: React.FC<CardSetSelectionProps> = ({ onNavigate }) => {
           description: item.description,
           cover: item.cover,
           cardCount: item.cardCount,
-          progress: 0, // Default progress for now
+          progress: 0, // Will be updated with real data
           dataFile: item.dataFile,
         }));
 
@@ -67,6 +70,46 @@ const CardSetSelection: React.FC<CardSetSelectionProps> = ({ onNavigate }) => {
 
     loadCardSets();
   }, []);
+
+  // Load progress data for authenticated users
+  useEffect(() => {
+    const loadProgress = async () => {
+      if (!state.isGuest && state.user) {
+        try {
+          console.log(
+            "CardSetSelection: Loading progress data for authenticated user"
+          );
+          const progress = await loadAllCardSetProgress();
+          setProgressData(progress);
+          console.log(
+            `CardSetSelection: Loaded progress for ${
+              Object.keys(progress).length
+            } card sets`
+          );
+        } catch (error) {
+          console.error("CardSetSelection: Error loading progress:", error);
+          setProgressData({});
+        }
+      } else {
+        console.log("CardSetSelection: Guest mode - using mock progress data");
+        // For guests, use mock progress data
+        const mockProgress: Record<string, number> = {
+          hsk_1_set_1_english: 25,
+          chinese_essentials_1: 60,
+          ielts_adjective_thai: 0,
+        };
+        setProgressData(mockProgress);
+      }
+    };
+
+    loadProgress();
+  }, [state.isGuest, state.user, loadAllCardSetProgress]);
+
+  // Merge card sets with progress data
+  const cardSetsWithProgress = cardSets.map((cardSet) => ({
+    ...cardSet,
+    progress: progressData[cardSet.id] || 0,
+  }));
   // Handle scroll event to show/hide shadow
   const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
     const target = e.target as HTMLDivElement;
@@ -137,7 +180,7 @@ const CardSetSelection: React.FC<CardSetSelectionProps> = ({ onNavigate }) => {
         <div className="flex-1 overflow-auto" onScroll={handleScroll}>
           <div className="max-w-md w-full mx-auto p-4 pt-6">
             <div className="space-y-4 pb-4">
-              {cardSets.map((cardSet) => (
+              {cardSetsWithProgress.map((cardSet) => (
                 <div
                   key={cardSet.id}
                   onClick={() => handleCardSetSelect(cardSet)}
