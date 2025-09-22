@@ -207,12 +207,12 @@ const Completion: React.FC<CompletionProps> = ({ onNavigate }) => {
           <button
             onClick={handleReturnToDashboard}
             className="
-              w-full py-3 px-6 bg-white border-2 border-gray-300 text-gray-600 
-              rounded-2xl font-rounded text-sm shadow-sm
-              hover:border-gray-400 hover:text-gray-700 transition-colors duration-200
-            "
+                w-full
+                py-2 px-4 text-gray-500 font-rounded text-sm
+                hover:text-gray-700 transition-colors duration-200
+              "
           >
-            📊 Back to Dashboard
+            ← Back to Dashboard
           </button>
         </div>
       </div>
