@@ -318,6 +318,7 @@ export const getDueFlashcards = async (
 };
 
 // Update flashcard progress (SM-2 algorithm results) for a specific card set
+// Supports lazy creation - creates card if it doesn't exist
 export const updateFlashcardProgress = async (
   cardId: string,
   cardSetId: string,
@@ -337,6 +338,9 @@ export const updateFlashcardProgress = async (
       cardId
     );
 
+    // Check if card exists first
+    const cardDoc = await getDoc(cardDocRef);
+
     const updateData = {
       ...progressData,
       cardSetId, // Ensure cardSetId is included
@@ -345,11 +349,40 @@ export const updateFlashcardProgress = async (
       nextReviewDate: progressData.nextReviewDate
         ? Timestamp.fromDate(progressData.nextReviewDate)
         : serverTimestamp(),
+      lastReviewDate: progressData.lastReviewDate
+        ? Timestamp.fromDate(progressData.lastReviewDate)
+        : serverTimestamp(),
     };
 
-    await updateDoc(cardDocRef, updateData);
+    if (!cardDoc.exists()) {
+      // Lazy creation: Create card with initial data if it doesn't exist
+      console.log(
+        `Creating new card in Firestore: ${cardId} (cardSet: ${cardSetId})`
+      );
 
-    console.log("Flashcard progress updated:", cardId);
+      const newCardData = {
+        id: cardId,
+        ...updateData,
+        createdAt: serverTimestamp(),
+        // Add default values for required fields if not provided
+        easinessFactor: progressData.easinessFactor || 2.5,
+        repetitions: progressData.repetitions || 0,
+        interval: progressData.interval || 1,
+        totalReviews: progressData.totalReviews || 1,
+        correctStreak: progressData.correctStreak || 0,
+        averageQuality: progressData.averageQuality || 3.0,
+        isNew: progressData.isNew !== undefined ? progressData.isNew : false,
+      };
+
+      await setDoc(cardDocRef, newCardData);
+      console.log(`Successfully created new card: ${cardId}`);
+    } else {
+      // Update existing card
+      console.log(`Updating existing card: ${cardId} (cardSet: ${cardSetId})`);
+      await updateDoc(cardDocRef, updateData);
+      console.log(`Successfully updated card: ${cardId}`);
+    }
+
     return { success: true, data: updateData };
   } catch (error) {
     console.error("Error updating flashcard progress:", error);

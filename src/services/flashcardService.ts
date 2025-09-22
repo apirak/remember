@@ -408,6 +408,7 @@ export class FlashcardService {
 
   /**
    * Update flashcard progress (SM-2 parameters) in Firestore for a specific card set
+   * Supports lazy creation - creates card if it doesn't exist
    * @param cardId - The ID of the card to update
    * @param cardSetId - The card set identifier
    * @param progressData - The progress data to save
@@ -452,6 +453,68 @@ export class FlashcardService {
           error instanceof Error
             ? error.message
             : "Failed to save progress to Firestore",
+      };
+    }
+  }
+
+  /**
+   * Create or update a card with both content and progress data (lazy creation)
+   * This is used when user reviews a card for the first time
+   * @param cardData - Complete card data including front/back content
+   * @param cardSetId - The card set identifier
+   * @param progressData - SM-2 progress data from review
+   * @returns Service result with success status
+   */
+  static async saveCardWithProgress(
+    cardData: any,
+    cardSetId: string,
+    progressData: any
+  ): Promise<ServiceResult> {
+    try {
+      const currentUser = getCurrentUser();
+      if (!currentUser) {
+        return {
+          success: false,
+          error: "User must be authenticated to save card with progress.",
+        };
+      }
+
+      // Combine card data with progress data
+      const completeCardData = {
+        ...cardData,
+        ...progressData,
+        cardSetId,
+        id: cardData.id,
+        // Ensure required fields are present
+        front: cardData.front || { icon: "", title: "", description: "" },
+        back: cardData.back || { icon: "", title: "", description: "" },
+      };
+
+      const result = await updateFlashcardProgress(
+        cardData.id,
+        cardSetId,
+        completeCardData
+      );
+
+      if (result.success) {
+        console.log(
+          `Lazy creation: Saved card ${cardData.id} with progress in card set: ${cardSetId}`
+        );
+        return { success: true, data: result.data };
+      } else {
+        return {
+          success: false,
+          error: result.error || "Failed to save card with progress",
+        };
+      }
+    } catch (error) {
+      console.error("Error saving card with progress:", error);
+      return {
+        success: false,
+        error:
+          error instanceof Error
+            ? error.message
+            : "Failed to save card with progress",
       };
     }
   }
