@@ -45,6 +45,9 @@ Card Set Selection → Dashboard → Review Session → Completion → Dashboard
 - `pnpm run test` - Tests (watch mode)
 - `pnpm run test:run` - Tests (single run)
 - `pnpm run build` - Production build
+- `pnpm run test:no-watch` - For AI to Run tests without watch mode
+
+* For AI to run tests without watch mode, add `--no-watch`
 
 ## Architecture
 
