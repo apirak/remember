@@ -259,7 +259,14 @@ export const getUserFlashcards = async (
       createdAt: doc.data().createdAt?.toDate() || new Date(),
       updatedAt: doc.data().updatedAt?.toDate() || new Date(),
       nextReviewDate: doc.data().nextReviewDate?.toDate() || new Date(),
-      lastReviewDate: doc.data().lastReviewDate?.toDate() || new Date(), // ← Fix: Convert lastReviewDate timestamp
+      // For cards without lastReviewDate, set to a day in the past so they won't count as "reviewed today"
+      lastReviewDate:
+        doc.data().lastReviewDate?.toDate() ||
+        (() => {
+          const yesterday = new Date();
+          yesterday.setDate(yesterday.getDate() - 1);
+          return yesterday;
+        })(),
     }));
 
     console.log(`Retrieved ${cards.length} flashcards`);

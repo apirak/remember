@@ -123,8 +123,16 @@ export const isCardReviewedToday = (
   card: Flashcard,
   currentDate: Date = new Date()
 ): boolean => {
-  // Handle edge case: if lastReviewDate is invalid or undefined, treat as not reviewed today
+  // Handle edge case: if lastReviewDate is invalid, undefined, or null, treat as not reviewed today
   if (!card.lastReviewDate || !(card.lastReviewDate instanceof Date)) {
+    return false;
+  }
+
+  // Only count as reviewed today if:
+  // 1. The card has been actually reviewed (not a new card)
+  // 2. The lastReviewDate is today
+  // 3. The card is not in "new" state
+  if (card.isNew || card.totalReviews === 0) {
     return false;
   }
 
