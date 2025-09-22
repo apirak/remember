@@ -118,17 +118,21 @@ export class FlashcardService {
   ): Promise<ServiceResult<Flashcard[]>> {
     try {
       // Dynamically import the card set data
-      const cardSetData = await import(`../data/${cardSetDataFile}`);
+      // Add .json extension if not present
+      const fileName = cardSetDataFile.endsWith(".json")
+        ? cardSetDataFile
+        : `${cardSetDataFile}.json`;
+      const cardSetData = await import(
+        /* @vite-ignore */ `../data/${fileName}`
+      );
       const cardsData = cardSetData.default as FlashcardData[];
 
       // Transform to include SM-2 parameters
       const cards = cardsData.map((data) =>
-        transformFlashcardData(data, cardSetDataFile.replace(".json", ""))
+        transformFlashcardData(data, fileName.replace(".json", ""))
       );
 
-      console.log(
-        `Loaded ${cards.length} cards from JSON file: ${cardSetDataFile}`
-      );
+      console.log(`Loaded ${cards.length} cards from JSON file: ${fileName}`);
       return {
         success: true,
         data: cards,
