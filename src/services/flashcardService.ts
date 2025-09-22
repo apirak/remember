@@ -150,7 +150,11 @@ export class FlashcardService {
   }
 
   /**
-   * Load cards for a specific card set (Firestore first, then JSON fallback)
+   * Load cards for a specific card set with simple straightforward logic:
+   * 1. Load from Firestore first
+   * 2. If empty, create from JSON and save to Firestore
+   * 3. Load from Firestore again
+   * 4. Return source information
    * @param cardSetId - The card set identifier
    * @param cardSetDataFile - JSON file name for fallback
    * @returns Service result with flashcard array and source info
@@ -162,7 +166,9 @@ export class FlashcardService {
     ServiceResult<{ cards: Flashcard[]; source: "firestore" | "json" }>
   > {
     try {
-      // First, try to load from Firestore
+      console.log(`Loading card set: ${cardSetId} (${cardSetDataFile})`);
+
+      // Step 1: Load from Firestore first
       const firestoreResult = await this.loadUserFlashcards(cardSetId);
 
       if (
@@ -170,6 +176,9 @@ export class FlashcardService {
         firestoreResult.data &&
         firestoreResult.data.length > 0
       ) {
+        console.log(
+          `Found ${firestoreResult.data.length} cards in Firestore for ${cardSetId}`
+        );
         return {
           success: true,
           data: {
@@ -179,22 +188,67 @@ export class FlashcardService {
         };
       }
 
-      // If no Firestore data, load from JSON
+      console.log(
+        `No cards found in Firestore for ${cardSetId}, creating from JSON`
+      );
+
+      // Step 2: If empty, create from JSON
       const jsonResult = await this.loadCardsFromJSON(cardSetDataFile);
 
-      if (jsonResult.success) {
+      if (!jsonResult.success || !jsonResult.data) {
+        return {
+          success: false,
+          error: `Failed to load JSON data for card set ${cardSetId}`,
+        };
+      }
+
+      // Save JSON cards to Firestore
+      const saveResult = await this.saveCardsBatch(jsonResult.data, cardSetId);
+
+      if (!saveResult.success) {
+        console.warn(
+          `Failed to save cards to Firestore for ${cardSetId}, returning JSON data`
+        );
         return {
           success: true,
           data: {
-            cards: jsonResult.data || [],
+            cards: jsonResult.data,
             source: "json",
           },
         };
       }
 
+      console.log(
+        `Successfully saved ${jsonResult.data.length} cards to Firestore for ${cardSetId}`
+      );
+
+      // Step 3: Load from Firestore again to get the saved data
+      const reloadResult = await this.loadUserFlashcards(cardSetId);
+
+      if (
+        reloadResult.success &&
+        reloadResult.data &&
+        reloadResult.data.length > 0
+      ) {
+        console.log(
+          `Reloaded ${reloadResult.data.length} cards from Firestore for ${cardSetId}`
+        );
+        return {
+          success: true,
+          data: {
+            cards: reloadResult.data,
+            source: "firestore",
+          },
+        };
+      }
+
+      // Fallback: return JSON data if reload failed
       return {
-        success: false,
-        error: `Failed to load cards for card set ${cardSetId} from both Firestore and JSON`,
+        success: true,
+        data: {
+          cards: jsonResult.data,
+          source: "json",
+        },
       };
     } catch (error) {
       console.error(`Error loading card set data for ${cardSetId}:`, error);
