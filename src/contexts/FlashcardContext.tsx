@@ -461,30 +461,39 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
   /**
    * Enhanced helper functions for loading states and error handling
    */
-  const setLoadingState = useCallback((
-    key: keyof FlashcardContextState["loadingStates"],
-    value: boolean
-  ) => {
-    dispatch({ type: "SET_LOADING_STATE", payload: { key, value } });
-  }, []);
+  const setLoadingState = useCallback(
+    (key: keyof FlashcardContextState["loadingStates"], value: boolean) => {
+      dispatch({ type: "SET_LOADING_STATE", payload: { key, value } });
+    },
+    []
+  );
 
-  const setDataSource = useCallback((source: "session" | "firestore" | "fallback") => {
-    dispatch({ type: "SET_DATA_SOURCE", payload: source });
-  }, []);
+  const setDataSource = useCallback(
+    (source: "session" | "firestore" | "fallback") => {
+      dispatch({ type: "SET_DATA_SOURCE", payload: source });
+    },
+    []
+  );
 
-  const setSyncStatus = useCallback((status: "idle" | "syncing" | "error" | "offline") => {
-    dispatch({ type: "SET_SYNC_STATUS", payload: status });
-  }, []);
+  const setSyncStatus = useCallback(
+    (status: "idle" | "syncing" | "error" | "offline") => {
+      dispatch({ type: "SET_SYNC_STATUS", payload: status });
+    },
+    []
+  );
 
-  const setError = useCallback((errorMessage: string, retryable: boolean = true) => {
-    const error = {
-      code: "CONTEXT_ERROR",
-      message: errorMessage,
-      retryable,
-      timestamp: new Date(),
-    };
-    dispatch({ type: "SET_ERROR", payload: error });
-  }, []);
+  const setError = useCallback(
+    (errorMessage: string, retryable: boolean = true) => {
+      const error = {
+        code: "CONTEXT_ERROR",
+        message: errorMessage,
+        retryable,
+        timestamp: new Date(),
+      };
+      dispatch({ type: "SET_ERROR", payload: error });
+    },
+    []
+  );
 
   const clearError = useCallback(() => {
     dispatch({ type: "CLEAR_ERROR" });
@@ -529,24 +538,27 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
   /**
    * Set the current card set and persist to localStorage
    */
-  const setCurrentCardSet = useCallback((
-    cardSet: {
-      id: string;
-      name: string;
-      cover: string;
-      dataFile: string;
-    } | null
-  ) => {
-    console.log("FlashcardContext: Setting current card set", cardSet);
+  const setCurrentCardSet = useCallback(
+    (
+      cardSet: {
+        id: string;
+        name: string;
+        cover: string;
+        dataFile: string;
+      } | null
+    ) => {
+      console.log("FlashcardContext: Setting current card set", cardSet);
 
-    // Update context state
-    dispatch({ type: "SET_CURRENT_CARD_SET", payload: cardSet });
+      // Update context state
+      dispatch({ type: "SET_CURRENT_CARD_SET", payload: cardSet });
 
-    // Persist to localStorage if card set is valid and storage is available
-    if (cardSet && isStorageAvailable()) {
-      saveLastCardSet(cardSet);
-    }
-  }, []);
+      // Persist to localStorage if card set is valid and storage is available
+      if (cardSet && isStorageAvailable()) {
+        saveLastCardSet(cardSet);
+      }
+    },
+    []
+  );
 
   // Create complex action helpers using the factory function
   const flashcardActions = createFlashcardActions({

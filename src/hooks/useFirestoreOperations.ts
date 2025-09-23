@@ -360,7 +360,9 @@ export const createFirestoreOperations = (deps: FirestoreOperationsDeps) => {
    * Load all card set progress data for the current user
    * Returns a map of cardSetId to progress percentage
    */
-  const loadAllCardSetProgress = useCallback(async (): Promise<Record<string, number>> => {
+  const loadAllCardSetProgress = useCallback(async (): Promise<
+    Record<string, number>
+  > => {
     try {
       if (state.isGuest) {
         console.log("Guest mode: Cannot load card set progress from Firestore");
