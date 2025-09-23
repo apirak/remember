@@ -1,7 +1,7 @@
 [
   {
     "id": "hsk_1_set_1_english",
-    "name": "Chinese HSK-1 (English)",
+    "name": "Chinese HSK-1",
     "description": "HSK Level 1 vocabulary set 1 with English translations",
     "cover": "🇨🇳",
     "cardCount": 210,
@@ -31,7 +31,7 @@
   },
   {
     "id": "ielts-adjective-thai",
-    "name": "IELTS Adjectives (Thai)",
+    "name": "IELTS Adjectives",
     "description": "IELTS vocabulary set focusing on adjectives with Thai translations",
     "cover": "🇬🇧",
     "cardCount": 200,
