@@ -24,6 +24,20 @@ const { title } = Astro.props;
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
+    <!-- Open Graph meta tags for social sharing -->
+    <meta property="og:title" content={title} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/og_share.jpg" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:description" content="Child-friendly flashcard app for spaced repetition learning" />
+    <meta property="og:site_name" content="Remember" />
+    
+    <!-- Twitter Card meta tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="/og_share.jpg" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content="Child-friendly flashcard app for spaced repetition learning" />
+
     <!-- Google Fonts for consistent cross-platform display -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
