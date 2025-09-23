@@ -221,7 +221,7 @@ const Completion: React.FC<CompletionProps> = ({ onNavigate }) => {
                 transform hover:scale-105 active:scale-95 transition-all duration-200
               "
             >
-              🔄 Review More Cards ({state.stats.dueCards} left)
+              Review More Cards ({state.stats.dueCards} left)
             </button>
           ) : (
             <div className="text-center p-4 bg-success-50 rounded-2xl border border-success-200">
