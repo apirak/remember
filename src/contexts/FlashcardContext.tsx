@@ -6,6 +6,7 @@ import React, {
   useContext,
   useReducer,
   useEffect,
+  useCallback,
   type ReactNode,
 } from "react";
 import type {
@@ -460,22 +461,22 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
   /**
    * Enhanced helper functions for loading states and error handling
    */
-  const setLoadingState = (
+  const setLoadingState = useCallback((
     key: keyof FlashcardContextState["loadingStates"],
     value: boolean
   ) => {
     dispatch({ type: "SET_LOADING_STATE", payload: { key, value } });
-  };
+  }, []);
 
-  const setDataSource = (source: "session" | "firestore" | "fallback") => {
+  const setDataSource = useCallback((source: "session" | "firestore" | "fallback") => {
     dispatch({ type: "SET_DATA_SOURCE", payload: source });
-  };
+  }, []);
 
-  const setSyncStatus = (status: "idle" | "syncing" | "error" | "offline") => {
+  const setSyncStatus = useCallback((status: "idle" | "syncing" | "error" | "offline") => {
     dispatch({ type: "SET_SYNC_STATUS", payload: status });
-  };
+  }, []);
 
-  const setError = (errorMessage: string, retryable: boolean = true) => {
+  const setError = useCallback((errorMessage: string, retryable: boolean = true) => {
     const error = {
       code: "CONTEXT_ERROR",
       message: errorMessage,
@@ -483,19 +484,19 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
       timestamp: new Date(),
     };
     dispatch({ type: "SET_ERROR", payload: error });
-  };
+  }, []);
 
-  const clearError = () => {
+  const clearError = useCallback(() => {
     dispatch({ type: "CLEAR_ERROR" });
-  };
+  }, []);
 
-  const retryPendingOperations = () => {
+  const retryPendingOperations = useCallback(() => {
     dispatch({ type: "RETRY_PENDING_OPERATIONS" });
-  };
+  }, []);
 
-  const setUser = (user: any, isGuest: boolean) => {
+  const setUser = useCallback((user: any, isGuest: boolean) => {
     dispatch({ type: "SET_USER", payload: { user, isGuest } });
-  };
+  }, []);
 
   /**
    * Factory function implementations for complex operations
@@ -528,7 +529,7 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
   /**
    * Set the current card set and persist to localStorage
    */
-  const setCurrentCardSet = (
+  const setCurrentCardSet = useCallback((
     cardSet: {
       id: string;
       name: string;
@@ -545,7 +546,7 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
     if (cardSet && isStorageAvailable()) {
       saveLastCardSet(cardSet);
     }
-  };
+  }, []);
 
   // Create complex action helpers using the factory function
   const flashcardActions = createFlashcardActions({

@@ -2,6 +2,7 @@
 // Handles all Firestore integration methods for the FlashcardContext
 // These methods are created as factory functions and used within the context
 
+import { useCallback } from "react";
 import type {
   Flashcard,
   FlashcardContextState,
@@ -359,7 +360,7 @@ export const createFirestoreOperations = (deps: FirestoreOperationsDeps) => {
    * Load all card set progress data for the current user
    * Returns a map of cardSetId to progress percentage
    */
-  const loadAllCardSetProgress = async (): Promise<Record<string, number>> => {
+  const loadAllCardSetProgress = useCallback(async (): Promise<Record<string, number>> => {
     try {
       if (state.isGuest) {
         console.log("Guest mode: Cannot load card set progress from Firestore");
@@ -398,7 +399,7 @@ export const createFirestoreOperations = (deps: FirestoreOperationsDeps) => {
     } finally {
       setLoadingState("fetchingCards", false);
     }
-  };
+  }, [state.isGuest, state.user, setLoadingState, clearError, setError]);
 
   return {
     loadCardsFromFirestore,
