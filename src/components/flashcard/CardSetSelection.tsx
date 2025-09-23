@@ -155,11 +155,11 @@ const CardSetSelection: React.FC<CardSetSelectionProps> = ({ onNavigate }) => {
   };
 
   return (
-    <div className="min-h-screen bg-yellow-50">
+    <div className="min-h-screen from-blue-50">
       <div className="h-screen flex flex-col">
         {/* Navigation Header - Sticky */}
         <div
-          className={`sticky top-0 z-10 bg-yellow-50 backdrop-blur-md border-b border-white/20 p-4 pb-2 transition-shadow duration-300 ${
+          className={`sticky top-0 z-10 from-blue-50 backdrop-blur-md border-b border-white/20 p-4 pb-2 transition-shadow duration-300 ${
             isScrolled ? "shadow-md shadow-black/10" : ""
           }`}
         >

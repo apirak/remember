@@ -258,7 +258,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
         </div>
 
         {/* Login Section */}
-        <div className="mt-2">
+        <div className="mt-4">
           <LoginButton />
         </div>
       </div>
