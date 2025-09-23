@@ -206,19 +206,21 @@ const CardSetSelection: React.FC<CardSetSelectionProps> = ({ onNavigate }) => {
                     </div>
                   </div>
 
-                  {/* Progress Bar */}
-                  <div className="mb-3">
-                    <div className="flex justify-between text-xs font-rounded text-gray-600 mb-1">
-                      <span>Progress</span>
-                      <span>{cardSet.progress}%</span>
+                  {/* Progress Bar - Only show for authenticated users with progress > 0 */}
+                  {!state.isGuest && cardSet.progress > 0 && (
+                    <div className="mb-3">
+                      <div className="flex justify-between text-xs font-rounded text-gray-600 mb-1">
+                        <span>Progress</span>
+                        <span>{cardSet.progress}%</span>
+                      </div>
+                      <div className="w-full bg-gray-200 rounded-full h-2">
+                        <div
+                          className="bg-gradient-to-r from-primary-500 to-primary-600 h-2 rounded-full transition-all duration-300"
+                          style={{ width: `${cardSet.progress}%` }}
+                        ></div>
+                      </div>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div
-                        className="bg-gradient-to-r from-primary-500 to-primary-600 h-2 rounded-full transition-all duration-300"
-                        style={{ width: `${cardSet.progress}%` }}
-                      ></div>
-                    </div>
-                  </div>
+                  )}
 
                   {/* Card Count and Status */}
                   <div className="flex justify-between items-center">
@@ -226,18 +228,19 @@ const CardSetSelection: React.FC<CardSetSelectionProps> = ({ onNavigate }) => {
                       {cardSet.cardCount} cards
                     </span>
 
-                    {cardSet.progress === 0 ? (
-                      <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-rounded rounded-full">
-                        New
-                      </span>
-                    ) : cardSet.progress === 100 ? (
-                      <span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-rounded rounded-full">
-                        Complete
-                      </span>
-                    ) : (
-                      <span className="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs font-rounded rounded-full">
-                        In Progress
-                      </span>
+                    {/* Only show status for authenticated users with progress > 0 */}
+                    {!state.isGuest && cardSet.progress > 0 && (
+                      <>
+                        {cardSet.progress === 100 ? (
+                          <span className="px-2 py-1 bg-green-100 text-green-700 text-xs font-rounded rounded-full">
+                            Complete
+                          </span>
+                        ) : (
+                          <span className="px-2 py-1 bg-yellow-100 text-yellow-700 text-xs font-rounded rounded-full">
+                            In Progress
+                          </span>
+                        )}
+                      </>
                     )}
                   </div>
                 </div>
