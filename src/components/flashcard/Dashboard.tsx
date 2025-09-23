@@ -116,8 +116,9 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             </div>
           )}
 
-          {/* All Sets Navigation Button - Top Left */}
-          <div>
+          {/* Top Navigation - All Sets (Left) and Share (Right) */}
+          <div className="flex justify-between items-center mb-2">
+            {/* All Sets Navigation Button - Top Left */}
             <button
               onClick={() => {
                 console.log("Dashboard: All Sets button clicked");
@@ -127,6 +128,61 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             >
               <EmojiText size={12}>📚</EmojiText>&nbsp;
               <span>All Sets</span>
+            </button>
+
+            {/* Share Button - Top Right */}
+            <button
+              onClick={(event) => {
+                const cardSetName = state.currentCardSet?.name || "Flashcards";
+                const cardSetId = state.currentCardSet?.id;
+
+                // Build the shareable URL with card set path
+                let shareUrl = window.location.origin;
+                if (cardSetId) {
+                  shareUrl += `/${cardSetId}`;
+                } else {
+                  // Fallback to current URL if no card set ID
+                  shareUrl = window.location.href;
+                }
+
+                // Check if it's a desktop/laptop (screen width > 768px or no touch support)
+                const isDesktop =
+                  window.innerWidth > 768 || !("ontouchstart" in window);
+
+                if (navigator.share && !isDesktop) {
+                  // Use native share API only on mobile/tablet
+                  navigator
+                    .share({
+                      title: `${cardSetName} - Smart Flashcards`,
+                      text: `Check out this flashcard set: ${cardSetName}`,
+                      url: shareUrl,
+                    })
+                    .catch((error) => {
+                      console.log("Error sharing:", error);
+                    });
+                } else {
+                  // Always use clipboard copy on desktop, or as fallback
+                  navigator.clipboard
+                    .writeText(shareUrl)
+                    .then(() => {
+                      // Show a temporary notification
+                      const button = event.target as HTMLElement;
+                      const originalText = button.textContent;
+                      button.textContent = "✓ Copied!";
+                      setTimeout(() => {
+                        button.textContent = originalText;
+                      }, 2000);
+                    })
+                    .catch((error) => {
+                      console.log("Error copying to clipboard:", error);
+                    });
+                }
+              }}
+              className="flex py-1 px-2 items-center text-sm font-rounded text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-colors duration-200"
+              title="Share this card set"
+            >
+              <EmojiText size={12}>🔗</EmojiText>&nbsp;
+              <span>Share</span>
             </button>
           </div>
 
