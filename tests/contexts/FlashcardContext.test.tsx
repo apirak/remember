@@ -7,36 +7,11 @@ import {
   FlashcardProvider,
   useFlashcard,
 } from "../../src/contexts/FlashcardContext";
+import * as cardSetLoader from "../../src/utils/cardSetLoader";
 
-// Mock the data imports to avoid file system dependencies
-vi.mock("../../src/data/flashcards.json", () => ({
-  default: [
-    {
-      id: "test-1",
-      front: "Test Front 1",
-      back: "Test Back 1",
-    },
-  ],
-}));
-
-vi.mock("../../src/data/chinese_essentials_in_communication_1.json", () => ({
-  default: [
-    {
-      id: "ce1-1",
-      front: "Hello",
-      back: "Nǐ hǎo",
-    },
-  ],
-}));
-
-vi.mock("../../src/data/chinese_essentials_in_communication_2.json", () => ({
-  default: [
-    {
-      id: "ce2-1",
-      front: "Goodbye",
-      back: "Zàijiàn",
-    },
-  ],
+// Mock card set loader for fetch-based loading
+vi.mock("../../src/utils/cardSetLoader", () => ({
+  loadCardSetDataWithFetch: vi.fn(),
 }));
 
 // Mock Firebase to avoid real authentication
@@ -71,6 +46,40 @@ describe("FlashcardContext Card Set Persistence", () => {
     // Clear localStorage before each test
     localStorage.clear();
     vi.clearAllMocks();
+
+    // Mock card set loader for different files
+    (cardSetLoader.loadCardSetDataWithFetch as any).mockImplementation(
+      (filename: string) => {
+        switch (filename) {
+          case "flashcards.json":
+            return Promise.resolve([
+              {
+                id: "test-1",
+                front: "Test Front 1",
+                back: "Test Back 1",
+              },
+            ]);
+          case "chinese_essentials_in_communication_1.json":
+            return Promise.resolve([
+              {
+                id: "ce1-1",
+                front: "Hello",
+                back: "Nǐ hǎo",
+              },
+            ]);
+          case "chinese_essentials_in_communication_2.json":
+            return Promise.resolve([
+              {
+                id: "ce2-1",
+                front: "Goodbye",
+                back: "Zàijiàn",
+              },
+            ]);
+          default:
+            return Promise.reject(new Error(`File not found: ${filename}`));
+        }
+      }
+    );
   });
 
   const renderHookWithProvider = <T,>(hook: () => T) => {

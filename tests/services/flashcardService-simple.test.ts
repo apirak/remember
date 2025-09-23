@@ -5,6 +5,7 @@ import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { FlashcardService } from "../../src/services/flashcardService";
 import * as firestoreUtils from "../../src/utils/firestore";
 import * as authUtils from "../../src/utils/auth";
+import * as cardSetLoader from "../../src/utils/cardSetLoader";
 
 // Mock Firebase Auth
 vi.mock("../../src/utils/auth", () => ({
@@ -17,23 +18,9 @@ vi.mock("../../src/utils/firestore", () => ({
   saveFlashcardsBatch: vi.fn(),
 }));
 
-// Mock business chinese data
-vi.mock("../../src/data/business_chinese.json", () => ({
-  default: [
-    {
-      id: "biz-001",
-      front: {
-        icon: "💼",
-        title: "商务",
-        description: "Business",
-      },
-      back: {
-        icon: "📊",
-        title: "shāngwù",
-        description: "Commercial activities",
-      },
-    },
-  ],
+// Mock card set loader for fetch-based loading
+vi.mock("../../src/utils/cardSetLoader", () => ({
+  loadCardSetDataWithFetch: vi.fn(),
 }));
 
 describe("FlashcardService - Simple Card Set Logic", () => {
@@ -45,6 +32,23 @@ describe("FlashcardService - Simple Card Set Logic", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     (authUtils.getCurrentUser as any).mockReturnValue(mockUser);
+
+    // Mock card set loader to return test data
+    (cardSetLoader.loadCardSetDataWithFetch as any).mockResolvedValue([
+      {
+        id: "biz-001",
+        front: {
+          icon: "💼",
+          title: "商务",
+          description: "Business",
+        },
+        back: {
+          icon: "📊",
+          title: "shāngwù",
+          description: "Commercial activities",
+        },
+      },
+    ]);
   });
 
   afterEach(() => {
@@ -178,6 +182,11 @@ describe("FlashcardService - Simple Card Set Logic", () => {
       success: true,
       data: [],
     });
+
+    // Mock: JSON loading fails
+    (cardSetLoader.loadCardSetDataWithFetch as any).mockRejectedValue(
+      new Error("File not found")
+    );
 
     const result = await FlashcardService.loadCardSetData(
       "invalid_set",
