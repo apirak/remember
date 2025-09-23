@@ -1,0 +1,30 @@
+---
+export interface Props {
+  emoji: string;
+  size?: number;
+  class?: string;
+}
+
+const { emoji, size = 24, class: className = "" } = Astro.props;
+
+// Convert emoji to unicode codepoint for twemoji URL
+function emojiToCodepoints(emoji: string): string {
+  // Get the codepoints of the emoji
+  const codePoints = [...emoji].map(char => 
+    char.codePointAt(0)?.toString(16).toLowerCase().padStart(4, '0') || ''
+  ).filter(code => code !== '');
+  
+  return codePoints.join('-');
+}
+
+const codepoints = emojiToCodepoints(emoji);
+const twemojiUrl = `https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/${codepoints}.svg`;
+---
+
+<img 
+  src={twemojiUrl}
+  alt={emoji}
+  class={`inline-block ${className}`}
+  style={`width: ${size}px; height: ${size}px; vertical-align: middle;`}
+  loading="lazy"
+/>

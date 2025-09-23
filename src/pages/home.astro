@@ -1,5 +1,6 @@
 ---
-import Layout from '../layouts/Layout-web.astro'; 
+import Layout from '../layouts/Layout-web.astro';
+import EmojiSVG from '../components/EmojiSVG.astro';
 ---
 <Layout title="Remember - Master Any Memory Like a Pro">
   <main class="overflow-auto min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
@@ -18,7 +19,7 @@ import Layout from '../layouts/Layout-web.astro';
           </h1>
           <p class="text-lg sm:text-xl text-gray-700 font-medium">
             Powered by <strong>Spaced Repetition</strong> &amp; <strong>SM-2 Algorithm</strong><br/>
-            <span class="text-base text-gray-500">The same science used by memory champions ⭐</span>
+            <span class="text-base text-gray-500">The same science used by memory champions <EmojiSVG emoji="⭐" size={20} /></span>
           </p>
           <a href="/"
              class="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl hover:from-blue-700 hover:to-purple-700 transform hover:scale-105 transition">
@@ -47,11 +48,11 @@ import Layout from '../layouts/Layout-web.astro';
     <section class="px-6 lg:px-12 py-16 bg-white/50">
       <div class="max-w-4xl mx-auto text-center space-y-8">
         <h2 class="text-3xl font-bold text-gray-800">
-          Born from a Real Dad's Problem 👨‍👧
+          Born from a Real Dad's Problem <EmojiSVG emoji="👨‍👧" size={32} />
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
           <div class="p-6 bg-red-50 rounded-xl border border-red-100">
-            <h3 class="text-lg font-semibold text-red-700 mb-3">😤 Old Problem</h3>
+            <h3 class="text-lg font-semibold text-red-700 mb-3"><EmojiSVG emoji="😤" size={20} /> Old Problem</h3>
             <ul class="space-y-2 text-gray-700">
               <li>• Cramming hundreds of vocabulary words</li>
               <li>• Only remembering a few after all that effort</li>
@@ -61,7 +62,7 @@ import Layout from '../layouts/Layout-web.astro';
             </ul>
           </div>
           <div class="p-6 bg-green-50 rounded-xl border border-green-100">
-            <h3 class="text-lg font-semibold text-green-700 mb-3">✨ Smart Solution</h3>
+            <h3 class="text-lg font-semibold text-green-700 mb-3"><EmojiSVG emoji="✨" size={20} /> Smart Solution</h3>
             <ul class="space-y-2 text-gray-700">
               <li>• Review at the perfect <strong>"about to forget"</strong> moment</li>
               <li>• SM-2 algorithm calculates timing automatically</li>
@@ -77,11 +78,11 @@ import Layout from '../layouts/Layout-web.astro';
     <section class="px-6 lg:px-12 py-16">
       <div class="max-w-5xl mx-auto text-center space-y-12">
         <h2 class="text-3xl font-bold text-gray-800">
-          How Does the SM-2 Algorithm Work? 🤖
+          How Does the SM-2 Algorithm Work? 
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div class="p-6 bg-white rounded-xl shadow-sm border space-y-4">
-            <div class="text-4xl">📝</div>
+            <div class="text-4xl flex justify-center"><EmojiSVG emoji="📝" size={48} /></div>
             <h3 class="text-lg font-semibold text-gray-800">1. Rate Yourself</h3>
             <p class="text-sm text-gray-600">
               Easy = 5 points<br/>
@@ -90,7 +91,7 @@ import Layout from '../layouts/Layout-web.astro';
             </p>
           </div>
           <div class="p-6 bg-white rounded-xl shadow-sm border space-y-4">
-            <div class="text-4xl">🧮</div>
+            <div class="text-4xl flex justify-center"><EmojiSVG emoji="🧮" size={48} /></div>
             <h3 class="text-lg font-semibold text-gray-800">2. Calculate Timing</h3>
             <p class="text-sm text-gray-600">
               Hard words = Review more often<br/>
@@ -99,7 +100,7 @@ import Layout from '../layouts/Layout-web.astro';
             </p>
           </div>
           <div class="p-6 bg-white rounded-xl shadow-sm border space-y-4">
-            <div class="text-4xl">🎯</div>
+            <div class="text-4xl flex justify-center"><EmojiSVG emoji="🎯" size={48} /></div>
             <h3 class="text-lg font-semibold text-gray-800">3. Perfect Review</h3>
             <p class="text-sm text-gray-600">
               Review when you're <strong>"about to forget"</strong><br/>
@@ -115,11 +116,11 @@ import Layout from '../layouts/Layout-web.astro';
     <section class="px-6 lg:px-12 py-16 bg-white/50">
       <div class="max-w-6xl mx-auto text-center space-y-12">
         <h2 class="text-3xl font-bold text-gray-800">
-          Why Does It Make Learning Easier? 💪
+          Why Does It Make Learning Easier? <EmojiSVG emoji="💪" size={32} />
         </h2>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
           <div class="p-8 bg-white rounded-xl shadow-sm border space-y-4">
-            <div class="text-5xl">🧠</div>
+            <div class="text-5xl flex justify-center"><EmojiSVG emoji="🧠" size={60} /></div>
             <h3 class="text-xl font-semibold text-gray-800">Remember Longer</h3>
             <p class="text-gray-600">
               <strong>Spaced Repetition</strong> technique backed by science<br/>
@@ -127,7 +128,7 @@ import Layout from '../layouts/Layout-web.astro';
             </p>
           </div>
           <div class="p-8 bg-white rounded-xl shadow-sm border space-y-4">
-            <div class="text-5xl">⚡</div>
+            <div class="text-5xl flex justify-center"><EmojiSVG emoji="⚡" size={60} /></div>
             <h3 class="text-xl font-semibold text-gray-800">Save Time</h3>
             <p class="text-gray-600">
               No need to review daily<br/>Just review when you're <strong>"about to forget"</strong><br/>
@@ -135,7 +136,7 @@ import Layout from '../layouts/Layout-web.astro';
             </p>
           </div>
           <div class="p-8 bg-white rounded-xl shadow-sm border space-y-4">
-            <div class="text-5xl">🎯</div>
+            <div class="text-5xl flex justify-center"><EmojiSVG emoji="🎯" size={60} /></div>
             <h3 class="text-xl font-semibold text-gray-800">Kid-Friendly</h3>
             <p class="text-gray-600">
               Designed for children to use<br/>
@@ -147,7 +148,7 @@ import Layout from '../layouts/Layout-web.astro';
         
         <!-- Real Results -->
         <div class="mt-12 p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl border">
-          <h3 class="text-lg font-semibold text-gray-800 mb-4">Real Results 📊</h3>
+          <h3 class="text-lg font-semibold text-gray-800 mb-4">Real Results <EmojiSVG emoji="📊" size={24} /></h3>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
             <div class="text-center">
               <div class="text-2xl font-bold text-blue-600">5x</div>
@@ -165,7 +166,9 @@ import Layout from '../layouts/Layout-web.astro';
         </div>
 
         <p class="text-gray-500 text-sm mt-8">
-          💝 Created with love by a dad who wanted effective learning for his child<br/>
+          Created with 
+          <EmojiSVG emoji="💝" size={20} /> 
+          by a dad who wanted effective learning for his child<br/>
           <a href="https://medium.com/p/f2875a0f8277" target="_blank" rel="noopener noreferrer"
              class="text-blue-600 hover:text-blue-700 underline">
             Read the full story →
