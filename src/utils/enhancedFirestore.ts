@@ -2,7 +2,7 @@
 // Handles CRUD operations with loading states, error handling, and automatic seeding
 
 import {
-  getUserFlashcards,
+  getUserCardSets,
   saveFlashcardsBatch,
   updateFlashcardProgress,
   createUserProfile,
@@ -65,21 +65,22 @@ export class EnhancedFirestoreService {
       this.setLoading("fetchingCards", true);
       this.setSyncStatus("syncing");
 
-      // Check if user already has cards
-      const existingCardsResult = await getUserFlashcards();
+      // Check if user already has any card sets
+      const existingCardSetsResult = await getUserCardSets();
 
       if (
-        existingCardsResult.success &&
-        existingCardsResult.data &&
-        existingCardsResult.data.length > 0
+        existingCardSetsResult.success &&
+        existingCardSetsResult.data &&
+        existingCardSetsResult.data.length > 0
       ) {
-        // User already has cards, no seeding needed
+        // User already has card sets, no seeding needed
         console.log(
-          `User ${currentUser.email} already has ${existingCardsResult.data.length} cards`
+          `User ${currentUser.email} already has ${existingCardSetsResult.data.length} card sets`
         );
         this.setLoading("fetchingCards", false);
         this.setSyncStatus("idle");
-        return existingCardsResult;
+        // Return empty since we're just checking for seeding
+        return { success: true, data: [] };
       }
 
       // Check if user should be seeded
@@ -98,8 +99,10 @@ export class EnhancedFirestoreService {
           seedCardCount: seedCards.length,
         });
 
-        // Batch create seed cards
-        const seedResult = await saveFlashcardsBatch(seedCards);
+        // Batch create seed cards - use the cardSetId from the first card or default
+        const cardSetId =
+          seedCards.length > 0 ? seedCards[0].cardSetId : "default";
+        const seedResult = await saveFlashcardsBatch(seedCards, cardSetId);
 
         if (seedResult.success) {
           console.log(
@@ -132,8 +135,8 @@ export class EnhancedFirestoreService {
     }
   }
 
-  // Load user cards with automatic seeding
-  async loadUserCards(): Promise<FirestoreResult<Flashcard[]>> {
+  // Load user card sets with automatic seeding
+  async loadUserCards(): Promise<FirestoreResult<any[]>> {
     try {
       const currentUser = getCurrentUser();
       if (!currentUser) {
@@ -153,24 +156,26 @@ export class EnhancedFirestoreService {
         return seedResult;
       }
 
-      // If seeding happened, return the seeded cards
+      // If seeding happened, return success with empty data since we're checking card sets
       if (seedResult.data && seedResult.data.length > 0) {
-        return seedResult;
+        this.setLoading("fetchingCards", false);
+        this.setSyncStatus("idle");
+        return { success: true, data: [] };
       }
 
-      // Otherwise, load existing cards
-      const cardsResult = await getUserFlashcards();
+      // Otherwise, load existing card sets
+      const cardSetsResult = await getUserCardSets();
 
       this.setLoading("fetchingCards", false);
 
-      if (cardsResult.success) {
+      if (cardSetsResult.success) {
         this.setSyncStatus("idle");
       } else {
         this.setSyncStatus("error");
-        this.setError(cardsResult.error || "Failed to load cards", true);
+        this.setError(cardSetsResult.error || "Failed to load card sets", true);
       }
 
-      return cardsResult;
+      return cardSetsResult;
     } catch (error) {
       console.error("Error loading user cards:", error);
       this.setError(
@@ -209,7 +214,11 @@ export class EnhancedFirestoreService {
         isNew: card.isNew,
       };
 
-      const result = await updateFlashcardProgress(card.id, progressData);
+      const result = await updateFlashcardProgress(
+        card.id,
+        card.cardSetId,
+        progressData
+      );
 
       this.setLoading("savingProgress", false);
 
