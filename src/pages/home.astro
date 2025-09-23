@@ -6,11 +6,11 @@ import EmojiSVG from '../components/EmojiSVG.astro';
   <main class="overflow-auto min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
     
     <!-- Hero -->
-    <section class="flex items-center justify-center min-h-screen px-6 lg:px-12">
+    <section class="flex items-center justify-center min-h-screen lg:min-h-[70vh] xl:min-h-[60vh] px-6 lg:px-12">
       <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         
         <!-- Text -->
-        <div class="text-center lg:text-left space-y-6">
+        <div class="text-center lg:text-left space-y-6 my-16 md:my-0">
           <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-800 leading-tight">
             Master Any Memory
             <span class="pt-2 block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
@@ -52,9 +52,9 @@ import EmojiSVG from '../components/EmojiSVG.astro';
         </h2>
         <div class="p-8 rounded-xl border shadow-sm bg-gradient-to-br from-blue-50 via-white to-purple-50 text-left">
           <p class="text-lg text-gray-700 font-medium leading-relaxed">
-            ตอนทำ Flashcard ให้ลูกเพื่อจำภาษาจีนไปสอบ ผมพบว่ามันเหนื่อยมากทั้งลูกและพ่อ 😅 พอจะทบทวนทีก็ต้องนั่งดูการ์ดทั้งหมด ทั้งที่จริงๆ แล้วควรจะทวนแค่คำที่จำไม่ได้ ส่วนคำที่จำได้แล้วก็มาเป็นระยะๆ เท่านั้น ซึ่งการทำให้ออกมาดีมันเหนื่อย
+            ตอนทำ Flashcard ภาษาจีนให้ลูก ผมพบว่าตอนทำการ์ดมันก็สนุกดีนะ 😅 แต่พอจะทบทวนทีก็ต้องนั่งดูการ์ดทั้งหมด ทั้งที่จริงๆ เราควรจะทวนแค่คำที่จำไม่ค่อยได้ก็พอ ส่วนคำที่จำได้แล้วก็มาเป็นระยะๆ เท่านั้น แต่การจะทำแบบนั้นเองมันยากมาก 
             <br/><br/>
-            เลยคิดว่าทำโปรแกรมมาช่วยดีกว่า ผมใช้หลักการทางวิทยาศาสตร์ที่เรียกว่า <strong>Spaced Repetition</strong> และ <strong>SM-2 Algorithm</strong> มาช่วยคำนวณช่วงเวลาที่เหมาะสมที่สุดในการทบทวนแต่ละคำ ทำให้เราไม่ต้องเสียเวลาไปกับการทวนในสิ่งที่เราจำได้แล้ว เรียนรู้ได้อย่างประหยัดเวลาสุด และจำได้แม่นด้วย! ✨
+            เลยคิดว่าทำโปรแกรมมาช่วยซะเลยดีกว่า ผมใช้หลักการทางวิทยาศาสตร์ที่เรียกว่า <strong>Spaced Repetition</strong> และ <strong>SM-2 Algorithm</strong> มาช่วยคำนวณช่วงเวลาที่เหมาะสมที่สุดในการทบทวนแต่ละคำ ทำให้เราไม่ต้องเสียเวลาไปกับการทวนในสิ่งที่เราจำได้แล้ว เรียนรู้ได้อย่างประหยัดเวลาสุด และจำได้แม่นด้วย! ✨
           </p>
         </div>
       </div>
@@ -109,9 +109,9 @@ import EmojiSVG from '../components/EmojiSVG.astro';
                     <div class="text-5xl flex justify-center"><EmojiSVG emoji="🧠" size={60} /></div>
                     <h3 class="text-xl font-semibold text-gray-800">Remember Longer</h3>
                     <p class="text-gray-600">
-                      <strong>Spaced Repetition</strong> technique backed by science<br/>
+                      <strong>Spaced Repetition</strong> technique backed by science
                       <a href="https://www.scientificamerican.com/article/how-to-become-a-memory-master/"
-                        class="inline-block text-sm text-blue-600 hover:text-blue-500 underline"
+                        class="text-blue-600 hover:text-blue-500 underline"
                         target="_blank" rel="noopener noreferrer">
                             Like muscle training - the more you train, the stronger it gets
                       </a>
@@ -121,9 +121,9 @@ import EmojiSVG from '../components/EmojiSVG.astro';
                     <div class="text-5xl flex justify-center"><EmojiSVG emoji="⚡" size={60} /></div>
                     <h3 class="text-xl font-semibold text-gray-800">Save Time</h3>
                     <p class="text-gray-600">
-                        No need to review daily<br/>Just review when you're <strong>"about to forget"</strong><br/>
+                        No need to review daily<br/>Just review when you're <strong>"about to forget"</strong>
                         <a href="https://www.supermemo.com/en/archives1990-2003/english/sm2"
-                          class="inline-block text-sm text-blue-600 hover:text-blue-500 underline"
+                          class="text-blue-600 hover:text-blue-500 underline"
                           target="_blank" rel="noopener noreferrer">
                               Less time, better results
                         </a>
@@ -134,25 +134,25 @@ import EmojiSVG from '../components/EmojiSVG.astro';
                     <h3 class="text-xl font-semibold text-gray-800">Kid-Friendly</h3>
                     <p class="text-gray-600">
                         Designed for children to use<br/>
-                        <strong>Just rate yourself</strong> - AI handles the rest<br/>
-                        <span class="text-sm text-blue-600">Simple, not stressful</span>
+                        <strong>Just rate yourself</strong> - AI handles the rest.
+                        <span class="text-blue-600">Simple, not stressful</span>
                     </p>
                     </div>
             </div>
             
             <div class="mt-12 p-6 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl border">
                 <h3 class="text-lg font-semibold text-gray-800 mb-4">Real Results</h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+                <div class="grid grid-cols-3 gap-4 text-sm">
                     <div class="text-center">
-                        <div class="text-2xl font-bold text-blue-600">5x</div>
+                        <div class="text-2xl md:text-4xl font-bold text-blue-600">5x</div>
                         <div class="text-gray-600">Longer retention</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-2xl font-bold text-green-600">60%</div>
+                        <div class="text-2xl md:text-4xl font-bold text-green-600">60%</div>
                         <div class="text-gray-600">Time saved</div>
                     </div>
                     <div class="text-center">
-                        <div class="text-2xl font-bold text-purple-600">90%+</div>
+                        <div class="text-2xl md:text-4xl font-bold text-purple-600">90%+</div>
                         <div class="text-gray-600">Success rate</div>
                     </div>
                 </div>
