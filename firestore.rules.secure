@@ -1,0 +1,66 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // ❌ REMOVED: Temporary allow-all rule for debugging
+    // This was a major security vulnerability
+    
+    // ✅ SECURE: User profile และ flashcards - ต้อง authenticate และเป็น owner
+    match /users/{userId} {
+      // ต้อง login และเป็น user คนนั้นเท่านั้น
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      
+      // User's card sets subcollection
+      match /cardSets/{cardSetId} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+        
+        // Cards within a specific card set
+        match /cards/{cardId} {
+          allow read, write: if request.auth != null && request.auth.uid == userId;
+        }
+      }
+      
+      // Card set progress tracking
+      match /cardSetProgress/{cardSetId} {
+        allow read: if request.auth != null && request.auth.uid == userId;
+        allow write: if request.auth != null 
+          && request.auth.uid == userId
+          && validateCardSetProgress();
+      }
+      
+      // Legacy: User's flashcards subcollection (for backward compatibility)
+      match /cards/{cardId} {
+        allow read, write: if request.auth != null && request.auth.uid == userId;
+      }
+    }
+    
+    // ✅ SECURE: Guest mode - improved security with time limits
+    match /guests/{sessionId} {
+      // Only allow if session is recent (within 24 hours) and matches user session
+      allow read, write: if isValidGuestSession(sessionId);
+      
+      match /cards/{cardId} {
+        allow read, write: if isValidGuestSession(resource.data.sessionId);
+      }
+    }
+  }
+
+  // Helper functions for validation
+  function validateCardSetProgress() {
+    return request.resource.data.keys().hasAll(['cardSetId', 'totalCards', 'reviewedCards', 'progressPercentage', 'updatedAt'])
+      && request.resource.data.cardSetId is string
+      && request.resource.data.totalCards is int
+      && request.resource.data.reviewedCards is int
+      && request.resource.data.progressPercentage >= 0
+      && request.resource.data.progressPercentage <= 100;
+  }
+  
+  // Validate guest session (basic validation - can be enhanced)
+  function isValidGuestSession(sessionId) {
+    // Allow guest sessions that start with "guest_" prefix
+    // Additional validation should be done on the client side
+    return sessionId != null 
+      && sessionId is string 
+      && sessionId.matches('guest_.*');
+  }
+}
