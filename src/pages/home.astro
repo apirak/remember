@@ -3,13 +3,15 @@ import Layout from '../layouts/Layout-web.astro';
 import EmojiSVG from '../components/EmojiSVG.astro';
 ---
 
-<Layout title="Remember - Master Any Memory Like a Pro">
+<style></style>
+
+<Layout title="Remember - Learn Smarter, Not Harder">
   <main
     class="overflow-auto min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50"
   >
-    <!-- Hero -->
+    <!-- Hero Section -->
     <section
-      class="flex items-center justify-center min-h-screen lg:min-h-[70vh] xl:min-h-[60vh] px-6 lg:px-12"
+      class="flex items-center justify-center min-h-screen 2xl:min-h-[70vh] lg:px-12"
     >
       <div
         class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
@@ -19,35 +21,29 @@ import EmojiSVG from '../components/EmojiSVG.astro';
           <h1
             class="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-800 leading-tight"
           >
-            Master Any Memory
+            Learn Smarter, Not Harder
             <span
-              class="pt-2 block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+              class="py-2 block bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
             >
-              Like a Pro! 🚀
+              Stop Wasting Time 🚀
             </span>
           </h1>
           <p class="text-lg sm:text-xl text-gray-700 font-medium">
-            Powered by <strong>Spaced Repetition</strong> &amp; <strong
-              >SM-2 Algorithm</strong
-            ><br />
-            <span class="text-base text-gray-500"
-              >The same science used by memory champions <EmojiSVG
-                emoji="⭐"
-                size={20}
-              /></span
-            >
+            Struggling to remember vocabulary? Our AI-powered SM-2 algorithm
+            ensures you review the right words at the right time. No more
+            guesswork, just smarter learning.
           </p>
           <a
             href="/"
             class="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg hover:shadow-xl hover:from-blue-700 hover:to-purple-700 transform hover:scale-105 transition"
           >
-            🚀 Start Learning
+            🚀 Start Learning Now
           </a>
           <p class="text-gray-500 text-sm">
-            Remember your progress • All devices supported
+            Save time • Learn faster • Remember longer
           </p>
         </div>
-        <!-- Screenshot -->
+        <!-- Visual -->
         <div class="relative max-w-lg mx-auto">
           <img
             src="/screenshot.png"
@@ -57,12 +53,12 @@ import EmojiSVG from '../components/EmojiSVG.astro';
           <div
             class="absolute -top-3 -right-3 bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium animate-bounce"
           >
-            Nailed it! 🎉
+            Smarter Learning 🎉
           </div>
           <div
             class="absolute -bottom-3 -left-3 bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm font-medium animate-pulse"
           >
-            SM-2 Algorithm
+            AI-Powered
           </div>
         </div>
       </div>
@@ -72,27 +68,79 @@ import EmojiSVG from '../components/EmojiSVG.astro';
     <section class="px-6 lg:px-12 py-8 bg-white/50">
       <div class="max-w-4xl mx-auto text-center space-y-8">
         <h2 class="text-3xl font-bold text-gray-800">
-          จากปัญหาจริงของคนเป็นพ่อ สู่เครื่องมือที่ช่วยให้ลูกจำได้ดีขึ้น 💪
+          The Problem: Wasting Time on Vocabulary You Already Know 💡
         </h2>
         <div
           class="p-8 rounded-xl border shadow-sm bg-gradient-to-br from-blue-50 via-white to-purple-50 text-left"
         >
-          <p class="text-lg text-gray-700 font-medium leading-relaxed">
-            ตอนทำ Flashcard ภาษาจีนให้ลูก ผมพบว่าตอนทำการ์ดมันก็สนุกดีนะ 😅
-            แต่พอจะทบทวนทีก็ต้องนั่งดูการ์ดทั้งหมด ทั้งที่จริงๆ
-            เราควรจะทวนแค่คำที่จำไม่ค่อยได้ก็พอ ส่วนคำที่จำได้แล้วก็มาเป็นระยะๆ
-            เท่านั้น แต่การจะทำแบบนั้นเองมันยากมาก
+          <p class="story text-lg text-gray-700 font-medium leading-relaxed">
+            You have 100 vocabulary words to learn. <b>Day 1:</b> you review 20 words.
+            Some stick, some don’t. <b>Day 2:</b> you should review the ones you
+            struggled with, but which ones were those? By <b>week 2</b>, you’re
+            lost - do you review all 100 again?
             <br /><br />
-            เลยคิดว่าทำโปรแกรมมาช่วยซะเลยดีกว่า ผมใช้หลักการทางวิทยาศาสตร์ที่เรียกว่า
-            <strong>Spaced Repetition</strong> และ <strong
-              >SM-2 Algorithm</strong
-            > มาช่วยคำนวณช่วงเวลาที่เหมาะสมที่สุดในการทบทวนแต่ละคำ ทำให้เราไม่ต้องเสียเวลาไปกับการทวนในสิ่งที่เราจำได้แล้ว
-            เรียนรู้ได้อย่างประหยัดเวลาสุด และจำได้แม่นด้วย! ✨
+            With <strong>Remember</strong>, our SM-2 algorithm tracks your
+            progress. Hard words? Review tomorrow. Easy words? Review next week.
+            You’ll never waste time on words you already know, and you’ll never
+            forget the ones you’re learning.
           </p>
         </div>
       </div>
     </section>
 
+    <!-- How It Works -->
+    <section class="px-6 lg:px-12 py-8 md:py-16 bg-white/50">
+      <div
+        class="max-w-6xl mx-auto mt-12 px-6 pt-1 pb-9 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl"
+      >
+        <h2 class="text-3xl font-semibold text-gray-800 my-8 text-center">
+          How It Works <EmojiSVG emoji="⚙️" size={24} />
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="p-8 bg-white rounded-xl shadow-sm border space-y-4">
+            <div class="text-5xl flex justify-center">
+              <EmojiSVG emoji="📝" size={60} />
+            </div>
+            <h4 class="text-xl font-semibold text-gray-800">
+              1. Rate Yourself
+            </h4>
+            <p class="text-gray-600">
+              Easy = 5 points<br />
+              Completely forgot = 1 point<br />
+              <span class="text-blue-600">AI learns your difficulty level</span>
+            </p>
+          </div>
+          <div class="p-8 bg-white rounded-xl shadow-sm border space-y-4">
+            <div class="text-5xl flex justify-center">
+              <EmojiSVG emoji="🧮" size={60} />
+            </div>
+            <h4 class="text-xl font-semibold text-gray-800">
+              2. Calculate Timing
+            </h4>
+            <p class="text-gray-600">
+              Hard words = Review more often<br />
+              Easy words = Review less often<br />
+              <span class="text-blue-600">Each word has its own schedule</span>
+            </p>
+          </div>
+          <div class="p-8 bg-white rounded-xl shadow-sm border space-y-4">
+            <div class="text-5xl flex justify-center">
+              <EmojiSVG emoji="🎯" size={60} />
+            </div>
+            <h4 class="text-xl font-semibold text-gray-800">
+              3. Perfect Review
+            </h4>
+            <p class="text-gray-600">
+              Review when you’re <strong>"about to forget"</strong>
+              Not too early, not too late
+              <span class="text-blue-600">Save time, remember longer</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Available Decks -->
     <section class="px-6 lg:px-12 py-8 md:py-16 bg-white/50">
       <div
         class="max-w-6xl mx-auto mt-12 px-6 pt-1 pb-9 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl"
@@ -250,63 +298,14 @@ import EmojiSVG from '../components/EmojiSVG.astro';
       </div>
     </section>
 
-    <!-- Why Does It Make Learning Easier -->
+    <!-- Benefits -->
     <section class="px-6 lg:px-12 pt-16 mb-16 bg-white/50">
       <div class="max-w-6xl mx-auto text-center space-y-20">
         <div>
           <h2 class="text-3xl font-bold text-gray-800 mb-12">
-            Why Does It Make Learning Easier? <EmojiSVG emoji="💪" size={32} />
+            Why Choose Remember? <EmojiSVG emoji="💪" size={32} />
           </h2>
 
-          <div class="mb-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div class="p-8 bg-white rounded-xl shadow-sm border space-y-4">
-                <div class="text-5xl flex justify-center">
-                  <EmojiSVG emoji="📝" size={60} />
-                </div>
-                <h4 class="text-xl font-semibold text-gray-800">
-                  1. Rate Yourself
-                </h4>
-                <p class="text-gray-600">
-                  Easy = 5 points<br />
-                  Completely forgot = 1 point<br />
-                  <span class="text-blue-600"
-                    >AI learns your difficulty level</span
-                  >
-                </p>
-              </div>
-              <div class="p-8 bg-white rounded-xl shadow-sm border space-y-4">
-                <div class="text-5xl flex justify-center">
-                  <EmojiSVG emoji="🧮" size={60} />
-                </div>
-                <h4 class="text-xl font-semibold text-gray-800">
-                  2. Calculate Timing
-                </h4>
-                <p class="text-gray-600">
-                  Hard words = Review more often<br />
-                  Easy words = Review less often<br />
-                  <span class="text-blue-600"
-                    >Each word has its own schedule</span
-                  >
-                </p>
-              </div>
-              <div class="p-8 bg-white rounded-xl shadow-sm border space-y-4">
-                <div class="text-5xl flex justify-center">
-                  <EmojiSVG emoji="🎯" size={60} />
-                </div>
-                <h4 class="text-xl font-semibold text-gray-800">
-                  3. Perfect Review
-                </h4>
-                <p class="text-gray-600">
-                  Review when you're <strong>"about to forget"</strong>
-                  Not too early, not too late
-                  <span class="text-blue-600">Save time, remember longer</span>
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Benefits -->
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
             <div class="p-8 bg-white rounded-xl shadow-sm border space-y-4">
               <div class="text-5xl flex justify-center">
@@ -334,7 +333,7 @@ import EmojiSVG from '../components/EmojiSVG.astro';
               </div>
               <h4 class="text-xl font-semibold text-gray-800">Save Time</h4>
               <p class="text-gray-600">
-                No need to review daily<br />Just review when you're <strong
+                No need to review daily<br />Just review when you’re <strong
                   >"about to forget"</strong
                 >
                 <a
