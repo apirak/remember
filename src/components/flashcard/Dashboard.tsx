@@ -1,15 +1,15 @@
 // Dashboard component - main landing screen with statistics and start review button
 // Shows progress stats and provides navigation to begin reviewing flashcards
 
-import React from "react";
+import React from 'react';
 import {
   MAX_REVIEW_CARDS,
   useFlashcard,
-} from "../../contexts/FlashcardContext";
-import LoginButton from "../auth/LoginButton";
-import EmojiText from "../EmojiSVG";
+} from '../../contexts/FlashcardContext';
+import LoginButton from '../auth/LoginButton';
+import EmojiText from '../EmojiSVG';
 
-type AppRoute = "dashboard" | "review" | "complete" | "card-sets";
+type AppRoute = 'dashboard' | 'review' | 'complete' | 'card-sets';
 
 interface DashboardProps {
   onNavigate: (route: AppRoute) => void;
@@ -20,22 +20,23 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
     useFlashcard();
 
   const handleStartReview = () => {
-    console.log("Dashboard: Start Review button clicked", {
+    console.log('Dashboard: Start Review button clicked', {
       dueCards: state.stats.dueCards,
+      isLoading: state.isLoading,
     });
-    if (state.stats.dueCards > 0) {
+    if (state.stats.dueCards > 0 && !state.isLoading) {
       startReviewSession();
-      onNavigate("review");
+      onNavigate('review');
     }
   };
 
   const handleResetProgress = async () => {
-    console.log("Dashboard: Reset Progress button clicked");
+    console.log('Dashboard: Reset Progress button clicked');
     try {
       await resetTodayProgress();
-      console.log("Dashboard: Reset Progress completed successfully");
+      console.log('Dashboard: Reset Progress completed successfully');
     } catch (error) {
-      console.error("Failed to reset progress:", error);
+      console.error('Failed to reset progress:', error);
       // You could add user-facing error handling here if needed
     }
   };
@@ -65,13 +66,13 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
               <div className="flex items-center">
                 <div className="text-red-500 mr-2">
                   {/* Show different icons based on error type */}
-                  {state.error.code.includes("CARD_SET")
-                    ? "📚"
-                    : state.error.code.includes("NETWORK")
-                    ? "🌐"
-                    : state.error.code.includes("FIRESTORE")
-                    ? "☁️"
-                    : "⚠️"}
+                  {state.error.code.includes('CARD_SET')
+                    ? '📚'
+                    : state.error.code.includes('NETWORK')
+                      ? '🌐'
+                      : state.error.code.includes('FIRESTORE')
+                        ? '☁️'
+                        : '⚠️'}
                 </div>
                 <div className="flex-1">
                   <p className="text-sm text-red-700 font-medium">
@@ -102,7 +103,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                       clearError();
                       // Retry loading the current card set
                       if (state.currentCardSet?.dataFile) {
-                        console.log("Dashboard: Retrying card set load");
+                        console.log('Dashboard: Retrying card set load');
                         // The loadCardSetData function will be triggered by the useEffect
                         // when currentCardSet changes or when manually called
                       }
@@ -121,8 +122,8 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             {/* All Sets Navigation Button - Top Left */}
             <button
               onClick={() => {
-                console.log("Dashboard: All Sets button clicked");
-                onNavigate("card-sets");
+                console.log('Dashboard: All Sets button clicked');
+                onNavigate('card-sets');
               }}
               className="flex py-1 px-2 items-center text-sm font-rounded text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-colors duration-200"
             >
@@ -133,7 +134,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             {/* Share Button - Top Right */}
             <button
               onClick={(event) => {
-                const cardSetName = state.currentCardSet?.name || "Flashcards";
+                const cardSetName = state.currentCardSet?.name || 'Flashcards';
                 const cardSetId = state.currentCardSet?.id;
 
                 // Build the shareable URL with card set path
@@ -147,7 +148,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
 
                 // Check if it's a desktop/laptop (screen width > 768px or no touch support)
                 const isDesktop =
-                  window.innerWidth > 768 || !("ontouchstart" in window);
+                  window.innerWidth > 768 || !('ontouchstart' in window);
 
                 if (navigator.share && !isDesktop) {
                   // Use native share API only on mobile/tablet
@@ -158,7 +159,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                       url: shareUrl,
                     })
                     .catch((error) => {
-                      console.log("Error sharing:", error);
+                      console.log('Error sharing:', error);
                     });
                 } else {
                   // Always use clipboard copy on desktop, or as fallback
@@ -168,13 +169,13 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                       // Show a temporary notification
                       const button = event.target as HTMLElement;
                       const originalText = button.textContent;
-                      button.textContent = "✓ Copied!";
+                      button.textContent = '✓ Copied!';
                       setTimeout(() => {
                         button.textContent = originalText;
                       }, 2000);
                     })
                     .catch((error) => {
-                      console.log("Error copying to clipboard:", error);
+                      console.log('Error copying to clipboard:', error);
                     });
                 }
               }}
@@ -189,10 +190,10 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
           {/* Header */}
           <div className="text-center mb-5 mt-2">
             <EmojiText size={64} className="p-4">
-              {state.currentCardSet?.cover || "🎓"}
+              {state.currentCardSet?.cover || '🎓'}
             </EmojiText>
             <h1 className="text-3xl font-child text-gray-600 mb-2">
-              {state.currentCardSet?.name || "Flashcards"}
+              {state.currentCardSet?.name || 'Flashcards'}
             </h1>
             <p className="text-sm font-rounded text-gray-600">
               Remember Everything with <br />
@@ -255,31 +256,34 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             {/* Start Review Button */}
             <button
               onClick={handleStartReview}
-              disabled={state.stats.dueCards === 0}
+              disabled={state.stats.dueCards === 0 || state.isLoading}
               className={`
-                w-full py-3 px-8 rounded-2xl font-bold font-child text-3xl 
+                w-full py-3 rounded-2xl font-bold font-child text-3xl 
                 transform transition-all duration-200
                 ${
-                  state.stats.dueCards > 0
-                    ? "bg-gradient-to-r from-primary-500 to-primary-600 text-white hover:scale-[102%] hover:shadow-2xl hover:shadow-primary-500/30 active:scale-95 active:shadow-lg active:shadow-primary-500/20"
-                    : "bg-gray-300 text-gray-500 border-gray-400 cursor-not-allowed"
+                  state.stats.dueCards > 0 && !state.isLoading
+                    ? 'bg-gradient-to-r from-primary-500 to-primary-600 text-white hover:scale-[102%] hover:shadow-2xl hover:shadow-primary-500/30 active:scale-95 active:shadow-lg active:shadow-primary-500/20'
+                    : 'bg-gray-300 text-gray-500 border-gray-400 cursor-not-allowed'
                 }
               `}
             >
-              {state.stats.dueCards > 0 ? (
+              {state.isLoading ? (
+                <div className="flex items-center justify-center">
+                  <span>Loading cards...</span>
+                </div>
+              ) : state.stats.dueCards > 0 ? (
                 <div className="flex items-center justify-center">
                   <span>Start Review</span>
                 </div>
               ) : (
                 <div className="flex items-center justify-center">
-                  <span className="text-2xl mr-3">🎉</span>
-                  <span>All Done! Come back tomorrow</span>
+                  <span>🎉 Done! See you tomorrow</span>
                 </div>
               )}
             </button>
 
             <div className="flex flex-col">
-              {state.stats.dueCards > 0 ? (
+              {!state.isLoading && state.stats.dueCards > 0 ? (
                 <div className="w-full text-center text-md text-primary-900">
                   {Math.min(state.stats.dueCards, MAX_REVIEW_CARDS)} cards ready
                   for today. 🚀
@@ -295,8 +299,8 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                 py-2
                 ${
                   state.loadingStates.savingProgress
-                    ? "bg-transparent text-gray-300 cursor-not-allowed"
-                    : "bg-transparent text-gray-400 hover:text-gray-500"
+                    ? 'bg-transparent text-gray-300 cursor-not-allowed'
+                    : 'bg-transparent text-gray-400 hover:text-gray-500'
                 }
               `}
               >

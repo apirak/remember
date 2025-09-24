@@ -1,45 +1,45 @@
 // Integration tests for FlashcardContext card set persistence
 // Tests the full flow of saving/loading card sets through context
 
-import { describe, it, expect, beforeEach, vi } from "vitest";
-import { renderHook, act } from "@testing-library/react";
+import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { renderHook, act } from '@testing-library/react';
 import {
   FlashcardProvider,
   useFlashcard,
-} from "../../src/contexts/FlashcardContext";
-import * as cardSetLoader from "../../src/utils/cardSetLoader";
+} from '../../src/contexts/FlashcardContext';
+import * as cardSetLoader from '../../src/utils/cardSetLoader';
 
 // Mock card set loader for fetch-based loading
-vi.mock("../../src/utils/cardSetLoader", () => ({
+vi.mock('../../src/utils/cardSetLoader', () => ({
   loadCardSetDataWithFetch: vi.fn(),
 }));
 
 // Mock Firebase to avoid real authentication
-vi.mock("../../src/utils/auth", () => ({
+vi.mock('../../src/utils/auth', () => ({
   onAuthStateChange: vi.fn((_callback) => {
     // Return unsubscribe function
     return () => {};
   }),
 }));
 
-vi.mock("../../src/utils/firebase", () => ({
+vi.mock('../../src/utils/firebase', () => ({
   auth: {},
   db: {},
 }));
 
-describe("FlashcardContext Card Set Persistence", () => {
+describe('FlashcardContext Card Set Persistence', () => {
   const mockCardSet1 = {
-    id: "chinese_essentials_1",
-    name: "Chinese Essentials 1",
-    cover: "🇨🇳",
-    dataFile: "chinese_essentials_in_communication_1.json",
+    id: 'chinese_essentials_1',
+    name: 'Chinese Essentials 1',
+    cover: '🇨🇳',
+    dataFile: 'chinese_essentials_in_communication_1.json',
   };
 
   const mockCardSet2 = {
-    id: "chinese_essentials_2",
-    name: "Chinese Essentials 2",
-    cover: "🏮",
-    dataFile: "chinese_essentials_in_communication_2.json",
+    id: 'chinese_essentials_2',
+    name: 'Chinese Essentials 2',
+    cover: '🏮',
+    dataFile: 'chinese_essentials_in_communication_2.json',
   };
 
   beforeEach(() => {
@@ -51,28 +51,28 @@ describe("FlashcardContext Card Set Persistence", () => {
     (cardSetLoader.loadCardSetDataWithFetch as any).mockImplementation(
       (filename: string) => {
         switch (filename) {
-          case "flashcards.json":
+          case 'flashcards.json':
             return Promise.resolve([
               {
-                id: "test-1",
-                front: "Test Front 1",
-                back: "Test Back 1",
+                id: 'test-1',
+                front: 'Test Front 1',
+                back: 'Test Back 1',
               },
             ]);
-          case "chinese_essentials_in_communication_1.json":
+          case 'chinese_essentials_in_communication_1.json':
             return Promise.resolve([
               {
-                id: "ce1-1",
-                front: "Hello",
-                back: "Nǐ hǎo",
+                id: 'ce1-1',
+                front: 'Hello',
+                back: 'Nǐ hǎo',
               },
             ]);
-          case "chinese_essentials_in_communication_2.json":
+          case 'chinese_essentials_in_communication_2.json':
             return Promise.resolve([
               {
-                id: "ce2-1",
-                front: "Goodbye",
-                back: "Zàijiàn",
+                id: 'ce2-1',
+                front: 'Goodbye',
+                back: 'Zàijiàn',
               },
             ]);
           default:
@@ -90,17 +90,17 @@ describe("FlashcardContext Card Set Persistence", () => {
     });
   };
 
-  describe("Initial card set loading", () => {
-    it("should load default card set when no saved data exists", () => {
+  describe('Initial card set loading', () => {
+    it('should load default card set when no saved data exists', () => {
       const { result } = renderHookWithProvider(() => useFlashcard());
 
       expect(result.current.state.currentCardSet).toEqual(mockCardSet1);
     });
 
-    it("should load saved card set from localStorage on initialization", () => {
+    it('should load saved card set from localStorage on initialization', () => {
       // Pre-populate localStorage
       localStorage.setItem(
-        "remember_last_card_set",
+        'remember_last_card_set',
         JSON.stringify(mockCardSet2)
       );
 
@@ -109,9 +109,9 @@ describe("FlashcardContext Card Set Persistence", () => {
       expect(result.current.state.currentCardSet).toEqual(mockCardSet2);
     });
 
-    it("should fall back to default when localStorage contains invalid data", () => {
+    it('should fall back to default when localStorage contains invalid data', () => {
       // Set invalid data
-      localStorage.setItem("remember_last_card_set", "invalid-json");
+      localStorage.setItem('remember_last_card_set', 'invalid-json');
 
       const { result } = renderHookWithProvider(() => useFlashcard());
 
@@ -119,8 +119,8 @@ describe("FlashcardContext Card Set Persistence", () => {
     });
   });
 
-  describe("Card set selection and persistence", () => {
-    it("should update context and save to localStorage when card set changes", async () => {
+  describe('Card set selection and persistence', () => {
+    it('should update context and save to localStorage when card set changes', async () => {
       const { result } = renderHookWithProvider(() => useFlashcard());
 
       // Change card set
@@ -132,12 +132,12 @@ describe("FlashcardContext Card Set Persistence", () => {
       expect(result.current.state.currentCardSet).toEqual(mockCardSet2);
 
       // Check localStorage updated
-      const stored = localStorage.getItem("remember_last_card_set");
+      const stored = localStorage.getItem('remember_last_card_set');
       expect(stored).toBeTruthy();
       expect(JSON.parse(stored!)).toEqual(mockCardSet2);
     });
 
-    it("should not save to localStorage when setting null card set", async () => {
+    it('should not save to localStorage when setting null card set', async () => {
       const { result } = renderHookWithProvider(() => useFlashcard());
 
       // Set card set to null
@@ -149,14 +149,14 @@ describe("FlashcardContext Card Set Persistence", () => {
       expect(result.current.state.currentCardSet).toBeNull();
 
       // Check localStorage not updated (should remain empty)
-      expect(localStorage.getItem("remember_last_card_set")).toBeNull();
+      expect(localStorage.getItem('remember_last_card_set')).toBeNull();
     });
 
-    it("should handle localStorage errors gracefully during save", async () => {
+    it('should handle localStorage errors gracefully during save', async () => {
       // Mock localStorage.setItem to throw error
-      const setItemSpy = vi.spyOn(Storage.prototype, "setItem");
+      const setItemSpy = vi.spyOn(Storage.prototype, 'setItem');
       setItemSpy.mockImplementation(() => {
-        throw new Error("Storage quota exceeded");
+        throw new Error('Storage quota exceeded');
       });
 
       const { result } = renderHookWithProvider(() => useFlashcard());
@@ -175,8 +175,8 @@ describe("FlashcardContext Card Set Persistence", () => {
     });
   });
 
-  describe("Card data loading with persistence", () => {
-    it("should load card data when card set changes", async () => {
+  describe('Card data loading with persistence', () => {
+    it('should load card data when card set changes', async () => {
       const { result } = renderHookWithProvider(() => useFlashcard());
 
       // Wait for initial load
@@ -203,8 +203,8 @@ describe("FlashcardContext Card Set Persistence", () => {
     });
   });
 
-  describe("Persistence across context recreation", () => {
-    it("should restore card set when context is recreated", () => {
+  describe('Persistence across context recreation', () => {
+    it('should restore card set when context is recreated', () => {
       // First context instance - set card set
       const { result: result1, unmount } = renderHookWithProvider(() =>
         useFlashcard()
@@ -226,10 +226,10 @@ describe("FlashcardContext Card Set Persistence", () => {
     });
   });
 
-  describe("Error recovery scenarios", () => {
-    it("should handle corrupted localStorage data gracefully", () => {
+  describe('Error recovery scenarios', () => {
+    it('should handle corrupted localStorage data gracefully', () => {
       // Set corrupted data
-      localStorage.setItem("remember_last_card_set", '{"id":"test"}'); // Missing required fields
+      localStorage.setItem('remember_last_card_set', '{"id":"test"}'); // Missing required fields
 
       const { result } = renderHookWithProvider(() => useFlashcard());
 
@@ -237,12 +237,12 @@ describe("FlashcardContext Card Set Persistence", () => {
       expect(result.current.state.currentCardSet).toEqual(mockCardSet1);
     });
 
-    it("should continue working when localStorage is unavailable", () => {
+    it('should continue working when localStorage is unavailable', () => {
       // Mock localStorage to be unavailable
       const originalLocalStorage = window.localStorage;
-      Object.defineProperty(window, "localStorage", {
+      Object.defineProperty(window, 'localStorage', {
         get: () => {
-          throw new Error("localStorage not available");
+          throw new Error('localStorage not available');
         },
       });
 
@@ -259,7 +259,7 @@ describe("FlashcardContext Card Set Persistence", () => {
       });
 
       // Restore localStorage
-      Object.defineProperty(window, "localStorage", {
+      Object.defineProperty(window, 'localStorage', {
         value: originalLocalStorage,
         writable: true,
       });
