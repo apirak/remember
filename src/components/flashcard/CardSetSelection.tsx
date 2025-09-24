@@ -1,9 +1,9 @@
 // CardSetSelection component - displays available card sets for user selection
 // Shows list of card sets with progress, descriptions, and navigation
 
-import React, { useState, useEffect } from "react";
-import EmojiText from "../EmojiSVG";
-import { useFlashcard } from "../../contexts/FlashcardContext";
+import React, { useState, useEffect } from 'react';
+import EmojiText from '../EmojiSVG';
+import { useFlashcard } from '../../contexts/FlashcardContext';
 
 // Type definitions for card set data structure
 interface CardSet {
@@ -17,7 +17,7 @@ interface CardSet {
 }
 
 // Navigation type to match existing patterns
-type AppRoute = "dashboard" | "review" | "complete" | "card-sets";
+type AppRoute = 'dashboard' | 'review' | 'complete' | 'card-sets';
 
 interface CardSetSelectionProps {
   onNavigate: (route: AppRoute) => void;
@@ -41,7 +41,7 @@ const CardSetSelection: React.FC<CardSetSelectionProps> = ({ onNavigate }) => {
     const loadCardSets = async () => {
       try {
         // Fetch the card set JSON data using the same method as card sets
-        const response = await fetch("/data/card_set.json");
+        const response = await fetch('/data/card_set.json');
         if (!response.ok) {
           throw new Error(
             `Failed to load card sets: ${response.status} ${response.statusText}`
@@ -62,12 +62,12 @@ const CardSetSelection: React.FC<CardSetSelectionProps> = ({ onNavigate }) => {
 
         setCardSets(transformedCardSets);
         console.log(
-          "CardSetSelection: Loaded",
+          'CardSetSelection: Loaded',
           transformedCardSets.length,
-          "card sets from JSON"
+          'card sets from JSON'
         );
       } catch (error) {
-        console.error("CardSetSelection: Error loading card sets:", error);
+        console.error('CardSetSelection: Error loading card sets:', error);
         // Fallback to empty array if loading fails
         setCardSets([]);
       }
@@ -82,7 +82,7 @@ const CardSetSelection: React.FC<CardSetSelectionProps> = ({ onNavigate }) => {
       if (!state.isGuest && state.user) {
         try {
           console.log(
-            "CardSetSelection: Loading progress data for authenticated user"
+            'CardSetSelection: Loading progress data for authenticated user'
           );
           const progress = await loadAllCardSetProgress();
           setProgressData(progress);
@@ -92,11 +92,11 @@ const CardSetSelection: React.FC<CardSetSelectionProps> = ({ onNavigate }) => {
             } card sets`
           );
         } catch (error) {
-          console.error("CardSetSelection: Error loading progress:", error);
+          console.error('CardSetSelection: Error loading progress:', error);
           setProgressData({});
         }
       } else {
-        console.log("CardSetSelection: Guest mode - using mock progress data");
+        console.log('CardSetSelection: Guest mode - using mock progress data');
         // For guests, use mock progress data
         const mockProgress: Record<string, number> = {
           hsk_1_set_1_english: 25,
@@ -123,7 +123,7 @@ const CardSetSelection: React.FC<CardSetSelectionProps> = ({ onNavigate }) => {
 
   // Handle card set selection
   const handleCardSetSelect = (cardSet: CardSet) => {
-    console.log("CardSetSelection: Card set selected", {
+    console.log('CardSetSelection: Card set selected', {
       id: cardSet.id,
       name: cardSet.name,
       cardCount: cardSet.cardCount,
@@ -142,16 +142,16 @@ const CardSetSelection: React.FC<CardSetSelectionProps> = ({ onNavigate }) => {
       `CardSetSelection: Set current card set to ${cardSet.name} (${cardSet.dataFile})`
     );
 
-    // Navigate back to dashboard to see the updated card set
-    onNavigate("dashboard");
+    // Navigate to the card set page using URL routing
+    window.location.href = `/${cardSet.id}`;
   };
 
   // Handle back navigation
   const handleBackClick = () => {
     console.log(
-      "CardSetSelection: Back button clicked, navigating to dashboard"
+      'CardSetSelection: Back button clicked, navigating to dashboard'
     );
-    onNavigate("dashboard");
+    onNavigate('dashboard');
   };
 
   return (
@@ -160,7 +160,7 @@ const CardSetSelection: React.FC<CardSetSelectionProps> = ({ onNavigate }) => {
         {/* Navigation Header - Sticky */}
         <div
           className={`sticky top-0 z-10 from-blue-50 backdrop-blur-md border-b border-white/20 p-4 pb-2 transition-shadow duration-300 ${
-            isScrolled ? "shadow-md shadow-black/10" : ""
+            isScrolled ? 'shadow-md shadow-black/10' : ''
           }`}
         >
           <div className="max-w-md w-full mx-auto">

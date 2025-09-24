@@ -1,24 +1,24 @@
 // Main FlashcardApp component with simple state-based navigation
 // Handles navigation between Dashboard, Review, and Completion screens
 
-import React from "react";
+import React from 'react';
 import {
   FlashcardProvider,
   useFlashcard,
-} from "../../contexts/FlashcardContext";
-import Dashboard from "./Dashboard.tsx";
-import Review from "./Review.tsx";
-import Completion from "./Completion.tsx";
-import CardSetSelection from "./CardSetSelection.tsx";
-import { DebugPanel } from "../ui/DebugPanel.tsx";
+} from '../../contexts/FlashcardContext';
+import Dashboard from './Dashboard.tsx';
+import Review from './Review.tsx';
+import Completion from './Completion.tsx';
+import CardSetSelection from './CardSetSelection.tsx';
+import { DebugPanel } from '../ui/DebugPanel.tsx';
 
 // Navigation types
-type AppRoute = "dashboard" | "review" | "complete" | "card-sets";
+type AppRoute = 'dashboard' | 'review' | 'complete' | 'card-sets';
 
 // Main app wrapper with state-based routing
 const FlashcardAppContent: React.FC = () => {
   const { state } = useFlashcard();
-  const [currentRoute, setCurrentRoute] = React.useState<AppRoute>("dashboard");
+  const [currentRoute, setCurrentRoute] = React.useState<AppRoute>('card-sets');
 
   // Safe navigation handler with validation
   const handleNavigation = React.useCallback(
@@ -29,10 +29,10 @@ const FlashcardAppContent: React.FC = () => {
 
       // Validate route exists in AppRoute type
       const validRoutes: AppRoute[] = [
-        "dashboard",
-        "review",
-        "complete",
-        "card-sets",
+        'dashboard',
+        'review',
+        'complete',
+        'card-sets',
       ];
       if (!validRoutes.includes(route)) {
         console.error(
@@ -48,7 +48,7 @@ const FlashcardAppContent: React.FC = () => {
 
   // Auto-navigate based on session state
   React.useEffect(() => {
-    console.log("FlashcardApp navigation check:", {
+    console.log('FlashcardApp navigation check:', {
       hasSession: !!state.currentSession,
       isComplete: state.currentSession?.isComplete,
       currentRoute,
@@ -57,17 +57,17 @@ const FlashcardAppContent: React.FC = () => {
     // Only auto-navigate if there's an active session or session just completed
     if (state.currentSession) {
       if (state.currentSession.isComplete) {
-        console.log("Session complete, navigating to complete screen");
-        handleNavigation("complete");
+        console.log('Session complete, navigating to complete screen');
+        handleNavigation('complete');
       } else {
-        console.log("Session active, navigating to review screen");
-        handleNavigation("review");
+        console.log('Session active, navigating to review screen');
+        handleNavigation('review');
       }
-    } else if (currentRoute === "review" || currentRoute === "complete") {
+    } else if (currentRoute === 'review' || currentRoute === 'complete') {
       // Only auto-navigate to dashboard if coming from review/complete routes
       // Preserve manual navigation to card-sets route
-      console.log("No session, navigating from review/complete to dashboard");
-      handleNavigation("dashboard");
+      console.log('No session, navigating from review/complete to dashboard');
+      handleNavigation('dashboard');
     }
     // Note: card-sets route is preserved for manual navigation
   }, [
@@ -82,21 +82,21 @@ const FlashcardAppContent: React.FC = () => {
     console.log(`FlashcardApp: Rendering route '${currentRoute}'`);
 
     switch (currentRoute) {
-      case "review":
+      case 'review':
         return <Review onNavigate={handleNavigation} />;
-      case "complete":
+      case 'complete':
         return <Completion onNavigate={handleNavigation} />;
-      case "card-sets":
-        console.log("Navigating to card sets selection screen");
+      case 'card-sets':
+        console.log('Navigating to card sets selection screen');
         return <CardSetSelection onNavigate={handleNavigation} />;
-      case "dashboard":
+      case 'dashboard':
         return <Dashboard onNavigate={handleNavigation} />;
       default:
         // Defensive handling for invalid routes
         console.warn(
           `FlashcardApp: Unknown route '${currentRoute}', falling back to dashboard`
         );
-        setCurrentRoute("dashboard");
+        setCurrentRoute('dashboard');
         return <Dashboard onNavigate={handleNavigation} />;
     }
   };
