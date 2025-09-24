@@ -5,19 +5,24 @@ import FlashcardAppWithPreload from '../components/flashcard/FlashcardAppWithPre
 export async function getStaticPaths() {
   // Load card sets to generate static paths
   try {
-    const cardSetsResponse = await fetch(new URL('/data/card_set.json', import.meta.env.SITE || 'http://localhost:4321'));
+    const cardSetsResponse = await fetch(
+      new URL(
+        '/data/card_set.json',
+        import.meta.env.SITE || 'http://localhost:4321'
+      )
+    );
     const cardSetsData = await cardSetsResponse.json();
-    
+
     // Generate paths for each card set - cardSetsData is an array
     const paths = cardSetsData.map((cardSet: any) => ({
       params: { cardSet: cardSet.id },
-      props: { 
+      props: {
         cardSetId: cardSet.id,
         cardSetName: cardSet.name,
-        cardSetDescription: cardSet.description
-      }
+        cardSetDescription: cardSet.description,
+      },
     }));
-    
+
     return paths;
   } catch (error) {
     console.error('Error loading card sets for static paths:', error);
@@ -30,10 +35,10 @@ const { cardSetId, cardSetName, cardSetDescription } = Astro.props;
 ---
 
 <Layout title={`${cardSetName || cardSet} - Learn Chinese Flashcards`}>
-	<FlashcardAppWithPreload 
-		client:load 
-		preloadCardSet={cardSetId || cardSet}
-		cardSetName={cardSetName}
-		cardSetDescription={cardSetDescription}
-	/>
+  <FlashcardAppWithPreload
+    client:load
+    preloadCardSet={cardSetId || cardSet}
+    cardSetName={cardSetName}
+    cardSetDescription={cardSetDescription}
+  />
 </Layout>

@@ -198,8 +198,7 @@ const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
                       Original:
                     </div>
                     <div className="text-lg font-bold text-gray-700">
-                      {currentCard.front.title} ({currentCard.front.description}
-                      )
+                      {currentCard.front.title}({currentCard.front.description})
                     </div>
                   </div>
                 </div>
