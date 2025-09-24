@@ -198,7 +198,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
               Remember Everything with <br />
               <a
                 className="text-blue-600 hover:text-blue-800 no-underline"
-                href="http://bit.ly/3KctaMk"
+                href="https://apirak.medium.com/วิธีจำอะไรก็ได้-ให้จำแม่นเหมือนโกง-f2875a0f8277"
               >
                 Smart Flashcards
               </a>
