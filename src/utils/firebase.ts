@@ -6,18 +6,16 @@ import { getAuth, type Auth } from 'firebase/auth';
 import { getFirestore, type Firestore } from 'firebase/firestore';
 // Note: Analytics import removed to avoid content blocker issues
 
-// Firebase configuration object - hardcoded as per requirements
+// Firebase configuration object - using environment variables for security
 const firebaseConfig = {
-  apiKey: "AIzaSyDPQE3fesCq9nN84-zVBYHJRyMUR-pWgLk",
-  authDomain: "remember-me-c8da6.firebaseapp.com",
-  projectId: "remember-me-c8da6",
-  storageBucket: "remember-me-c8da6.firebasestorage.app",
-  messagingSenderId: "818564421697",
-  appId: "1:818564421697:web:f2abcf83ca42a9c3978ec0",
-  measurementId: "G-ZK2QES54E1",
-  webClientId:
-    "818564421697-g4orolgg2o002splkbtvog6og7ivjg7q.apps.googleusercontent.com",
-  webClientSecret: "remember-me-secret"
+  apiKey: import.meta.env.PUBLIC_FIREBASE_API_KEY || "AIzaSyDPQE3fesCq9nN84-zVBYHJRyMUR-pWgLk",
+  authDomain: import.meta.env.PUBLIC_FIREBASE_AUTH_DOMAIN || "remember-me-c8da6.firebaseapp.com",
+  projectId: import.meta.env.PUBLIC_FIREBASE_PROJECT_ID || "remember-me-c8da6",
+  storageBucket: import.meta.env.PUBLIC_FIREBASE_STORAGE_BUCKET || "remember-me-c8da6.firebasestorage.app",
+  messagingSenderId: import.meta.env.PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "818564421697",
+  appId: import.meta.env.PUBLIC_FIREBASE_APP_ID || "1:818564421697:web:f2abcf83ca42a9c3978ec0",
+  measurementId: import.meta.env.PUBLIC_FIREBASE_MEASUREMENT_ID || "G-ZK2QES54E1",
+  // Note: Removed webClientSecret and webClientId as they should not be in client-side code
 };
 
 // Initialize Firebase app
