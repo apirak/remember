@@ -52,7 +52,14 @@ const FlashcardAppContent: React.FC = () => {
       hasSession: !!state.currentSession,
       isComplete: state.currentSession?.isComplete,
       currentRoute,
+      savingProgress: state.loadingStates?.savingProgress,
     });
+
+    // Don't navigate while batch save is in progress to avoid race conditions
+    if (state.loadingStates?.savingProgress) {
+      console.log('Batch save in progress, deferring navigation...');
+      return;
+    }
 
     // Only auto-navigate if there's an active session or session just completed
     if (state.currentSession) {
@@ -75,6 +82,7 @@ const FlashcardAppContent: React.FC = () => {
     state.currentSession,
     currentRoute,
     handleNavigation,
+    state.loadingStates?.savingProgress, // Add this to dependencies
   ]);
 
   // Render current screen

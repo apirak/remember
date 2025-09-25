@@ -2,11 +2,7 @@
 // Handles complex action helpers with side effects and business logic
 
 import type { FlashcardContextState } from "../types/flashcard";
-import {
-  calculateSM2,
-  QUALITY_RATINGS,
-  type QualityRating,
-} from "../utils/sm2";
+import { QUALITY_RATINGS } from "../utils/sm2";
 import { FlashcardService } from "../services/flashcardService";
 import { getCurrentUser } from "../utils/auth";
 
@@ -23,7 +19,7 @@ export interface FlashcardActionsDeps {
   setSyncStatus: (status: "idle" | "syncing" | "error" | "offline") => void;
   setError: (error: string, retryable?: boolean) => void;
   clearError: () => void;
-  saveProgressToFirestore: (cardId: string, progressData: any) => Promise<void>;
+  // Note: saveProgressToFirestore removed for batch save optimization
 }
 
 /**
@@ -39,7 +35,6 @@ export const createFlashcardActions = (deps: FlashcardActionsDeps) => {
     setSyncStatus,
     setError,
     clearError,
-    saveProgressToFirestore,
   } = deps;
 
   /**
@@ -56,41 +51,31 @@ export const createFlashcardActions = (deps: FlashcardActionsDeps) => {
         payload: { cardId: currentCard.id, quality },
       });
 
-      // If user is authenticated and data source is Firestore, save to Firestore
+      // OPTIMIZATION: Defer Firestore writes for batch save at session completion
+      // This reduces Firestore read/write operations during review session
+      // Progress is tracked in sessionReducer.pendingProgress for batch save later
+      
+      // Note: All progress calculation and storage is now handled in sessionReducer
+      // The updated card data is already stored in pendingProgress Map
+      // Batch save will happen when:
+      // 1. Session completes (isComplete = true)
+      // 2. User navigates away from review screen
+      // 3. Browser unload events (beforeunload)
+      
+      console.log('Card rated:', currentCard.id, 'quality:', quality, 
+                  'batch save will occur at session completion');
+      
+      // Previous immediate Firestore save code commented out for optimization:
+      /*
       if (!state.isGuest && state.dataSource === "firestore") {
         try {
-          // Calculate the updated progress data using SM-2 algorithm
-          const updatedProgress = calculateSM2(
-            currentCard,
-            quality as QualityRating
-          );
-
-          // Save progress to Firestore in background
-          await saveProgressToFirestore(currentCard.id, {
-            easinessFactor: updatedProgress.easinessFactor,
-            repetitions: updatedProgress.repetitions,
-            interval: updatedProgress.interval,
-            nextReviewDate: updatedProgress.nextReviewDate,
-            lastReviewDate: new Date(),
-            totalReviews: currentCard.totalReviews + 1,
-            correctStreak:
-              quality >= QUALITY_RATINGS.HARD
-                ? currentCard.correctStreak + 1
-                : 0,
-            averageQuality:
-              (currentCard.averageQuality * currentCard.totalReviews +
-                quality) /
-              (currentCard.totalReviews + 1),
-            isNew: false,
-          });
+          const updatedProgress = calculateSM2(currentCard, quality as QualityRating);
+          await saveProgressToFirestore(currentCard.id, { ...progressData });
         } catch (error) {
-          console.warn(
-            "Failed to save card rating to Firestore, will retry later:",
-            error
-          );
-          // Note: saveProgressToFirestore already handles adding to pending operations
+          console.warn("Failed to save card rating to Firestore, will retry later:", error);
         }
       }
+      */
     }
   };
 

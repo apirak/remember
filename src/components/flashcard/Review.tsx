@@ -30,6 +30,23 @@ const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
     }
   }, [state.currentCard?.id]);
 
+  // Handle navigation based on session state (fix for setState during render)
+  useEffect(() => {
+    // If no session exists, redirect to dashboard
+    if (!state.currentSession) {
+      console.log("Review: No session found, redirecting to dashboard");
+      onNavigate("dashboard");
+      return;
+    }
+
+    // If session is complete, redirect to complete screen
+    if (state.currentSession.isComplete) {
+      console.log("Review: Session is complete, redirecting to complete screen");
+      onNavigate("complete");
+      return;
+    }
+  }, [state.currentSession, state.currentSession?.isComplete, onNavigate]);
+
   // Handle "I Know" button
   const handleKnowCard = () => {
     knowCard();
@@ -70,13 +87,30 @@ const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
   };
 
   // Show loading or redirect if no session
-  if (!state.currentSession || !state.currentCard) {
+  console.log("Review component state check:", { 
+    hasSession: !!state.currentSession, 
+    hasCard: !!state.currentCard,
+    isComplete: state.currentSession?.isComplete,
+    savingProgress: state.loadingStates?.savingProgress
+  });
+
+  // Early returns for invalid states (navigation handled by useEffect above)
+  if (!state.currentSession) {
+    return null; // Navigation handled by useEffect
+  }
+
+  if (state.currentSession.isComplete) {
+    return null; // Navigation handled by useEffect
+  }
+
+  // If no current card, show loading (this is normal during card transitions)
+  if (!state.currentCard) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto mb-4"></div>
           <p className="text-lg font-rounded text-gray-600">
-            Loading review...
+            Preparing next card...
           </p>
         </div>
       </div>

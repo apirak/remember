@@ -531,6 +531,63 @@ export class FlashcardService {
   }
 
   /**
+   * Save multiple card progress updates in batch operation (OPTIMIZATION)
+   * Used at end of review session to minimize Firestore operations
+   * @param progressUpdates - Map of cardId -> progress data
+   * @param cardSetId - The card set identifier  
+   * @returns Service result with success status
+   */
+  static async saveProgressBatch(
+    progressUpdates: Map<string, any>,
+    cardSetId: string
+  ): Promise<ServiceResult> {
+    try {
+      const currentUser = getCurrentUser();
+      if (!currentUser) {
+        return {
+          success: false,
+          error: "User must be authenticated to save progress batch to Firestore.",
+        };
+      }
+
+      if (progressUpdates.size === 0) {
+        console.log("No progress updates to save in batch");
+        return { success: true, data: [] };
+      }
+
+      console.log(`Batch saving progress for ${progressUpdates.size} cards in card set: ${cardSetId}`);
+
+      // Convert Map to array format expected by saveFlashcardsBatch
+      const progressArray = Array.from(progressUpdates.entries()).map(([cardId, progressData]) => ({
+        id: cardId,
+        ...progressData,
+        cardSetId,
+      }));
+
+      const result = await saveFlashcardsBatch(progressArray, cardSetId);
+
+      if (result.success) {
+        console.log(`Successfully batch saved progress for ${progressArray.length} cards`);
+        return { success: true, data: result.data };
+      } else {
+        return {
+          success: false,
+          error: result.error || "Failed to batch save progress to Firestore",
+        };
+      }
+    } catch (error) {
+      console.error("Error batch saving progress:", error);
+      return {
+        success: false,
+        error:
+          error instanceof Error
+            ? error.message
+            : "Failed to batch save progress to Firestore",
+      };
+    }
+  }
+
+  /**
    * Save multiple flashcards to Firestore in batch for a specific card set
    * @param cards - Array of flashcards to save
    * @param cardSetId - The card set identifier

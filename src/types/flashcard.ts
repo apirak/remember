@@ -70,6 +70,8 @@ export interface ReviewSession {
   hardCount: number; // Count of "Hard" responses
   againCount: number; // Count of "Again" responses
   reviewedCardIds: Set<string>; // Track which unique cards have been completed
+  // Optimization: Track progress updates during session for batch save
+  pendingProgress: Map<string, any>; // cardId -> progress data (to be saved to Firestore)
 }
 
 // Card set specific progress tracking (simplified)

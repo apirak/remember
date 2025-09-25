@@ -57,6 +57,8 @@ export const sessionReducer = (
         hardCount: 0,
         againCount: 0,
         reviewedCardIds: new Set<string>(),
+        // Initialize pending progress tracking for batch save optimization
+        pendingProgress: new Map<string, any>(),
       };
 
       return {
@@ -95,6 +97,29 @@ export const sessionReducer = (
 
       // Clone session for updates
       const updatedSession = { ...state.currentSession };
+      
+      // Clone pendingProgress Map to avoid mutations
+      updatedSession.pendingProgress = new Map(state.currentSession.pendingProgress);
+      
+      // Store progress data for batch save later (optimization: no immediate Firestore write)
+      const progressData = {
+        easinessFactor: updatedCard.easinessFactor,
+        repetitions: updatedCard.repetitions,
+        interval: updatedCard.interval,
+        nextReviewDate: updatedCard.nextReviewDate,
+        lastReviewDate: new Date(),
+        totalReviews: (currentCard.totalReviews || 0) + 1,
+        correctStreak: quality >= QUALITY_RATINGS.HARD
+          ? (currentCard.correctStreak || 0) + 1
+          : 0,
+        averageQuality: ((currentCard.averageQuality || 3.0) * (currentCard.totalReviews || 0) + quality) 
+          / ((currentCard.totalReviews || 0) + 1),
+        isNew: false,
+        updatedAt: new Date(),
+      };
+      
+      // Add to pending progress for batch save at session completion
+      updatedSession.pendingProgress.set(cardId, progressData);
 
       // Track response type based on quality
       if (quality === QUALITY_RATINGS.AGAIN) {
@@ -174,6 +199,10 @@ export const sessionReducer = (
       // Recalculate due cards and stats after session completion
       const dueCards = getDueFlashcards(state.allCards);
       const stats = calculateFlashcardStats(state.allCards);
+
+      // Note: Batch save of pendingProgress will be handled by useEffect 
+      // in FlashcardContext when it detects session.isComplete = true
+      // This keeps the reducer pure and side-effect free
 
       return {
         dueCards,

@@ -42,14 +42,16 @@ const Completion: React.FC<CompletionProps> = ({ onNavigate }) => {
     updateProgress();
   }, [state.currentSession?.isComplete, state.isGuest]);
 
-  // Show loading while we wait for session state to stabilize
-  if (!state.currentSession) {
+  // Show loading while we wait for session state to stabilize OR batch save to complete
+  if (!state.currentSession || state.loadingStates?.savingProgress) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto mb-4"></div>
           <p className="text-lg font-rounded text-gray-600">
-            Loading results...
+            {state.loadingStates?.savingProgress 
+              ? "Saving your progress..." 
+              : "Loading results..."}
           </p>
         </div>
       </div>

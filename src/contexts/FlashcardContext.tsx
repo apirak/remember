@@ -29,6 +29,7 @@ import { onAuthStateChange } from '../utils/auth';
 import { flashcardReducer } from '../reducers/flashcardReducer';
 // Firestore operations
 import { createFirestoreOperations } from '../hooks/useFirestoreOperations';
+import { FlashcardService } from '../services/flashcardService';
 // Complex action hooks
 import { createFlashcardActions } from '../hooks/useFlashcardActions';
 // Card set persistence for remembering user's last selected set
@@ -173,7 +174,7 @@ const FlashcardContext = createContext<{
   // Firestore integration methods
   loadCardsFromFirestore: () => Promise<void>;
   saveCardToFirestore: (card: Flashcard) => Promise<void>;
-  saveProgressToFirestore: (cardId: string, progressData: any) => Promise<void>;
+  // Note: saveProgressToFirestore removed for batch save optimization
   migrateGuestDataToFirestore: (guestData: any) => Promise<void>;
 
   // Card set progress methods
@@ -426,6 +427,68 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
   }, [state.currentCardSet, state.isGuest, state.user]); // Depends on auth state too
 
   /**
+   * OPTIMIZATION: Batch save pending progress when review session completes
+   * This reduces Firestore operations by collecting all progress updates and saving them together
+   */
+  useEffect(() => {
+    const savePendingProgress = async () => {
+      // Only process if we have a completed session with pending progress
+      if (
+        !state.currentSession?.isComplete ||
+        !state.currentSession.pendingProgress ||
+        state.currentSession.pendingProgress.size === 0 ||
+        state.isGuest ||
+        state.dataSource !== 'firestore'
+      ) {
+        return;
+      }
+
+      try {
+        console.log(
+          `Session completed: Batch saving ${state.currentSession.pendingProgress.size} progress updates`
+        );
+
+        setLoadingState('savingProgress', true);
+        setSyncStatus('syncing');
+
+        const result = await FlashcardService.saveProgressBatch(
+          state.currentSession.pendingProgress,
+          state.currentCardSet?.id || 'unknown'
+        );
+
+        if (result.success) {
+          console.log('✅ Batch progress save completed successfully');
+          setSyncStatus('idle');
+          // Clear pending progress after successful save
+          // Note: We could dispatch an action to clear pendingProgress, but since
+          // session will be reset soon anyway, we'll let it be cleaned up naturally
+        } else {
+          console.error('❌ Batch progress save failed:', result.error);
+          setSyncStatus('error');
+          setError(`Failed to save session progress: ${result.error}`, true);
+        }
+      } catch (error) {
+        console.error('❌ Batch progress save error:', error);
+        setSyncStatus('error');
+        setError(
+          `Failed to save session progress: ${error instanceof Error ? error.message : 'Unknown error'}`,
+          true
+        );
+      } finally {
+        setLoadingState('savingProgress', false);
+      }
+    };
+
+    savePendingProgress();
+  }, [
+    state.currentSession?.isComplete,
+    state.currentSession?.pendingProgress?.size,
+    state.isGuest,
+    state.dataSource,
+    state.currentCardSet?.id,
+  ]);
+
+  /**
    * Basic action helper functions for core flashcard operations
    */
   const loadCards = (cards: Flashcard[]) => {
@@ -525,7 +588,7 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
   const {
     loadCardsFromFirestore,
     saveCardToFirestore,
-    saveProgressToFirestore,
+    // Note: saveProgressToFirestore removed for batch save optimization
     migrateGuestDataToFirestore,
     loadCardSetProgress,
     saveCardSetProgress,
@@ -569,7 +632,6 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
     setSyncStatus,
     setError,
     clearError,
-    saveProgressToFirestore,
   });
 
   // Extract individual methods for backward compatibility
@@ -604,7 +666,7 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
     // Firestore integration methods
     loadCardsFromFirestore,
     saveCardToFirestore,
-    saveProgressToFirestore,
+    // Note: saveProgressToFirestore removed for batch save optimization
     migrateGuestDataToFirestore,
     // Card set progress methods
     loadCardSetProgress,
