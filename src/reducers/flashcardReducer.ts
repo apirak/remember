@@ -57,7 +57,7 @@ export const flashcardReducer = (
     action.type === "RETRY_PENDING_OPERATIONS" ||
     action.type === "SET_MIGRATION_STATUS" ||
     action.type === "SET_USER" ||
-    action.type === "SET_CURRENT_CARD_SET" ||
+    action.type === "SET_SELECTED_CARD_SET" ||
     action.type === "SET_LAST_WORKING_CARD_SET"
   ) {
     const appStateUpdates = appStateReducer(state, action as AppStateAction);

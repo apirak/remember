@@ -5,12 +5,16 @@
  * Type definition for stored card set data
  * Matches the structure used in FlashcardContext
  */
-export interface StoredCardSet {
+// Import CardSet type for type checking
+import type { CardSet } from '../types/flashcard';
+
+// StoredCardSet can now be a complete CardSet or the minimal format for backwards compatibility
+export type StoredCardSet = CardSet | {
   id: string;
   name: string;
   cover: string;
   dataFile: string;
-}
+};
 
 // localStorage key for card set persistence
 const CARD_SET_STORAGE_KEY = "remember_last_card_set";
@@ -19,7 +23,7 @@ const CARD_SET_STORAGE_KEY = "remember_last_card_set";
  * Save the current card set to localStorage
  * @param cardSet - The card set to persist
  */
-export const saveLastCardSet = (cardSet: StoredCardSet): void => {
+export const saveLastCardSet = (cardSet: StoredCardSet | CardSet): void => {
   try {
     const cardSetData = JSON.stringify(cardSet);
     localStorage.setItem(CARD_SET_STORAGE_KEY, cardSetData);
@@ -58,6 +62,13 @@ export const loadLastCardSet = (): StoredCardSet | null => {
       );
       return null;
     }
+
+    // Check if it's a complete CardSet (has additional properties) or minimal format
+    const isComplete = 'description' in cardSet && 'cardCount' in cardSet;
+    console.log(
+      `CardSetPersistence: Loaded ${isComplete ? 'complete' : 'minimal'} card set from localStorage`,
+      cardSet.name
+    );
 
     console.log(
       "CardSetPersistence: Loaded card set from localStorage",

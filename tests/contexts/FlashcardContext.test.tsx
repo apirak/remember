@@ -2,7 +2,7 @@
 // Tests the full flow of saving/loading card sets through context
 
 import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { renderHook, act } from '@testing-library/react';
+import { renderHook, act, waitFor } from '@testing-library/react';
 import {
   FlashcardProvider,
   useFlashcard,
@@ -107,13 +107,15 @@ describe('FlashcardContext Card Set Persistence', () => {
   };
 
   describe('Initial card set loading', () => {
-    it('should load default card set when no saved data exists', () => {
+    it('should load default card set when no saved data exists', async () => {
       const { result } = renderHookWithProvider(() => useFlashcard());
 
-      expect(result.current.state.currentCardSet).toEqual(mockCardSet1);
+      await waitFor(() => {
+        expect(result.current.state.selectedCardSet).toEqual(mockCardSet1);
+      });
     });
 
-    it('should load saved card set from localStorage on initialization', () => {
+    it('should load saved card set from localStorage on initialization', async () => {
       // Pre-populate localStorage
       localStorage.setItem(
         'remember_last_card_set',
@@ -122,16 +124,20 @@ describe('FlashcardContext Card Set Persistence', () => {
 
       const { result } = renderHookWithProvider(() => useFlashcard());
 
-      expect(result.current.state.currentCardSet).toEqual(mockCardSet2);
+      await waitFor(() => {
+        expect(result.current.state.selectedCardSet).toEqual(mockCardSet2);
+      });
     });
 
-    it('should fall back to default when localStorage contains invalid data', () => {
-      // Set invalid data
-      localStorage.setItem('remember_last_card_set', 'invalid-json');
+    it('should fall back to default when localStorage contains invalid data', async () => {
+      // Pre-populate localStorage with invalid data
+      localStorage.setItem('remember_last_card_set', 'invalid json');
 
       const { result } = renderHookWithProvider(() => useFlashcard());
 
-      expect(result.current.state.currentCardSet).toEqual(mockCardSet1);
+      await waitFor(() => {
+        expect(result.current.state.selectedCardSet).toEqual(mockCardSet1);
+      });
     });
   });
 
@@ -145,7 +151,9 @@ describe('FlashcardContext Card Set Persistence', () => {
       });
 
       // Check context updated
-      expect(result.current.state.selectedCardSet).toEqual(mockCardSet2);
+      await waitFor(() => {
+        expect(result.current.state.selectedCardSet).toEqual(mockCardSet2);
+      });
 
       // Check localStorage updated
       const stored = localStorage.getItem('remember_last_card_set');
@@ -158,11 +166,11 @@ describe('FlashcardContext Card Set Persistence', () => {
 
       // Set card set to null
       await act(async () => {
-        result.current.setCurrentCardSet(null);
+        result.current.setSelectedCardSet(null);
       });
 
       // Check context updated
-      expect(result.current.state.currentCardSet).toBeNull();
+      expect(result.current.state.selectedCardSet).toBeNull();
 
       // Check localStorage not updated (should remain empty)
       expect(localStorage.getItem('remember_last_card_set')).toBeNull();
@@ -180,12 +188,14 @@ describe('FlashcardContext Card Set Persistence', () => {
       // Should not throw error
       await act(async () => {
         expect(() => {
-          result.current.setCurrentCardSet(mockCardSet2);
+          result.current.setSelectedCardSet(mockCardSet2);
         }).not.toThrow();
       });
 
       // Context should still be updated
-      expect(result.current.state.currentCardSet).toEqual(mockCardSet2);
+      await waitFor(() => {
+        expect(result.current.state.selectedCardSet).toEqual(mockCardSet2);
+      });
 
       setItemSpy.mockRestore();
     });
@@ -206,7 +216,7 @@ describe('FlashcardContext Card Set Persistence', () => {
 
       // Change card set
       await act(async () => {
-        result.current.setCurrentCardSet(mockCardSet2);
+        result.current.setSelectedCardSet(mockCardSet2);
       });
 
       // Wait for new data to load
@@ -215,22 +225,26 @@ describe('FlashcardContext Card Set Persistence', () => {
       });
 
       // Should have loaded different cards (mocked data)
-      expect(result.current.state.currentCardSet).toEqual(mockCardSet2);
+      await waitFor(() => {
+        expect(result.current.state.selectedCardSet).toEqual(mockCardSet2);
+      });
     });
   });
 
   describe('Persistence across context recreation', () => {
-    it('should restore card set when context is recreated', () => {
+    it('should restore card set when context is recreated', async () => {
       // First context instance - set card set
       const { result: result1, unmount } = renderHookWithProvider(() =>
         useFlashcard()
       );
 
       act(() => {
-        result1.current.setCurrentCardSet(mockCardSet2);
+        result1.current.setSelectedCardSet(mockCardSet2);
       });
 
-      expect(result1.current.state.currentCardSet).toEqual(mockCardSet2);
+      await waitFor(() => {
+        expect(result1.current.state.selectedCardSet).toEqual(mockCardSet2);
+      });
 
       // Unmount first context
       unmount();
@@ -238,22 +252,26 @@ describe('FlashcardContext Card Set Persistence', () => {
       // Create new context instance - should restore from localStorage
       const { result: result2 } = renderHookWithProvider(() => useFlashcard());
 
-      expect(result2.current.state.currentCardSet).toEqual(mockCardSet2);
+      await waitFor(() => {
+        expect(result2.current.state.selectedCardSet).toEqual(mockCardSet2);
+      });
     });
   });
 
   describe('Error recovery scenarios', () => {
-    it('should handle corrupted localStorage data gracefully', () => {
+    it('should handle corrupted localStorage data gracefully', async () => {
       // Set corrupted data
       localStorage.setItem('remember_last_card_set', '{"id":"test"}'); // Missing required fields
 
       const { result } = renderHookWithProvider(() => useFlashcard());
 
       // Should fall back to default
-      expect(result.current.state.currentCardSet).toEqual(mockCardSet1);
+      await waitFor(() => {
+        expect(result.current.state.selectedCardSet).toEqual(mockCardSet1);
+      });
     });
 
-    it('should continue working when localStorage is unavailable', () => {
+    it('should continue working when localStorage is unavailable', async () => {
       // Mock localStorage to be unavailable
       const originalLocalStorage = window.localStorage;
       Object.defineProperty(window, 'localStorage', {
@@ -265,12 +283,14 @@ describe('FlashcardContext Card Set Persistence', () => {
       const { result } = renderHookWithProvider(() => useFlashcard());
 
       // Should still work with default card set
-      expect(result.current.state.currentCardSet).toEqual(mockCardSet1);
+      await waitFor(() => {
+        expect(result.current.state.selectedCardSet).toEqual(mockCardSet1);
+      });
 
-      // Should handle setCurrentCardSet without errors
+      // Should handle setSelectedCardSet without errors
       act(() => {
         expect(() => {
-          result.current.setCurrentCardSet(mockCardSet2);
+          result.current.setSelectedCardSet(mockCardSet2);
         }).not.toThrow();
       });
 

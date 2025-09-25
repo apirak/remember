@@ -143,6 +143,7 @@ export const appStateReducer = (
     // Card set management
     case "SET_SELECTED_CARD_SET": {
       return {
+        ...state,
         selectedCardSet: action.payload,
       };
     }

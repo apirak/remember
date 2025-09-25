@@ -225,7 +225,7 @@ export const createFirestoreOperations = (deps: FirestoreOperationsDeps) => {
       // Add to pending operations for retry
       const pendingOp = FlashcardService.createPendingOperation("rate_card", {
         cardId,
-        cardSetId: state.currentCardSet?.id,
+        cardSetId: state.selectedCardSet?.id,
         progressData,
       });
       dispatch({ type: "ADD_PENDING_OPERATION", payload: pendingOp });
