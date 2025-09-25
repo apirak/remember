@@ -197,13 +197,6 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             </h1>
             <p className="text-sm font-rounded text-gray-600">
               {state.selectedCardSet?.description }
-              Remember Everything with <br />
-              <a
-                className="text-blue-600 hover:text-blue-800 no-underline"
-                href="https://apirak.medium.com/วิธีจำอะไรก็ได้-ให้จำแม่นเหมือนโกง-f2875a0f8277"
-              >
-                Smart Flashcards
-              </a>
             </p>
           </div>
 
