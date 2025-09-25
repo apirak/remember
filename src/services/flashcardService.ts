@@ -270,109 +270,6 @@ export class FlashcardService {
   }
 
   /**
-   * Legacy method - will be removed after migration
-   * @deprecated Use loadCardSetData instead
-   */
-  static async loadUserFlashcardsLegacy(): Promise<ServiceResult<Flashcard[]>> {
-    try {
-      const currentUser = getCurrentUser();
-      if (!currentUser) {
-        return {
-          success: false,
-          error: "User must be authenticated to load cards from Firestore.",
-        };
-      }
-
-      // Use default card set for legacy support
-      const defaultCardSetId = "chinese_essentials_1";
-      const result = await getUserFlashcards(defaultCardSetId);
-
-      if (!result.success) {
-        return {
-          success: false,
-          error: result.error || "Failed to load cards from Firestore",
-        };
-      }
-
-      let cards: Flashcard[];
-
-      // If user has no cards in Firestore yet, use default cards and save them
-      if (!result.data || result.data.length === 0) {
-        console.log(
-          "No cards found in Firestore for new user, using default cards"
-        );
-
-        // Transform default cards to include SM-2 parameters
-        const defaultCardsData = await loadCardSetDataWithFetch(
-          "flashcards.json"
-        );
-        const defaultCards = defaultCardsData.map((data) =>
-          transformFlashcardData(data, "default")
-        );
-
-        // Save default cards to Firestore for the new user
-        try {
-          const saveResult = await saveFlashcardsBatch(
-            defaultCards,
-            defaultCardSetId
-          );
-          if (saveResult.success) {
-            console.log(
-              "Successfully saved default cards to Firestore for new user"
-            );
-          } else {
-            console.warn(
-              "Failed to save default cards to Firestore:",
-              saveResult.error
-            );
-          }
-        } catch (batchError) {
-          console.warn("Error saving default cards to Firestore:", batchError);
-        }
-
-        cards = defaultCards;
-      } else {
-        // Convert existing Firestore data to our Flashcard format
-        cards = result.data.map((cardData: any) => ({
-          ...cardData,
-          // Ensure proper date conversion
-          nextReviewDate:
-            cardData.nextReviewDate instanceof Date
-              ? cardData.nextReviewDate
-              : new Date(cardData.nextReviewDate),
-          lastReviewDate:
-            cardData.lastReviewDate instanceof Date
-              ? cardData.lastReviewDate
-              : new Date(cardData.lastReviewDate),
-          createdAt:
-            cardData.createdAt instanceof Date
-              ? cardData.createdAt
-              : new Date(cardData.createdAt),
-          updatedAt:
-            cardData.updatedAt instanceof Date
-              ? cardData.updatedAt
-              : new Date(cardData.updatedAt),
-        }));
-      }
-
-      console.log(`Loaded ${cards.length} cards from Firestore`);
-      return {
-        success: true,
-        data: cards,
-      };
-    } catch (error) {
-      console.error("Error loading cards from Firestore:", error);
-      return {
-        success: false,
-        error:
-          error instanceof Error
-            ? error.message
-            : "Failed to load cards from Firestore",
-      };
-    }
-  }
-
-  /**
    * Save a single flashcard to Firestore for a specific card set
    * @param card - The flashcard to save
    * @param cardSetId - The card set identifier
@@ -709,8 +606,14 @@ export class FlashcardService {
     operation: PendingOperation
   ): Promise<ServiceResult> {
     try {
-      // For legacy operations without cardSetId, use default
-      const cardSetId = operation.data?.cardSetId || "chinese_essentials_1";
+      const cardSetId = operation.data?.cardSetId;
+      
+      if (!cardSetId) {
+        return {
+          success: false,
+          error: "Missing cardSetId in pending operation data",
+        };
+      }
 
       switch (operation.type) {
         case "add_card":
