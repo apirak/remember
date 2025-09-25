@@ -125,27 +125,35 @@ export const createFlashcardActions = (deps: FlashcardActionsDeps) => {
         }));
 
         // Save all reset cards to Firestore using batch operation
-        let currentCardSet = state.currentCardSet;
-        if (!currentCardSet) {
+        let selectedCardSet = state.selectedCardSet;
+        if (!selectedCardSet) {
           // Use default card set if none is selected
-          currentCardSet = {
+          selectedCardSet = {
             id: "chinese_essentials_1",
             name: "Chinese Essentials 1",
+            description: "Basic everyday communication",
             cover: "🇨🇳",
+            cardCount: 0,
+            category: "language_basics",
+            tags: ["chinese", "communication", "beginner"],
             dataFile: "chinese_essentials_in_communication_1.json",
+            author: "HSK Learning Team",
+            isActive: true,
+            createdAt: new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
           };
         }
 
         const result = await FlashcardService.saveCardsBatch(
           resetCards,
-          currentCardSet.id
+          selectedCardSet.id
         );
 
         if (result.success) {
           setSyncStatus("idle");
           dispatch({ type: "SET_LAST_SYNC_TIME", payload: new Date() });
           console.log(
-            `Successfully reset all cards progress in Firestore for card set: ${currentCardSet.name}`
+            `Successfully reset all cards progress in Firestore for card set: ${selectedCardSet.name}`
           );
         } else {
           throw new Error(

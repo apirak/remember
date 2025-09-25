@@ -43,7 +43,7 @@ const FlashcardAppWithPreloadContent: React.FC<
     );
   }
 
-  const { setCurrentCardSet, loadCardSetData } = context;
+  const { setSelectedCardSet, loadCardSetData } = context;
 
   // Safe navigation handler with validation
   const handleNavigation = React.useCallback(
@@ -107,16 +107,11 @@ const FlashcardAppWithPreloadContent: React.FC<
 
         console.log(`FlashcardAppWithPreload: Found card set:`, cardSet);
 
-        // Set the current card set in context first
-        setCurrentCardSet({
-          id: cardSet.id,
-          name: cardSet.name,
-          cover: cardSet.cover,
-          dataFile: cardSet.dataFile,
-        });
+        // Set the selected card set in context first
+        setSelectedCardSet(cardSet);
 
         console.log(
-          `FlashcardAppWithPreload: Set current card set, now loading data from ${cardSet.dataFile}`
+          `FlashcardAppWithPreload: Set selected card set, now loading data from ${cardSet.dataFile}`
         );
 
         // Load the actual card data

@@ -4,7 +4,6 @@
 
 import type {
   Flashcard,
-  FlashcardData,
   PendingOperation,
   CardSetProgress,
 } from "../types/flashcard";

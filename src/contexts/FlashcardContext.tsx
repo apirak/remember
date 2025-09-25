@@ -15,6 +15,7 @@ import type {
   Flashcard,
   FlashcardData,
   CardSetProgress,
+  CardSet,
 } from '../types/flashcard';
 import { transformFlashcardData } from '../utils/seedData';
 // Enhanced error handling for card set operations
@@ -83,12 +84,9 @@ const initialState: FlashcardContextState = {
   currentSession: null,
   currentCard: null,
 
-  // Card set management (new)
+  // Card set management
   selectedCardSet: null,
   availableCardSets: [],
-
-  // Card set management (legacy) - will be initialized in provider
-  currentCardSet: null,
 
   // Track last successfully loaded card set for error recovery
   lastWorkingCardSet: null,
@@ -162,14 +160,7 @@ const FlashcardContext = createContext<{
   clearError: () => void;
   retryPendingOperations: () => void;
   setUser: (user: any, isGuest: boolean) => void;
-  setCurrentCardSet: (
-    cardSet: {
-      id: string;
-      name: string;
-      cover: string;
-      dataFile: string;
-    } | null
-  ) => void;
+  setSelectedCardSet: (cardSet: CardSet | null) => void;
 
   // Firestore integration methods
   loadCardsFromFirestore: () => Promise<void>;
@@ -226,7 +217,7 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
       if (transformedCards.length === 0) {
         throw createCardSetError(
           'CARD_SET_EMPTY',
-          state.currentCardSet?.id,
+          state.selectedCardSet?.id,
           dataFile
         );
       }
@@ -237,10 +228,10 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
       );
 
       // Mark this card set as the last working one on successful load
-      if (state.currentCardSet) {
+      if (state.selectedCardSet) {
         dispatch({
           type: 'SET_LAST_WORKING_CARD_SET',
-          payload: state.currentCardSet,
+          payload: state.selectedCardSet,
         });
       }
     } catch (error) {
@@ -253,7 +244,7 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
       const errorCode = getErrorCodeFromException(error);
       const cardSetError = createCardSetError(
         errorCode,
-        state.currentCardSet?.id,
+        state.selectedCardSet?.id,
         dataFile,
         error
       );
@@ -290,10 +281,26 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
             dispatch({ type: 'LOAD_CARDS', payload: fallbackCards });
 
             // Revert to the last working card set
-            dispatch({
-              type: 'SET_CURRENT_CARD_SET',
-              payload: state.lastWorkingCardSet,
-            });
+            if (state.lastWorkingCardSet) {
+              const fallbackCardSet: CardSet = {
+                id: state.lastWorkingCardSet.id,
+                name: state.lastWorkingCardSet.name,
+                description: '',
+                cover: state.lastWorkingCardSet.cover,
+                cardCount: fallbackCards.length,
+                category: '',
+                tags: [],
+                dataFile: state.lastWorkingCardSet.dataFile,
+                author: '',
+                isActive: true,
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString(),
+              };
+              dispatch({
+                type: 'SET_SELECTED_CARD_SET',
+                payload: fallbackCardSet,
+              });
+            }
 
             console.log(
               `FlashcardContext: Successfully fell back to ${state.lastWorkingCardSet.name}`
@@ -334,10 +341,25 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
    * Initialize card set from localStorage on component mount
    */
   useEffect(() => {
-    // Only initialize if currentCardSet is null (initial state)
-    if (!state.currentCardSet) {
+    // Only initialize if selectedCardSet is null (initial state)
+    if (!state.selectedCardSet) {
       const initialCardSet = getInitialCardSet();
-      dispatch({ type: 'SET_CURRENT_CARD_SET', payload: initialCardSet });
+      // For now, we'll create a minimal CardSet from the stored data and load full data later
+      const cardSetShell: CardSet = {
+        id: initialCardSet.id,
+        name: initialCardSet.name,
+        description: '', // Will be loaded from card_set.json
+        cover: initialCardSet.cover,
+        cardCount: 0, // Will be populated when data loads
+        category: '',
+        tags: [],
+        dataFile: initialCardSet.dataFile,
+        author: '',
+        isActive: true,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+      dispatch({ type: 'SET_SELECTED_CARD_SET', payload: cardSetShell });
     }
   }, []);
 
@@ -376,15 +398,15 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
   }, []); // Empty dependency array since we want this to run once on mount
 
   /**
-   * Load card data when currentCardSet changes, considering authentication state
+   * Load card data when selectedCardSet changes, considering authentication state
    * - For authenticated users: load from Firestore
    * - For guest users: load from JSON
    */
   useEffect(() => {
-    if (state.currentCardSet?.dataFile) {
+    if (state.selectedCardSet?.dataFile) {
       console.log(
         `FlashcardContext: Card set changed to ${
-          state.currentCardSet.name
+          state.selectedCardSet.name
         }, loading data for ${state.isGuest ? 'guest' : 'authenticated'} user`
       );
 
@@ -396,15 +418,15 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
             error
           );
           // Fallback to JSON if Firestore fails
-          if (state.currentCardSet?.dataFile) {
-            loadCardSetData(state.currentCardSet.dataFile);
+          if (state.selectedCardSet?.dataFile) {
+            loadCardSetData(state.selectedCardSet.dataFile);
           }
         });
       } else {
         // Guest user - load from JSON
-        loadCardSetData(state.currentCardSet.dataFile);
+        loadCardSetData(state.selectedCardSet.dataFile);
       }
-    } else if (!state.currentCardSet?.dataFile) {
+    } else if (!state.selectedCardSet?.dataFile) {
       // Fallback to default data if no dataFile
       const loadDefaultData = async () => {
         dispatch({ type: 'SET_LOADING', payload: true });
@@ -424,7 +446,7 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
       };
       loadDefaultData();
     }
-  }, [state.currentCardSet, state.isGuest, state.user]); // Depends on auth state too
+  }, [state.selectedCardSet, state.isGuest, state.user]); // Depends on auth state too
 
   /**
    * OPTIMIZATION: Batch save pending progress when review session completes
@@ -453,7 +475,7 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
 
         const result = await FlashcardService.saveProgressBatch(
           state.currentSession.pendingProgress,
-          state.currentCardSet?.id || 'unknown'
+          state.selectedCardSet?.id || 'unknown'
         );
 
         if (result.success) {
@@ -485,7 +507,7 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
     state.currentSession?.pendingProgress?.size,
     state.isGuest,
     state.dataSource,
-    state.currentCardSet?.id,
+    state.selectedCardSet?.id,
   ]);
 
   /**
@@ -597,32 +619,28 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
   } = firestoreOperations;
 
   /**
-   * Set the current card set and persist to localStorage
+   * Set the selected card set and persist to localStorage
    */
-  const setCurrentCardSet = useCallback(
-    (
-      cardSet: {
-        id: string;
-        name: string;
-        cover: string;
-        dataFile: string;
-      } | null
-    ) => {
-      console.log('FlashcardContext: Setting current card set', cardSet);
+  const setSelectedCardSet = useCallback((cardSet: CardSet | null) => {
+    console.log('FlashcardContext: Setting selected card set', cardSet);
 
-      // Reset any existing session when changing card sets to prevent race conditions
-      dispatch({ type: 'RESET_SESSION' });
+    // Reset any existing session when changing card sets to prevent race conditions
+    dispatch({ type: 'RESET_SESSION' });
 
-      // Update context state
-      dispatch({ type: 'SET_CURRENT_CARD_SET', payload: cardSet });
+    // Update context state
+    dispatch({ type: 'SET_SELECTED_CARD_SET', payload: cardSet });
 
-      // Persist to localStorage if card set is valid and storage is available
-      if (cardSet && isStorageAvailable()) {
-        saveLastCardSet(cardSet);
-      }
-    },
-    []
-  );
+    // Persist to localStorage if card set is valid and storage is available
+    if (cardSet && isStorageAvailable()) {
+      const storedData = {
+        id: cardSet.id,
+        name: cardSet.name,
+        cover: cardSet.cover,
+        dataFile: cardSet.dataFile,
+      };
+      saveLastCardSet(storedData);
+    }
+  }, []);
 
   // Create complex action helpers using the factory function
   const flashcardActions = createFlashcardActions({
@@ -662,7 +680,7 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
     clearError,
     retryPendingOperations,
     setUser,
-    setCurrentCardSet,
+    setSelectedCardSet,
     // Firestore integration methods
     loadCardsFromFirestore,
     saveCardToFirestore,

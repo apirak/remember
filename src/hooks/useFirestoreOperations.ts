@@ -54,21 +54,29 @@ export const createFirestoreOperations = (deps: FirestoreOperationsDeps) => {
       clearError();
 
       // Get current card set info with fallback to default
-      let currentCardSet = state.currentCardSet;
-      if (!currentCardSet) {
+      let selectedCardSet = state.selectedCardSet;
+      if (!selectedCardSet) {
         // Use default card set if none is selected
-        currentCardSet = {
+        selectedCardSet = {
           id: "chinese_essentials_1",
           name: "Chinese Essentials 1",
+          description: "Basic everyday communication",
           cover: "🇨🇳",
+          cardCount: 0,
+          category: "language_basics",
+          tags: ["chinese", "communication", "beginner"],
           dataFile: "chinese_essentials_in_communication_1.json",
+          author: "HSK Learning Team",
+          isActive: true,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
         };
-        console.log("Using default card set as fallback:", currentCardSet.name);
+        console.log("Using default card set as fallback:", selectedCardSet.name);
       }
 
       const result = await FlashcardService.loadCardSetData(
-        currentCardSet.id,
-        currentCardSet.dataFile
+        selectedCardSet.id,
+        selectedCardSet.dataFile
       );
 
       if (result.success && result.data) {
@@ -80,7 +88,7 @@ export const createFirestoreOperations = (deps: FirestoreOperationsDeps) => {
         dispatch({ type: "SET_LAST_SYNC_TIME", payload: new Date() });
 
         console.log(
-          `Loaded ${result.data.cards.length} cards from ${result.data.source} for card set: ${currentCardSet.name}`
+          `Loaded ${result.data.cards.length} cards from ${result.data.source} for card set: ${selectedCardSet.name}`
         );
       } else {
         throw new Error(result.error || "Failed to load cards");
@@ -106,24 +114,32 @@ export const createFirestoreOperations = (deps: FirestoreOperationsDeps) => {
       clearError();
 
       // Get current card set info with fallback to default
-      let currentCardSet = state.currentCardSet;
-      if (!currentCardSet) {
+      let selectedCardSet = state.selectedCardSet;
+      if (!selectedCardSet) {
         // Use default card set if none is selected
-        currentCardSet = {
+        selectedCardSet = {
           id: "chinese_essentials_1",
           name: "Chinese Essentials 1",
+          description: "Basic everyday communication",
           cover: "🇨🇳",
+          cardCount: 0,
+          category: "language_basics",
+          tags: ["chinese", "communication", "beginner"],
           dataFile: "chinese_essentials_in_communication_1.json",
+          author: "HSK Learning Team",
+          isActive: true,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
         };
       }
 
-      const result = await FlashcardService.saveCard(card, currentCardSet.id);
+      const result = await FlashcardService.saveCard(card, selectedCardSet.id);
 
       if (result.success) {
         setSyncStatus("idle");
         dispatch({ type: "SET_LAST_SYNC_TIME", payload: new Date() });
         console.log(
-          `Saved card ${card.id} to Firestore in card set: ${currentCardSet.name}`
+          `Saved card ${card.id} to Firestore in card set: ${selectedCardSet.name}`
         );
       } else {
         throw new Error(result.error || "Failed to save card to Firestore");
@@ -140,7 +156,7 @@ export const createFirestoreOperations = (deps: FirestoreOperationsDeps) => {
       // Add to pending operations for retry
       const pendingOp = FlashcardService.createPendingOperation("add_card", {
         ...card,
-        cardSetId: state.currentCardSet?.id,
+        cardSetId: state.selectedCardSet?.id,
       });
       dispatch({ type: "ADD_PENDING_OPERATION", payload: pendingOp });
     } finally {
@@ -163,20 +179,28 @@ export const createFirestoreOperations = (deps: FirestoreOperationsDeps) => {
       clearError();
 
       // Get current card set info with fallback to default
-      let currentCardSet = state.currentCardSet;
-      if (!currentCardSet) {
+      let selectedCardSet = state.selectedCardSet;
+      if (!selectedCardSet) {
         // Use default card set if none is selected
-        currentCardSet = {
+        selectedCardSet = {
           id: "chinese_essentials_1",
           name: "Chinese Essentials 1",
+          description: "Basic everyday communication",
           cover: "🇨🇳",
+          cardCount: 0,
+          category: "language_basics",
+          tags: ["chinese", "communication", "beginner"],
           dataFile: "chinese_essentials_in_communication_1.json",
+          author: "HSK Learning Team",
+          isActive: true,
+          createdAt: new Date().toISOString(),
+          updatedAt: new Date().toISOString(),
         };
       }
 
       const result = await FlashcardService.saveProgress(
         cardId,
-        currentCardSet.id,
+        selectedCardSet.id,
         progressData
       );
 
@@ -184,7 +208,7 @@ export const createFirestoreOperations = (deps: FirestoreOperationsDeps) => {
         setSyncStatus("idle");
         dispatch({ type: "SET_LAST_SYNC_TIME", payload: new Date() });
         console.log(
-          `Updated progress for card ${cardId} in Firestore (card set: ${currentCardSet.name})`
+          `Updated progress for card ${cardId} in Firestore (card set: ${selectedCardSet.name})`
         );
       } else {
         throw new Error(result.error || "Failed to save progress to Firestore");
@@ -322,11 +346,11 @@ export const createFirestoreOperations = (deps: FirestoreOperationsDeps) => {
       console.log("updateCurrentCardSetProgress called:", {
         isGuest: state.isGuest,
         user: state.user?.uid || "none",
-        currentCardSet: state.currentCardSet?.id || "none",
+        selectedCardSet: state.selectedCardSet?.id || "none",
         allCardsCount: state.allCards.length,
       });
 
-      if (state.isGuest || !state.currentCardSet) {
+      if (state.isGuest || !state.selectedCardSet) {
         console.log("Guest mode or no card set: Cannot update progress");
         return;
       }
@@ -339,11 +363,11 @@ export const createFirestoreOperations = (deps: FirestoreOperationsDeps) => {
       // Calculate progress from current cards in state
       const progress = calculateCardSetProgress(
         state.allCards,
-        state.currentCardSet.id
+        state.selectedCardSet.id
       );
 
       console.log(
-        `Updating progress for ${state.currentCardSet.name}: ${progress.progressPercentage}% (${progress.reviewedCards}/${progress.totalCards})`
+        `Updating progress for ${state.selectedCardSet.name}: ${progress.progressPercentage}% (${progress.reviewedCards}/${progress.totalCards})`
       );
 
       // Save to Firestore

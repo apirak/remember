@@ -4,14 +4,10 @@
 import React, { useState, useEffect } from 'react';
 import EmojiText from '../EmojiSVG';
 import { useFlashcard } from '../../contexts/FlashcardContext';
+import type { CardSet } from '../../types/flashcard';
 
-// Type definitions for card set data structure
-interface CardSet {
-  id: string;
-  name: string;
-  description: string;
-  cover: string; // emoji
-  cardCount: number;
+// Extended card set with progress for display
+interface CardSetWithProgress extends CardSet {
   progress: number; // 0-100 percentage
   dataFile: string; // JSON file containing the card data
 }
@@ -25,7 +21,7 @@ interface CardSetSelectionProps {
 
 const CardSetSelection: React.FC<CardSetSelectionProps> = ({ onNavigate }) => {
   // Access FlashcardContext to set the current card set and load progress
-  const { setCurrentCardSet, loadAllCardSetProgress, state } = useFlashcard();
+  const { setSelectedCardSet, loadAllCardSetProgress, state } = useFlashcard();
 
   // State for loading card sets from JSON
   const [cardSets, setCardSets] = useState<CardSet[]>([]);
@@ -122,24 +118,22 @@ const CardSetSelection: React.FC<CardSetSelectionProps> = ({ onNavigate }) => {
   };
 
   // Handle card set selection
-  const handleCardSetSelect = (cardSet: CardSet) => {
+  const handleCardSetSelect = (cardSetWithProgress: CardSetWithProgress) => {
     console.log('CardSetSelection: Card set selected', {
-      id: cardSet.id,
-      name: cardSet.name,
-      cardCount: cardSet.cardCount,
-      progress: cardSet.progress,
+      id: cardSetWithProgress.id,
+      name: cardSetWithProgress.name,
+      cardCount: cardSetWithProgress.cardCount,
+      progress: cardSetWithProgress.progress,
     });
 
-    // Set the current card set in the context
-    setCurrentCardSet({
-      id: cardSet.id,
-      name: cardSet.name,
-      cover: cardSet.cover,
-      dataFile: cardSet.dataFile,
-    });
+    // Remove the progress property before passing to setSelectedCardSet
+    const { progress: _, ...cardSet } = cardSetWithProgress;
+
+    // Set the selected card set in the context
+    setSelectedCardSet(cardSet);
 
     console.log(
-      `CardSetSelection: Set current card set to ${cardSet.name} (${cardSet.dataFile})`
+      `CardSetSelection: Set selected card set to ${cardSet.name} (${cardSet.dataFile})`
     );
 
     // Navigate to the card set page using URL routing

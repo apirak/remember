@@ -67,7 +67,7 @@ export const DebugPanel: React.FC<DebugPanelProps> = ({
     dataSource: state.dataSource,
     isGuest: state.isGuest,
     syncStatus: state.syncStatus,
-    currentCardSet: state.currentCardSet?.name || "None",
+    currentCardSet: state.selectedCardSet?.name || "None",
     sampleCards: state.allCards.slice(0, 3).map((card: Flashcard) => ({
       id: card.id,
       lastReviewDate: card.lastReviewDate,
@@ -119,15 +119,15 @@ export const DebugPanel: React.FC<DebugPanelProps> = ({
           <div>
             <span className="text-blue-400">Card Set:</span>{" "}
             {debugInfo.currentCardSet}
-            {state.currentCardSet && (
-              <div className="text-gray-400 ml-4">
-                ID: {state.currentCardSet.id}
-              </div>
+            {state.selectedCardSet && (
+              <span className="text-xs text-gray-400">
+                ID: {state.selectedCardSet.id}
+              </span>
             )}
-            {state.currentCardSet && (
-              <div className="text-gray-400 ml-4">
-                File: {state.currentCardSet.dataFile}
-              </div>
+            {state.selectedCardSet && (
+              <span className="text-xs text-gray-400">
+                File: {state.selectedCardSet.dataFile}
+              </span>
             )}
           </div>
           <div>
@@ -169,9 +169,9 @@ export const DebugPanel: React.FC<DebugPanelProps> = ({
           )}
 
           {/* Card set transition status */}
-          {state.isLoading && state.currentCardSet && (
-            <div className="text-orange-400">
-              📂 Loading: {state.currentCardSet.name}
+          {state.isLoading && state.selectedCardSet && (
+            <div className="text-xs text-amber-600 animate-pulse">
+              📂 Loading: {state.selectedCardSet.name}
             </div>
           )}
 
@@ -212,7 +212,7 @@ export const DebugPanel: React.FC<DebugPanelProps> = ({
                     {state.currentCard.front.title.length > 30 ? "..." : ""}
                   </div>
                   {/* Card set validation info */}
-                  {state.currentCardSet && (
+                  {state.selectedCardSet && (
                     <div className="text-xs mt-1">
                       <span className="text-purple-400">Card-Set Match:</span>{" "}
                       {state.currentSession.cards.some(

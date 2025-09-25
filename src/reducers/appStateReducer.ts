@@ -38,22 +38,12 @@ export type AppStateAction =
   | { type: "SET_USER"; payload: { user: any; isGuest: boolean } }
   // Card set management
   | {
-      type: "SET_CURRENT_CARD_SET";
-      payload: {
-        id: string;
-        name: string;
-        cover: string;
-        dataFile: string;
-      } | null;
+      type: "SET_SELECTED_CARD_SET";
+      payload: import('../types/flashcard').CardSet | null;
     }
   | {
       type: "SET_LAST_WORKING_CARD_SET";
-      payload: {
-        id: string;
-        name: string;
-        cover: string;
-        dataFile: string;
-      } | null;
+      payload: import('../types/flashcard').CardSet | null;
     };
 
 /**
@@ -151,15 +141,20 @@ export const appStateReducer = (
     }
 
     // Card set management
-    case "SET_CURRENT_CARD_SET": {
+    case "SET_SELECTED_CARD_SET": {
       return {
-        currentCardSet: action.payload,
+        selectedCardSet: action.payload,
       };
     }
 
     case "SET_LAST_WORKING_CARD_SET": {
       return {
-        lastWorkingCardSet: action.payload,
+        lastWorkingCardSet: action.payload ? {
+          id: action.payload.id,
+          name: action.payload.name,
+          cover: action.payload.cover,
+          dataFile: action.payload.dataFile,
+        } : null,
       };
     }
 

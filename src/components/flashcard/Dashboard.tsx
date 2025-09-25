@@ -97,15 +97,15 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
                 </button>
 
                 {/* Retry button for retryable errors */}
-                {state.error.retryable && state.currentCardSet?.dataFile && (
+                {state.error.retryable && state.selectedCardSet?.dataFile && (
                   <button
                     onClick={() => {
                       clearError();
                       // Retry loading the current card set
-                      if (state.currentCardSet?.dataFile) {
+                      if (state.selectedCardSet?.dataFile) {
                         console.log('Dashboard: Retrying card set load');
                         // The loadCardSetData function will be triggered by the useEffect
-                        // when currentCardSet changes or when manually called
+                        // when selectedCardSet changes or when manually called
                       }
                     }}
                     className="text-xs bg-red-100 text-red-700 hover:bg-red-200 px-2 py-1 rounded transition-colors duration-200"
@@ -134,8 +134,8 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
             {/* Share Button - Top Right */}
             <button
               onClick={(event) => {
-                const cardSetName = state.currentCardSet?.name || 'Flashcards';
-                const cardSetId = state.currentCardSet?.id;
+                const cardSetName = state.selectedCardSet?.name || 'Flashcards';
+                const cardSetId = state.selectedCardSet?.id;
 
                 // Build the shareable URL with card set path
                 let shareUrl = window.location.origin;
@@ -190,12 +190,13 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
           {/* Header */}
           <div className="text-center mb-5 mt-2">
             <EmojiText size={64} className="p-4">
-              {state.currentCardSet?.cover || '🎓'}
+              {state.selectedCardSet?.cover || '🎓'}
             </EmojiText>
             <h1 className="text-3xl font-child text-gray-600 mb-2">
-              {state.currentCardSet?.name || 'Flashcards'}
+              {state.selectedCardSet?.name || 'Flashcards'}
             </h1>
             <p className="text-sm font-rounded text-gray-600">
+              {state.selectedCardSet?.description }
               Remember Everything with <br />
               <a
                 className="text-blue-600 hover:text-blue-800 no-underline"

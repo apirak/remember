@@ -129,7 +129,7 @@ const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
       {
         currentCardId: state.currentCard.id,
         sessionCardIds: state.currentSession.cards.map((c) => c.id),
-        currentCardSet: state.currentCardSet?.name,
+        currentCardSet: state.selectedCardSet?.name,
       }
     );
 

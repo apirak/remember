@@ -31,15 +31,31 @@ describe('FlashcardContext Card Set Persistence', () => {
   const mockCardSet1 = {
     id: 'chinese_essentials_1',
     name: 'Chinese Essentials 1',
+    description: 'Basic everyday communication',
     cover: '🇨🇳',
+    cardCount: 50,
+    category: 'language_basics',
+    tags: ['chinese', 'communication', 'beginner'],
     dataFile: 'chinese_essentials_in_communication_1.json',
+    author: 'Test Author',
+    isActive: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z',
   };
 
   const mockCardSet2 = {
     id: 'chinese_essentials_2',
     name: 'Chinese Essentials 2',
+    description: 'Intermediate communication',
     cover: '🏮',
+    cardCount: 75,
+    category: 'language_intermediate',
+    tags: ['chinese', 'communication', 'intermediate'],
     dataFile: 'chinese_essentials_in_communication_2.json',
+    author: 'Test Author',
+    isActive: true,
+    createdAt: '2024-01-01T00:00:00Z',
+    updatedAt: '2024-01-01T00:00:00Z',
   };
 
   beforeEach(() => {
@@ -125,11 +141,11 @@ describe('FlashcardContext Card Set Persistence', () => {
 
       // Change card set
       await act(async () => {
-        result.current.setCurrentCardSet(mockCardSet2);
+        result.current.setSelectedCardSet(mockCardSet2);
       });
 
       // Check context updated
-      expect(result.current.state.currentCardSet).toEqual(mockCardSet2);
+      expect(result.current.state.selectedCardSet).toEqual(mockCardSet2);
 
       // Check localStorage updated
       const stored = localStorage.getItem('remember_last_card_set');

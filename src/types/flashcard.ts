@@ -101,14 +101,6 @@ export interface FlashcardContextState {
   selectedCardSet: CardSet | null;
   availableCardSets: CardSet[];
 
-  // Legacy support - will be removed after migration
-  currentCardSet: {
-    id: string;
-    name: string;
-    cover: string;
-    dataFile: string;
-  } | null;
-
   // Track last successfully loaded card set for error recovery
   lastWorkingCardSet: {
     id: string;
