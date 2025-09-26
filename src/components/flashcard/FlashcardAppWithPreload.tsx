@@ -1,19 +1,19 @@
 // FlashcardAppWithPreload - Wrapper component for handling preloaded card sets
 // Automatically loads specified card set and navigates to dashboard
 
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 import {
   FlashcardProvider,
   useFlashcard,
-} from "../../contexts/FlashcardContext";
-import Dashboard from "./Dashboard.tsx";
-import Review from "./Review.tsx";
-import Completion from "./Completion.tsx";
-import CardSetSelection from "./CardSetSelection.tsx";
-import { DebugPanel } from "../ui/DebugPanel.tsx";
+} from '../../contexts/FlashcardContext';
+import Dashboard from './Dashboard.tsx';
+import Review from './Review.tsx';
+import Completion from './Completion.tsx';
+import CardSetSelection from './CardSetSelection.tsx';
+import { DebugPanel } from '../ui/DebugPanel.tsx';
 
 // Navigation types
-type AppRoute = "dashboard" | "review" | "complete" | "card-sets";
+type AppRoute = 'dashboard' | 'review' | 'complete' | 'card-sets';
 
 interface FlashcardAppWithPreloadProps {
   preloadCardSet: string;
@@ -26,7 +26,7 @@ const FlashcardAppWithPreloadContent: React.FC<
   FlashcardAppWithPreloadProps
 > = ({ preloadCardSet, cardSetName, cardSetDescription }) => {
   const context = useFlashcard();
-  const [currentRoute, setCurrentRoute] = React.useState<AppRoute>("dashboard");
+  const [currentRoute, setCurrentRoute] = React.useState<AppRoute>('dashboard');
   const [isPreloading, setIsPreloading] = React.useState(true);
   const preloadedRef = React.useRef<string | null>(null);
 
@@ -54,10 +54,10 @@ const FlashcardAppWithPreloadContent: React.FC<
 
       // Validate route exists in AppRoute type
       const validRoutes: AppRoute[] = [
-        "dashboard",
-        "review",
-        "complete",
-        "card-sets",
+        'dashboard',
+        'review',
+        'complete',
+        'card-sets',
       ];
       if (!validRoutes.includes(route)) {
         console.error(`FlashcardApp: Invalid route '${route}' requested`);
@@ -91,7 +91,7 @@ const FlashcardAppWithPreloadContent: React.FC<
         );
 
         // First, load the card set metadata
-        const response = await fetch("/data/card_set.json");
+        const response = await fetch('/data/card_set.json');
         if (!response.ok) {
           throw new Error(`Failed to load card sets: ${response.status}`);
         }
@@ -157,13 +157,13 @@ const FlashcardAppWithPreloadContent: React.FC<
 
   // Handle different app routes
   switch (currentRoute) {
-    case "dashboard":
+    case 'dashboard':
       return <Dashboard onNavigate={handleNavigation} />;
-    case "review":
+    case 'review':
       return <Review onNavigate={handleNavigation} />;
-    case "complete":
+    case 'complete':
       return <Completion onNavigate={handleNavigation} />;
-    case "card-sets":
+    case 'card-sets':
       return <CardSetSelection onNavigate={handleNavigation} />;
     default:
       console.error(`FlashcardApp: Unknown route '${currentRoute}'`);
@@ -179,7 +179,7 @@ const FlashcardAppWithPreload: React.FC<FlashcardAppWithPreloadProps> = (
     <div className="app-container">
       <FlashcardProvider>
         <FlashcardAppWithPreloadContent {...props} />
-        <DebugPanel />
+        {/* <DebugPanel /> */}
       </FlashcardProvider>
     </div>
   );
