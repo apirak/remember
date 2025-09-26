@@ -10,7 +10,7 @@ import Dashboard from './Dashboard.tsx';
 import Review from './Review.tsx';
 import Completion from './Completion.tsx';
 import CardSetSelection from './CardSetSelection.tsx';
-import { DebugPanel } from '../ui/DebugPanel.tsx';
+// import { DebugPanel } from '../ui/DebugPanel.tsx';
 
 // Navigation types
 type AppRoute = 'dashboard' | 'review' | 'complete' | 'card-sets';
