@@ -61,6 +61,35 @@
     transform: rotateY(180deg);
   }
 
+  /* 
+   * SOLUTION FOR CARD FLIP ISSUE:
+   * Hide back content completely until flip animation is done
+   * - Much simpler than opacity transitions
+   * - Prevents "answer flash" when transitioning to next card
+   * - Only affects back content, front cards remain normal
+   */
+
+  /* Hide back content by default */
+  .flashcard-back .space-y-4 {
+    display: none;
+  }
+
+  /* Show back content only when card is flipped */
+  .flashcard-flip.flipped .flashcard-back .space-y-4 {
+    display: block;
+    animation: fadeInContent 0.3s ease 0.3s both; /* Fade in after flip is halfway */
+  }
+
+  /* Fade in animation for back content */
+  @keyframes fadeInContent {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
   /* Button animations */
   .btn-bounce {
     @apply transform transition-all duration-200 hover:scale-105 active:scale-95;
