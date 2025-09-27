@@ -19,13 +19,14 @@ import {
   type DocumentData,
   type QuerySnapshot,
   type WriteBatch,
-} from "firebase/firestore";
+} from 'firebase/firestore';
 import {
   firestore,
   isFirebaseError,
   getFirebaseErrorMessage,
-} from "./firebase";
-import { getCurrentUser } from "./auth";
+} from './firebase';
+import { getCurrentUser } from './auth';
+import { firestoreCounter } from './simpleFirestoreCounter';
 
 // Firestore operation result type
 export interface FirestoreResult<T = any> {
@@ -36,9 +37,9 @@ export interface FirestoreResult<T = any> {
 
 // Firestore collection names
 export const COLLECTIONS = {
-  USERS: "users",
-  CARD_SETS: "cardSets",
-  CARDS: "cards",
+  USERS: 'users',
+  CARD_SETS: 'cardSets',
+  CARDS: 'cards',
 } as const;
 
 // Helper function to get user's cards collection reference for a specific card set
@@ -96,18 +97,19 @@ export const createUserProfile = async (
       updatedAt: serverTimestamp(),
     };
 
+    firestoreCounter.countWrite();
     await setDoc(userDocRef, userData, { merge: true });
 
-    console.log("User profile created/updated:", userId);
+    console.log('User profile created/updated:', userId);
     return { success: true, data: userData };
   } catch (error) {
-    console.error("Error creating user profile:", error);
+    console.error('Error creating user profile:', error);
 
     if (isFirebaseError(error)) {
       return { success: false, error: getFirebaseErrorMessage(error) };
     }
 
-    return { success: false, error: "Failed to create user profile." };
+    return { success: false, error: 'Failed to create user profile.' };
   }
 };
 
@@ -117,22 +119,23 @@ export const getUserProfile = async (
 ): Promise<FirestoreResult> => {
   try {
     const userDocRef = getUserDocRef(userId);
+    firestoreCounter.countRead();
     const userDoc = await getDoc(userDocRef);
 
     if (userDoc.exists()) {
       const userData = userDoc.data();
       return { success: true, data: userData };
     } else {
-      return { success: false, error: "User profile not found." };
+      return { success: false, error: 'User profile not found.' };
     }
   } catch (error) {
-    console.error("Error getting user profile:", error);
+    console.error('Error getting user profile:', error);
 
     if (isFirebaseError(error)) {
       return { success: false, error: getFirebaseErrorMessage(error) };
     }
 
-    return { success: false, error: "Failed to get user profile." };
+    return { success: false, error: 'Failed to get user profile.' };
   }
 };
 
@@ -146,7 +149,7 @@ export const saveFlashcard = async (
     if (!currentUser) {
       return {
         success: false,
-        error: "User must be authenticated to save cards.",
+        error: 'User must be authenticated to save cards.',
       };
     }
 
@@ -164,18 +167,20 @@ export const saveFlashcard = async (
       createdAt: cardData.createdAt || serverTimestamp(),
     };
 
+    // ✍️ นับ WRITE operation
+    firestoreCounter.countWrite();
     await setDoc(cardDocRef, cardWithTimestamp, { merge: true });
 
-    console.log("Flashcard saved:", cardData.id);
+    console.log('Flashcard saved:', cardData.id);
     return { success: true, data: cardWithTimestamp };
   } catch (error) {
-    console.error("Error saving flashcard:", error);
+    console.error('Error saving flashcard:', error);
 
     if (isFirebaseError(error)) {
       return { success: false, error: getFirebaseErrorMessage(error) };
     }
 
-    return { success: false, error: "Failed to save flashcard." };
+    return { success: false, error: 'Failed to save flashcard.' };
   }
 };
 
@@ -189,7 +194,7 @@ export const saveFlashcardsBatch = async (
     if (!currentUser) {
       return {
         success: false,
-        error: "User must be authenticated to save cards.",
+        error: 'User must be authenticated to save cards.',
       };
     }
 
@@ -213,6 +218,8 @@ export const saveFlashcardsBatch = async (
       };
 
       batch.set(cardDocRef, cardWithTimestamp, { merge: true });
+      // นับแต่ละ write operation ใน batch
+      firestoreCounter.countWrite();
     });
 
     await batch.commit();
@@ -220,13 +227,13 @@ export const saveFlashcardsBatch = async (
     console.log(`${cards.length} flashcards saved in batch`);
     return { success: true, data: cards };
   } catch (error) {
-    console.error("Error saving flashcards batch:", error);
+    console.error('Error saving flashcards batch:', error);
 
     if (isFirebaseError(error)) {
       return { success: false, error: getFirebaseErrorMessage(error) };
     }
 
-    return { success: false, error: "Failed to save flashcards." };
+    return { success: false, error: 'Failed to save flashcards.' };
   }
 };
 
@@ -239,7 +246,7 @@ export const getUserFlashcards = async (
     if (!currentUser) {
       return {
         success: false,
-        error: "User must be authenticated to get cards.",
+        error: 'User must be authenticated to get cards.',
       };
     }
 
@@ -247,11 +254,12 @@ export const getUserFlashcards = async (
       currentUser.uid,
       cardSetId
     );
-    const cardsQuery = query(cardsCollection, orderBy("createdAt", "desc"));
+    const cardsQuery = query(cardsCollection, orderBy('createdAt', 'desc'));
 
-    const querySnapshot: QuerySnapshot<DocumentData> = await getDocs(
-      cardsQuery
-    );
+    // 📖 นับ READ operation
+    firestoreCounter.countRead();
+    const querySnapshot: QuerySnapshot<DocumentData> =
+      await getDocs(cardsQuery);
     const cards = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
@@ -272,13 +280,13 @@ export const getUserFlashcards = async (
     console.log(`Retrieved ${cards.length} flashcards`);
     return { success: true, data: cards };
   } catch (error) {
-    console.error("Error getting flashcards:", error);
+    console.error('Error getting flashcards:', error);
 
     if (isFirebaseError(error)) {
       return { success: false, error: getFirebaseErrorMessage(error) };
     }
 
-    return { success: false, error: "Failed to get flashcards." };
+    return { success: false, error: 'Failed to get flashcards.' };
   }
 };
 
@@ -291,7 +299,7 @@ export const getDueFlashcards = async (
     if (!currentUser) {
       return {
         success: false,
-        error: "User must be authenticated to get cards.",
+        error: 'User must be authenticated to get cards.',
       };
     }
 
@@ -303,13 +311,13 @@ export const getDueFlashcards = async (
 
     const dueCardsQuery = query(
       cardsCollection,
-      where("nextReviewDate", "<=", now),
-      orderBy("nextReviewDate", "asc")
+      where('nextReviewDate', '<=', now),
+      orderBy('nextReviewDate', 'asc')
     );
 
-    const querySnapshot: QuerySnapshot<DocumentData> = await getDocs(
-      dueCardsQuery
-    );
+    firestoreCounter.countRead();
+    const querySnapshot: QuerySnapshot<DocumentData> =
+      await getDocs(dueCardsQuery);
     const dueCards = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
@@ -321,13 +329,13 @@ export const getDueFlashcards = async (
     console.log(`Retrieved ${dueCards.length} due flashcards`);
     return { success: true, data: dueCards };
   } catch (error) {
-    console.error("Error getting due flashcards:", error);
+    console.error('Error getting due flashcards:', error);
 
     if (isFirebaseError(error)) {
       return { success: false, error: getFirebaseErrorMessage(error) };
     }
 
-    return { success: false, error: "Failed to get due flashcards." };
+    return { success: false, error: 'Failed to get due flashcards.' };
   }
 };
 
@@ -343,7 +351,7 @@ export const updateFlashcardProgress = async (
     if (!currentUser) {
       return {
         success: false,
-        error: "User must be authenticated to update progress.",
+        error: 'User must be authenticated to update progress.',
       };
     }
 
@@ -353,6 +361,7 @@ export const updateFlashcardProgress = async (
     );
 
     // Check if card exists first
+    firestoreCounter.countRead();
     const cardDoc = await getDoc(cardDocRef);
 
     const updateData = {
@@ -388,24 +397,26 @@ export const updateFlashcardProgress = async (
         isNew: progressData.isNew !== undefined ? progressData.isNew : false,
       };
 
+      firestoreCounter.countWrite();
       await setDoc(cardDocRef, newCardData);
       console.log(`Successfully created new card: ${cardId}`);
     } else {
       // Update existing card
       console.log(`Updating existing card: ${cardId} (cardSet: ${cardSetId})`);
+      firestoreCounter.countWrite();
       await updateDoc(cardDocRef, updateData);
       console.log(`Successfully updated card: ${cardId}`);
     }
 
     return { success: true, data: updateData };
   } catch (error) {
-    console.error("Error updating flashcard progress:", error);
+    console.error('Error updating flashcard progress:', error);
 
     if (isFirebaseError(error)) {
       return { success: false, error: getFirebaseErrorMessage(error) };
     }
 
-    return { success: false, error: "Failed to update flashcard progress." };
+    return { success: false, error: 'Failed to update flashcard progress.' };
   }
 };
 
@@ -419,7 +430,7 @@ export const deleteFlashcard = async (
     if (!currentUser) {
       return {
         success: false,
-        error: "User must be authenticated to delete cards.",
+        error: 'User must be authenticated to delete cards.',
       };
     }
 
@@ -427,18 +438,19 @@ export const deleteFlashcard = async (
       getUserCardSetCardsCollection(currentUser.uid, cardSetId),
       cardId
     );
+    firestoreCounter.countWrite();
     await deleteDoc(cardDocRef);
 
-    console.log("Flashcard deleted:", cardId, "from card set:", cardSetId);
+    console.log('Flashcard deleted:', cardId, 'from card set:', cardSetId);
     return { success: true };
   } catch (error) {
-    console.error("Error deleting flashcard:", error);
+    console.error('Error deleting flashcard:', error);
 
     if (isFirebaseError(error)) {
       return { success: false, error: getFirebaseErrorMessage(error) };
     }
 
-    return { success: false, error: "Failed to delete flashcard." };
+    return { success: false, error: 'Failed to delete flashcard.' };
   }
 };
 
@@ -451,12 +463,12 @@ export const migrateGuestDataToUser = async (
     if (!currentUser) {
       return {
         success: false,
-        error: "User must be authenticated to migrate data.",
+        error: 'User must be authenticated to migrate data.',
       };
     }
 
     if (!guestData || !Array.isArray(guestData.cards)) {
-      return { success: false, error: "No valid guest data to migrate." };
+      return { success: false, error: 'No valid guest data to migrate.' };
     }
 
     // Create user profile
@@ -468,7 +480,7 @@ export const migrateGuestDataToUser = async (
     });
 
     // Migrate flashcards to default card set (chinese_essentials_1)
-    const defaultCardSetId = "chinese_essentials_1";
+    const defaultCardSetId = 'chinese_essentials_1';
     const migrationResult = await saveFlashcardsBatch(
       guestData.cards,
       defaultCardSetId
@@ -483,13 +495,13 @@ export const migrateGuestDataToUser = async (
       return migrationResult;
     }
   } catch (error) {
-    console.error("Error migrating guest data:", error);
+    console.error('Error migrating guest data:', error);
 
     if (isFirebaseError(error)) {
       return { success: false, error: getFirebaseErrorMessage(error) };
     }
 
-    return { success: false, error: "Failed to migrate guest data." };
+    return { success: false, error: 'Failed to migrate guest data.' };
   }
 };
 
@@ -500,7 +512,7 @@ export const subscribeToUserFlashcards = (
 ): (() => void) => {
   const currentUser = getCurrentUser();
   if (!currentUser) {
-    console.warn("User must be authenticated to subscribe to flashcards");
+    console.warn('User must be authenticated to subscribe to flashcards');
     return () => {};
   }
 
@@ -508,7 +520,7 @@ export const subscribeToUserFlashcards = (
     currentUser.uid,
     cardSetId
   );
-  const cardsQuery = query(cardsCollection, orderBy("createdAt", "desc"));
+  const cardsQuery = query(cardsCollection, orderBy('createdAt', 'desc'));
 
   return onSnapshot(
     cardsQuery,
@@ -524,7 +536,7 @@ export const subscribeToUserFlashcards = (
       callback(cards);
     },
     (error) => {
-      console.error("Error in flashcards subscription:", error);
+      console.error('Error in flashcards subscription:', error);
     }
   );
 };
@@ -536,16 +548,17 @@ export const getUserCardSets = async (): Promise<FirestoreResult<any[]>> => {
     if (!currentUser) {
       return {
         success: false,
-        error: "User must be authenticated to get card sets.",
+        error: 'User must be authenticated to get card sets.',
       };
     }
 
     const cardSetsCollection = getUserCardSetsCollection(currentUser.uid);
     const cardSetsQuery = query(
       cardSetsCollection,
-      orderBy("lastAccessedAt", "desc")
+      orderBy('lastAccessedAt', 'desc')
     );
 
+    firestoreCounter.countRead();
     const querySnapshot = await getDocs(cardSetsQuery);
     const cardSets = querySnapshot.docs.map((doc) => ({
       id: doc.id,
@@ -558,13 +571,13 @@ export const getUserCardSets = async (): Promise<FirestoreResult<any[]>> => {
     console.log(`Found ${cardSets.length} card sets for user`);
     return { success: true, data: cardSets };
   } catch (error) {
-    console.error("Error getting user card sets:", error);
+    console.error('Error getting user card sets:', error);
 
     if (isFirebaseError(error)) {
       return { success: false, error: getFirebaseErrorMessage(error) };
     }
 
-    return { success: false, error: "Failed to get card sets." };
+    return { success: false, error: 'Failed to get card sets.' };
   }
 };
 
@@ -578,7 +591,7 @@ export const updateCardSetMetadata = async (
     if (!currentUser) {
       return {
         success: false,
-        error: "User must be authenticated to update card set metadata.",
+        error: 'User must be authenticated to update card set metadata.',
       };
     }
 
@@ -591,18 +604,19 @@ export const updateCardSetMetadata = async (
       createdAt: metadata.createdAt || serverTimestamp(),
     };
 
+    firestoreCounter.countWrite();
     await setDoc(cardSetDocRef, updateData, { merge: true });
 
-    console.log("Card set metadata updated:", cardSetId);
+    console.log('Card set metadata updated:', cardSetId);
     return { success: true };
   } catch (error) {
-    console.error("Error updating card set metadata:", error);
+    console.error('Error updating card set metadata:', error);
 
     if (isFirebaseError(error)) {
       return { success: false, error: getFirebaseErrorMessage(error) };
     }
 
-    return { success: false, error: "Failed to update card set metadata." };
+    return { success: false, error: 'Failed to update card set metadata.' };
   }
 };
 

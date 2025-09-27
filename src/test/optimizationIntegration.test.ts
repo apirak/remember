@@ -4,7 +4,6 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { FlashcardService } from '../services/flashcardService';
 import { flashcardCache } from '../utils/flashcardContextCache';
-import type { UserProfileWithProgress } from '../types/optimization';
 
 // Mock Firebase
 vi.mock('../utils/firestore', () => ({
@@ -25,30 +24,6 @@ vi.mock('../utils/firestore', () => ({
 }));
 
 describe('Firestore Optimization Integration Test', () => {
-  // Mock profile structure for testing
-  const getMockProfile = (): UserProfileWithProgress => ({
-    uid: 'test-user',
-    email: 'test@example.com',
-    displayName: 'Test User',
-    photoURL: null,
-    createdAt: new Date('2024-01-01'),
-    lastLoginAt: new Date('2024-01-15'),
-    isActive: true,
-    cardSetsProgress: {
-      hsk_1: {
-        cardSetId: 'hsk_1',
-        totalCards: 50,
-        reviewedCards: 25,
-        progressPercentage: 50,
-        lastReviewDate: new Date('2024-01-10'),
-        createdAt: new Date('2024-01-01'),
-        updatedAt: new Date('2024-01-10'),
-      },
-    },
-    migrationVersion: 1,
-    lastMigrationDate: new Date('2024-01-15'),
-  });
-
   beforeEach(() => {
     vi.clearAllMocks();
     flashcardCache.clearCache();
