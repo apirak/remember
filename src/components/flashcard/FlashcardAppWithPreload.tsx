@@ -180,12 +180,25 @@ const FlashcardAppWithPreloadContent: React.FC<
 const FlashcardAppWithPreload: React.FC<FlashcardAppWithPreloadProps> = (
   props
 ) => {
+  const [debugPanelVisible, setDebugPanelVisible] = React.useState(false);
+
   return (
     <div className="app-container">
       <AuthProvider>
         <FlashcardProvider>
-          <FlashcardAppWithPreloadContent {...props} />
-          <DebugPanel />
+          <div className="flex min-h-screen bg-gradient-to-br from-blue-50 via-yellow-50 to-green-50">
+            {/* Main content area */}
+            <div className="flex-1">
+              <FlashcardAppWithPreloadContent {...props} />
+            </div>
+            {/* Debug Panel as right sidebar */}
+            <DebugPanel
+              position="right"
+              defaultVisible={false}
+              visible={debugPanelVisible}
+              onVisibilityChange={setDebugPanelVisible}
+            />
+          </div>
         </FlashcardProvider>
       </AuthProvider>
     </div>

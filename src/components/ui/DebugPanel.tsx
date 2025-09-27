@@ -2,7 +2,7 @@
 // Shows debugging information in development mode only
 // Global overlay that can be toggled from any page
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useFlashcard } from '../../contexts/FlashcardContext';
 import {
   calculateReviewsToday,
@@ -14,22 +14,41 @@ import { firestoreCounter } from '../../utils/simpleFirestoreCounter';
 interface DebugPanelProps {
   position?: 'right' | 'left' | 'bottom';
   defaultVisible?: boolean;
+  visible?: boolean;
+  onVisibilityChange?: (visible: boolean) => void;
 }
 
 export const DebugPanel: React.FC<DebugPanelProps> = ({
   position = 'right',
   defaultVisible = false,
+  visible: controlledVisible,
+  onVisibilityChange,
 }) => {
   const { state } = useFlashcard();
-  const [isVisible, setIsVisible] = useState(defaultVisible);
+  const [internalVisible, setInternalVisible] = useState(defaultVisible);
   const [isExpanded, setIsExpanded] = useState(false);
+
+  // Use controlled visibility if provided, otherwise use internal state
+  const isVisible =
+    controlledVisible !== undefined ? controlledVisible : internalVisible;
+
   const [firestoreStats, setFirestoreStats] = useState({
     totalReads: 0,
     totalWrites: 0,
     totalOps: 0,
   });
 
-  // Only show in development
+  // Function to toggle visibility
+  const toggleVisibility = useCallback(() => {
+    const newVisible = !isVisible;
+    if (onVisibilityChange) {
+      onVisibilityChange(newVisible);
+    } else {
+      setInternalVisible(newVisible);
+    }
+  }, [isVisible, onVisibilityChange]);
+
+  // Only show in development or when explicitly enabled
   if (process.env.NODE_ENV !== 'development') {
     return null;
   }
@@ -41,13 +60,13 @@ export const DebugPanel: React.FC<DebugPanelProps> = ({
     const handleKeyPress = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.key === 'd') {
         e.preventDefault();
-        setIsVisible((prev) => !prev);
+        toggleVisibility();
       }
     };
 
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, []);
+  }, [toggleVisibility]);
 
   // Update Firestore stats every 2 seconds when visible (client-side only)
   useEffect(() => {
@@ -60,14 +79,16 @@ export const DebugPanel: React.FC<DebugPanelProps> = ({
       const interval = setInterval(updateStats, 2000);
       return () => clearInterval(interval);
     }
+    // Return empty cleanup function when condition is not met
+    return () => {};
   }, [isVisible]);
 
   if (!isVisible) {
-    // Floating toggle button
+    // Small floating toggle button when panel is hidden
     return (
       <button
-        onClick={() => setIsVisible(true)}
-        className="fixed top-4 right-4 z-50 bg-purple-600 hover:bg-purple-700 text-white p-2 rounded-full shadow-lg transition-all duration-200"
+        onClick={toggleVisibility}
+        className="w-10 h-10 bg-purple-600 hover:bg-purple-700 text-white rounded-full shadow-lg transition-all duration-200 flex items-center justify-center text-sm"
         title="Toggle Debug Panel (Ctrl/Cmd + D)"
       >
         🐛
@@ -101,17 +122,17 @@ export const DebugPanel: React.FC<DebugPanelProps> = ({
     })),
   };
 
-  // Determine panel positioning
+  // Determine panel positioning - now using inline layout instead of fixed
   const panelClasses =
     position === 'right'
-      ? 'fixed top-0 right-0 h-screen w-80'
+      ? 'w-80 h-screen' // Right sidebar
       : position === 'left'
-        ? 'fixed top-0 left-0 h-screen w-80'
-        : 'fixed bottom-0 left-0 right-0 h-64';
+        ? 'w-80 h-screen' // Left sidebar
+        : 'w-full h-64'; // Bottom panel
 
   return (
     <div
-      className={`${panelClasses} bg-gray-900 text-green-400 z-40 shadow-2xl flex flex-col`}
+      className={`${panelClasses} bg-gray-900 text-green-400 shadow-2xl flex flex-col border-l border-gray-700`}
     >
       {/* Header */}
       <div className="bg-purple-600 text-white px-4 py-3 flex items-center justify-between">
@@ -125,7 +146,7 @@ export const DebugPanel: React.FC<DebugPanelProps> = ({
             {isExpanded ? '▼' : '▲'}
           </button>
           <button
-            onClick={() => setIsVisible(false)}
+            onClick={toggleVisibility}
             className="bg-purple-700 hover:bg-purple-800 text-white px-2 py-1 rounded text-xs font-mono ml-1"
           >
             ✕

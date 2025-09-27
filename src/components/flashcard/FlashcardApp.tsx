@@ -12,7 +12,7 @@ import Review from './Review.tsx';
 import Completion from './Completion.tsx';
 import CardSetSelection from './CardSetSelection.tsx';
 import Profile from './Profile.tsx';
-// import { DebugPanel } from '../ui/DebugPanel.tsx';
+import { DebugPanel } from '../ui/DebugPanel.tsx';
 
 // Navigation types
 type AppRoute = 'dashboard' | 'review' | 'complete' | 'card-sets' | 'profile';
@@ -21,6 +21,7 @@ type AppRoute = 'dashboard' | 'review' | 'complete' | 'card-sets' | 'profile';
 const FlashcardAppContent: React.FC = () => {
   const { state } = useFlashcard();
   const [currentRoute, setCurrentRoute] = React.useState<AppRoute>('card-sets');
+  const [debugPanelVisible, setDebugPanelVisible] = React.useState(false);
 
   // Safe navigation handler with validation
   const handleNavigation = React.useCallback(
@@ -116,10 +117,16 @@ const FlashcardAppContent: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-yellow-50 to-green-50">
-      {renderCurrentScreen()}
-      {/* Global Debug Panel - visible on all pages in development */}
-      {/* <DebugPanel position="right" defaultVisible={false} /> */}
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-yellow-50 to-green-50 flex">
+      {/* Main content area */}
+      <div className="flex-1">{renderCurrentScreen()}</div>
+      {/* Debug Panel as right sidebar */}
+      <DebugPanel
+        position="right"
+        defaultVisible={false}
+        visible={debugPanelVisible}
+        onVisibilityChange={setDebugPanelVisible}
+      />
     </div>
   );
 };
