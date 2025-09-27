@@ -248,15 +248,20 @@ export const createFirestoreOperations = (deps: FirestoreOperationsDeps) => {
       setSyncStatus('syncing');
       clearError();
 
-      const result = await FlashcardService.migrateGuestData(guestData);
+      const result = await FlashcardService.migrateGuestToAuthenticatedUser(
+        guestData.cards || [],
+        guestData.stats
+      );
 
       if (result.success) {
-        // Migration successful - the useEffect in FlashcardContext will handle reloading
+        // Migration successful - show results and update state
         dispatch({ type: 'SET_MIGRATION_STATUS', payload: 'completed' });
         setSyncStatus('idle');
         setDataSource('firestore');
 
-        console.log('Successfully migrated guest data to Firestore');
+        console.log(
+          `✅ Successfully migrated guest data: ${result.data?.migratedCards} cards, ${result.data?.migratedProgress} with progress`
+        );
       } else {
         throw new Error(result.error || 'Failed to migrate data to Firestore');
       }

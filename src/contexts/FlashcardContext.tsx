@@ -401,6 +401,19 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
         };
 
         console.log('FlashcardContext: User signed in, updating auth state');
+
+        // Check if we need to migrate guest data
+        if (state.isGuest && state.allCards.length > 0) {
+          console.log(
+            'FlashcardContext: Detected guest data, initiating migration...'
+          );
+          migrateGuestDataToFirestore({
+            cards: state.allCards,
+            stats: state.stats,
+            selectedCardSet: state.selectedCardSet,
+          });
+        }
+
         setUser(userProfile, false);
         // Note: Card loading is now handled by the unified useEffect below
       } else {

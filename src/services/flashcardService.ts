@@ -1086,4 +1086,119 @@ export class FlashcardService {
       };
     }
   }
+
+  /**
+   * Collect and migrate guest data to authenticated user account
+   * Gathers data from in-memory state and localStorage, then migrates to Firestore
+   * @param guestCards - Current flashcard state from context
+   * @param guestStats - Current statistics from context
+   * @returns Service result with migration status
+   */
+  static async migrateGuestToAuthenticatedUser(
+    guestCards: Flashcard[],
+    guestStats?: any
+  ): Promise<
+    ServiceResult<{ migratedCards: number; migratedProgress: number }>
+  > {
+    try {
+      const currentUser = getCurrentUser();
+      if (!currentUser) {
+        return {
+          success: false,
+          error: 'User must be authenticated to migrate guest data.',
+        };
+      }
+
+      console.log('Starting guest to authenticated user migration...');
+      console.log('Guest cards to migrate:', guestCards?.length || 0);
+
+      // Validate guest data
+      if (!guestCards || guestCards.length === 0) {
+        console.log('No guest cards found to migrate');
+        return {
+          success: true,
+          data: { migratedCards: 0, migratedProgress: 0 },
+        };
+      }
+
+      // Filter cards that have meaningful progress (modified from defaults)
+      const cardsWithProgress = guestCards.filter((card) => {
+        // Check if card has been reviewed (most reliable indicator)
+        if (card.totalReviews > 0) return true;
+
+        // Check if easiness factor has been modified from default
+        if (card.easinessFactor !== 2.5) return true;
+
+        // Check if interval has been modified from default
+        if (card.interval !== 1) return true;
+
+        // Check if card is no longer new (has been encountered)
+        if (card.isNew === false) return true;
+
+        // Default: no meaningful progress
+        return false;
+      });
+
+      console.log('Cards with meaningful progress:', cardsWithProgress.length);
+
+      // Get the selected card set from localStorage for context
+      let targetCardSetId = 'default';
+      try {
+        const storedCardSet = localStorage.getItem('remember_last_card_set');
+        if (storedCardSet) {
+          const cardSetData = JSON.parse(storedCardSet);
+          targetCardSetId = cardSetData.id || 'default';
+        }
+      } catch (error) {
+        console.warn('Could not determine card set from localStorage:', error);
+      }
+
+      // Prepare guest data for migration
+      const guestData = {
+        cards: cardsWithProgress,
+        cardSetId: targetCardSetId,
+        stats: guestStats || {},
+        migrationTimestamp: new Date().toISOString(),
+      };
+
+      // Call existing migration function
+      const migrationResult = await this.migrateGuestData(guestData);
+
+      if (migrationResult.success) {
+        // Clear guest data from localStorage after successful migration
+        try {
+          localStorage.removeItem('remember_last_card_set');
+          console.log('Cleared guest data from localStorage');
+        } catch (error) {
+          console.warn('Could not clear localStorage after migration:', error);
+        }
+
+        console.log(
+          `✅ Successfully migrated ${cardsWithProgress.length} cards with progress`
+        );
+
+        return {
+          success: true,
+          data: {
+            migratedCards: guestCards.length,
+            migratedProgress: cardsWithProgress.length,
+          },
+        };
+      } else {
+        return {
+          success: false,
+          error: migrationResult.error || 'Migration failed',
+        };
+      }
+    } catch (error) {
+      console.error('Error during guest to authenticated migration:', error);
+      return {
+        success: false,
+        error:
+          error instanceof Error
+            ? error.message
+            : 'Failed to migrate guest data',
+      };
+    }
+  }
 }
