@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import FlashcardAppWithPreload from '../components/flashcard/FlashcardAppWithPreload.tsx';
+import FlashcardApp from '../components/flashcard/FlashcardApp.tsx';
 
 export async function getStaticPaths() {
   // Load card sets to generate static paths
@@ -35,7 +35,7 @@ const { cardSetId, cardSetName, cardSetDescription } = Astro.props;
 ---
 
 <Layout title={`${cardSetName || cardSet} - Learn Chinese Flashcards`}>
-  <FlashcardAppWithPreload
+  <FlashcardApp
     client:load
     preloadCardSet={cardSetId || cardSet}
     cardSetName={cardSetName}
