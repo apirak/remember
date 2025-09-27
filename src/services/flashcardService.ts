@@ -920,19 +920,25 @@ export class FlashcardService {
       return { success: true };
     } catch (error) {
       console.error('Error saving user profile:', error);
-      
+
       // Check if it's a permission error and provide helpful message
-      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-      const isPermissionError = errorMessage.includes('Missing or insufficient permissions');
-      
+      const errorMessage =
+        error instanceof Error ? error.message : 'Unknown error';
+      const isPermissionError = errorMessage.includes(
+        'Missing or insufficient permissions'
+      );
+
       if (isPermissionError) {
-        console.warn('Firestore rules may not be deployed yet. User profile save failed due to permissions.');
+        console.warn(
+          'Firestore rules may not be deployed yet. User profile save failed due to permissions.'
+        );
         return {
           success: false,
-          error: 'Firestore permissions not configured yet. User profile will be created later.',
+          error:
+            'Firestore permissions not configured yet. User profile will be created later.',
         };
       }
-      
+
       return {
         success: false,
         error:
