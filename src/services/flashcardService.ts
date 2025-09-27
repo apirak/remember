@@ -27,7 +27,9 @@ import { loadCardSetDataWithFetch } from '../utils/cardSetLoader';
 import { firestore } from '../utils/firebase';
 import { getCurrentUser } from '../utils/auth';
 import { transformFlashcardData } from '../utils/seedData';
-import type { UserProfile } from '../types/flashcard';
+import type { UserProfile, UserProfileWithProgress } from '../types/flashcard';
+// Import optimization utilities
+import { FirestoreOptimizationMigration } from './firestoreOptimization';
 
 // Service result type with standardized error handling
 export interface ServiceResult<T = any> {
@@ -1198,6 +1200,471 @@ export class FlashcardService {
           error instanceof Error
             ? error.message
             : 'Failed to migrate guest data',
+      };
+    }
+  }
+
+  // ========================================
+  // OPTIMIZED FIRESTORE OPERATIONS
+  // ========================================
+  // These methods implement the consolidated data structure
+  // to reduce Firestore read operations by 70-80%
+
+  /**
+   * Load user profile with consolidated progress data (OPTIMIZED)
+   * Replaces loadAllCardSetProgress() - Single read instead of N+1 reads
+   * Automatically handles migration if needed
+   * @returns Service result with user profile including all progress data
+   */
+  static async loadUserProfileWithProgress(): Promise<
+    ServiceResult<UserProfileWithProgress | null>
+  > {
+    try {
+      const currentUser = getCurrentUser();
+      if (!currentUser) {
+        return {
+          success: false,
+          error: 'User must be authenticated to load profile from Firestore.',
+        };
+      }
+
+      console.log(
+        `Loading optimized profile with consolidated progress for user: ${currentUser.uid}`
+      );
+
+      // Use optimization utility for automatic migration and loading
+      const profile =
+        await FirestoreOptimizationMigration.autoMigrateAndLoadProfile(
+          currentUser.uid
+        );
+
+      if (profile) {
+        console.log(
+          `Loaded profile with ${Object.keys(profile.cardSetsProgress).length} card set progress records`
+        );
+        return {
+          success: true,
+          data: profile,
+        };
+      } else {
+        console.log('No profile found or migration failed');
+        return {
+          success: true,
+          data: null,
+        };
+      }
+    } catch (error) {
+      console.error('Error loading optimized profile:', error);
+      return {
+        success: false,
+        error:
+          error instanceof Error
+            ? error.message
+            : 'Failed to load user profile with progress',
+      };
+    }
+  }
+
+  /**
+   * Get card set progress from consolidated profile (OPTIMIZED)
+   * Replaces loadCardSetProgress() - No additional reads, uses cached profile
+   * @param cardSetId - The card set identifier
+   * @param profile - The user profile with consolidated progress (from loadUserProfileWithProgress)
+   * @returns Service result with card set progress or null
+   */
+  static getCardSetProgressFromProfile(
+    cardSetId: string,
+    profile: UserProfileWithProgress
+  ): ServiceResult<CardSetProgress | null> {
+    try {
+      const progress = profile.cardSetsProgress[cardSetId] || null;
+
+      if (progress) {
+        console.log(
+          `Retrieved progress for card set ${cardSetId} from consolidated profile`
+        );
+        return {
+          success: true,
+          data: progress,
+        };
+      } else {
+        console.log(
+          `No progress found for card set ${cardSetId} in consolidated profile`
+        );
+        return {
+          success: true,
+          data: null,
+        };
+      }
+    } catch (error) {
+      console.error('Error retrieving progress from profile:', error);
+      return {
+        success: false,
+        error:
+          error instanceof Error
+            ? error.message
+            : 'Failed to retrieve progress from profile',
+      };
+    }
+  }
+
+  /**
+   * Update card set progress in consolidated structure (OPTIMIZED)
+   * Replaces individual progress document updates - More efficient atomic updates
+   * @param cardSetId - The card set identifier
+   * @param progress - The progress data to update
+   * @returns Service result with success status
+   */
+  static async updateCardSetProgressOptimized(
+    cardSetId: string,
+    progress: CardSetProgress
+  ): Promise<ServiceResult<boolean>> {
+    try {
+      const currentUser = getCurrentUser();
+      if (!currentUser) {
+        return {
+          success: false,
+          error: 'User must be authenticated to update progress in Firestore.',
+        };
+      }
+
+      console.log(
+        `Updating progress for card set ${cardSetId} using optimized method`
+      );
+
+      const success =
+        await FirestoreOptimizationMigration.updateCardSetProgress(
+          currentUser.uid,
+          cardSetId,
+          progress
+        );
+
+      if (success) {
+        console.log(`Successfully updated progress for card set: ${cardSetId}`);
+        return {
+          success: true,
+          data: true,
+        };
+      } else {
+        return {
+          success: false,
+          error: 'Failed to update progress in optimized structure',
+        };
+      }
+    } catch (error) {
+      console.error('Error updating optimized progress:', error);
+      return {
+        success: false,
+        error:
+          error instanceof Error
+            ? error.message
+            : 'Failed to update card set progress',
+      };
+    }
+  }
+
+  /**
+   * Ensure card set exists with pre-population (OPTIMIZED)
+   * Eliminates lazy creation pattern - Creates complete card sets from JSON
+   * Reduces review session reads to zero by pre-populating all cards
+   * @param cardSetId - The card set identifier
+   * @param cardSetDataFile - JSON file name for card data
+   * @returns Service result with success status
+   */
+  static async ensureCardSetExists(
+    cardSetId: string,
+    cardSetDataFile: string
+  ): Promise<ServiceResult<boolean>> {
+    try {
+      const currentUser = getCurrentUser();
+      if (!currentUser) {
+        return {
+          success: false,
+          error: 'User must be authenticated to create card sets in Firestore.',
+        };
+      }
+
+      console.log(`Ensuring card set exists: ${cardSetId}`);
+
+      // Check if card set already exists (optimized check)
+      const existingCards = await this.loadUserFlashcards(cardSetId);
+
+      if (
+        existingCards.success &&
+        existingCards.data &&
+        existingCards.data.length > 0
+      ) {
+        console.log(
+          `Card set ${cardSetId} already exists with ${existingCards.data.length} cards`
+        );
+        return {
+          success: true,
+          data: true,
+        };
+      }
+
+      console.log(
+        `Card set ${cardSetId} does not exist, creating from JSON: ${cardSetDataFile}`
+      );
+
+      // Load cards from JSON file
+      const jsonResult = await this.loadCardsFromJSON(cardSetDataFile);
+      if (!jsonResult.success || !jsonResult.data) {
+        return {
+          success: false,
+          error: jsonResult.error || 'Failed to load cards from JSON',
+        };
+      }
+
+      const cardsToCreate = jsonResult.data.map((cardData) => ({
+        ...cardData,
+        cardSetId,
+        // Initialize with default SM-2 parameters
+        easinessFactor: 2.5,
+        repetitions: 0,
+        interval: 1,
+        nextReviewDate: new Date(),
+        lastReviewDate: new Date(),
+        totalReviews: 0,
+        correctStreak: 0,
+        averageQuality: 0,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        isNew: true,
+      }));
+
+      // Save all cards in batch to Firestore
+      const batchResult = await this.saveCardsBatch(cardsToCreate, cardSetId);
+
+      if (batchResult.success) {
+        console.log(
+          `Pre-populated card set ${cardSetId} with ${cardsToCreate.length} cards`
+        );
+
+        // Initialize progress tracking for this card set
+        const initialProgress: CardSetProgress = {
+          cardSetId,
+          totalCards: cardsToCreate.length,
+          reviewedCards: 0,
+          progressPercentage: 0,
+          lastReviewDate: null,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        };
+
+        const progressResult = await this.updateCardSetProgressOptimized(
+          cardSetId,
+          initialProgress
+        );
+
+        if (progressResult.success) {
+          console.log(
+            `Initialized progress tracking for card set: ${cardSetId}`
+          );
+        } else {
+          console.warn(
+            `Card set created but progress initialization failed: ${progressResult.error}`
+          );
+        }
+
+        return {
+          success: true,
+          data: true,
+        };
+      } else {
+        return {
+          success: false,
+          error: batchResult.error || 'Failed to save card set batch',
+        };
+      }
+    } catch (error) {
+      console.error('Error ensuring card set exists:', error);
+      return {
+        success: false,
+        error:
+          error instanceof Error
+            ? error.message
+            : 'Failed to ensure card set exists',
+      };
+    }
+  }
+
+  /**
+   * Get all card set progress from consolidated profile (OPTIMIZED)
+   * Replaces loadAllCardSetProgress() - Uses already loaded profile data
+   * @param profile - The user profile with consolidated progress
+   * @returns Service result with array of all progress data
+   */
+  static getAllCardSetProgressFromProfile(
+    profile: UserProfileWithProgress
+  ): ServiceResult<CardSetProgress[]> {
+    try {
+      const allProgress = Object.values(profile.cardSetsProgress);
+
+      console.log(
+        `Retrieved ${allProgress.length} card set progress records from consolidated profile`
+      );
+
+      return {
+        success: true,
+        data: allProgress,
+      };
+    } catch (error) {
+      console.error('Error retrieving all progress from profile:', error);
+      return {
+        success: false,
+        error:
+          error instanceof Error
+            ? error.message
+            : 'Failed to retrieve all progress from profile',
+      };
+    }
+  }
+
+  /**
+   * Batch update multiple card set progress records (OPTIMIZED)
+   * More efficient than individual updates - Single atomic transaction
+   * @param progressUpdates - Map of cardSetId to progress data
+   * @returns Service result with success status
+   */
+  static async batchUpdateCardSetProgress(
+    progressUpdates: Record<string, CardSetProgress>
+  ): Promise<ServiceResult<boolean>> {
+    try {
+      const currentUser = getCurrentUser();
+      if (!currentUser) {
+        return {
+          success: false,
+          error: 'User must be authenticated to update progress in Firestore.',
+        };
+      }
+
+      console.log(
+        `Batch updating progress for ${Object.keys(progressUpdates).length} card sets`
+      );
+
+      // Use Firestore batch operation for atomic updates
+      const userDocRef = doc(firestore, 'users', currentUser.uid);
+
+      const updateData: any = {
+        updatedAt: serverTimestamp(),
+      };
+
+      // Add each progress update to the batch
+      Object.entries(progressUpdates).forEach(([cardSetId, progress]) => {
+        updateData[`cardSetsProgress.${cardSetId}`] = {
+          ...progress,
+          updatedAt: serverTimestamp(),
+        };
+      });
+
+      await setDoc(userDocRef, updateData, { merge: true });
+
+      console.log(
+        `Successfully batch updated progress for ${Object.keys(progressUpdates).length} card sets`
+      );
+
+      return {
+        success: true,
+        data: true,
+      };
+    } catch (error) {
+      console.error('Error in batch progress update:', error);
+      return {
+        success: false,
+        error:
+          error instanceof Error
+            ? error.message
+            : 'Failed to batch update progress',
+      };
+    }
+  }
+
+  // ========================================
+  // MIGRATION UTILITIES
+  // ========================================
+
+  /**
+   * Check if user needs data migration to optimized structure
+   * @returns Service result with migration status
+   */
+  static async checkMigrationStatus(): Promise<
+    ServiceResult<{ needsMigration: boolean; reason: string }>
+  > {
+    try {
+      const currentUser = getCurrentUser();
+      if (!currentUser) {
+        return {
+          success: false,
+          error: 'User must be authenticated to check migration status.',
+        };
+      }
+
+      const needsMigration =
+        await FirestoreOptimizationMigration.needsMigration(currentUser.uid);
+
+      return {
+        success: true,
+        data: {
+          needsMigration,
+          reason: needsMigration
+            ? 'User data needs migration to optimized structure'
+            : 'User already has optimized data structure',
+        },
+      };
+    } catch (error) {
+      console.error('Error checking migration status:', error);
+      return {
+        success: false,
+        error:
+          error instanceof Error
+            ? error.message
+            : 'Failed to check migration status',
+      };
+    }
+  }
+
+  /**
+   * Manually trigger migration to optimized structure
+   * @returns Service result with migration details
+   */
+  static async triggerMigration(): Promise<ServiceResult<any>> {
+    try {
+      const currentUser = getCurrentUser();
+      if (!currentUser) {
+        return {
+          success: false,
+          error: 'User must be authenticated to trigger migration.',
+        };
+      }
+
+      console.log('Manually triggering migration to optimized structure');
+
+      const migrationResult =
+        await FirestoreOptimizationMigration.migrateToOptimizedStructure(
+          currentUser.uid
+        );
+
+      if (migrationResult.success) {
+        console.log('Migration completed successfully:', migrationResult);
+        return {
+          success: true,
+          data: migrationResult,
+        };
+      } else {
+        return {
+          success: false,
+          error: `Migration failed: ${migrationResult.errors.join(', ')}`,
+        };
+      }
+    } catch (error) {
+      console.error('Error triggering migration:', error);
+      return {
+        success: false,
+        error:
+          error instanceof Error
+            ? error.message
+            : 'Failed to trigger migration',
       };
     }
   }

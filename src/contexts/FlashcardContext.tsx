@@ -10,12 +10,13 @@ import React, {
   type ReactNode,
 } from 'react';
 import type {
-  FlashcardContextState,
-  FlashcardAction,
   Flashcard,
   FlashcardData,
-  CardSetProgress,
   CardSet,
+  FlashcardContextState,
+  FlashcardAction,
+  CardSetProgress,
+  UserProfileWithProgress,
 } from '../types/flashcard';
 import { transformFlashcardData } from '../utils/seedData';
 // Enhanced error handling for card set operations
@@ -41,6 +42,8 @@ import {
 } from '../utils/cardSetPersistence';
 // Fetch-based card set loader for reliable production loading
 import { loadCardSetDataWithFetch } from '../utils/cardSetLoader';
+// Optimized caching layer
+import { flashcardCache } from '../utils/flashcardContextCache';
 
 export const MAX_REVIEW_CARDS = 10;
 
@@ -185,6 +188,19 @@ const FlashcardContext = createContext<{
   // User profile methods
   loadUserProfile: () => Promise<any>;
   updateUserProfile: (updates: any) => Promise<boolean>;
+
+  // OPTIMIZED METHODS - Caching layer with reduced Firestore operations
+  initializeCacheForUser: () => Promise<boolean>;
+  loadUserProfileWithProgressOptimized: () => Promise<UserProfileWithProgress | null>;
+  getCardSetProgressFromCache: (cardSetId: string) => CardSetProgress | null;
+  getAllCardSetProgressFromCache: () => Record<string, CardSetProgress>;
+  updateCardSetProgressOptimized: (
+    cardSetId: string,
+    progress: CardSetProgress
+  ) => void;
+  forceSyncNow: () => Promise<boolean>;
+  getCacheStats: () => any;
+  clearCache: () => void;
 } | null>(null);
 
 /**
@@ -683,6 +699,194 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
     clearError,
   });
 
+  // ========================================
+  // OPTIMIZED CACHE-BASED METHODS
+  // ========================================
+  // These methods use the caching layer to reduce Firestore operations
+
+  /**
+   * Initialize cache for authenticated user (1 read operation)
+   * Replaces multiple individual loads during app startup
+   */
+  const initializeCacheForUser = useCallback(async (): Promise<boolean> => {
+    try {
+      setLoadingState('fetchingCards', true);
+      setSyncStatus('syncing');
+
+      console.log('🚀 Initializing cache for user session');
+      const success = await flashcardCache.initializeCacheForUser();
+
+      if (success) {
+        setDataSource('firestore');
+        setSyncStatus('idle');
+        console.log('✅ Cache initialization successful');
+      } else {
+        setSyncStatus('error');
+        setError('Failed to initialize cache', true);
+      }
+
+      return success;
+    } catch (error) {
+      console.error('❌ Cache initialization error:', error);
+      setSyncStatus('error');
+      setError(
+        error instanceof Error ? error.message : 'Cache initialization failed',
+        true
+      );
+      return false;
+    } finally {
+      setLoadingState('fetchingCards', false);
+    }
+  }, [setLoadingState, setSyncStatus, setDataSource, setError]);
+
+  /**
+   * Load user profile with consolidated progress (OPTIMIZED - 1 read)
+   */
+  const loadUserProfileWithProgressOptimized =
+    useCallback(async (): Promise<UserProfileWithProgress | null> => {
+      try {
+        console.log('🚀 Loading user profile with consolidated progress');
+        const result = await flashcardCache.loadUserProfileWithProgress();
+
+        if (result.success && result.profile) {
+          console.log('✅ Profile loaded from optimized cache');
+          return result.profile;
+        } else {
+          console.log('⚠️ Profile load failed:', result.error);
+          setError(result.error || 'Failed to load profile', true);
+          return null;
+        }
+      } catch (error) {
+        console.error('❌ Optimized profile load error:', error);
+        setError(
+          error instanceof Error ? error.message : 'Profile load failed',
+          true
+        );
+        return null;
+      }
+    }, [setError]);
+
+  /**
+   * Get card set progress from cache (0 additional reads)
+   */
+  const getCardSetProgressFromCache = useCallback(
+    (cardSetId: string): CardSetProgress | null => {
+      const result = flashcardCache.getCardSetProgress(cardSetId);
+
+      if (result.success && result.servedFromCache) {
+        console.log(`🎯 Progress for ${cardSetId} served from cache`);
+        return result.progress;
+      } else {
+        console.log(`📭 No cached progress for ${cardSetId}`);
+        return null;
+      }
+    },
+    []
+  );
+
+  /**
+   * Get all card set progress from cache (0 additional reads)
+   */
+  const getAllCardSetProgressFromCache = useCallback((): Record<
+    string,
+    CardSetProgress
+  > => {
+    const result = flashcardCache.getAllCardSetProgress();
+
+    if (result.success && result.servedFromCache) {
+      console.log(
+        `🎯 All progress served from cache (${Object.keys(result.progressMap).length} card sets)`
+      );
+      return result.progressMap;
+    } else {
+      console.log('📭 No cached progress available');
+      return {};
+    }
+  }, []);
+
+  /**
+   * Update card set progress with optimistic updates
+   * Immediately updates UI, queues sync operation
+   */
+  const updateCardSetProgressOptimized = useCallback(
+    (cardSetId: string, progress: CardSetProgress): void => {
+      try {
+        console.log(`⚡ Optimistic progress update for ${cardSetId}`);
+
+        // Optimistic update - immediate UI response
+        flashcardCache.updateCardSetProgressOptimistic(cardSetId, progress);
+
+        // Update context state for immediate UI feedback
+        dispatch({
+          type: 'UPDATE_CARD_SET_PROGRESS_OPTIMISTIC',
+          payload: { cardSetId, progress },
+        });
+
+        setSyncStatus('syncing');
+        console.log(`📋 Progress update queued for batch sync`);
+      } catch (error) {
+        console.error('❌ Optimistic update error:', error);
+        setError(
+          error instanceof Error ? error.message : 'Progress update failed',
+          true
+        );
+      }
+    },
+    [dispatch, setSyncStatus, setError]
+  );
+
+  /**
+   * Force immediate sync of queued operations
+   */
+  const forceSyncNow = useCallback(async (): Promise<boolean> => {
+    try {
+      setSyncStatus('syncing');
+      console.log('🔄 Forcing immediate sync');
+
+      const success = await flashcardCache.forceSyncNow();
+
+      if (success) {
+        setSyncStatus('idle');
+        console.log('✅ Force sync completed');
+      } else {
+        setSyncStatus('error');
+        setError('Force sync failed', true);
+      }
+
+      return success;
+    } catch (error) {
+      console.error('❌ Force sync error:', error);
+      setSyncStatus('error');
+      setError(
+        error instanceof Error ? error.message : 'Force sync failed',
+        true
+      );
+      return false;
+    }
+  }, [setSyncStatus, setError]);
+
+  /**
+   * Get cache statistics and performance metrics
+   */
+  const getCacheStats = useCallback(() => {
+    const stats = flashcardCache.getCacheStats();
+    console.log('📊 Cache statistics:', stats);
+    return stats;
+  }, []);
+
+  /**
+   * Clear cache (for logout or reset)
+   */
+  const clearCache = useCallback((): void => {
+    console.log('🗑️ Clearing flashcard cache');
+    flashcardCache.clearCache();
+
+    // Reset context state
+    dispatch({ type: 'CLEAR_CACHE' });
+    setSyncStatus('idle');
+    setDataSource('session');
+  }, [dispatch, setSyncStatus, setDataSource]);
+
   // Extract individual methods for backward compatibility
   const { rateCard, knowCard, resetTodayProgress } = flashcardActions;
 
@@ -725,6 +929,15 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
     // User profile methods
     loadUserProfile,
     updateUserProfile,
+    // OPTIMIZED METHODS - Caching layer with reduced Firestore operations
+    initializeCacheForUser,
+    loadUserProfileWithProgressOptimized,
+    getCardSetProgressFromCache,
+    getAllCardSetProgressFromCache,
+    updateCardSetProgressOptimized,
+    forceSyncNow,
+    getCacheStats,
+    clearCache,
   };
 
   return (

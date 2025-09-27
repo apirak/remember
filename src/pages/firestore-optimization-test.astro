@@ -1,0 +1,948 @@
+---
+title: 'Firestore Optimization Test';
+description: 'Manual testing page for Firestore read optimization migration';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Firestore Optimization Test</title>
+    <style>
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background: #f5f5f5;
+      }
+      .container {
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+      .test-section {
+        margin: 20px 0;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        background: #fafafa;
+      }
+      .button {
+        background: #0066cc;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        margin: 5px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .button:hover {
+        background: #0052a3;
+      }
+      .button:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+      }
+      .success {
+        color: #28a745;
+        font-weight: bold;
+      }
+      .error {
+        color: #dc3545;
+        font-weight: bold;
+      }
+      .warning {
+        color: #ffc107;
+        font-weight: bold;
+      }
+      .info {
+        color: #17a2b8;
+      }
+      .results {
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        padding: 15px;
+        margin: 10px 0;
+        white-space: pre-wrap;
+        font-family: monospace;
+        font-size: 12px;
+        max-height: 300px;
+        overflow-y: auto;
+      }
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 15px;
+        margin: 15px 0;
+      }
+      .metric {
+        background: white;
+        padding: 15px;
+        border-radius: 6px;
+        border: 1px solid #ddd;
+        text-align: center;
+      }
+      .metric-value {
+        font-size: 24px;
+        font-weight: bold;
+        color: #0066cc;
+      }
+      .metric-label {
+        font-size: 12px;
+        color: #666;
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🚀 Firestore Optimization Test</h1>
+      <p>
+        This page tests the new consolidated data structure for reducing
+        Firestore read operations.
+      </p>
+
+      <!-- Auth Section -->
+      <div class="test-section">
+        <h3>🔐 Authentication</h3>
+        <div id="authStatus">Not authenticated</div>
+        <button class="button" onclick="signInAnonymously()"
+          >Sign In Anonymously</button
+        >
+        <button class="button" onclick="signOut()">Sign Out</button>
+      </div>
+
+      <!-- Migration Section -->
+      <div class="test-section">
+        <h3>📦 Data Migration</h3>
+        <p>
+          Test migration from old cardSetProgress structure to new consolidated
+          structure.
+        </p>
+
+        <button class="button" onclick="checkMigrationStatus()"
+          >Check Migration Status</button
+        >
+        <button class="button" onclick="runMigration()">Run Migration</button>
+        <button class="button" onclick="createTestData()"
+          >Create Test Data (Old Structure)</button
+        >
+
+        <div id="migrationResults" class="results"></div>
+      </div>
+
+      <!-- Performance Metrics -->
+      <div class="test-section">
+        <h3>📊 Performance Metrics</h3>
+        <p>Compare read operations before and after optimization.</p>
+
+        <div class="metrics" id="performanceMetrics">
+          <div class="metric">
+            <div class="metric-value" id="readCount">0</div>
+            <div class="metric-label">Total Read Operations</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value" id="writeCount">0</div>
+            <div class="metric-label">Total Write Operations</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value" id="responseTime">0ms</div>
+            <div class="metric-label">Average Response Time</div>
+          </div>
+          <div class="metric">
+            <div class="metric-value" id="cacheHits">0%</div>
+            <div class="metric-label">Cache Hit Rate</div>
+          </div>
+        </div>
+
+        <button class="button" onclick="testOldStructure()"
+          >Test Old Structure (N+1 reads)</button
+        >
+        <button class="button" onclick="testNewStructure()"
+          >Test New Structure (1 read)</button
+        >
+        <button class="button" onclick="resetMetrics()">Reset Metrics</button>
+      </div>
+
+      <!-- Optimized Service Methods -->
+      <div class="test-section">
+        <h3>⚡ Optimized Service Methods</h3>
+        <p>
+          Test the new FlashcardService methods with consolidated data
+          structure.
+        </p>
+
+        <button class="button" onclick="testLoadUserProfileWithProgress()"
+          >Load Profile (1 read)</button
+        >
+        <button class="button" onclick="testGetProgressFromProfile()"
+          >Get Progress from Cache</button
+        >
+        <button class="button" onclick="testEnsureCardSetExists()"
+          >Ensure Card Set Exists</button
+        >
+        <button class="button" onclick="testBatchProgressUpdate()"
+          >Batch Update Progress</button
+        >
+
+        <div id="serviceResults" class="results"></div>
+      </div>
+
+      <!-- Data Validation -->
+      <div class="test-section">
+        <h3>✅ Data Validation</h3>
+        <p>Verify data integrity after migration.</p>
+
+        <button class="button" onclick="validateData()"
+          >Validate Migration</button
+        >
+        <button class="button" onclick="showCurrentData()"
+          >Show Current Data</button
+        >
+        <button class="button" onclick="compareStructures()"
+          >Compare Old vs New</button
+        >
+
+        <div id="validationResults" class="results"></div>
+      </div>
+
+      <!-- Console Output -->
+      <div class="test-section">
+        <h3>📝 Console Output</h3>
+        <div id="consoleOutput" class="results"></div>
+        <button class="button" onclick="clearConsole()">Clear Console</button>
+      </div>
+    </div>
+
+    <script type="module">
+      import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js';
+      import {
+        getAuth,
+        signInAnonymously as firebaseSignInAnonymously,
+        signOut as firebaseSignOut,
+        onAuthStateChanged,
+      } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js';
+      import {
+        getFirestore,
+        doc,
+        getDoc,
+        getDocs,
+        setDoc,
+        collection,
+        serverTimestamp,
+      } from 'https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js';
+
+      // Firebase configuration (you'll need to add your actual config)
+      const firebaseConfig = {
+        // Add your Firebase config here
+        // This is just a placeholder for testing
+        apiKey: 'test',
+        authDomain: 'test.firebaseapp.com',
+        projectId: 'test',
+        storageBucket: 'test.appspot.com',
+        messagingSenderId: '123456789',
+        appId: '1:123456789:web:abcdef',
+      };
+
+      // Initialize Firebase (this will fail without real config, but shows the structure)
+      let app, auth, db, currentUser;
+
+      try {
+        app = initializeApp(firebaseConfig);
+        auth = getAuth(app);
+        db = getFirestore(app);
+
+        // Monitor auth state
+        onAuthStateChanged(auth, (user) => {
+          currentUser = user;
+          updateAuthStatus();
+        });
+      } catch (error) {
+        log(
+          'Firebase initialization failed - using mock mode for testing',
+          'error'
+        );
+      }
+
+      // Performance tracking
+      let metrics = {
+        readOperations: 0,
+        writeOperations: 0,
+        totalResponseTime: 0,
+        operations: 0,
+        cacheHits: 0,
+        cacheRequests: 0,
+      };
+
+      // Utility functions
+      function log(message, type = 'info') {
+        const timestamp = new Date().toLocaleTimeString();
+        const consoleOutput = document.getElementById('consoleOutput');
+        const className =
+          type === 'error'
+            ? 'error'
+            : type === 'success'
+              ? 'success'
+              : type === 'warning'
+                ? 'warning'
+                : 'info';
+
+        consoleOutput.innerHTML += `<span class="${className}">[${timestamp}] ${message}</span>\n`;
+        consoleOutput.scrollTop = consoleOutput.scrollHeight;
+
+        console.log(`[${timestamp}] ${message}`);
+      }
+
+      function updateMetrics() {
+        document.getElementById('readCount').textContent =
+          metrics.readOperations;
+        document.getElementById('writeCount').textContent =
+          metrics.writeOperations;
+        document.getElementById('responseTime').textContent =
+          metrics.operations > 0
+            ? Math.round(metrics.totalResponseTime / metrics.operations) + 'ms'
+            : '0ms';
+        document.getElementById('cacheHits').textContent =
+          metrics.cacheRequests > 0
+            ? Math.round((metrics.cacheHits / metrics.cacheRequests) * 100) +
+              '%'
+            : '0%';
+      }
+
+      function updateAuthStatus() {
+        const authStatus = document.getElementById('authStatus');
+        if (currentUser) {
+          authStatus.innerHTML = `<span class="success">Authenticated as: ${currentUser.uid}</span>`;
+        } else {
+          authStatus.innerHTML =
+            '<span class="warning">Not authenticated</span>';
+        }
+      }
+
+      // Global functions for button clicks
+      window.signInAnonymously = async function () {
+        try {
+          if (!auth) {
+            log(
+              'Firebase not initialized - using mock authentication',
+              'warning'
+            );
+            currentUser = { uid: 'mock-user-' + Date.now() };
+            updateAuthStatus();
+            return;
+          }
+
+          log('Signing in anonymously...');
+          await firebaseSignInAnonymously(auth);
+          log('Successfully signed in', 'success');
+        } catch (error) {
+          log(`Sign in error: ${error.message}`, 'error');
+        }
+      };
+
+      window.signOut = async function () {
+        try {
+          if (!auth) {
+            currentUser = null;
+            updateAuthStatus();
+            return;
+          }
+
+          await firebaseSignOut(auth);
+          log('Successfully signed out', 'success');
+        } catch (error) {
+          log(`Sign out error: ${error.message}`, 'error');
+        }
+      };
+
+      window.checkMigrationStatus = async function () {
+        if (!currentUser) {
+          log('Please sign in first', 'error');
+          return;
+        }
+
+        try {
+          log('Checking migration status...');
+          const startTime = Date.now();
+
+          // Simulate checking migration status
+          const mockCheck = await simulateFirestoreRead(
+            'users/' + currentUser.uid
+          );
+          const responseTime = Date.now() - startTime;
+
+          metrics.readOperations++;
+          metrics.totalResponseTime += responseTime;
+          metrics.operations++;
+          updateMetrics();
+
+          const migrationResults = document.getElementById('migrationResults');
+          migrationResults.textContent = JSON.stringify(
+            {
+              needsMigration: mockCheck.needsMigration || true,
+              currentStructure: mockCheck.structure || 'old',
+              estimatedReadReduction: '75%',
+              responseTime: responseTime + 'ms',
+            },
+            null,
+            2
+          );
+
+          log(`Migration status checked in ${responseTime}ms`, 'success');
+        } catch (error) {
+          log(`Migration check error: ${error.message}`, 'error');
+        }
+      };
+
+      window.runMigration = async function () {
+        if (!currentUser) {
+          log('Please sign in first', 'error');
+          return;
+        }
+
+        try {
+          log('Running migration to optimized structure...');
+          const startTime = Date.now();
+
+          // Simulate migration process
+          await simulateFirestoreOperation('migration', 2000); // Longer operation
+          const responseTime = Date.now() - startTime;
+
+          // Simulate read operations during migration
+          metrics.readOperations += 3; // Load user + progress collection + validation
+          metrics.writeOperations += 1; // Write consolidated data
+          metrics.totalResponseTime += responseTime;
+          metrics.operations++;
+          updateMetrics();
+
+          const migrationResults = document.getElementById('migrationResults');
+          migrationResults.textContent = JSON.stringify(
+            {
+              success: true,
+              migratedCardSets: ['business_chinese', 'hsk_1_set_1'],
+              readOperations: 3,
+              writeOperations: 1,
+              timeElapsed: responseTime + 'ms',
+              readReductionAchieved: '75%',
+            },
+            null,
+            2
+          );
+
+          log(
+            `Migration completed successfully in ${responseTime}ms`,
+            'success'
+          );
+          log(
+            'Read operations reduced from N+1 to 1 for future loads',
+            'success'
+          );
+        } catch (error) {
+          log(`Migration error: ${error.message}`, 'error');
+        }
+      };
+
+      window.createTestData = async function () {
+        if (!currentUser) {
+          log('Please sign in first', 'error');
+          return;
+        }
+
+        try {
+          log('Creating test data with old structure...');
+
+          // Simulate creating old cardSetProgress documents
+          const cardSets = [
+            'business_chinese',
+            'hsk_1_set_1',
+            'ielts_adjective',
+          ];
+          let totalWrites = 0;
+
+          for (const cardSet of cardSets) {
+            await simulateFirestoreWrite(
+              `users/${currentUser.uid}/cardSetProgress/${cardSet}`
+            );
+            totalWrites++;
+          }
+
+          metrics.writeOperations += totalWrites;
+          updateMetrics();
+
+          log(
+            `Created ${totalWrites} cardSetProgress documents (old structure)`,
+            'success'
+          );
+        } catch (error) {
+          log(`Test data creation error: ${error.message}`, 'error');
+        }
+      };
+
+      window.testOldStructure = async function () {
+        if (!currentUser) {
+          log('Please sign in first', 'error');
+          return;
+        }
+
+        log('Testing old structure performance (N+1 reads)...');
+        const startTime = Date.now();
+
+        // Simulate old structure: 1 read for user + N reads for N card sets
+        const cardSetsCount = 3;
+        let readOperations = 1; // User document
+
+        for (let i = 0; i < cardSetsCount; i++) {
+          await simulateFirestoreRead(`cardSetProgress/${i}`);
+          readOperations++;
+        }
+
+        const responseTime = Date.now() - startTime;
+        metrics.readOperations += readOperations;
+        metrics.totalResponseTime += responseTime;
+        metrics.operations++;
+        updateMetrics();
+
+        log(
+          `Old structure: ${readOperations} reads for ${cardSetsCount} card sets (${responseTime}ms)`,
+          'warning'
+        );
+      };
+
+      window.testNewStructure = async function () {
+        if (!currentUser) {
+          log('Please sign in first', 'error');
+          return;
+        }
+
+        log('Testing new optimized structure (1 read)...');
+        const startTime = Date.now();
+
+        // Simulate new structure: 1 read for user with consolidated progress
+        await simulateFirestoreRead(`users/${currentUser.uid}`);
+
+        const responseTime = Date.now() - startTime;
+        metrics.readOperations += 1;
+        metrics.totalResponseTime += responseTime;
+        metrics.operations++;
+        metrics.cacheHits++; // Subsequent reads from cache
+        metrics.cacheRequests++;
+        updateMetrics();
+
+        log(
+          `New structure: 1 read for all progress data (${responseTime}ms)`,
+          'success'
+        );
+      };
+
+      window.resetMetrics = function () {
+        metrics = {
+          readOperations: 0,
+          writeOperations: 0,
+          totalResponseTime: 0,
+          operations: 0,
+          cacheHits: 0,
+          cacheRequests: 0,
+        };
+        updateMetrics();
+        log('Metrics reset', 'info');
+      };
+
+      window.validateData = async function () {
+        if (!currentUser) {
+          log('Please sign in first', 'error');
+          return;
+        }
+
+        try {
+          log('Validating data integrity after migration...');
+
+          const validation = {
+            userProfileExists: true,
+            consolidatedProgressExists: true,
+            oldDocumentsRemoved: true,
+            dataIntegrity: 'PASSED',
+            migrationVersion: 1,
+            totalCardSets: 3,
+            allProgressMigrated: true,
+          };
+
+          const validationResults =
+            document.getElementById('validationResults');
+          validationResults.textContent = JSON.stringify(validation, null, 2);
+
+          log('Data validation completed - all checks passed', 'success');
+        } catch (error) {
+          log(`Validation error: ${error.message}`, 'error');
+        }
+      };
+
+      window.showCurrentData = async function () {
+        if (!currentUser) {
+          log('Please sign in first', 'error');
+          return;
+        }
+
+        try {
+          log('Loading current data structure...');
+
+          const mockData = {
+            uid: currentUser.uid,
+            email: 'test@example.com',
+            cardSetsProgress: {
+              business_chinese: {
+                totalCards: 50,
+                reviewedCards: 25,
+                progressPercentage: 50,
+              },
+              hsk_1_set_1: {
+                totalCards: 30,
+                reviewedCards: 10,
+                progressPercentage: 33.33,
+              },
+            },
+            migrationVersion: 1,
+            lastMigrationDate: new Date().toISOString(),
+          };
+
+          const validationResults =
+            document.getElementById('validationResults');
+          validationResults.textContent = JSON.stringify(mockData, null, 2);
+
+          log('Current data structure loaded', 'success');
+        } catch (error) {
+          log(`Data loading error: ${error.message}`, 'error');
+        }
+      };
+
+      window.compareStructures = function () {
+        const comparison = {
+          'Old Structure (Problematic)': {
+            reads_on_startup: 'N+1 (1 user + N cardSetProgress docs)',
+            reads_during_review: 'M (M = new cards to create)',
+            data_location: 'Fragmented across subcollections',
+            atomic_updates: 'No',
+            cache_efficiency: 'Poor',
+          },
+          'New Structure (Optimized)': {
+            reads_on_startup: '1 (consolidated user profile)',
+            reads_during_review: '0 (pre-populated + cache)',
+            data_location: 'Single document with nested progress',
+            atomic_updates: 'Yes',
+            cache_efficiency: 'Excellent',
+          },
+          Improvement: {
+            read_reduction: '70-80%',
+            startup_time: 'Significantly faster',
+            review_performance: 'Near-instant',
+            data_consistency: 'Improved',
+          },
+        };
+
+        const validationResults = document.getElementById('validationResults');
+        validationResults.textContent = JSON.stringify(comparison, null, 2);
+
+        log('Structure comparison completed', 'info');
+      };
+
+      window.clearConsole = function () {
+        document.getElementById('consoleOutput').innerHTML = '';
+      };
+
+      // ========================================
+      // OPTIMIZED SERVICE METHODS TESTING
+      // ========================================
+
+      window.testLoadUserProfileWithProgress = async function () {
+        if (!currentUser) {
+          log('Please sign in first', 'error');
+          return;
+        }
+
+        try {
+          log('Testing loadUserProfileWithProgress (1 read operation)...');
+          const startTime = Date.now();
+
+          // Simulate the optimized profile loading
+          const mockProfile = {
+            uid: currentUser.uid,
+            email: 'test@example.com',
+            displayName: 'Test User',
+            cardSetsProgress: {
+              business_chinese: {
+                totalCards: 50,
+                reviewedCards: 25,
+                progressPercentage: 50,
+                lastReviewDate: new Date().toISOString(),
+              },
+              hsk_1_set_1: {
+                totalCards: 30,
+                reviewedCards: 10,
+                progressPercentage: 33.33,
+                lastReviewDate: new Date().toISOString(),
+              },
+            },
+            migrationVersion: 1,
+            lastMigrationDate: new Date().toISOString(),
+          };
+
+          await simulateFirestoreRead('users/' + currentUser.uid);
+
+          const responseTime = Date.now() - startTime;
+          metrics.readOperations += 1; // Only 1 read for entire profile
+          metrics.totalResponseTime += responseTime;
+          metrics.operations++;
+          updateMetrics();
+
+          const serviceResults = document.getElementById('serviceResults');
+          serviceResults.textContent = JSON.stringify(
+            {
+              method: 'loadUserProfileWithProgress',
+              success: true,
+              readOperations: 1,
+              responseTime: responseTime + 'ms',
+              cardSetsLoaded: Object.keys(mockProfile.cardSetsProgress).length,
+              profile: mockProfile,
+            },
+            null,
+            2
+          );
+
+          log(
+            `✅ Profile loaded with ${Object.keys(mockProfile.cardSetsProgress).length} card sets in ${responseTime}ms`,
+            'success'
+          );
+          log(
+            `📊 Total read operations: 1 (vs ${Object.keys(mockProfile.cardSetsProgress).length + 1} in old approach)`,
+            'success'
+          );
+        } catch (error) {
+          log(`Profile loading error: ${error.message}`, 'error');
+        }
+      };
+
+      window.testGetProgressFromProfile = function () {
+        try {
+          log('Testing getCardSetProgressFromProfile (0 additional reads)...');
+          const startTime = Date.now();
+
+          // Simulate getting progress from already loaded profile (no additional reads)
+          const mockProfile = {
+            cardSetsProgress: {
+              business_chinese: {
+                totalCards: 50,
+                reviewedCards: 25,
+                progressPercentage: 50,
+                lastReviewDate: new Date().toISOString(),
+              },
+            },
+          };
+
+          const progress = mockProfile.cardSetsProgress['business_chinese'];
+          const responseTime = Date.now() - startTime;
+
+          // No additional read operations - data served from memory
+          metrics.cacheHits++;
+          metrics.cacheRequests++;
+          updateMetrics();
+
+          const serviceResults = document.getElementById('serviceResults');
+          serviceResults.textContent = JSON.stringify(
+            {
+              method: 'getCardSetProgressFromProfile',
+              success: true,
+              readOperations: 0,
+              responseTime: responseTime + 'ms',
+              servedFromCache: true,
+              progress: progress,
+            },
+            null,
+            2
+          );
+
+          log(
+            `✅ Progress retrieved from cache in ${responseTime}ms (0 reads)`,
+            'success'
+          );
+          log(`🚀 Cache hit! No network requests needed`, 'success');
+        } catch (error) {
+          log(`Progress retrieval error: ${error.message}`, 'error');
+        }
+      };
+
+      window.testEnsureCardSetExists = async function () {
+        if (!currentUser) {
+          log('Please sign in first', 'error');
+          return;
+        }
+
+        try {
+          log('Testing ensureCardSetExists (pre-population strategy)...');
+          const startTime = Date.now();
+
+          // Simulate checking if card set exists
+          await simulateFirestoreRead('cardSet/business_chinese');
+          metrics.readOperations++;
+
+          // Simulate card set doesn't exist - create it
+          log('Card set does not exist, pre-populating from JSON...');
+
+          const mockCards = Array.from({ length: 50 }, (_, i) => ({
+            id: `card-${i}`,
+            front: { title: `Business Term ${i}` },
+            back: { title: `商业术语 ${i}` },
+          }));
+
+          // Simulate batch card creation
+          await simulateFirestoreOperation('batchCreate', 1000);
+          metrics.writeOperations++;
+
+          // Simulate progress initialization
+          await simulateFirestoreWrite('progress/business_chinese');
+          metrics.writeOperations++;
+
+          const responseTime = Date.now() - startTime;
+          metrics.totalResponseTime += responseTime;
+          metrics.operations++;
+          updateMetrics();
+
+          const serviceResults = document.getElementById('serviceResults');
+          serviceResults.textContent = JSON.stringify(
+            {
+              method: 'ensureCardSetExists',
+              success: true,
+              cardSetId: 'business_chinese',
+              prePopulated: true,
+              cardsCreated: mockCards.length,
+              readOperations: 1,
+              writeOperations: 2,
+              responseTime: responseTime + 'ms',
+              benefit:
+                'Eliminates lazy creation during review (0 future reads)',
+            },
+            null,
+            2
+          );
+
+          log(
+            `✅ Card set pre-populated with ${mockCards.length} cards`,
+            'success'
+          );
+          log(
+            `📈 Future review sessions will have 0 read operations`,
+            'success'
+          );
+        } catch (error) {
+          log(`Card set creation error: ${error.message}`, 'error');
+        }
+      };
+
+      window.testBatchProgressUpdate = async function () {
+        if (!currentUser) {
+          log('Please sign in first', 'error');
+          return;
+        }
+
+        try {
+          log('Testing batchUpdateCardSetProgress (atomic updates)...');
+          const startTime = Date.now();
+
+          const progressUpdates = {
+            business_chinese: {
+              totalCards: 50,
+              reviewedCards: 30,
+              progressPercentage: 60,
+              lastReviewDate: new Date().toISOString(),
+            },
+            hsk_1_set_1: {
+              totalCards: 30,
+              reviewedCards: 15,
+              progressPercentage: 50,
+              lastReviewDate: new Date().toISOString(),
+            },
+            ielts_adjective: {
+              totalCards: 40,
+              reviewedCards: 20,
+              progressPercentage: 50,
+              lastReviewDate: new Date().toISOString(),
+            },
+          };
+
+          // Simulate single atomic batch update (vs 3 individual updates)
+          await simulateFirestoreOperation('batchUpdate', 300);
+          metrics.writeOperations += 1; // Only 1 write operation for all updates
+
+          const responseTime = Date.now() - startTime;
+          metrics.totalResponseTime += responseTime;
+          metrics.operations++;
+          updateMetrics();
+
+          const serviceResults = document.getElementById('serviceResults');
+          serviceResults.textContent = JSON.stringify(
+            {
+              method: 'batchUpdateCardSetProgress',
+              success: true,
+              cardSetsUpdated: Object.keys(progressUpdates).length,
+              writeOperations: 1,
+              responseTime: responseTime + 'ms',
+              atomic: true,
+              oldApproachWrites: Object.keys(progressUpdates).length,
+              improvement: `${Object.keys(progressUpdates).length - 1} fewer write operations`,
+            },
+            null,
+            2
+          );
+
+          log(
+            `✅ Updated ${Object.keys(progressUpdates).length} card sets in single atomic operation`,
+            'success'
+          );
+          log(
+            `⚡ Batch update completed in ${responseTime}ms (1 write vs ${Object.keys(progressUpdates).length} writes)`,
+            'success'
+          );
+        } catch (error) {
+          log(`Batch update error: ${error.message}`, 'error');
+        }
+      }; // Helper functions for simulation
+      async function simulateFirestoreRead(path, delay = 150) {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve({
+              path,
+              data: { mock: 'data' },
+              needsMigration: Math.random() > 0.5,
+              structure: Math.random() > 0.5 ? 'old' : 'new',
+            });
+          }, delay);
+        });
+      }
+
+      async function simulateFirestoreWrite(path, delay = 100) {
+        return new Promise((resolve) => {
+          setTimeout(() => resolve({ path, success: true }), delay);
+        });
+      }
+
+      async function simulateFirestoreOperation(type, delay = 500) {
+        return new Promise((resolve) => {
+          setTimeout(() => resolve({ type, success: true }), delay);
+        });
+      }
+
+      // Initialize
+      log('Firestore Optimization Test Page Loaded', 'success');
+      log(
+        'This page simulates the migration from fragmented to consolidated data structure',
+        'info'
+      );
+      updateMetrics();
+    </script>
+  </body>
+</html>

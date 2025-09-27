@@ -209,7 +209,15 @@ export type FlashcardAction =
         cover: string;
         dataFile: string;
       } | null;
-    };
+    }
+  // OPTIMIZED CACHING ACTIONS
+  | {
+      type: 'UPDATE_CARD_SET_PROGRESS_OPTIMISTIC';
+      payload: { cardSetId: string; progress: CardSetProgress };
+    }
+  | { type: 'CLEAR_CACHE' }
+  | { type: 'INITIALIZE_CACHE'; payload: any }
+  | { type: 'SYNC_CACHE_STATE' };
 
 // Review statistics for dashboard display
 export interface ReviewStats {
@@ -316,3 +324,14 @@ export interface PendingOperation {
 
 // Export utility type for transforming raw flashcard data to full flashcard
 export type FlashcardTransform = (data: FlashcardData) => Flashcard;
+
+// Re-export optimization types for convenience
+export type {
+  UserProfileWithProgress,
+  CacheState,
+  BatchSyncOperation,
+  MigrationResult,
+  PerformanceMetrics,
+  ErrorRecoveryState,
+  CardSetMetadata,
+} from './optimization';
