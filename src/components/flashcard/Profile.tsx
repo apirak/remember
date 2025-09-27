@@ -11,7 +11,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useFlashcard } from '../../contexts/FlashcardContext';
-import EmojiText from '../EmojiSVG';
 import type { AppRoute, UserProfile } from '../../types/flashcard';
 
 interface ProfileProps {
@@ -74,7 +73,7 @@ const Profile: React.FC<ProfileProps> = ({ onNavigate }) => {
   // Show loading state
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-yellow-50 to-green-50">
+      <div className="min-h-screen flex items-center justify-center from-blue-50">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500 mx-auto mb-4"></div>
           <p className="text-lg font-rounded text-gray-600">
@@ -96,153 +95,152 @@ const Profile: React.FC<ProfileProps> = ({ onNavigate }) => {
     : 'Recently';
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-yellow-50 to-green-50">
-      <div className="container mx-auto px-4 py-8 max-w-2xl">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <button
-            onClick={handleBackToDashboard}
-            className="flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-200"
-          >
-            <span className="mr-2">←</span>
-            <span className="font-rounded">Back to Dashboard</span>
-          </button>
-          <h1 className="text-2xl font-bold font-child text-gray-800">
-            <EmojiText size={24}>👤</EmojiText> Profile
-          </h1>
-          <div className="w-24"></div> {/* Spacer for center alignment */}
-        </div>
-
-        {/* Profile Card */}
-        <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
-          {/* Profile Header */}
-          <div className="bg-gradient-to-r from-primary-500 to-primary-600 px-6 py-8 text-white text-center">
-            {/* Profile Picture */}
-            <div className="mb-4">
-              {photoURL ? (
-                <img
-                  src={photoURL}
-                  alt={`${displayName}'s profile`}
-                  className="w-20 h-20 rounded-full mx-auto border-4 border-white/30 object-cover"
-                />
-              ) : (
-                <div className="w-20 h-20 rounded-full mx-auto border-4 border-white/30 bg-white/20 flex items-center justify-center">
-                  <EmojiText size={32}>👤</EmojiText>
-                </div>
-              )}
-            </div>
-
-            {/* Name and Email */}
-            <h2 className="text-xl font-bold font-child mb-1">{displayName}</h2>
-            {email && (
-              <p className="text-primary-100 font-rounded text-sm">{email}</p>
-            )}
-          </div>
-
-          {/* Profile Information */}
-          <div className="p-6 space-y-6">
-            {/* Account Statistics */}
-            <div>
-              <h3 className="text-lg font-bold font-child text-gray-800 mb-4">
-                <EmojiText size={18}>📊</EmojiText> Account Statistics
-              </h3>
-
-              <div className="grid grid-cols-2 gap-4">
-                {/* Total Reviews */}
-                <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-4 text-center">
-                  <div className="text-2xl font-bold font-child text-green-600 mb-1">
-                    {totalReviewsCount.toLocaleString()}
-                  </div>
-                  <div className="text-sm font-rounded text-green-700">
-                    Total Reviews
-                  </div>
-                </div>
-
-                {/* Cards Due Today */}
-                <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-4 text-center">
-                  <div className="text-2xl font-bold font-child text-blue-600 mb-1">
-                    {flashcardState.stats.dueCards}
-                  </div>
-                  <div className="text-sm font-rounded text-blue-700">
-                    Cards Due Today
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Account Information */}
-            <div>
-              <h3 className="text-lg font-bold font-child text-gray-800 mb-4">
-                <EmojiText size={18}>ℹ️</EmojiText> Account Information
-              </h3>
-
-              <div className="space-y-3">
-                <div className="flex justify-between items-center py-2">
-                  <span className="font-rounded text-gray-600">
-                    Member since:
-                  </span>
-                  <span className="font-rounded text-gray-800">
-                    {memberSince}
-                  </span>
-                </div>
-
-                <div className="flex justify-between items-center py-2">
-                  <span className="font-rounded text-gray-600">
-                    Account type:
-                  </span>
-                  <span className="font-rounded text-primary-600 font-medium">
-                    <EmojiText size={14}>✨</EmojiText> Premium
-                  </span>
-                </div>
-
-                {userProfile?.migratedFromGuest && (
-                  <div className="flex justify-between items-center py-2">
-                    <span className="font-rounded text-gray-600">
-                      Migrated from guest:
-                    </span>
-                    <span className="font-rounded text-gray-800">
-                      <EmojiText size={14}>✅</EmojiText> Yes
-                    </span>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Sign Out Section */}
-            <div className="pt-4 border-t border-gray-200">
+    <div className="min-h-screen from-blue-50">
+      <div className="h-screen flex flex-col">
+        {/* Navigation Header - Sticky */}
+        <div className="sticky top-0 z-10 from-blue-50 backdrop-blur-md border-b border-white/20 p-4 pb-2">
+          <div className="max-w-md w-full mx-auto">
+            <div className="flex items-center justify-between">
               <button
-                onClick={handleSignOut}
-                disabled={isSigningOut}
-                className={`
-                  w-full py-3 px-6 rounded-2xl font-rounded font-medium transition-all duration-200
-                  ${
-                    isSigningOut
-                      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                      : 'bg-red-500 hover:bg-red-600 text-white hover:shadow-lg hover:shadow-red-500/20 active:scale-95'
-                  }
-                `}
+                onClick={handleBackToDashboard}
+                className="flex items-center px-3 py-2 text-sm font-rounded text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-colors duration-200"
               >
-                {isSigningOut ? (
-                  <div className="flex items-center justify-center">
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-500 mr-2"></div>
-                    Signing out...
-                  </div>
-                ) : (
-                  <div className="flex items-center justify-center">
-                    <EmojiText size={16}>🚪</EmojiText>
-                    <span className="ml-2">Sign Out</span>
-                  </div>
-                )}
+                <span className="mr-2">←</span>
+                <span>Back</span>
               </button>
+
+              <h1 className="text-2xl font-child text-gray-700">Profile</h1>
+
+              {/* Spacer for centering */}
+              <div className="w-16"></div>
             </div>
           </div>
         </div>
 
-        {/* Footer */}
-        <div className="text-center mt-8">
-          <p className="text-sm font-rounded text-gray-500">
-            Your progress is automatically synced across all devices
-          </p>
+        {/* Profile Content - Scrollable */}
+        <div className="flex-1 overflow-auto">
+          <div className="max-w-md w-full mx-auto p-4 pt-6">
+            {/* Profile Card */}
+            <div className="bg-white/80 backdrop-blur-md rounded-2xl shadow-md p-4 mb-4">
+              {/* Profile Header */}
+              <div className="text-center mb-4">
+                {/* Profile Picture */}
+                <div className="mb-3">
+                  {photoURL ? (
+                    <img
+                      src={photoURL}
+                      alt={`${displayName}'s profile`}
+                      className="w-16 h-16 rounded-full mx-auto border-2 border-gray-200 object-cover"
+                    />
+                  ) : (
+                    <div className="w-16 h-16 rounded-full mx-auto border-2 border-gray-200 bg-gray-100 flex items-center justify-center">
+                      <span className="text-2xl">👤</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Name and Email */}
+                <h2 className="text-lg font-bold font-child text-gray-800 mb-1">
+                  {displayName}
+                </h2>
+                {email && (
+                  <p className="text-gray-600 font-rounded text-sm">{email}</p>
+                )}
+              </div>
+
+              {/* Account Statistics */}
+              <div className="mb-4">
+                <h3 className="text-lg font-bold font-child text-gray-800 mb-3">
+                  Statistics
+                </h3>
+
+                <div className="grid grid-cols-2 gap-3">
+                  {/* Total Reviews */}
+                  <div className="bg-gray-50 rounded-2xl p-3 text-center">
+                    <div className="text-xl font-bold font-child text-gray-700 mb-1">
+                      {totalReviewsCount.toLocaleString()}
+                    </div>
+                    <div className="text-xs font-rounded text-gray-600">
+                      Total Reviews
+                    </div>
+                  </div>
+
+                  {/* Cards Due Today */}
+                  <div className="bg-gray-50 rounded-2xl p-3 text-center">
+                    <div className="text-xl font-bold font-child text-gray-700 mb-1">
+                      {flashcardState.stats.dueCards}
+                    </div>
+                    <div className="text-xs font-rounded text-gray-600">
+                      Cards Due Today
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Account Information */}
+              <div className="mb-4">
+                <h3 className="text-lg font-bold font-child text-gray-800 mb-3">
+                  Account Information
+                </h3>
+
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center py-1">
+                    <span className="font-rounded text-gray-600 text-sm">
+                      Member since:
+                    </span>
+                    <span className="font-rounded text-gray-800 text-sm">
+                      {memberSince}
+                    </span>
+                  </div>
+
+                  <div className="flex justify-between items-center py-1">
+                    <span className="font-rounded text-gray-600 text-sm">
+                      Account type:
+                    </span>
+                    <span className="font-rounded text-primary-600 font-medium text-sm">
+                      Free
+                    </span>
+                  </div>
+
+                  {userProfile?.migratedFromGuest && (
+                    <div className="flex justify-between items-center py-1">
+                      <span className="font-rounded text-gray-600 text-sm">
+                        Migrated from guest:
+                      </span>
+                      <span className="font-rounded text-gray-800 text-sm">
+                        Yes
+                      </span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Sign Out Section */}
+              <div className="pt-3 border-t border-gray-200">
+                <button
+                  onClick={handleSignOut}
+                  disabled={isSigningOut}
+                  className={`
+                    w-full py-3 px-4 rounded-2xl font-rounded font-medium transition-all duration-200 text-sm
+                    ${
+                      isSigningOut
+                        ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                        : 'bg-red-500 hover:bg-red-600 text-white hover:shadow-lg hover:shadow-red-500/20 active:scale-95'
+                    }
+                  `}
+                >
+                  {isSigningOut ? <>Signing out...</> : <>Sign out</>}
+                </button>
+              </div>
+            </div>
+
+            {/* Footer */}
+            <div className="text-center mt-6 pb-4">
+              <p className="text-xs font-rounded text-gray-500">
+                Your progress is automatically synced across all devices
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
