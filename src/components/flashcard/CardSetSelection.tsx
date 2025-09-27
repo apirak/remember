@@ -136,8 +136,8 @@ const CardSetSelection: React.FC<CardSetSelectionProps> = ({ onNavigate }) => {
       `CardSetSelection: Set selected card set to ${cardSet.name} (${cardSet.dataFile})`
     );
 
-    // Navigate to the card set page using URL routing
-    window.location.href = `/${cardSet.id}`;
+    // Navigate to dashboard using client-side routing (no reload)
+    onNavigate('dashboard');
   };
 
   // Handle back navigation
