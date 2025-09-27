@@ -181,6 +181,10 @@ const FlashcardContext = createContext<{
   saveCardSetProgress: (progress: CardSetProgress) => Promise<void>;
   updateCurrentCardSetProgress: () => Promise<void>;
   loadAllCardSetProgress: () => Promise<Record<string, number>>;
+
+  // User profile methods
+  loadUserProfile: () => Promise<any>;
+  updateUserProfile: (updates: any) => Promise<boolean>;
 } | null>(null);
 
 /**
@@ -355,7 +359,10 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
       // Check if it's already a complete CardSet (from localStorage) or needs to be used as default
       if ('description' in initialCardSet && 'cardCount' in initialCardSet) {
         // It's a complete CardSet from localStorage
-        dispatch({ type: 'SET_SELECTED_CARD_SET', payload: initialCardSet as CardSet });
+        dispatch({
+          type: 'SET_SELECTED_CARD_SET',
+          payload: initialCardSet as CardSet,
+        });
       } else {
         // It's the minimal default, create a complete CardSet
         const completeCardSet: CardSet = {
@@ -630,6 +637,8 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
     saveCardSetProgress,
     updateCurrentCardSetProgress,
     loadAllCardSetProgress,
+    loadUserProfile,
+    updateUserProfile,
   } = firestoreOperations;
 
   /**
@@ -700,6 +709,9 @@ export const FlashcardProvider: React.FC<{ children: ReactNode }> = ({
     saveCardSetProgress,
     updateCurrentCardSetProgress,
     loadAllCardSetProgress,
+    // User profile methods
+    loadUserProfile,
+    updateUserProfile,
   };
 
   return (

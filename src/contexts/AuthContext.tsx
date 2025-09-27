@@ -11,9 +11,9 @@
  * - Clean auth state persistence
  */
 
-import React, { createContext, useContext, useReducer, useEffect } from "react";
-import type { ReactNode } from "react";
-import { onAuthStateChange } from "../utils/auth";
+import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import type { ReactNode } from 'react';
+import { onAuthStateChange } from '../utils/auth';
 
 /**
  * Authentication state interface
@@ -27,7 +27,7 @@ export interface AuthState {
   isGuest: boolean;
 
   /** Migration status for transferring guest data to authenticated user */
-  migrationStatus: "none" | "in-progress" | "completed" | "failed";
+  migrationStatus: 'none' | 'in-progress' | 'completed' | 'failed';
 
   /** Loading state for auth operations */
   isAuthLoading: boolean;
@@ -41,11 +41,11 @@ export interface AuthState {
  * Defines all possible auth state mutations
  */
 export type AuthAction =
-  | { type: "SET_USER"; payload: { user: any; isGuest: boolean } }
-  | { type: "SET_MIGRATION_STATUS"; payload: AuthState["migrationStatus"] }
-  | { type: "SET_AUTH_LOADING"; payload: boolean }
-  | { type: "SET_AUTH_ERROR"; payload: string | null }
-  | { type: "CLEAR_AUTH_ERROR" };
+  | { type: 'SET_USER'; payload: { user: any; isGuest: boolean } }
+  | { type: 'SET_MIGRATION_STATUS'; payload: AuthState['migrationStatus'] }
+  | { type: 'SET_AUTH_LOADING'; payload: boolean }
+  | { type: 'SET_AUTH_ERROR'; payload: string | null }
+  | { type: 'CLEAR_AUTH_ERROR' };
 
 /**
  * Initial authentication state
@@ -54,7 +54,7 @@ export type AuthAction =
 const initialAuthState: AuthState = {
   user: null,
   isGuest: true,
-  migrationStatus: "none",
+  migrationStatus: 'none',
   isAuthLoading: true, // Start as loading since we need to check auth state
   authError: null,
 };
@@ -69,7 +69,7 @@ const initialAuthState: AuthState = {
  */
 const authReducer = (state: AuthState, action: AuthAction): AuthState => {
   switch (action.type) {
-    case "SET_USER": {
+    case 'SET_USER': {
       const { user, isGuest } = action.payload;
       return {
         ...state,
@@ -80,21 +80,21 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
       };
     }
 
-    case "SET_MIGRATION_STATUS": {
+    case 'SET_MIGRATION_STATUS': {
       return {
         ...state,
         migrationStatus: action.payload,
       };
     }
 
-    case "SET_AUTH_LOADING": {
+    case 'SET_AUTH_LOADING': {
       return {
         ...state,
         isAuthLoading: action.payload,
       };
     }
 
-    case "SET_AUTH_ERROR": {
+    case 'SET_AUTH_ERROR': {
       return {
         ...state,
         authError: action.payload,
@@ -102,7 +102,7 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
       };
     }
 
-    case "CLEAR_AUTH_ERROR": {
+    case 'CLEAR_AUTH_ERROR': {
       return {
         ...state,
         authError: null,
@@ -131,7 +131,7 @@ interface AuthContextValue {
   setUser: (user: any, isGuest: boolean) => void;
 
   /** Update migration status during guest-to-user data transfer */
-  setMigrationStatus: (status: AuthState["migrationStatus"]) => void;
+  setMigrationStatus: (status: AuthState['migrationStatus']) => void;
 
   /** Set loading state for auth operations */
   setAuthLoading: (loading: boolean) => void;
@@ -171,14 +171,14 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
    * @param isGuest Whether the user is in guest mode
    */
   const setUser = (user: any, isGuest: boolean) => {
-    console.log("AuthContext: Setting user", {
+    console.log('AuthContext: Setting user', {
       hasUser: !!user,
       isGuest,
       userId: user?.uid,
     });
 
     dispatch({
-      type: "SET_USER",
+      type: 'SET_USER',
       payload: { user, isGuest },
     });
   };
@@ -188,9 +188,9 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
    *
    * @param status New migration status
    */
-  const setMigrationStatus = (status: AuthState["migrationStatus"]) => {
-    console.log("AuthContext: Setting migration status", status);
-    dispatch({ type: "SET_MIGRATION_STATUS", payload: status });
+  const setMigrationStatus = (status: AuthState['migrationStatus']) => {
+    console.log('AuthContext: Setting migration status', status);
+    dispatch({ type: 'SET_MIGRATION_STATUS', payload: status });
   };
 
   /**
@@ -199,7 +199,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
    * @param loading Whether auth is currently loading
    */
   const setAuthLoading = (loading: boolean) => {
-    dispatch({ type: "SET_AUTH_LOADING", payload: loading });
+    dispatch({ type: 'SET_AUTH_LOADING', payload: loading });
   };
 
   /**
@@ -209,16 +209,16 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
    */
   const setAuthError = (error: string | null) => {
     if (error) {
-      console.error("AuthContext: Auth error occurred", error);
+      console.error('AuthContext: Auth error occurred', error);
     }
-    dispatch({ type: "SET_AUTH_ERROR", payload: error });
+    dispatch({ type: 'SET_AUTH_ERROR', payload: error });
   };
 
   /**
    * Clear auth error
    */
   const clearAuthError = () => {
-    dispatch({ type: "CLEAR_AUTH_ERROR" });
+    dispatch({ type: 'CLEAR_AUTH_ERROR' });
   };
 
   /**
@@ -229,19 +229,19 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     try {
       setAuthLoading(true);
       // Import signOutUser dynamically to avoid circular dependencies
-      const { signOutUser } = await import("../utils/auth");
+      const { signOutUser } = await import('../utils/auth');
       const result = await signOutUser();
 
       if (!result.success) {
-        throw new Error(result.error || "Sign out failed");
+        throw new Error(result.error || 'Sign out failed');
       }
 
-      console.log("AuthContext: User signed out successfully");
+      console.log('AuthContext: User signed out successfully');
     } catch (error) {
-      console.error("AuthContext: Error signing out", error);
+      console.error('AuthContext: Error signing out', error);
       setAuthError(
         `Failed to sign out: ${
-          error instanceof Error ? error.message : "Unknown error"
+          error instanceof Error ? error.message : 'Unknown error'
         }`
       );
       throw error; // Re-throw so components can handle if needed
@@ -253,18 +253,54 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
   /**
    * Monitor authentication state changes
    * Listens to Firebase auth state and updates context accordingly
+   * Auto-saves user profile when user signs in
    */
   useEffect(() => {
-    console.log("AuthContext: Setting up auth state listener");
+    console.log('AuthContext: Setting up auth state listener');
 
-    const unsubscribe = onAuthStateChange((firebaseUser) => {
-      console.log("AuthContext: Auth state changed", {
+    const unsubscribe = onAuthStateChange(async (firebaseUser) => {
+      console.log('AuthContext: Auth state changed', {
         hasUser: !!firebaseUser,
         userId: firebaseUser?.uid,
       });
 
       if (firebaseUser) {
-        // User is signed in
+        // User is signed in - auto-save user profile
+        try {
+          setAuthLoading(true);
+
+          // Import dependencies dynamically to avoid circular imports
+          const { createUserProfile } = await import('../utils/auth');
+          const { FlashcardService } = await import(
+            '../services/flashcardService'
+          );
+
+          // Create user profile from Firebase user data
+          const userProfile = createUserProfile(firebaseUser);
+
+          // Auto-save to Firestore (creates if not exists, updates lastLoginAt if exists)
+          const saveResult =
+            await FlashcardService.saveUserProfile(userProfile);
+
+          if (saveResult.success) {
+            console.log(
+              'AuthContext: Successfully auto-saved user profile on sign in'
+            );
+          } else {
+            console.warn(
+              'AuthContext: Failed to auto-save user profile:',
+              saveResult.error
+            );
+            // Don't throw error - we still want to proceed with authentication
+          }
+        } catch (error) {
+          console.error('AuthContext: Error during profile auto-save:', error);
+          // Don't block authentication on profile save failure
+        } finally {
+          setAuthLoading(false);
+        }
+
+        // Update auth state regardless of profile save result
         setUser(firebaseUser, false);
       } else {
         // User is signed out or was never signed in - switch to guest mode
@@ -274,7 +310,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
     // Cleanup subscription on unmount
     return () => {
-      console.log("AuthContext: Cleaning up auth state listener");
+      console.log('AuthContext: Cleaning up auth state listener');
       unsubscribe();
     };
   }, []); // Empty dependency array - this should only run once on mount
@@ -310,8 +346,8 @@ export const useAuth = (): AuthContextValue => {
 
   if (!context) {
     throw new Error(
-      "useAuth must be used within an AuthProvider. " +
-        "Make sure your component is wrapped in an AuthProvider."
+      'useAuth must be used within an AuthProvider. ' +
+        'Make sure your component is wrapped in an AuthProvider.'
     );
   }
 

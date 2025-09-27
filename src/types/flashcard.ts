@@ -123,8 +123,8 @@ export interface FlashcardContextState {
   };
 
   // Data source and sync status
-  dataSource: "session" | "firestore" | "fallback";
-  syncStatus: "idle" | "syncing" | "error" | "offline";
+  dataSource: 'session' | 'firestore' | 'fallback';
+  syncStatus: 'idle' | 'syncing' | 'error' | 'offline';
   lastSyncTime: Date | null;
 
   // Error handling
@@ -132,7 +132,7 @@ export interface FlashcardContextState {
   pendingOperations: PendingOperation[];
 
   // Migration status
-  migrationStatus: "none" | "pending" | "in-progress" | "completed" | "failed";
+  migrationStatus: 'none' | 'pending' | 'in-progress' | 'completed' | 'failed';
 
   // Progress statistics
   stats: {
@@ -150,50 +150,50 @@ export interface FlashcardContextState {
 
 // Action types for context reducer
 export type FlashcardAction =
-  | { type: "LOAD_CARDS"; payload: Flashcard[] }
-  | { type: "START_REVIEW_SESSION"; payload: Flashcard[] }
-  | { type: "SHOW_CARD_BACK" }
-  | { type: "RATE_CARD"; payload: { cardId: string; quality: number } }
-  | { type: "NEXT_CARD" }
-  | { type: "COMPLETE_SESSION" }
-  | { type: "RESET_SESSION" }
-  | { type: "RESET_TODAY_PROGRESS" }
-  | { type: "SET_LOADING"; payload: boolean }
-  | { type: "UPDATE_STATS" }
+  | { type: 'LOAD_CARDS'; payload: Flashcard[] }
+  | { type: 'START_REVIEW_SESSION'; payload: Flashcard[] }
+  | { type: 'SHOW_CARD_BACK' }
+  | { type: 'RATE_CARD'; payload: { cardId: string; quality: number } }
+  | { type: 'NEXT_CARD' }
+  | { type: 'COMPLETE_SESSION' }
+  | { type: 'RESET_SESSION' }
+  | { type: 'RESET_TODAY_PROGRESS' }
+  | { type: 'SET_LOADING'; payload: boolean }
+  | { type: 'UPDATE_STATS' }
   // Enhanced loading states
   | {
-      type: "SET_LOADING_STATE";
+      type: 'SET_LOADING_STATE';
       payload: {
-        key: keyof FlashcardContextState["loadingStates"];
+        key: keyof FlashcardContextState['loadingStates'];
         value: boolean;
       };
     }
   // Data source and sync management
-  | { type: "SET_DATA_SOURCE"; payload: "session" | "firestore" | "fallback" }
+  | { type: 'SET_DATA_SOURCE'; payload: 'session' | 'firestore' | 'fallback' }
   | {
-      type: "SET_SYNC_STATUS";
-      payload: "idle" | "syncing" | "error" | "offline";
+      type: 'SET_SYNC_STATUS';
+      payload: 'idle' | 'syncing' | 'error' | 'offline';
     }
-  | { type: "SET_LAST_SYNC_TIME"; payload: Date }
+  | { type: 'SET_LAST_SYNC_TIME'; payload: Date }
   // Error handling
-  | { type: "SET_ERROR"; payload: AppError | null }
-  | { type: "CLEAR_ERROR" }
-  | { type: "ADD_PENDING_OPERATION"; payload: PendingOperation }
-  | { type: "REMOVE_PENDING_OPERATION"; payload: string }
-  | { type: "RETRY_PENDING_OPERATIONS" }
+  | { type: 'SET_ERROR'; payload: AppError | null }
+  | { type: 'CLEAR_ERROR' }
+  | { type: 'ADD_PENDING_OPERATION'; payload: PendingOperation }
+  | { type: 'REMOVE_PENDING_OPERATION'; payload: string }
+  | { type: 'RETRY_PENDING_OPERATIONS' }
   // Migration
   | {
-      type: "SET_MIGRATION_STATUS";
-      payload: "none" | "pending" | "in-progress" | "completed" | "failed";
+      type: 'SET_MIGRATION_STATUS';
+      payload: 'none' | 'pending' | 'in-progress' | 'completed' | 'failed';
     }
   // User authentication
-  | { type: "SET_USER"; payload: { user: any; isGuest: boolean } }
+  | { type: 'SET_USER'; payload: { user: any; isGuest: boolean } }
   // Card set management (new)
-  | { type: "SET_SELECTED_CARD_SET"; payload: CardSet | null }
-  | { type: "SET_AVAILABLE_CARD_SETS"; payload: CardSet[] }
+  | { type: 'SET_SELECTED_CARD_SET'; payload: CardSet | null }
+  | { type: 'SET_AVAILABLE_CARD_SETS'; payload: CardSet[] }
   // Card set management (legacy - will be removed)
   | {
-      type: "SET_CURRENT_CARD_SET";
+      type: 'SET_CURRENT_CARD_SET';
       payload: {
         id: string;
         name: string;
@@ -202,7 +202,7 @@ export type FlashcardAction =
       } | null;
     }
   | {
-      type: "SET_LAST_WORKING_CARD_SET";
+      type: 'SET_LAST_WORKING_CARD_SET';
       payload: {
         id: string;
         name: string;
@@ -224,7 +224,12 @@ export interface ReviewStats {
 }
 
 // Router navigation types
-export type AppRoute = "dashboard" | "review" | "complete";
+export type AppRoute =
+  | 'dashboard'
+  | 'review'
+  | 'complete'
+  | 'card-sets'
+  | 'profile';
 
 // Component props interfaces
 export interface DashboardProps {
@@ -264,14 +269,14 @@ export interface AppError {
 
 // Specific error codes for better error handling and user feedback
 export type ErrorCode =
-  | "CONTEXT_ERROR" // Generic context errors
-  | "CARD_SET_NOT_FOUND" // Card set file doesn't exist
-  | "CARD_SET_INVALID_DATA" // Card set data is corrupted/invalid
-  | "CARD_SET_LOAD_FAILED" // General loading failure
-  | "CARD_SET_EMPTY" // Card set contains no valid cards
-  | "FIRESTORE_ERROR" // Firebase/Firestore related errors
-  | "NETWORK_ERROR" // Network connectivity issues
-  | "SESSION_ERROR"; // Review session related errors
+  | 'CONTEXT_ERROR' // Generic context errors
+  | 'CARD_SET_NOT_FOUND' // Card set file doesn't exist
+  | 'CARD_SET_INVALID_DATA' // Card set data is corrupted/invalid
+  | 'CARD_SET_LOAD_FAILED' // General loading failure
+  | 'CARD_SET_EMPTY' // Card set contains no valid cards
+  | 'FIRESTORE_ERROR' // Firebase/Firestore related errors
+  | 'NETWORK_ERROR' // Network connectivity issues
+  | 'SESSION_ERROR'; // Review session related errors
 
 // Helper function to create specific card set errors with user-friendly messages
 export interface CardSetError extends AppError {
@@ -279,10 +284,30 @@ export interface CardSetError extends AppError {
   dataFile?: string;
 }
 
+// User profile data structure for Firestore storage
+export interface UserProfile {
+  uid: string;
+  email: string | null;
+  displayName: string | null;
+  photoURL: string | null;
+  // Profile metadata
+  createdAt: Date;
+  lastLoginAt: Date;
+  // Statistics and preferences
+  totalReviewsCount?: number;
+  preferredLanguage?: string;
+  theme?: 'light' | 'dark' | 'system';
+  // Migration tracking
+  migratedFromGuest?: boolean;
+  migrationDate?: Date;
+  // Account status
+  isActive: boolean;
+}
+
 // Pending operation for offline/fallback support
 export interface PendingOperation {
   id: string;
-  type: "rate_card" | "add_card" | "edit_card" | "delete_card" | "migrate_data";
+  type: 'rate_card' | 'add_card' | 'edit_card' | 'delete_card' | 'migrate_data';
   data: any;
   timestamp: Date;
   retryCount: number;

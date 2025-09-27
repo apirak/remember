@@ -7,17 +7,9 @@ import {
   signOut,
   onAuthStateChanged,
   type User,
-} from "firebase/auth";
-import { auth } from "./firebase";
-
-// User profile interface
-export interface UserProfile {
-  uid: string;
-  email: string | null;
-  displayName: string | null;
-  photoURL: string | null;
-  isGuest: boolean;
-}
+} from 'firebase/auth';
+import { auth } from './firebase';
+import { type UserProfile } from '../types/flashcard';
 
 // Authentication result interface
 export interface AuthResult {
@@ -28,14 +20,14 @@ export interface AuthResult {
 
 // Error messages in Thai
 const ERROR_MESSAGES = {
-  "auth/popup-closed-by-user": "ผู้ใช้ปิดหน้าต่างการเข้าสู่ระบบ",
-  "auth/popup-blocked":
-    "เบราว์เซอร์บล็อกหน้าต่างการเข้าสู่ระบบ กรุณาอนุญาต popup",
-  "auth/cancelled-popup-request": "การเข้าสู่ระบบถูกยกเลิก",
-  "auth/network-request-failed": "ไม่สามารถเชื่อมต่ออินเทอร์เน็ตได้",
-  "auth/user-disabled": "บัญชีนี้ถูกระงับการใช้งาน",
-  "auth/operation-not-allowed": "ไม่อนุญาตให้ใช้วิธีการเข้าสู่ระบบนี้",
-  default: "เกิดข้อผิดพลาดในการเข้าสู่ระบบ กรุณาลองใหม่อีกครั้ง",
+  'auth/popup-closed-by-user': 'ผู้ใช้ปิดหน้าต่างการเข้าสู่ระบบ',
+  'auth/popup-blocked':
+    'เบราว์เซอร์บล็อกหน้าต่างการเข้าสู่ระบบ กรุณาอนุญาต popup',
+  'auth/cancelled-popup-request': 'การเข้าสู่ระบบถูกยกเลิก',
+  'auth/network-request-failed': 'ไม่สามารถเชื่อมต่ออินเทอร์เน็ตได้',
+  'auth/user-disabled': 'บัญชีนี้ถูกระงับการใช้งาน',
+  'auth/operation-not-allowed': 'ไม่อนุญาตให้ใช้วิธีการเข้าสู่ระบบนี้',
+  default: 'เกิดข้อผิดพลาดในการเข้าสู่ระบบ กรุณาลองใหม่อีกครั้ง',
 };
 
 // Get error message in Thai
@@ -47,32 +39,38 @@ const getErrorMessage = (errorCode: string): string => {
 };
 
 // Convert Firebase user to UserProfile
-const createUserProfile = (user: User): UserProfile => {
+export const createUserProfile = (user: User): UserProfile => {
   return {
     uid: user.uid,
     email: user.email,
     displayName: user.displayName,
     photoURL: user.photoURL,
-    isGuest: false,
+    createdAt: new Date(),
+    lastLoginAt: new Date(),
+    totalReviewsCount: 0,
+    preferredLanguage: 'en',
+    theme: 'system',
+    migratedFromGuest: false,
+    isActive: true,
   };
 };
 
 // Google Sign-In function
 export const signInWithGoogle = async (): Promise<AuthResult> => {
   try {
-    console.log("Starting Google Sign-In...");
+    console.log('Starting Google Sign-In...');
 
     const provider = new GoogleAuthProvider();
 
     // Configure the provider
-    provider.addScope("email");
-    provider.addScope("profile");
+    provider.addScope('email');
+    provider.addScope('profile');
 
     // Sign in with popup
     const result = await signInWithPopup(auth, provider);
     const user = result.user;
 
-    console.log("Google Sign-In successful:", {
+    console.log('Google Sign-In successful:', {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
@@ -83,9 +81,9 @@ export const signInWithGoogle = async (): Promise<AuthResult> => {
       user: createUserProfile(user),
     };
   } catch (error: any) {
-    console.error("Google Sign-In error:", error);
+    console.error('Google Sign-In error:', error);
 
-    const errorCode = error?.code || "default";
+    const errorCode = error?.code || 'default';
     const errorMessage = getErrorMessage(errorCode);
 
     return {
@@ -98,19 +96,19 @@ export const signInWithGoogle = async (): Promise<AuthResult> => {
 // Sign out function
 export const signOutUser = async (): Promise<AuthResult> => {
   try {
-    console.log("Signing out user...");
+    console.log('Signing out user...');
     await signOut(auth);
 
     // Clear guest mode
     disableGuestMode();
 
-    console.log("Sign out successful");
+    console.log('Sign out successful');
     return { success: true };
   } catch (error: any) {
-    console.error("Sign out error:", error);
+    console.error('Sign out error:', error);
     return {
       success: false,
-      error: "เกิดข้อผิดพลาดในการออกจากระบบ",
+      error: 'เกิดข้อผิดพลาดในการออกจากระบบ',
     };
   }
 };
@@ -134,23 +132,23 @@ export const onAuthStateChange = (
 };
 
 // Guest mode management
-const GUEST_MODE_KEY = "remember_guest_mode";
+const GUEST_MODE_KEY = 'remember_guest_mode';
 
 export const isGuestMode = (): boolean => {
-  if (typeof window === "undefined") return false;
-  return localStorage.getItem(GUEST_MODE_KEY) === "true";
+  if (typeof window === 'undefined') return false;
+  return localStorage.getItem(GUEST_MODE_KEY) === 'true';
 };
 
 export const enableGuestMode = (): void => {
-  if (typeof window === "undefined") return;
-  localStorage.setItem(GUEST_MODE_KEY, "true");
-  console.log("Guest mode enabled");
+  if (typeof window === 'undefined') return;
+  localStorage.setItem(GUEST_MODE_KEY, 'true');
+  console.log('Guest mode enabled');
 };
 
 export const disableGuestMode = (): void => {
-  if (typeof window === "undefined") return;
+  if (typeof window === 'undefined') return;
   localStorage.removeItem(GUEST_MODE_KEY);
-  console.log("Guest mode disabled");
+  console.log('Guest mode disabled');
 };
 
 // Convenience function to check if user is authenticated (either Firebase or guest)

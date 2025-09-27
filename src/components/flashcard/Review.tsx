@@ -1,11 +1,11 @@
 // Review component - main flashcard review interface
 // Handles showing cards, flipping to back, and rating responses
 
-import React, { useEffect, useState } from "react";
-import { useFlashcard } from "../../contexts/FlashcardContext";
-import { QUALITY_RATINGS } from "../../utils/sm2";
+import React, { useEffect, useState } from 'react';
+import { useFlashcard } from '../../contexts/FlashcardContext';
+import { QUALITY_RATINGS } from '../../utils/sm2';
 
-type AppRoute = "dashboard" | "review" | "complete";
+type AppRoute = 'dashboard' | 'review' | 'complete' | 'card-sets' | 'profile';
 
 interface ReviewProps {
   onNavigate: (route: AppRoute) => void;
@@ -34,15 +34,17 @@ const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
   useEffect(() => {
     // If no session exists, redirect to dashboard
     if (!state.currentSession) {
-      console.log("Review: No session found, redirecting to dashboard");
-      onNavigate("dashboard");
+      console.log('Review: No session found, redirecting to dashboard');
+      onNavigate('dashboard');
       return;
     }
 
     // If session is complete, redirect to complete screen
     if (state.currentSession.isComplete) {
-      console.log("Review: Session is complete, redirecting to complete screen");
-      onNavigate("complete");
+      console.log(
+        'Review: Session is complete, redirecting to complete screen'
+      );
+      onNavigate('complete');
       return;
     }
   }, [state.currentSession, state.currentSession?.isComplete, onNavigate]);
@@ -58,17 +60,17 @@ const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
     // Update progress before leaving review
     if (!state.isGuest && state.currentSession) {
       console.log(
-        "Review: Updating card set progress before returning to dashboard"
+        'Review: Updating card set progress before returning to dashboard'
       );
       try {
         await updateCurrentCardSetProgress();
       } catch (error) {
-        console.error("Review: Failed to update progress:", error);
+        console.error('Review: Failed to update progress:', error);
       }
     }
 
     resetSession();
-    onNavigate("dashboard");
+    onNavigate('dashboard');
   };
 
   // Handle card flip animation
@@ -87,11 +89,11 @@ const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
   };
 
   // Show loading or redirect if no session
-  console.log("Review component state check:", { 
-    hasSession: !!state.currentSession, 
+  console.log('Review component state check:', {
+    hasSession: !!state.currentSession,
     hasCard: !!state.currentCard,
     isComplete: state.currentSession?.isComplete,
-    savingProgress: state.loadingStates?.savingProgress
+    savingProgress: state.loadingStates?.savingProgress,
   });
 
   // Early returns for invalid states (navigation handled by useEffect above)
@@ -136,7 +138,7 @@ const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
     // Reset session and redirect to dashboard for safety
     // This prevents showing cards from wrong card sets
     resetSession();
-    onNavigate("dashboard");
+    onNavigate('dashboard');
 
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -165,7 +167,7 @@ const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
             <div className="flex justify-between text-sm font-rounded text-gray-600 mb-1">
               <span>Progress</span>
               <span>
-                {currentSession.reviewedCards} / {currentSession.totalCards}{" "}
+                {currentSession.reviewedCards} / {currentSession.totalCards}{' '}
                 completed
               </span>
             </div>
@@ -181,7 +183,7 @@ const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
           <div className="flex justify-between text-sm font-rounded text-gray-500">
             <span>Reviewed: {currentSession.reviewedCards}</span>
             <span>
-              Easy: {currentSession.easyCount} | Hard:{" "}
+              Easy: {currentSession.easyCount} | Hard:{' '}
               {currentSession.hardCount}
             </span>
           </div>
@@ -194,7 +196,7 @@ const Review: React.FC<ReviewProps> = ({ onNavigate }) => {
           {/* Flashcard */}
           <div
             className={`flashcard-flip ${
-              isShowingBack || isFlipping ? "flipped" : ""
+              isShowingBack || isFlipping ? 'flipped' : ''
             } mb-8 min-h-[300px]`}
           >
             <div className="flashcard-inner">

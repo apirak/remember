@@ -6,14 +6,16 @@ import {
   FlashcardProvider,
   useFlashcard,
 } from '../../contexts/FlashcardContext';
+import { AuthProvider } from '../../contexts/AuthContext';
 import Dashboard from './Dashboard.tsx';
 import Review from './Review.tsx';
 import Completion from './Completion.tsx';
 import CardSetSelection from './CardSetSelection.tsx';
+import Profile from './Profile.tsx';
 // import { DebugPanel } from '../ui/DebugPanel.tsx';
 
 // Navigation types
-type AppRoute = 'dashboard' | 'review' | 'complete' | 'card-sets';
+type AppRoute = 'dashboard' | 'review' | 'complete' | 'card-sets' | 'profile';
 
 interface FlashcardAppWithPreloadProps {
   preloadCardSet: string;
@@ -58,6 +60,7 @@ const FlashcardAppWithPreloadContent: React.FC<
         'review',
         'complete',
         'card-sets',
+        'profile',
       ];
       if (!validRoutes.includes(route)) {
         console.error(`FlashcardApp: Invalid route '${route}' requested`);
@@ -165,22 +168,26 @@ const FlashcardAppWithPreloadContent: React.FC<
       return <Completion onNavigate={handleNavigation} />;
     case 'card-sets':
       return <CardSetSelection onNavigate={handleNavigation} />;
+    case 'profile':
+      return <Profile onNavigate={handleNavigation} />;
     default:
       console.error(`FlashcardApp: Unknown route '${currentRoute}'`);
       return <Dashboard onNavigate={handleNavigation} />;
   }
 };
 
-// Main wrapper component with FlashcardProvider
+// Main wrapper component with AuthProvider and FlashcardProvider
 const FlashcardAppWithPreload: React.FC<FlashcardAppWithPreloadProps> = (
   props
 ) => {
   return (
     <div className="app-container">
-      <FlashcardProvider>
-        <FlashcardAppWithPreloadContent {...props} />
-        {/* <DebugPanel /> */}
-      </FlashcardProvider>
+      <AuthProvider>
+        <FlashcardProvider>
+          <FlashcardAppWithPreloadContent {...props} />
+          {/* <DebugPanel /> */}
+        </FlashcardProvider>
+      </AuthProvider>
     </div>
   );
 };

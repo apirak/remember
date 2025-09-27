@@ -9,7 +9,7 @@ import {
 import LoginButton from '../auth/LoginButton';
 import EmojiText from '../EmojiSVG';
 
-type AppRoute = 'dashboard' | 'review' | 'complete' | 'card-sets';
+type AppRoute = 'dashboard' | 'review' | 'complete' | 'card-sets' | 'profile';
 
 interface DashboardProps {
   onNavigate: (route: AppRoute) => void;
@@ -196,7 +196,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
               {state.selectedCardSet?.name || 'Flashcards'}
             </h1>
             <p className="text-sm font-rounded text-gray-600">
-              {state.selectedCardSet?.description }
+              {state.selectedCardSet?.description}
             </p>
           </div>
 
@@ -313,7 +313,7 @@ const Dashboard: React.FC<DashboardProps> = ({ onNavigate }) => {
 
         {/* Login Section */}
         <div className="mt-4">
-          <LoginButton />
+          <LoginButton onNavigate={onNavigate} />
         </div>
       </div>
     </div>

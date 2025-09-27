@@ -13,7 +13,7 @@ interface CardSetWithProgress extends CardSet {
 }
 
 // Navigation type to match existing patterns
-type AppRoute = 'dashboard' | 'review' | 'complete' | 'card-sets';
+type AppRoute = 'dashboard' | 'review' | 'complete' | 'card-sets' | 'profile';
 
 interface CardSetSelectionProps {
   onNavigate: (route: AppRoute) => void;

@@ -6,14 +6,14 @@ import type {
   Flashcard,
   PendingOperation,
   CardSetProgress,
-} from "../types/flashcard";
+} from '../types/flashcard';
 import {
   getUserFlashcards,
   updateFlashcardProgress,
   saveFlashcard,
   migrateGuestDataToUser,
   saveFlashcardsBatch,
-} from "../utils/firestore";
+} from '../utils/firestore';
 import {
   doc,
   getDoc,
@@ -21,12 +21,13 @@ import {
   setDoc,
   collection,
   serverTimestamp,
-} from "firebase/firestore";
+} from 'firebase/firestore';
 // Fetch-based card set loader for reliable loading
-import { loadCardSetDataWithFetch } from "../utils/cardSetLoader";
-import { firestore } from "../utils/firebase";
-import { getCurrentUser } from "../utils/auth";
-import { transformFlashcardData } from "../utils/seedData";
+import { loadCardSetDataWithFetch } from '../utils/cardSetLoader';
+import { firestore } from '../utils/firebase';
+import { getCurrentUser } from '../utils/auth';
+import { transformFlashcardData } from '../utils/seedData';
+import type { UserProfile } from '../types/flashcard';
 
 // Service result type with standardized error handling
 export interface ServiceResult<T = any> {
@@ -53,7 +54,7 @@ export class FlashcardService {
       if (!currentUser) {
         return {
           success: false,
-          error: "User must be authenticated to load cards from Firestore.",
+          error: 'User must be authenticated to load cards from Firestore.',
         };
       }
 
@@ -62,7 +63,7 @@ export class FlashcardService {
       if (!result.success) {
         return {
           success: false,
-          error: result.error || "Failed to load cards from Firestore",
+          error: result.error || 'Failed to load cards from Firestore',
         };
       }
 
@@ -106,13 +107,13 @@ export class FlashcardService {
         data: cards,
       };
     } catch (error) {
-      console.error("Error loading cards from Firestore:", error);
+      console.error('Error loading cards from Firestore:', error);
       return {
         success: false,
         error:
           error instanceof Error
             ? error.message
-            : "Failed to load cards from Firestore",
+            : 'Failed to load cards from Firestore',
       };
     }
   }
@@ -128,7 +129,7 @@ export class FlashcardService {
   ): Promise<ServiceResult<Flashcard[]>> {
     try {
       // Use fetch-based loader for reliable dev and production loading
-      const fileName = cardSetDataFile.endsWith(".json")
+      const fileName = cardSetDataFile.endsWith('.json')
         ? cardSetDataFile
         : `${cardSetDataFile}.json`;
 
@@ -136,7 +137,7 @@ export class FlashcardService {
 
       // Transform to include SM-2 parameters
       const cards = cardsData.map((data) =>
-        transformFlashcardData(data, fileName.replace(".json", ""))
+        transformFlashcardData(data, fileName.replace('.json', ''))
       );
 
       console.log(`Loaded ${cards.length} cards from JSON file: ${fileName}`);
@@ -170,7 +171,7 @@ export class FlashcardService {
     cardSetId: string,
     cardSetDataFile: string
   ): Promise<
-    ServiceResult<{ cards: Flashcard[]; source: "firestore" | "json" }>
+    ServiceResult<{ cards: Flashcard[]; source: 'firestore' | 'json' }>
   > {
     try {
       console.log(`Loading card set: ${cardSetId} (${cardSetDataFile})`);
@@ -190,7 +191,7 @@ export class FlashcardService {
           success: true,
           data: {
             cards: firestoreResult.data,
-            source: "firestore",
+            source: 'firestore',
           },
         };
       }
@@ -220,7 +221,7 @@ export class FlashcardService {
           success: true,
           data: {
             cards: jsonResult.data,
-            source: "json",
+            source: 'json',
           },
         };
       }
@@ -244,7 +245,7 @@ export class FlashcardService {
           success: true,
           data: {
             cards: reloadResult.data,
-            source: "firestore",
+            source: 'firestore',
           },
         };
       }
@@ -254,7 +255,7 @@ export class FlashcardService {
         success: true,
         data: {
           cards: jsonResult.data,
-          source: "json",
+          source: 'json',
         },
       };
     } catch (error) {
@@ -264,7 +265,7 @@ export class FlashcardService {
         error:
           error instanceof Error
             ? error.message
-            : "Failed to load card set data",
+            : 'Failed to load card set data',
       };
     }
   }
@@ -284,7 +285,7 @@ export class FlashcardService {
       if (!currentUser) {
         return {
           success: false,
-          error: "User must be authenticated to save cards to Firestore.",
+          error: 'User must be authenticated to save cards to Firestore.',
         };
       }
 
@@ -298,17 +299,17 @@ export class FlashcardService {
       } else {
         return {
           success: false,
-          error: result.error || "Failed to save card to Firestore",
+          error: result.error || 'Failed to save card to Firestore',
         };
       }
     } catch (error) {
-      console.error("Error saving card to Firestore:", error);
+      console.error('Error saving card to Firestore:', error);
       return {
         success: false,
         error:
           error instanceof Error
             ? error.message
-            : "Failed to save card to Firestore",
+            : 'Failed to save card to Firestore',
       };
     }
   }
@@ -331,7 +332,7 @@ export class FlashcardService {
       if (!currentUser) {
         return {
           success: false,
-          error: "User must be authenticated to save progress to Firestore.",
+          error: 'User must be authenticated to save progress to Firestore.',
         };
       }
 
@@ -349,17 +350,17 @@ export class FlashcardService {
       } else {
         return {
           success: false,
-          error: result.error || "Failed to save progress to Firestore",
+          error: result.error || 'Failed to save progress to Firestore',
         };
       }
     } catch (error) {
-      console.error("Error saving progress to Firestore:", error);
+      console.error('Error saving progress to Firestore:', error);
       return {
         success: false,
         error:
           error instanceof Error
             ? error.message
-            : "Failed to save progress to Firestore",
+            : 'Failed to save progress to Firestore',
       };
     }
   }
@@ -382,7 +383,7 @@ export class FlashcardService {
       if (!currentUser) {
         return {
           success: false,
-          error: "User must be authenticated to save card with progress.",
+          error: 'User must be authenticated to save card with progress.',
         };
       }
 
@@ -393,8 +394,8 @@ export class FlashcardService {
         cardSetId,
         id: cardData.id,
         // Ensure required fields are present
-        front: cardData.front || { icon: "", title: "", description: "" },
-        back: cardData.back || { icon: "", title: "", description: "" },
+        front: cardData.front || { icon: '', title: '', description: '' },
+        back: cardData.back || { icon: '', title: '', description: '' },
       };
 
       const result = await updateFlashcardProgress(
@@ -411,17 +412,17 @@ export class FlashcardService {
       } else {
         return {
           success: false,
-          error: result.error || "Failed to save card with progress",
+          error: result.error || 'Failed to save card with progress',
         };
       }
     } catch (error) {
-      console.error("Error saving card with progress:", error);
+      console.error('Error saving card with progress:', error);
       return {
         success: false,
         error:
           error instanceof Error
             ? error.message
-            : "Failed to save card with progress",
+            : 'Failed to save card with progress',
       };
     }
   }
@@ -430,7 +431,7 @@ export class FlashcardService {
    * Save multiple card progress updates in batch operation (OPTIMIZATION)
    * Used at end of review session to minimize Firestore operations
    * @param progressUpdates - Map of cardId -> progress data
-   * @param cardSetId - The card set identifier  
+   * @param cardSetId - The card set identifier
    * @returns Service result with success status
    */
   static async saveProgressBatch(
@@ -442,43 +443,50 @@ export class FlashcardService {
       if (!currentUser) {
         return {
           success: false,
-          error: "User must be authenticated to save progress batch to Firestore.",
+          error:
+            'User must be authenticated to save progress batch to Firestore.',
         };
       }
 
       if (progressUpdates.size === 0) {
-        console.log("No progress updates to save in batch");
+        console.log('No progress updates to save in batch');
         return { success: true, data: [] };
       }
 
-      console.log(`Batch saving progress for ${progressUpdates.size} cards in card set: ${cardSetId}`);
+      console.log(
+        `Batch saving progress for ${progressUpdates.size} cards in card set: ${cardSetId}`
+      );
 
       // Convert Map to array format expected by saveFlashcardsBatch
-      const progressArray = Array.from(progressUpdates.entries()).map(([cardId, progressData]) => ({
-        id: cardId,
-        ...progressData,
-        cardSetId,
-      }));
+      const progressArray = Array.from(progressUpdates.entries()).map(
+        ([cardId, progressData]) => ({
+          id: cardId,
+          ...progressData,
+          cardSetId,
+        })
+      );
 
       const result = await saveFlashcardsBatch(progressArray, cardSetId);
 
       if (result.success) {
-        console.log(`Successfully batch saved progress for ${progressArray.length} cards`);
+        console.log(
+          `Successfully batch saved progress for ${progressArray.length} cards`
+        );
         return { success: true, data: result.data };
       } else {
         return {
           success: false,
-          error: result.error || "Failed to batch save progress to Firestore",
+          error: result.error || 'Failed to batch save progress to Firestore',
         };
       }
     } catch (error) {
-      console.error("Error batch saving progress:", error);
+      console.error('Error batch saving progress:', error);
       return {
         success: false,
         error:
           error instanceof Error
             ? error.message
-            : "Failed to batch save progress to Firestore",
+            : 'Failed to batch save progress to Firestore',
       };
     }
   }
@@ -498,7 +506,7 @@ export class FlashcardService {
       if (!currentUser) {
         return {
           success: false,
-          error: "User must be authenticated to save cards to Firestore.",
+          error: 'User must be authenticated to save cards to Firestore.',
         };
       }
 
@@ -512,17 +520,17 @@ export class FlashcardService {
       } else {
         return {
           success: false,
-          error: result.error || "Failed to save cards batch to Firestore",
+          error: result.error || 'Failed to save cards batch to Firestore',
         };
       }
     } catch (error) {
-      console.error("Error saving cards batch to Firestore:", error);
+      console.error('Error saving cards batch to Firestore:', error);
       return {
         success: false,
         error:
           error instanceof Error
             ? error.message
-            : "Failed to save cards batch to Firestore",
+            : 'Failed to save cards batch to Firestore',
       };
     }
   }
@@ -538,29 +546,29 @@ export class FlashcardService {
       if (!currentUser) {
         return {
           success: false,
-          error: "User must be authenticated to migrate data to Firestore.",
+          error: 'User must be authenticated to migrate data to Firestore.',
         };
       }
 
       const result = await migrateGuestDataToUser(guestData);
 
       if (result.success) {
-        console.log("Successfully migrated guest data to Firestore");
+        console.log('Successfully migrated guest data to Firestore');
         return { success: true };
       } else {
         return {
           success: false,
-          error: result.error || "Failed to migrate guest data to Firestore",
+          error: result.error || 'Failed to migrate guest data to Firestore',
         };
       }
     } catch (error) {
-      console.error("Error migrating guest data to Firestore:", error);
+      console.error('Error migrating guest data to Firestore:', error);
       return {
         success: false,
         error:
           error instanceof Error
             ? error.message
-            : "Failed to migrate guest data to Firestore",
+            : 'Failed to migrate guest data to Firestore',
       };
     }
   }
@@ -570,9 +578,9 @@ export class FlashcardService {
    * @returns Default flashcard array
    */
   static async getDefaultFlashcards(): Promise<Flashcard[]> {
-    const defaultCardsData = await loadCardSetDataWithFetch("flashcards.json");
+    const defaultCardsData = await loadCardSetDataWithFetch('flashcards.json');
     return defaultCardsData.map((data) =>
-      transformFlashcardData(data, "default")
+      transformFlashcardData(data, 'default')
     );
   }
   /**
@@ -583,7 +591,7 @@ export class FlashcardService {
    * @returns Pending operation object
    */
   static createPendingOperation(
-    type: PendingOperation["type"],
+    type: PendingOperation['type'],
     data: any,
     maxRetries: number = 3
   ): PendingOperation {
@@ -607,26 +615,26 @@ export class FlashcardService {
   ): Promise<ServiceResult> {
     try {
       const cardSetId = operation.data?.cardSetId;
-      
+
       if (!cardSetId) {
         return {
           success: false,
-          error: "Missing cardSetId in pending operation data",
+          error: 'Missing cardSetId in pending operation data',
         };
       }
 
       switch (operation.type) {
-        case "add_card":
+        case 'add_card':
           return await this.saveCard(operation.data, cardSetId);
 
-        case "rate_card":
+        case 'rate_card':
           return await this.saveProgress(
             operation.data.cardId,
             cardSetId,
             operation.data.progressData
           );
 
-        case "edit_card":
+        case 'edit_card':
           return await this.saveCard(operation.data, cardSetId);
 
         default:
@@ -639,7 +647,7 @@ export class FlashcardService {
       return {
         success: false,
         error:
-          error instanceof Error ? error.message : "Failed to retry operation",
+          error instanceof Error ? error.message : 'Failed to retry operation',
       };
     }
   }
@@ -657,7 +665,7 @@ export class FlashcardService {
       if (!currentUser) {
         return {
           success: false,
-          error: "User must be authenticated to load progress from Firestore.",
+          error: 'User must be authenticated to load progress from Firestore.',
         };
       }
 
@@ -666,9 +674,9 @@ export class FlashcardService {
       // Get progress document from Firestore
       const progressDoc = doc(
         firestore,
-        "users",
+        'users',
         currentUser.uid,
-        "cardSetProgress",
+        'cardSetProgress',
         cardSetId
       );
 
@@ -706,13 +714,13 @@ export class FlashcardService {
         data: progress,
       };
     } catch (error) {
-      console.error("Error loading card set progress:", error);
+      console.error('Error loading card set progress:', error);
       return {
         success: false,
         error:
           error instanceof Error
             ? error.message
-            : "Failed to load card set progress",
+            : 'Failed to load card set progress',
       };
     }
   }
@@ -730,15 +738,15 @@ export class FlashcardService {
       if (!currentUser) {
         return {
           success: false,
-          error: "User must be authenticated to save progress to Firestore.",
+          error: 'User must be authenticated to save progress to Firestore.',
         };
       }
 
       console.log(
         `Saving card set progress for: ${progress.cardSetId} (${progress.progressPercentage}%)`
       );
-      console.log("User UID:", currentUser.uid);
-      console.log("Progress data:", {
+      console.log('User UID:', currentUser.uid);
+      console.log('Progress data:', {
         cardSetId: progress.cardSetId,
         totalCards: progress.totalCards,
         reviewedCards: progress.reviewedCards,
@@ -748,9 +756,9 @@ export class FlashcardService {
       // Prepare Firestore document data
       const progressDoc = doc(
         firestore,
-        "users",
+        'users',
         currentUser.uid,
-        "cardSetProgress",
+        'cardSetProgress',
         progress.cardSetId
       );
 
@@ -775,13 +783,13 @@ export class FlashcardService {
         success: true,
       };
     } catch (error) {
-      console.error("Error saving card set progress:", error);
+      console.error('Error saving card set progress:', error);
       return {
         success: false,
         error:
           error instanceof Error
             ? error.message
-            : "Failed to save card set progress",
+            : 'Failed to save card set progress',
       };
     }
   }
@@ -798,18 +806,18 @@ export class FlashcardService {
       if (!currentUser) {
         return {
           success: false,
-          error: "User must be authenticated to load progress from Firestore.",
+          error: 'User must be authenticated to load progress from Firestore.',
         };
       }
 
-      console.log("Loading all card set progress for user");
+      console.log('Loading all card set progress for user');
 
       // Query all progress documents for the user
       const progressCollection = collection(
         firestore,
-        "users",
+        'users',
         currentUser.uid,
-        "cardSetProgress"
+        'cardSetProgress'
       );
 
       const querySnapshot = await getDocs(progressCollection);
@@ -839,13 +847,236 @@ export class FlashcardService {
         data: allProgress,
       };
     } catch (error) {
-      console.error("Error loading all card set progress:", error);
+      console.error('Error loading all card set progress:', error);
       return {
         success: false,
         error:
           error instanceof Error
             ? error.message
-            : "Failed to load card set progress",
+            : 'Failed to load card set progress',
+      };
+    }
+  }
+
+  /**
+   * Create or update user profile in Firestore
+   * Auto-saves user profile data from Google authentication
+   * @param userProfile - UserProfile object to save
+   * @returns Service result with success status
+   */
+  static async saveUserProfile(
+    userProfile: UserProfile
+  ): Promise<ServiceResult> {
+    try {
+      const currentUser = getCurrentUser();
+      if (!currentUser) {
+        return {
+          success: false,
+          error: 'User must be authenticated to save profile to Firestore.',
+        };
+      }
+
+      // Ensure profile ID matches the authenticated user ID
+      if (userProfile.uid !== currentUser.uid) {
+        return {
+          success: false,
+          error: 'Profile UID must match authenticated user ID.',
+        };
+      }
+
+      console.log('Saving user profile for:', currentUser.uid);
+
+      // Reference to user profile document
+      const profileDocRef = doc(
+        firestore,
+        'users',
+        currentUser.uid,
+        'profile',
+        currentUser.uid
+      );
+
+      // Prepare Firestore document data with server timestamps
+      const profileData = {
+        uid: userProfile.uid,
+        email: userProfile.email,
+        displayName: userProfile.displayName,
+        photoURL: userProfile.photoURL,
+        createdAt: userProfile.createdAt || serverTimestamp(),
+        lastLoginAt: serverTimestamp(), // Always update last login
+        totalReviewsCount: userProfile.totalReviewsCount || 0,
+        preferredLanguage: userProfile.preferredLanguage || 'en',
+        theme: userProfile.theme || 'system',
+        migratedFromGuest: userProfile.migratedFromGuest || false,
+        migrationDate: userProfile.migrationDate || null,
+        isActive:
+          userProfile.isActive !== undefined ? userProfile.isActive : true,
+        updatedAt: serverTimestamp(),
+      };
+
+      // Save to Firestore with merge to preserve existing data
+      await setDoc(profileDocRef, profileData, { merge: true });
+
+      console.log('Successfully saved user profile');
+      return { success: true };
+    } catch (error) {
+      console.error('Error saving user profile:', error);
+      
+      // Check if it's a permission error and provide helpful message
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      const isPermissionError = errorMessage.includes('Missing or insufficient permissions');
+      
+      if (isPermissionError) {
+        console.warn('Firestore rules may not be deployed yet. User profile save failed due to permissions.');
+        return {
+          success: false,
+          error: 'Firestore permissions not configured yet. User profile will be created later.',
+        };
+      }
+      
+      return {
+        success: false,
+        error:
+          error instanceof Error
+            ? error.message
+            : 'Failed to save user profile to Firestore',
+      };
+    }
+  }
+
+  /**
+   * Load user profile from Firestore
+   * @param userId - User ID to load profile for (optional, uses current user if not provided)
+   * @returns Service result with UserProfile object
+   */
+  static async loadUserProfile(
+    userId?: string
+  ): Promise<ServiceResult<UserProfile | null>> {
+    try {
+      const currentUser = getCurrentUser();
+      if (!currentUser) {
+        return {
+          success: false,
+          error: 'User must be authenticated to load profile from Firestore.',
+        };
+      }
+
+      // Use provided userId or current user's ID
+      const targetUserId = userId || currentUser.uid;
+
+      // Security: Only allow loading own profile for now
+      if (targetUserId !== currentUser.uid) {
+        return {
+          success: false,
+          error: 'Can only load own profile data.',
+        };
+      }
+
+      console.log('Loading user profile for:', targetUserId);
+
+      // Reference to user profile document
+      const profileDocRef = doc(
+        firestore,
+        'users',
+        targetUserId,
+        'profile',
+        targetUserId
+      );
+
+      const profileDoc = await getDoc(profileDocRef);
+
+      if (!profileDoc.exists()) {
+        console.log('No user profile found, returning null');
+        return { success: true, data: null };
+      }
+
+      const data = profileDoc.data();
+
+      // Transform Firestore data to UserProfile type
+      const userProfile: UserProfile = {
+        uid: data.uid,
+        email: data.email,
+        displayName: data.displayName,
+        photoURL: data.photoURL,
+        createdAt: data.createdAt?.toDate() || new Date(),
+        lastLoginAt: data.lastLoginAt?.toDate() || new Date(),
+        totalReviewsCount: data.totalReviewsCount || 0,
+        preferredLanguage: data.preferredLanguage || 'en',
+        theme: data.theme || 'system',
+        migratedFromGuest: data.migratedFromGuest || false,
+        migrationDate: data.migrationDate?.toDate() || null,
+        isActive: data.isActive !== undefined ? data.isActive : true,
+      };
+
+      console.log('Successfully loaded user profile');
+      return { success: true, data: userProfile };
+    } catch (error) {
+      console.error('Error loading user profile:', error);
+      return {
+        success: false,
+        error:
+          error instanceof Error
+            ? error.message
+            : 'Failed to load user profile from Firestore',
+      };
+    }
+  }
+
+  /**
+   * Update user profile fields (partial update)
+   * @param updates - Partial UserProfile object with fields to update
+   * @returns Service result with success status
+   */
+  static async updateUserProfile(
+    updates: Partial<UserProfile>
+  ): Promise<ServiceResult> {
+    try {
+      const currentUser = getCurrentUser();
+      if (!currentUser) {
+        return {
+          success: false,
+          error: 'User must be authenticated to update profile.',
+        };
+      }
+
+      console.log('Updating user profile for:', currentUser.uid);
+
+      // Reference to user profile document
+      const profileDocRef = doc(
+        firestore,
+        'users',
+        currentUser.uid,
+        'profile',
+        currentUser.uid
+      );
+
+      // Prepare update data with server timestamp
+      const updateData = {
+        ...updates,
+        updatedAt: serverTimestamp(),
+        // Security: Prevent changing uid
+        uid: currentUser.uid,
+      };
+
+      // Remove undefined values
+      Object.keys(updateData).forEach((key) => {
+        if ((updateData as any)[key] === undefined) {
+          delete (updateData as any)[key];
+        }
+      });
+
+      // Update Firestore document
+      await setDoc(profileDocRef, updateData, { merge: true });
+
+      console.log('Successfully updated user profile');
+      return { success: true };
+    } catch (error) {
+      console.error('Error updating user profile:', error);
+      return {
+        success: false,
+        error:
+          error instanceof Error
+            ? error.message
+            : 'Failed to update user profile',
       };
     }
   }

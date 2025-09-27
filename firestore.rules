@@ -1,9 +1,18 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    
     // User profile และ flashcards
     match /users/{userId} {
       allow read, write: if request.auth != null && request.auth.uid == userId;
+      
+      // User profile subcollection
+      match /profile/{profileId} {
+        allow read: if request.auth != null && request.auth.uid == userId;
+        allow write: if request.auth != null 
+          && request.auth.uid == userId
+          && validateUserProfile();
+      }
       
       // User's card sets subcollection
       match /cardSets/{cardSetId} {
@@ -40,6 +49,20 @@ service cloud.firestore {
   }
 
   // Helper functions for validation
+  function validateUserProfile() {
+    return request.resource.data.keys().hasAll(['uid', 'email', 'displayName', 'createdAt', 'lastLoginAt', 'isActive'])
+      && request.resource.data.uid is string
+      && request.resource.data.uid == request.auth.uid
+      && request.resource.data.isActive is bool
+      && (request.resource.data.email == null || request.resource.data.email is string)
+      && (request.resource.data.displayName == null || request.resource.data.displayName is string)
+      && (request.resource.data.photoURL == null || request.resource.data.photoURL is string)
+      && (request.resource.data.totalReviewsCount == null || request.resource.data.totalReviewsCount is number)
+      && (request.resource.data.preferredLanguage == null || request.resource.data.preferredLanguage is string)
+      && (request.resource.data.theme == null || request.resource.data.theme in ['light', 'dark', 'system'])
+      && (request.resource.data.migratedFromGuest == null || request.resource.data.migratedFromGuest is bool);
+  }
+  
   function validateCardSetProgress() {
     return request.resource.data.keys().hasAll(['cardSetId', 'totalCards', 'reviewedCards', 'progressPercentage', 'updatedAt'])
       && request.resource.data.cardSetId is string

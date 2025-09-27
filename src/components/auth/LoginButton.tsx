@@ -1,17 +1,19 @@
 // Login Button component for Google authentication
 // Simple button component that handles Google Sign-In with Firebase
 
-import React, { useState, useEffect } from "react";
-import { signInWithGoogle, signOutUser, getAuthState } from "../../utils/auth";
-import { onAuthStateChanged, type User } from "firebase/auth";
-import { auth } from "../../utils/firebase";
+import React, { useState, useEffect } from 'react';
+import { signInWithGoogle, signOutUser, getAuthState } from '../../utils/auth';
+import { onAuthStateChanged, type User } from 'firebase/auth';
+import { auth } from '../../utils/firebase';
+import type { AppRoute } from '../../types/flashcard';
 
 interface LoginButtonProps {
   // Component no longer needs external auth state change callback
   // as it uses Firebase onAuthStateChanged internally
+  onNavigate?: (route: AppRoute) => void;
 }
 
-const LoginButton: React.FC<LoginButtonProps> = () => {
+const LoginButton: React.FC<LoginButtonProps> = ({ onNavigate }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [authState, setAuthState] = useState(getAuthState());
@@ -22,8 +24,8 @@ const LoginButton: React.FC<LoginButtonProps> = () => {
       // Update auth state when Firebase auth state changes
       setAuthState(getAuthState());
       console.log(
-        "Auth state changed:",
-        user ? "User logged in" : "User logged out"
+        'Auth state changed:',
+        user ? 'User logged in' : 'User logged out'
       );
     });
 
@@ -41,14 +43,14 @@ const LoginButton: React.FC<LoginButtonProps> = () => {
       const result = await signInWithGoogle();
 
       if (result.success) {
-        console.log("Successfully signed in:", result.user);
+        console.log('Successfully signed in:', result.user);
         // Auth state will be updated automatically via onAuthStateChanged
       } else {
-        setError(result.error || "An error occurred during login");
+        setError(result.error || 'An error occurred during login');
       }
     } catch (error) {
-      console.error("Login error:", error);
-      setError("An error occurred during login");
+      console.error('Login error:', error);
+      setError('An error occurred during login');
     } finally {
       setIsLoading(false);
     }
@@ -62,14 +64,14 @@ const LoginButton: React.FC<LoginButtonProps> = () => {
       const result = await signOutUser();
 
       if (result.success) {
-        console.log("Successfully signed out");
+        console.log('Successfully signed out');
         // Auth state will be updated automatically via onAuthStateChanged
       } else {
-        setError(result.error || "An error occurred during logout");
+        setError(result.error || 'An error occurred during logout');
       }
     } catch (error) {
-      console.error("Logout error:", error);
-      setError("An error occurred during logout");
+      console.error('Logout error:', error);
+      setError('An error occurred during logout');
     } finally {
       setIsLoading(false);
     }
@@ -90,9 +92,12 @@ const LoginButton: React.FC<LoginButtonProps> = () => {
               />
             )}
             <div className="flex-1">
-              <div className="text-sm font-rounded font-semibold text-green-800">
-                {user.displayName || user.email || "Logged in"}
-              </div>
+              <button
+                onClick={() => onNavigate?.('profile')}
+                className="text-sm font-rounded font-semibold text-green-800 hover:text-green-600 hover:underline transition-colors duration-200"
+              >
+                {user.displayName || user.email || 'Logged in'}
+              </button>
             </div>
           </div>
           <button
@@ -107,7 +112,7 @@ const LoginButton: React.FC<LoginButtonProps> = () => {
               transition-colors duration-200
             "
           >
-            {isLoading ? "⌛ logging out..." : "Log out"}
+            {isLoading ? '⌛ logging out...' : 'Log out'}
           </button>
         </div>
 
@@ -163,7 +168,7 @@ const LoginButton: React.FC<LoginButtonProps> = () => {
             <path fill="none" d="M0 0h48v48H0z"></path>
           </svg>
         )}
-        {isLoading ? "⌛ Signing in..." : "Continue with Google"}
+        {isLoading ? '⌛ Signing in...' : 'Continue with Google'}
       </button>
 
       {/* Benefits of signing in */}

@@ -1,10 +1,10 @@
 // Completion component - shown when review session is finished
 // Displays session results and provides options to continue or return to dashboard
 
-import React, { useEffect, useRef } from "react";
-import { useFlashcard } from "../../contexts/FlashcardContext";
+import React, { useEffect, useRef } from 'react';
+import { useFlashcard } from '../../contexts/FlashcardContext';
 
-type AppRoute = "dashboard" | "review" | "complete";
+type AppRoute = 'dashboard' | 'review' | 'complete' | 'card-sets' | 'profile';
 
 interface CompletionProps {
   onNavigate: (route: AppRoute) => void;
@@ -28,13 +28,13 @@ const Completion: React.FC<CompletionProps> = ({ onNavigate }) => {
         !progressUpdatedRef.current
       ) {
         console.log(
-          "Completion: Updating card set progress after session completion"
+          'Completion: Updating card set progress after session completion'
         );
         progressUpdatedRef.current = true;
         try {
           await updateCurrentCardSetProgress();
         } catch (error) {
-          console.error("Completion: Failed to update progress:", error);
+          console.error('Completion: Failed to update progress:', error);
         }
       }
     };
@@ -49,9 +49,9 @@ const Completion: React.FC<CompletionProps> = ({ onNavigate }) => {
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-200 border-t-yellow-300 border-r-green-200 border-b-blue-300 mx-auto mb-4 opacity-70"></div>
           <p className="text-lg font-rounded text-yellow-900/60">
-            {state.loadingStates?.savingProgress 
-              ? "Saving your progress..." 
-              : "Loading results..."}
+            {state.loadingStates?.savingProgress
+              ? 'Saving your progress...'
+              : 'Loading results...'}
           </p>
         </div>
       </div>
@@ -60,8 +60,8 @@ const Completion: React.FC<CompletionProps> = ({ onNavigate }) => {
 
   // Redirect if no completed session
   if (!state.currentSession.isComplete) {
-    console.log("Session not complete, redirecting to dashboard");
-    onNavigate("dashboard");
+    console.log('Session not complete, redirecting to dashboard');
+    onNavigate('dashboard');
     return null;
   }
 
@@ -78,7 +78,7 @@ const Completion: React.FC<CompletionProps> = ({ onNavigate }) => {
   const handleReturnToDashboard = () => {
     progressUpdatedRef.current = false; // Reset for next session
     resetSession();
-    onNavigate("dashboard");
+    onNavigate('dashboard');
   };
 
   const handleReviewAgain = () => {
@@ -86,7 +86,7 @@ const Completion: React.FC<CompletionProps> = ({ onNavigate }) => {
       progressUpdatedRef.current = false; // Reset for next session
       resetSession();
       startReviewSession();
-      onNavigate("review");
+      onNavigate('review');
     } else {
       handleReturnToDashboard();
     }
@@ -96,27 +96,27 @@ const Completion: React.FC<CompletionProps> = ({ onNavigate }) => {
   const getCelebrationMessage = () => {
     if (accuracy >= 90) {
       return {
-        emoji: "🌟",
-        message: "Outstanding!",
+        emoji: '🌟',
+        message: 'Outstanding!',
         subtext: "You're a vocabulary superstar!",
       };
     } else if (accuracy >= 75) {
       return {
-        emoji: "🎉",
-        message: "Great job!",
+        emoji: '🎉',
+        message: 'Great job!',
         subtext: "You're making excellent progress!",
       };
     } else if (accuracy >= 50) {
       return {
-        emoji: "👍",
-        message: "Good work!",
+        emoji: '👍',
+        message: 'Good work!',
         subtext: "Keep practicing and you'll improve!",
       };
     } else {
       return {
-        emoji: "💪",
-        message: "Keep trying!",
-        subtext: "Every practice session makes you stronger!",
+        emoji: '💪',
+        message: 'Keep trying!',
+        subtext: 'Every practice session makes you stronger!',
       };
     }
   };
@@ -196,13 +196,13 @@ const Completion: React.FC<CompletionProps> = ({ onNavigate }) => {
             {/* Session duration */}
             <div className="border-t border-gray-200 pt-4">
               <div className="text-sm font-rounded text-gray-500">
-                Session completed in{" "}
+                Session completed in{' '}
                 <span className="font-semibold text-gray-700">
                   {Math.round(
                     (Date.now() - currentSession.startTime.getTime()) /
                       1000 /
                       60
-                  )}{" "}
+                  )}{' '}
                   minutes
                 </span>
               </div>

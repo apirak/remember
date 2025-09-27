@@ -6,14 +6,16 @@ import {
   FlashcardProvider,
   useFlashcard,
 } from '../../contexts/FlashcardContext';
+import { AuthProvider } from '../../contexts/AuthContext';
 import Dashboard from './Dashboard.tsx';
 import Review from './Review.tsx';
 import Completion from './Completion.tsx';
 import CardSetSelection from './CardSetSelection.tsx';
+import Profile from './Profile.tsx';
 // import { DebugPanel } from '../ui/DebugPanel.tsx';
 
 // Navigation types
-type AppRoute = 'dashboard' | 'review' | 'complete' | 'card-sets';
+type AppRoute = 'dashboard' | 'review' | 'complete' | 'card-sets' | 'profile';
 
 // Main app wrapper with state-based routing
 const FlashcardAppContent: React.FC = () => {
@@ -33,6 +35,7 @@ const FlashcardAppContent: React.FC = () => {
         'review',
         'complete',
         'card-sets',
+        'profile',
       ];
       if (!validRoutes.includes(route)) {
         console.error(
@@ -97,6 +100,9 @@ const FlashcardAppContent: React.FC = () => {
       case 'card-sets':
         console.log('Navigating to card sets selection screen');
         return <CardSetSelection onNavigate={handleNavigation} />;
+      case 'profile':
+        console.log('Navigating to profile screen');
+        return <Profile onNavigate={handleNavigation} />;
       case 'dashboard':
         return <Dashboard onNavigate={handleNavigation} />;
       default:
@@ -118,12 +124,14 @@ const FlashcardAppContent: React.FC = () => {
   );
 };
 
-// Main app component with context provider
+// Main app component with context providers
 const FlashcardApp: React.FC = () => {
   return (
-    <FlashcardProvider>
-      <FlashcardAppContent />
-    </FlashcardProvider>
+    <AuthProvider>
+      <FlashcardProvider>
+        <FlashcardAppContent />
+      </FlashcardProvider>
+    </AuthProvider>
   );
 };
 
